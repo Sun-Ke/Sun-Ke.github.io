@@ -29,7 +29,7 @@
 <meta property="og:description" content="写在前面写这篇文章的初衷是解决一些简单的字符串模拟题目，对于特定的某些题目，有时候用C++11的正则表达式会方便很多。 本文主要总结一下常见的一些正则表达式写法，以及如何使用C++11的regex库，最后以几个具体题目举例。 总的来说，正则表达式最简单的应用是判断一个字符串中是否包含特定字符串。正则表达式是一种文本模式，由普通字符和元字符组成。  常用的元字符 “.” 匹配除“\n”之外的任何单个">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-04-25T01:34:00.000Z">
-<meta property="article:modified_time" content="2020-04-18T16:37:50.230Z">
+<meta property="article:modified_time" content="2020-04-18T16:56:36.777Z">
 <meta property="article:author" content="Forever you">
 <meta property="article:tag" content="regex">
 <meta name="twitter:card" content="summary">
@@ -209,9 +209,14 @@
 <p>“him|her”匹配“him”和“her”，也可写作“h(im|er)”</p>
 <p>“\bthe\b”匹配“in the war”中的“the”，但不匹配“other”中的“the”</p>
 <hr>
-<h3 id="分组、捕获、反向引用"><a href="#分组、捕获、反向引用" class="headerlink" title="分组、捕获、反向引用"></a><strong>分组、捕获、反向引用</strong></h3><p>“( )” 可以将“(”和“)”之间的表达式定义为组，并且将匹配这个表达式的字符保存到一个临时区域。匹配后的各组按照左括号出现的顺序（？）分别存到$1,$2,$3…中。</p>
+<h3 id="分组、捕获、反向引用"><a href="#分组、捕获、反向引用" class="headerlink" title="分组、捕获、反向引用"></a><strong>分组、捕获、反向引用</strong></h3><p>“( )” 可以将“(”和“)”之间的表达式定义为组，并且将匹配这个表达式的字符保存到一个临时区域。匹配后的各组按照左括号出现的顺序（？）分别存到\$1,\$2,\$3…中。</p>
 <p>比如“2018-04-25”，我们用“(\d{4})-(\d\d)-(\d\d)”去匹配，</p>
-<p>那么2018 → $1, 04 → ​$2, 25 → $3。</p>
+<p>那么</p>
+<ul>
+<li>$1 = “2018”</li>
+<li>$2 = “04”</li>
+<li>$3 = “25”</li>
+</ul>
 <p>如果想让某个括号里的内容不被捕获到，需要用到非捕获性分组</p>
 <p>比如“h(im|er)”，就要改为“h(?:im|er)”</p>
 <p>然后一个很重要的问题来了!如果想要匹配“看了看”、“研究研究”这样的重叠结构怎么办呢？</p>
@@ -277,7 +282,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-04-18T16:37:50.230Z" itemprop="dateUpdated">2020-04-19 00:37:50</time>
+    Last updated: <time datetime="2020-04-18T16:56:36.777Z" itemprop="dateUpdated">2020-04-19 00:56:36</time>
 </span><br>
 
 

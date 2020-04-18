@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Forever you~</title>
+  <icon>https://www.gravatar.com/avatar/90af6df82266d6aed61c6eaf0a24e2fe</icon>
+  <subtitle>重剑无锋，大巧不工</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-04-18T11:47:44.276Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Forever you</name>
+    <email>573570584@qq.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>my article</title>
+    <link href="http://yoursite.com/2020/04/18/Hello%20World/"/>
+    <id>http://yoursite.com/2020/04/18/Hello%20World/</id>
+    <published>2020-04-18T07:12:27.000Z</published>
+    <updated>2020-04-18T11:47:44.276Z</updated>
+    
+    <content type="html"><![CDATA[<p>打算抛弃wordpress，改用hexo了…</p><p>感觉工作量有点大:fearful:</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;打算抛弃wordpress，改用hexo了…&lt;/p&gt;
+&lt;p&gt;感觉工作量有点大:fearful:&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>

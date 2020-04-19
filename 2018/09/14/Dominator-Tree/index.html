@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Dominator Tree | Forever you~ | 重剑无锋，大巧不工</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="图论">
+    <meta name="description" content="问题引入题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。  Flow Graph：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。 必经点（dom）：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到达y的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dominator Tree">
+<meta property="og:url" content="http://yoursite.com/2018/09/14/Dominator-Tree/index.html">
+<meta property="og:site_name" content="Forever you~">
+<meta property="og:description" content="问题引入题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。  Flow Graph：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。 必经点（dom）：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到达y的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/e8e23e35ccde15bd227e/%E6%94%AF%E9%85%8D%E6%A0%911.png">
+<meta property="og:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/90d30869f1a44b9db7a7/%E6%94%AF%E9%85%8D%E6%A0%912.png">
+<meta property="article:published_time" content="2018-09-14T04:28:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T15:34:43.052Z">
+<meta property="article:author" content="forever_you">
+<meta property="article:tag" content="图论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/e8e23e35ccde15bd227e/%E6%94%AF%E9%85%8D%E6%A0%911.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Forever you~" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">forever_you</h5>
+          <a href="mailto:573570584@qq.com" title="573570584@qq.com" class="mail">573570584@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Sun-Ke" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/30900443" target="_blank" >
+                <i class="icon icon-lg icon-youtube-play"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Dominator Tree</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Dominator Tree</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-14T04:28:00.000Z" itemprop="datePublished" class="page-time">
+  2018-09-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题引入"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题引入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dominator-Tree"><span class="post-toc-number">2.</span> <span class="post-toc-text">Dominator Tree</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#半必经点"><span class="post-toc-number">3.</span> <span class="post-toc-text">半必经点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#必经点"><span class="post-toc-number">4.</span> <span class="post-toc-text">必经点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目"><span class="post-toc-number">5.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-hdu-4694-Important-Sisters"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">1.hdu 4694 Important Sisters</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2017-2018-Petrozavodsk-Winter-Training-Camp-Saratov-SU-Contest-L"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">2.2017-2018 Petrozavodsk Winter Training Camp, Saratov SU Contest L</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Dominator-Tree"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Dominator Tree</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-14 12:28:00" datetime="2018-09-14T04:28:00.000Z"  itemprop="datePublished">2018-09-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h3><p>题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。</p>
+<ul>
+<li><strong>Flow Graph</strong>：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。</li>
+<li><strong>必经点（dom）</strong>：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到达y的所有必经点构成的集合记为dom(y)，即dom(y)={x | x dom y}。</li>
+<li><strong>最近必经点（idom）</strong>： 节点y的必经点集合dom(y)中dfn值最大的点x是距离y最近的必经点，称为y的最近必经点。最近必经点是唯一的，因此可以记x=idom(y)。</li>
+</ul>
+<p>于是可以按下面$O(V^2)$暴力求解</p>
+<ul>
+<li>$pre(y)={x|(x,y)\in E}$ y的前驱节点集合</li>
+<li>$suc(x)={y|(x,y)\in E}$ x的后继节点集合</li>
+<li>$dom(r)={r}$</li>
+<li>$dom(y)=\cap _{x\in pre(y)} dom(x) \cup {y}$</li>
+<li>$idom(x)=id[Max{dfn[y]|y\in dom(x)}]$</li>
+</ul>
+<h3 id="Dominator-Tree"><a href="#Dominator-Tree" class="headerlink" title="Dominator Tree"></a>Dominator Tree</h3><p>设有向图$G=(V,E)$，$(G,r)$是一个Flow Graph，则称$(G,r)$的子图$D=(V, { (idom(i),i) | i\in V , i\neq r }, r)$为$(G,r)$的一棵Dominator Tree。</p>
+<p>$(G,r)$的Dominator Tree是一棵有向有根树，从$r$出发可以到达G中的所有点，并且树上的每条边$(u,v)$都满足：$u=idom(v)$，即父节点是子节点的最近必经点。</p>
+<ul>
+<li>$x=idom(y)$，当且仅当有向边$(x,y)$是Dominator Tree中的一条树枝边。</li>
+<li>$x dom y$，当且仅当在Dominator Tree中存在一条从$x$到$y$的路径。</li>
+<li>$x$的必经点集合$dom(x)$是Dominator Tree上$x$的所有祖先以及$x$自身。</li>
+</ul>
+<h3 id="半必经点"><a href="#半必经点" class="headerlink" title="半必经点"></a>半必经点</h3><p><strong>半必经点（semi）</strong> 在搜索树T上点$y$的祖先中，经过时间戳比$y$大的节点可以到达$y$的深度最小的祖先$x$，称为$y$的半必经点。关于半必经点有如下性质：</p>
+<ul>
+<li>半必经点也是唯一的，因此可以记$x=semi(y)$。</li>
+<li>一个点的半必经点必定是它在dfs树上的祖先，$dfn[semi[x]]&lt;dfn[x]$。</li>
+<li>半必经点不一定是x的必经点。</li>
+</ul>
+<center><img src="http://lc-8FjWg1io.cn-n1.lcfile.com/e8e23e35ccde15bd227e/%E6%94%AF%E9%85%8D%E6%A0%911.png" width="40%">&nbsp&nbsp&nbsp<img src="http://lc-8FjWg1io.cn-n1.lcfile.com/90d30869f1a44b9db7a7/%E6%94%AF%E9%85%8D%E6%A0%912.png" width="35%"></center>
+
+<p><strong>如何求半必经点</strong>：对于G中一点y，考虑所有$x\in pre(y)$，设$temp=INF$。</p>
+<ul>
+<li>若$dfn[x]&lt;dfn[y]$，则$(x,y)$为树枝边或前向边，此时$temp=min(temp,dfn[x])$</li>
+<li>若$dfn[x]&gt;dfn[y]$，则$(x,y)$为横叉边或后向边，此时任意$x$在$T$中的祖先$z$，满足$dfn[z]&gt;dfn[y]$时，$temp=min(temp,dfn[semi[z]])$</li>
+<li>$semi[y]=id[temp]$</li>
+</ul>
+<h3 id="必经点"><a href="#必经点" class="headerlink" title="必经点"></a>必经点</h3><p>对于G中的一点$x$，考虑搜索树T中$semi(x)$到$x$的路径上除端点之外的点构成的集合path</p>
+<p>设$y=id[min{dfn[semi(z)]|z\in path}]$，即path中半必经节点的时间戳最小的节点。</p>
+<ul>
+<li>$semi(x)=semi(y)$时，$idom(x)=semi(x)$</li>
+<li>$semi(x)\neq semi(y)$时，$idom(x)=idom(y)$</li>
+</ul>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="1-hdu-4694-Important-Sisters"><a href="#1-hdu-4694-Important-Sisters" class="headerlink" title="1.hdu 4694 Important Sisters"></a>1.<a href="http://acm.hdu.edu.cn/showproblem.php?pid=4694" target="_blank" rel="noopener">hdu 4694 Important Sisters</a></h4><p>给一个有向图，输出每个点的必经点集合里的点的编号和，源点是n</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 500010</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[N],redge[N],edom[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> mn[N],dfn[N],idom[N],sdom[N],id[N],fa[N],f[N];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[x]==x)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="built_in">find</span>(f[x]);</span><br><span class="line">    <span class="keyword">if</span>(sdom[mn[x]]&gt;sdom[mn[f[x]]])mn[x]=mn[f[x]];</span><br><span class="line">    <span class="keyword">return</span>  f[x]=y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    id[dfn[u]=++cnt]=u;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v:edge[u])</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])dfs(v),fa[dfn[v]]=dfn[u];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)f[i]=sdom[i]=mn[i]=fa[i]=i,dfn[i]=<span class="number">0</span>;</span><br><span class="line">    cnt=<span class="number">0</span>;</span><br><span class="line">    dfs(s);</span><br><span class="line">    <span class="keyword">int</span> k,x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=cnt; i&gt;<span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v:redge[id[i]])</span><br><span class="line">            <span class="keyword">if</span>(dfn[v])</span><br><span class="line">                <span class="built_in">find</span>(k=dfn[v]),sdom[i]= sdom[i]&lt;sdom[mn[k]]?sdom[i]:sdom[mn[k]];</span><br><span class="line">        edom[sdom[i]].push_back(i);</span><br><span class="line">        f[i]=x=fa[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v:edom[x])</span><br><span class="line">            <span class="built_in">find</span>(k=v),idom[k] = sdom[mn[k]] &lt; x?mn[k]:x;</span><br><span class="line">        edom[x].<span class="built_in">clear</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=cnt; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(idom[i]!=sdom[i])idom[i]=idom[idom[i]];</span><br><span class="line">        edom[id[idom[i]]].push_back(id[i]);</span><br><span class="line">        <span class="comment">//if(idom[i]==i)puts("WA");</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Ans[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mp</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Ans[u]=p;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v:edom[u])</span><br><span class="line">        Mp(v,p+v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">out</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;<span class="number">9</span>)out(x/<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">'0'</span>+x%<span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) edge[i].<span class="built_in">clear</span>(),redge[i].<span class="built_in">clear</span>(),edom[i].<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x,y;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">            edge[x].push_back(y);</span><br><span class="line">            redge[y].push_back(x);</span><br><span class="line">        &#125;</span><br><span class="line">        tarjan(n);</span><br><span class="line">        Mp(n,n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            out(Ans[i]),<span class="built_in">putchar</span>(i==n?<span class="string">'\n'</span>:<span class="string">' '</span>),Ans[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2017-2018-Petrozavodsk-Winter-Training-Camp-Saratov-SU-Contest-L"><a href="#2-2017-2018-Petrozavodsk-Winter-Training-Camp-Saratov-SU-Contest-L" class="headerlink" title="2.2017-2018 Petrozavodsk Winter Training Camp, Saratov SU Contest L"></a>2.<a href="http://codeforces.com/gym/101741" target="_blank" rel="noopener">2017-2018 Petrozavodsk Winter Training Camp, Saratov SU Contest L</a></h4><p>无向图，边有边权，起点为1号点，询问如果增大输入中第i条边的边权，最短路会受到影响的点有多少个。</p>
+<p>做法很自然，在最短路构成的DAG上求支配树，询问的就是支配树子树大小了。这里把边新建点，方便处理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 400010</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> n,m,e;</span><br><span class="line"><span class="keyword">int</span> p[N],head[N],last[N],w[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line">ll dis[N];</span><br><span class="line"><span class="keyword">int</span> id[N],ans[N],num[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    head[e]=y;w[e]=c;</span><br><span class="line">    last[e]=p[x];</span><br><span class="line">    p[x]=e++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    ll dis;</span><br><span class="line">    node()&#123;&#125;</span><br><span class="line">    node(<span class="keyword">int</span> x_,ll dis_)</span><br><span class="line">    &#123;</span><br><span class="line">        x=x_;</span><br><span class="line">        dis=dis_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> node &amp;t)<span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> dis&gt;t.dis;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;node&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        dis[i]=<span class="number">1L</span>L&lt;&lt;<span class="number">60</span>;</span><br><span class="line">        vis[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dis[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    q.push(node(<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x=q.top().x;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span>(vis[x]) <span class="keyword">continue</span>;</span><br><span class="line">        vis[x]=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=p[x];j!=<span class="number">-1</span>;j=last[j])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> y=head[j];</span><br><span class="line">            <span class="keyword">if</span>(dis[y]&gt;dis[x]+w[j])</span><br><span class="line">            &#123;</span><br><span class="line">                dis[y]=dis[x]+w[j];</span><br><span class="line">                q.push(node(y,dis[y]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> fa[N],nodeName[N],nodeID[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ncnt=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[N],redge[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vis[x]=<span class="literal">true</span>;</span><br><span class="line">    nodeID[x]=ncnt;</span><br><span class="line">    nodeName[ncnt++]=x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;y:edge[x])</span><br><span class="line">    <span class="keyword">if</span>(!vis[y])</span><br><span class="line">    &#123;</span><br><span class="line">        fa[y]=x;</span><br><span class="line">        dfs(y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> semi[N],idom[N],ufs[N];</span><br><span class="line"><span class="keyword">int</span> mnsemi[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bucket[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ufs_union</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ufs[x]=y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ufs_internal_find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ufs[ufs[x]]==ufs[x]) <span class="keyword">return</span>;</span><br><span class="line">    ufs_internal_find(ufs[x]);</span><br><span class="line">    <span class="keyword">if</span>(semi[mnsemi[ufs[x]]]&lt;semi[mnsemi[x]])</span><br><span class="line">        mnsemi[x]=mnsemi[ufs[x]];</span><br><span class="line">    ufs[x]=ufs[ufs[x]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ufs_find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ufs[x]==x) <span class="keyword">return</span> x;</span><br><span class="line">    ufs_internal_find(x);</span><br><span class="line">    <span class="keyword">return</span> mnsemi[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calc_dominator_tree</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)</span><br><span class="line">        semi[i]=mnsemi[i]=ufs[i]=i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x=n<span class="number">-1</span>;x&gt;<span class="number">0</span>;x--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tfa=nodeID[fa[nodeName[x]]];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;y:redge[nodeName[x]])</span><br><span class="line">        <span class="keyword">if</span>(vis[y])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> fy=ufs_find(nodeID[y]);</span><br><span class="line">            <span class="keyword">if</span>(semi[fy]&lt;semi[x])</span><br><span class="line">                semi[x]=semi[fy];</span><br><span class="line">        &#125;</span><br><span class="line">        bucket[semi[x]].push_back(x);</span><br><span class="line">        ufs_union(x,tfa);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;y:bucket[tfa])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> fy=ufs_find(y);</span><br><span class="line">            idom[nodeName[y]]=nodeName[semi[fy]&lt;semi[y]?fy:tfa];</span><br><span class="line">        &#125;</span><br><span class="line">        bucket[tfa].<span class="built_in">clear</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">1</span>;x&lt;n;++x)</span><br><span class="line">        <span class="keyword">if</span>(idom[nodeName[x]]!=nodeName[semi[x]])</span><br><span class="line">            idom[nodeName[x]]=idom[idom[nodeName[x]]];</span><br><span class="line">    idom[nodeName[<span class="number">0</span>]]=<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> pre)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num[x]=(x&lt;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;y:edge[x])</span><br><span class="line">    <span class="keyword">if</span>(y!=pre)</span><br><span class="line">    &#123;</span><br><span class="line">        dfs(y,x);</span><br><span class="line">        num[x]+=num[y];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(p,<span class="number">-1</span>,<span class="keyword">sizeof</span>(p));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x,y,c;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;c);</span><br><span class="line">        --x;--y;</span><br><span class="line">        add(x,y,c);</span><br><span class="line">        add(y,x,c);</span><br><span class="line">    &#125;</span><br><span class="line">    dijkstra();</span><br><span class="line">    <span class="keyword">int</span> tot=n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;e;++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(dis[head[j]]==dis[head[j^<span class="number">1</span>]]+w[j])</span><br><span class="line">        &#123;</span><br><span class="line">            id[tot]=j/<span class="number">2</span>;</span><br><span class="line">            edge[head[j^<span class="number">1</span>]].push_back(tot);</span><br><span class="line">            edge[tot].push_back(head[j]);</span><br><span class="line">            redge[head[j]].push_back(tot);</span><br><span class="line">            redge[tot].push_back(head[j^<span class="number">1</span>]);</span><br><span class="line">            ++tot;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;head[j^1]&lt;&lt;" "&lt;&lt;head[j]&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(fa,<span class="number">-1</span>,<span class="keyword">sizeof</span>(fa));</span><br><span class="line">    <span class="built_in">memset</span>(idom,<span class="number">-1</span>,<span class="keyword">sizeof</span>(idom));</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    ncnt=<span class="number">0</span>;</span><br><span class="line">    dfs(<span class="number">0</span>);</span><br><span class="line">    calc_dominator_tree(ncnt);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;tot;++i)</span><br><span class="line">        edge[i].<span class="built_in">clear</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;tot;++i)</span><br><span class="line">        edge[idom[i]].push_back(i);</span><br><span class="line">    dfs(<span class="number">0</span>,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&lt;tot;++i)</span><br><span class="line">        ans[id[i]]=num[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-19T15:34:43.052Z" itemprop="dateUpdated">2020-04-19 23:34:43</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/09/14/Dominator-Tree/" target="_blank" rel="external">http://yoursite.com/2018/09/14/Dominator-Tree/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="forever_you">
+            forever_you
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/09/14/Dominator-Tree/&title=《Dominator Tree》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/09/14/Dominator-Tree/&title=《Dominator Tree》 — Forever you~&source=记录退役生活" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/09/14/Dominator-Tree/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Dominator Tree》 — Forever you~&url=http://yoursite.com/2018/09/14/Dominator-Tree/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/09/14/Dominator-Tree/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/18/Hello%20World/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/12/Knapsack-and-Queries/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Knapsack and Queries</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHsz",
+            appKey: "2Twk1r9fmBnvsFveG9Ey5o6F",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>forever_you &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/09/14/Dominator-Tree/&title=《Dominator Tree》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/09/14/Dominator-Tree/&title=《Dominator Tree》 — Forever you~&source=记录退役生活" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/09/14/Dominator-Tree/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Dominator Tree》 — Forever you~&url=http://yoursite.com/2018/09/14/Dominator-Tree/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/09/14/Dominator-Tree/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/09/14/Dominator-Tree/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1278826631&web_id=1278826631')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

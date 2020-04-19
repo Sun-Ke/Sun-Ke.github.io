@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>超实用！Stern-Brocot tree总结奉上 | Forever you~ | 重剑无锋，大巧不工</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Stern-Brocot tree">
+    <meta name="description" content="关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。 Stern-Brocot tree:   Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。 构造方法可以理解为：先在左边写上$\frac{0}{1}$，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超实用！Stern-Brocot tree总结奉上">
+<meta property="og:url" content="http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/index.html">
+<meta property="og:site_name" content="Forever you~">
+<meta property="og:description" content="关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。 Stern-Brocot tree:   Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。 构造方法可以理解为：先在左边写上$\frac{0}{1}$，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/128a6f3bc584638d799c/sbtree.png">
+<meta property="article:published_time" content="2018-09-11T13:07:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T14:16:30.838Z">
+<meta property="article:author" content="forever_you">
+<meta property="article:tag" content="Stern-Brocot tree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/128a6f3bc584638d799c/sbtree.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Forever you~" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">forever_you</h5>
+          <a href="mailto:573570584@qq.com" title="573570584@qq.com" class="mail">573570584@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Sun-Ke" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/30900443" target="_blank" >
+                <i class="icon icon-lg icon-youtube-play"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">超实用！Stern-Brocot tree总结奉上</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">超实用！Stern-Brocot tree总结奉上</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-11T13:07:00.000Z" itemprop="datePublished" class="page-time">
+  2018-09-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目列表："><span class="post-toc-number">1.</span> <span class="post-toc-text">题目列表：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-Alice-Bob-Oranges-and-Apples"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.Alice, Bob, Oranges and Apples</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2017-CCPC-哈尔滨-Cow-s-Segment"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 2017 CCPC 哈尔滨 Cow&#96;s Segment</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-Petrozavodsk-Winter-2018-AtCoder-Contest-C-Construct-Point"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.Petrozavodsk Winter-2018. AtCoder Contest C Construct Point</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-超实用！Stern-Brocot-tree总结奉上"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">超实用！Stern-Brocot tree总结奉上</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-11 21:07:00" datetime="2018-09-11T13:07:00.000Z"  itemprop="datePublished">2018-09-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有<a href="https://en.wikipedia.org/wiki/Stern–Brocot_tree" target="_blank" rel="noopener">Wikipedia</a>以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。</p>
+<p>Stern-Brocot tree:</p>
+<center><img src="http://lc-8FjWg1io.cn-n1.lcfile.com/128a6f3bc584638d799c/sbtree.png" width="80%"></center>
+
+<p>Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。</p>
+<p>构造方法可以理解为：先在左边写上$\frac{0}{1}$，右边写上$\frac{1}{0}$，代表零和正无穷，然后分子、分母分别相加，得到$\frac{1}{1}$，写在中间，之后每次把当前层复制到下一层，然后对于下一层相邻两个有理数之间还是分子分母分别相加，得到新的有理数，写在两者中间，重复这个操作就可以无限的写下去，进而得到所有的有理数。树形结构的获得见上图。</p>
+<p>记树中的一个节点$\frac{y}{x}$，它是由$\frac{L_m}{L_n},\frac{R_m}{R_n}$这两个数产生的，那么可以发现：</p>
+<p>1.$\frac{L_m}{L_n}$是位于左上方且离它最近的祖先，$\frac{R_m}{R_n}$是位于右上方且离它最近的祖先。</p>
+<p>2.$gcd(x,y)=1$。</p>
+<p>3.$R_mL_n-L_mR_n=1$。</p>
+<p>4.以$\frac{y}{x}$为根的子树中的所有数都落在区间$(\frac{L_m}{L_n},\frac{R_m}{R_n})$中</p>
+<p>找一个数$\frac{b}{a}$在树中的位置可以通过在树上二分，但如果一步一步走的话，时间复杂度关于a,b是线性的，比如找$\frac{1}{10^9}$，需要从根一直往左走$10^9-1$步。但是*<em>可以证明，在树上“拐弯”的次数是$O(log)$的 *</em>，可以与辗转相除法联系起来，详见<a href="https://www.bilibili.com/video/BV1PE411W7Ze" target="_blank" rel="noopener">这个视频</a>。这样每次直走的步数我们可以列不等式$O(1)$求出，拐弯的过程递归下去就好了。也可以用具体数学书上的结论。</p>
+<h3 id="题目列表："><a href="#题目列表：" class="headerlink" title="题目列表："></a>题目列表：</h3><h4 id="1-Alice-Bob-Oranges-and-Apples"><a href="#1-Alice-Bob-Oranges-and-Apples" class="headerlink" title="1.Alice, Bob, Oranges and Apples"></a>1.<a href="https://codeforces.com/problemset/problem/586/E" target="_blank" rel="noopener">Alice, Bob, Oranges and Apples</a></h4><p>题意：懒得叙述了，总之把在Stern-Brocot tree上走的过程抽象了一下，简化的题意就是给一个分数，输出从根到该点的路径。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ll x,y;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;x,&amp;y)!=EOF)&#123;</span><br><span class="line">        <span class="keyword">if</span>(__gcd(x,y)&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Impossible"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(x!=y)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x&lt;y) &#123;</span><br><span class="line">                ll t=(y<span class="number">-1</span>)/x;</span><br><span class="line">                y-=t*x;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%lldB"</span>,t);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ll t=(x<span class="number">-1</span>)/y;</span><br><span class="line">                x-=t*y;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%lldA"</span>,t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2017-CCPC-哈尔滨-Cow-s-Segment"><a href="#2-2017-CCPC-哈尔滨-Cow-s-Segment" class="headerlink" title="2. 2017 CCPC 哈尔滨 Cow`s Segment"></a>2. <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6238" target="_blank" rel="noopener">2017 CCPC 哈尔滨 Cow`s Segment</a></h4><p>题意：给两个高精度浮点数$a,b$，求最小的正整数$x$使得区间$[ax,bx)$包含整数（注，原题面有误，真实的数据是左闭右开的）。</p>
+<p>思路：设$ax\le y&lt;bx$，即$a\le \frac{y}{x}&lt;b$，就按上面说的，在Stern-Brocot tree上二分，直到找到第一个符合条件的点，同时就是x的最小值。</p>
+<p>(Java写起来太长了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.math.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> BigInteger one=BigInteger.ONE;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> BigInteger zero=BigInteger.ZERO;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> BigInteger base=BigInteger.valueOf(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> LEN=<span class="number">300</span>;</span><br><span class="line">    <span class="keyword">static</span> BigInteger ans;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BigInteger <span class="title">trans</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len=s.length();</span><br><span class="line">        <span class="keyword">int</span> num=LEN,flag=<span class="number">0</span>;</span><br><span class="line">        BigInteger ans=BigInteger.valueOf(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i)==<span class="string">'.'</span>) flag=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">            &#123;</span><br><span class="line">                num-=flag;</span><br><span class="line">                <span class="keyword">int</span> now=s.charAt(i)-<span class="string">'0'</span>;</span><br><span class="line">                ans=ans.multiply(base).add(BigInteger.valueOf(now));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=num;++i)</span><br><span class="line">            ans=ans.multiply(base);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(BigInteger a,BigInteger b,BigInteger c,BigInteger d,</span></span></span><br><span class="line"><span class="function"><span class="params">    		BigInteger la,BigInteger lb,BigInteger ra,BigInteger rb,</span></span></span><br><span class="line"><span class="function"><span class="params">    		BigInteger x,BigInteger y)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        BigInteger le=b.multiply(x).subtract(a.multiply(y));</span><br><span class="line">        BigInteger ri=d.multiply(x).subtract(c.multiply(y));</span><br><span class="line">        <span class="keyword">if</span>(le.compareTo(zero)&lt;=<span class="number">0</span> &amp;&amp; ri.compareTo(zero)&gt;<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans=x;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        BigInteger k,tem;</span><br><span class="line">        <span class="keyword">if</span>(le.compareTo(zero)&gt;<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            tem=a.multiply(rb).subtract(b.multiply(ra));</span><br><span class="line">            k=le.add(tem.subtract(one)).divide(tem);</span><br><span class="line">            dfs(a,b,c,d,</span><br><span class="line">            x.add(k.subtract(one).multiply(ra)),y.add(k.subtract(one).multiply(rb)),</span><br><span class="line">            ra,rb,</span><br><span class="line">            x.add(k.multiply(ra)),y.add(k.multiply(rb)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ri=ri.negate();</span><br><span class="line">            tem=d.multiply(la).subtract(c.multiply(lb));</span><br><span class="line">            k=ri.divide(tem).add(one);</span><br><span class="line">            dfs(a,b,c,d,</span><br><span class="line">            la,lb,</span><br><span class="line">            x.add(k.subtract(one).multiply(la)),y.add(k.subtract(one).multiply(lb)),</span><br><span class="line">            x.add(k.multiply(la)),y.add(k.multiply(lb)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Scanner cin=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        BigInteger pow=base.pow(LEN);</span><br><span class="line">        BigInteger a,b;</span><br><span class="line">        <span class="keyword">int</span> T=cin.nextInt();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> cas=<span class="number">1</span>;cas&lt;=T;++cas)</span><br><span class="line">        &#123;</span><br><span class="line">            String s=cin.next(),t=cin.next();</span><br><span class="line">            a=trans(s);</span><br><span class="line">            b=trans(t);</span><br><span class="line">            dfs(pow,a,pow,b,one,zero,zero,one,one,one);</span><br><span class="line">            System.out.println(ans);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-Petrozavodsk-Winter-2018-AtCoder-Contest-C-Construct-Point"><a href="#3-Petrozavodsk-Winter-2018-AtCoder-Contest-C-Construct-Point" class="headerlink" title="3.Petrozavodsk Winter-2018. AtCoder Contest C Construct Point"></a>3.Petrozavodsk Winter-2018. AtCoder Contest C Construct Point</h4><p>题意：二维平面上给整点三角形的三个顶点坐标，判断三角形内部（不含边界）是否存在整点，如果有输出任意一个。</p>
+<p>思路：先考虑这么一个子问题，在直线$y=\frac{b}{a}x$和$y=\frac{d}{c}x$之间找一个整点，范围$0&lt;x\le D$，那么还是$\frac{b}{a}x &lt; y&lt;\frac{d}{c}x$，得到$\frac{b}{a}&lt;\frac{y}{x}&lt;\frac{d}{c}$，找到最小的x和D比较即可。对于任意三角形的话，通过分割，平移，对称的变换就能规约成上述子问题啦。</p>
+<p>代码略。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-19T14:16:30.838Z" itemprop="dateUpdated">2020-04-19 22:16:30</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" target="_blank" rel="external">http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="forever_you">
+            forever_you
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stern-Brocot-tree/" rel="tag">Stern-Brocot tree</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/&title=《超实用！Stern-Brocot tree总结奉上》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/&title=《超实用！Stern-Brocot tree总结奉上》 — Forever you~&source=记录退役生活" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《超实用！Stern-Brocot tree总结奉上》 — Forever you~&url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/18/Hello%20World/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/05/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">线段树合并</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHsz",
+            appKey: "2Twk1r9fmBnvsFveG9Ey5o6F",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>forever_you &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/&title=《超实用！Stern-Brocot tree总结奉上》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/&title=《超实用！Stern-Brocot tree总结奉上》 — Forever you~&source=记录退役生活" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《超实用！Stern-Brocot tree总结奉上》 — Forever you~&url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1278826631&web_id=1278826631')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

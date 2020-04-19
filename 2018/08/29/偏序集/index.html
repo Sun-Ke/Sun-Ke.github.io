@@ -14,23 +14,24 @@
     
     
     
-    <title>Hello World | Forever you~ | 重剑无锋，大巧不工</title>
+    <title>偏序集 | Forever you~ | 重剑无锋，大巧不工</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="之前用wordpress作为个人博客大概用了三年多，这一段时间里因为各种原因也陆陆续续出了一些问题，大规模的迁移有两三次。上学期不知道为什么服务器的数据库突然空了，导致一学期的文章白写了。考虑到维护服务器确实比较耗费精力，于是决定改用github+hexo的方式搭建静态博客…目前看起来还是比较舒服的。 持续建设中…">
+    <meta name="keywords" content="偏序集">
+    <meta name="description" content="偏序关系首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系  如果对于X中所有的x，都有x R x，则R是自反的 如果对于X中所有x和y，若x R y和y R x同时成立则x&#x3D;y，则R是反对称的 对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的  通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示严格偏">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/18/Hello%20World/index.html">
+<meta property="og:title" content="偏序集">
+<meta property="og:url" content="http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/index.html">
 <meta property="og:site_name" content="Forever you~">
-<meta property="og:description" content="之前用wordpress作为个人博客大概用了三年多，这一段时间里因为各种原因也陆陆续续出了一些问题，大规模的迁移有两三次。上学期不知道为什么服务器的数据库突然空了，导致一学期的文章白写了。考虑到维护服务器确实比较耗费精力，于是决定改用github+hexo的方式搭建静态博客…目前看起来还是比较舒服的。 持续建设中…">
+<meta property="og:description" content="偏序关系首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系  如果对于X中所有的x，都有x R x，则R是自反的 如果对于X中所有x和y，若x R y和y R x同时成立则x&#x3D;y，则R是反对称的 对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的  通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示严格偏">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-18T07:12:27.000Z">
-<meta property="article:modified_time" content="2020-04-18T14:21:13.251Z">
+<meta property="article:published_time" content="2018-08-29T08:47:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T08:31:11.733Z">
 <meta property="article:author" content="Forever you">
+<meta property="article:tag" content="偏序集">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" type="application/atom+xml" title="Forever you~" href="/atom.xml">
@@ -119,7 +120,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Hello World</div>
+        <div class="flex-col header-title ellipsis">偏序集</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -141,11 +142,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Hello World</h1>
+        <h1 class="title">偏序集</h1>
         <h5 class="subtitle">
             
-                <time datetime="2020-04-18T07:12:27.000Z" itemprop="datePublished" class="page-time">
-  2020-04-18
+                <time datetime="2018-08-29T08:47:00.000Z" itemprop="datePublished" class="page-time">
+  2018-08-29
 </time>
 
 
@@ -161,14 +162,21 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#偏序关系"><span class="post-toc-number">1.</span> <span class="post-toc-text">偏序关系</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#可比与不可比"><span class="post-toc-number">2.</span> <span class="post-toc-text">可比与不可比</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#极小元极大元"><span class="post-toc-number">3.</span> <span class="post-toc-text">极小元极大元</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#链与反链"><span class="post-toc-number">4.</span> <span class="post-toc-text">链与反链</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#重要定理"><span class="post-toc-number">5.</span> <span class="post-toc-text">重要定理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题目"><span class="post-toc-number">6.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-导弹拦截"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">1.导弹拦截</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-2017-ICPC-Nanning-The-Maximum-Unreachable-Node-Set"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">2.2017 ICPC Nanning The Maximum Unreachable Node Set</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
 
-<article id="post-Hello World"
+
+<article id="post-偏序集"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Hello World</h1>
+        <h1 class="post-card-title">偏序集</h1>
         <div class="post-meta">
-            <time class="post-time" title="2020-04-18 15:12:27" datetime="2020-04-18T07:12:27.000Z"  itemprop="datePublished">2020-04-18</time>
+            <time class="post-time" title="2018-08-29 16:47:00" datetime="2018-08-29T08:47:00.000Z"  itemprop="datePublished">2018-08-29</time>
 
             
 
@@ -181,8 +189,25 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>之前用wordpress作为个人博客大概用了三年多，这一段时间里因为各种原因也陆陆续续出了一些问题，大规模的迁移有两三次。上学期不知道为什么服务器的数据库突然空了，导致一学期的文章白写了。考虑到维护服务器确实比较耗费精力，于是决定改用github+hexo的方式搭建静态博客…目前看起来还是比较舒服的。</p>
-<p>持续建设中…</p>
+            <h4 id="偏序关系"><a href="#偏序关系" class="headerlink" title="偏序关系"></a>偏序关系</h4><p>首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系</p>
+<ul>
+<li>如果对于X中所有的x，都有x R x，则R是<strong>自反</strong>的</li>
+<li>如果对于X中所有x和y，若x R y和y R x同时成立则x=y，则R是<strong>反对称</strong>的</li>
+<li>对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是<strong>传递</strong>的</li>
+</ul>
+<p>通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示严格偏序（反自反，反对称，传递），比如严格包含于，小于关系等。</p>
+<h4 id="可比与不可比"><a href="#可比与不可比" class="headerlink" title="可比与不可比"></a>可比与不可比</h4><p>对于X中x和y，如果x R y或者y R x，则说x和y是<strong>可比</strong>的，否则就说x和y<strong>不可比</strong></p>
+<h4 id="极小元极大元"><a href="#极小元极大元" class="headerlink" title="极小元极大元"></a>极小元极大元</h4><p>对于偏序集X中的元素a，不存在满足x&lt;a的元素x，则a是偏序集的一个<strong>极小元。</strong>对于偏序集X中的元素b，不存在满足b&lt;y的元素y，则b是偏序集的一个<strong>极大元。</strong></p>
+<h4 id="链与反链"><a href="#链与反链" class="headerlink" title="链与反链"></a>链与反链</h4><p>设$(X,\le)$是有限偏序集，<strong>链</strong>是X的一个子集C，它的每一对元素都可比，因此链C是X的一个全序子集，链的元素可以被线性排序。<strong>反链</strong>是X的一个子集A，他的任意两个元素都不可比。</p>
+<p>由定义可知</p>
+<p>链的子集也是链，反链的子集还是反链。</p>
+<p>如果A是一个反链而C是一个链，则$\left| A\cap C\right|\le 1$</p>
+<h4 id="重要定理"><a href="#重要定理" class="headerlink" title="重要定理"></a>重要定理</h4><p><strong>定理1</strong> 设$(X,\le)$是有限偏序集，设r是链的最大大小。则X可以被划分成r个反链，但不能划分成少于r个反链</p>
+<p><strong>定理2</strong> (<strong>Dilworth定理</strong>) 设$(X,\le)$是有限偏序集，设m是反链的最大大小。则X可以被划分成m个链，但不能划分成少于m个链</p>
+<p>定理1的证明大概是每次找到偏序集的极小元集合，然后删掉，这样实际上得到的r个极小元集合就是划分成r个反链的方案。定理2是定理1的“对偶”定理，但是证明就比较复杂了。</p>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><h5 id="1-导弹拦截"><a href="#1-导弹拦截" class="headerlink" title="1.导弹拦截"></a>1.<a href="https://www.luogu.org/problemnew/show/P1020" target="_blank" rel="noopener">导弹拦截</a></h5><p>最经典的题目，把一个数列划分成最少的最长不升子序列的数目就等于这个数列的最长上升子序列的长度。这里的偏序关系i R j，可以理解为i&lt;j且a[i]&lt;a[j]。</p>
+<h5 id="2-2017-ICPC-Nanning-The-Maximum-Unreachable-Node-Set"><a href="#2-2017-ICPC-Nanning-The-Maximum-Unreachable-Node-Set" class="headerlink" title="2.2017 ICPC Nanning The Maximum Unreachable Node Set"></a>2.<a href="https://nanti.jisuanke.com/t/19979" target="_blank" rel="noopener">2017 ICPC Nanning The Maximum Unreachable Node Set</a></h5><p>求一个DAG的最大的两两不可达的点集大小。</p>
+<p>需要先做floyd，然后转化为求<strong>最小不相交路径覆盖</strong>就可以了，每个点拆成两个点，形成一个左右各n个点的二分图，对于一条边(i,j)左边的i连向右边的j，最终答案为n减去二分图最大匹配的数量。</p>
 
         </div>
 
@@ -191,12 +216,12 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-04-18T14:21:13.251Z" itemprop="dateUpdated">2020-04-18 22:21:13</time>
+    Last updated: <time datetime="2020-04-19T08:31:11.733Z" itemprop="dateUpdated">2020-04-19 16:31:11</time>
 </span><br>
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2020/04/18/Hello%20World/" target="_blank" rel="external">http://yoursite.com/2020/04/18/Hello%20World/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" target="_blank" rel="external">http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/</a>
         
     </div>
     
@@ -213,6 +238,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%81%8F%E5%BA%8F%E9%9B%86/" rel="tag">偏序集</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -221,7 +248,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/18/Hello%20World/&title=《Hello World》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/&title=《偏序集》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -231,22 +258,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/18/Hello%20World/&title=《Hello World》 — Forever you~&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/&title=《偏序集》 — Forever you~&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/18/Hello%20World/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hello World》 — Forever you~&url=http://yoursite.com/2020/04/18/Hello%20World/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《偏序集》 — Forever you~&url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/18/Hello%20World/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -269,18 +296,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2020/04/18/Markdown%20For%20Typora/" id="post-prev" class="post-nav-link">
+      <a href="/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Markdown For Typora</h4>
+        <h4 class="title">高维偏序问题</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/" id="post-next" class="post-nav-link">
+      <a href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">2017 西安网络赛 A题 TREE</h4>
+        <h4 class="title">类欧几里得算法</h4>
       </a>
     </div>
   
@@ -378,7 +405,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/18/Hello%20World/&title=《Hello World》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/&title=《偏序集》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -388,22 +415,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/18/Hello%20World/&title=《Hello World》 — Forever you~&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/&title=《偏序集》 — Forever you~&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/04/18/Hello%20World/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hello World》 — Forever you~&url=http://yoursite.com/2020/04/18/Hello%20World/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《偏序集》 — Forever you~&url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/04/18/Hello%20World/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -414,7 +441,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/04/18/Hello%20World/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" alt="微信分享二维码">
 </div>
 
 

@@ -241,6 +241,199 @@
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-2017-西安网络赛-A题-TREE"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-31 14:45:00" datetime="2018-08-31T06:45:00.000Z"  itemprop="datePublished">2018-08-31</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/">2017 西安网络赛 A题 TREE</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        最近想起来这么一道题，当时q神没rush出来，赛后几分钟AC掉的
+题目链接：https://nanti.jisuanke.com/t/17114
+题意是树上有$N$个点，每个点的点权是一个01矩阵，有$Q$次询问，每次问树上从x到y这条路径上的矩阵依次乘起来的结果是多少(模2意义下)。数据范围$N\le 3000,Q\le 30000$，矩阵大小$64\times 64$。
+首先这里的模2意...
+    
+
+        <a href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LCA/" rel="tag">LCA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitset/" rel="tag">bitset</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-高维偏序问题"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-30 19:55:00" datetime="2018-08-30T11:55:00.000Z"  itemprop="datePublished">2018-08-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/">高维偏序问题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        最近做了几道高维偏序的简单题。
+对于这类题目一般有三种通用方法，一是cdq分治，维数越多嵌套次数就越多，总体来说思路就是对时间分治，每次统计出左半区间的贡献点对右半区间的询问点的贡献，这样对于每个询问点来说，它前面的所有对它造成影响的点就都会被算到。二是用bitset优化暴力，应该只能处理计数问题，但优点是好写，适合做高维偏序。三是KDtree，emmmm，这个没怎么写过，多校训练十分艰难的...
+    
+
+        <a href="/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%81%8F%E5%BA%8F/" rel="tag">偏序</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-偏序集"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-29 16:47:00" datetime="2018-08-29T08:47:00.000Z"  itemprop="datePublished">2018-08-29</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/">偏序集</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        偏序关系首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系
+
+如果对于X中所有的x，都有x R x，则R是自反的
+如果对于X中所有x和y，若x R y和y R x同时成立则x=y，则R是反对称的
+对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的
+
+通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示...
+    
+
+        <a href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%81%8F%E5%BA%8F%E9%9B%86/" rel="tag">偏序集</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-类欧几里得算法"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-08-28 17:41:00" datetime="2018-08-28T09:41:00.000Z"  itemprop="datePublished">2018-08-28</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">类欧几里得算法</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        推导有时候需要快速计算如下式子(比如数据范围都是1e9)
+$$f(a,b,c,n)=\sum_{i=0}^{n}\lfloor\frac{ai+b}{c}\rfloor$$
+$$g(a,b,c,n)=\sum_{i=0}^{n}i\lfloor\frac{ai+b}{c}\rfloor$$
+$$h(a,b,c,n)=\sum_{i=0}^{n} {\lfloor\frac{ai+b}{c}\...
+    
+
+        <a href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/" rel="tag">math</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-后缀自动机学习笔记"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -455,229 +648,15 @@ $$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=...
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-莫队算法总结"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-05-03 13:36:00" datetime="2018-05-03T05:36:00.000Z"  itemprop="datePublished">2018-05-03</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/05/03/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">莫队算法总结</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        写在前面莫队算法用于离线解决一类区间问题。
-
-普通莫队如果我们已知查询为区间$[l,r]$的答案，并且能在$O(1)$的时间内通过添加或删除一个元素得到$[l-1,r],[l+1,r],[l,r-1],[l,r+1]$的答案，那么就可以考虑使用莫队算法。
-做法：
-1.首先我们对原序列分块，原序列长度$N$,每块大小记为$Size$，那么块数为$\lfloor \frac{N-1}{Size}...
-    
-
-        <a href="/2018/05/03/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/" rel="tag">莫队算法</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-七律 三月十七日记雪"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-25 21:43:00" datetime="2018-04-25T13:43:00.000Z"  itemprop="datePublished">2018-04-25</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/25/%E4%B8%83%E5%BE%8B%20%E4%B8%89%E6%9C%88%E5%8D%81%E4%B8%83%E6%97%A5%E8%AE%B0%E9%9B%AA/">七绝·三月十七日记雪</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        七绝·三月十七日记雪
-
-情深几许总成空，
-
-柳絮轻扬未遇风。
-
-无奈曦园留不得，
-
-只看劲挺一青松。
-
-自注：
-1.采用首句平起入韵的格式。
-2.“空”、“风”为“一东韵”，“松”为“二冬韵”
-3.第二句化用“未若柳絮因风起”。
-4.第三句意指雪花落地即化。
-
-
-
-其实是格律诗词与写作这门课的作业…
-随便写了几句，没什么辞藻，格律是没问题的。
-老师点评说有点惆怅的感觉:)
-还有一个问题是逻辑...
-    
-
-        <a href="/2018/04/25/%E4%B8%83%E5%BE%8B%20%E4%B8%89%E6%9C%88%E5%8D%81%E4%B8%83%E6%97%A5%E8%AE%B0%E9%9B%AA/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%97%E8%AF%8D/" rel="tag">诗词</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-正则表达式"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-25 09:34:00" datetime="2018-04-25T01:34:00.000Z"  itemprop="datePublished">2018-04-25</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        写在前面写这篇文章的初衷是解决一些简单的字符串模拟题目，对于特定的某些题目，有时候用C++11的正则表达式会方便很多。
-本文主要总结一下常见的一些正则表达式写法，以及如何使用C++11的regex库，最后以几个具体题目举例。
-总的来说，正则表达式最简单的应用是判断一个字符串中是否包含特定字符串。正则表达式是一种文本模式，由普通字符和元字符组成。
-
-常用的元字符
-“.” 匹配除“\n”之外的任...
-    
-
-        <a href="/2018/04/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/" rel="tag">regex</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-树链剖分"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-24 14:48:00" datetime="2018-04-24T06:48:00.000Z"  itemprop="datePublished">2018-04-24</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/24/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/">树链剖分</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        简单回顾一下树链剖分（以下摘自2009年漆子超的论文《分治算法在树的路径问题中的应用 》）：
-
-
-定义：
-将树中的边分为两类：轻边和重边。
-记$Size(U)$表示以$U$为根的子树的结点个数。
-令$V$为$U$的儿子中$Size(V)$最大的一个，那么我们称边$(U,V)$为重边，其余边为轻边。
-我们称某条路径为重路径，当且仅当它全部由重边组成。
-
-性质：
-性质1：如果$(U,V)$为轻边...
-    
-
-        <a href="/2018/04/24/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" rel="tag">树链剖分</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
+<nav id="page-nav">
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    </div>
+</nav>
+
 
 </div>
 

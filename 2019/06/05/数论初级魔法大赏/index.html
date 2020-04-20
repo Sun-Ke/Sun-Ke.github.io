@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>数论初级魔法大赏 | Forever you~ | 重剑无锋，大巧不工</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="时间复杂度,数论,莫比乌斯反演">
+    <meta name="description" content="最近在准备关于莫比乌斯反演的课件，准备把例题简要整理下来，那就开始吧 1.bzoj 2190 [SDOI2008]仪仗队求$2+\sum_{x&#x3D;1}^{n-1}\sum_{y&#x3D;1}^{n-1}[gcd(x,y)&#x3D;&#x3D;1](n\le 40000)$ 最简单的做法，线性筛预处理出欧拉函数的前缀和，时间复杂度$O(n)$。 2.bzoj 2818 Gcd求$\sum_{p}\sum_{x&#x3D;1}^{n}\s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论初级魔法大赏">
+<meta property="og:url" content="http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/index.html">
+<meta property="og:site_name" content="Forever you~">
+<meta property="og:description" content="最近在准备关于莫比乌斯反演的课件，准备把例题简要整理下来，那就开始吧 1.bzoj 2190 [SDOI2008]仪仗队求$2+\sum_{x&#x3D;1}^{n-1}\sum_{y&#x3D;1}^{n-1}[gcd(x,y)&#x3D;&#x3D;1](n\le 40000)$ 最简单的做法，线性筛预处理出欧拉函数的前缀和，时间复杂度$O(n)$。 2.bzoj 2818 Gcd求$\sum_{p}\sum_{x&#x3D;1}^{n}\s">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-05T12:44:00.000Z">
+<meta property="article:modified_time" content="2020-04-20T04:05:22.682Z">
+<meta property="article:author" content="forever_you">
+<meta property="article:tag" content="时间复杂度">
+<meta property="article:tag" content="数论">
+<meta property="article:tag" content="莫比乌斯反演">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="Forever you~" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">forever_you</h5>
+          <a href="mailto:573570584@qq.com" title="573570584@qq.com" class="mail">573570584@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Sun-Ke" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/30900443" target="_blank" >
+                <i class="icon icon-lg icon-youtube-play"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">数论初级魔法大赏</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">数论初级魔法大赏</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-05T12:44:00.000Z" itemprop="datePublished" class="page-time">
+  2019-06-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-bzoj-2190-SDOI2008-仪仗队"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.bzoj 2190 [SDOI2008]仪仗队</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-bzoj-2818-Gcd"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.bzoj 2818 Gcd</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-bzoj-2705-SDOI2012-Longge的问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.bzoj 2705 [SDOI2012]Longge的问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-bzoj-2440-中山市选2011-完全平方数"><span class="post-toc-number">4.</span> <span class="post-toc-text">4.bzoj 2440 [中山市选2011]完全平方数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-luogu-P2257-YY的GCD-bzoj-2820"><span class="post-toc-number">5.</span> <span class="post-toc-text">5.luogu P2257 YY的GCD(bzoj 2820)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-spoj-LCMSUM"><span class="post-toc-number">6.</span> <span class="post-toc-text">6.spoj LCMSUM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-bzoj-2154-Crash的数字表格"><span class="post-toc-number">7.</span> <span class="post-toc-text">7.bzoj 2154 Crash的数字表格</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-bzoj-3994-SDOI2015-约数个数和"><span class="post-toc-number">8.</span> <span class="post-toc-text">8.bzoj 3994 [SDOI2015]约数个数和</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-bzoj-4659-lcm"><span class="post-toc-number">9.</span> <span class="post-toc-text">9.bzoj 4659 lcm</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-bzoj-4816-Sdoi2017-数字表格"><span class="post-toc-number">10.</span> <span class="post-toc-text">10.bzoj 4816 [Sdoi2017]数字表格</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-数论初级魔法大赏"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">数论初级魔法大赏</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-05 20:44:00" datetime="2019-06-05T12:44:00.000Z"  itemprop="datePublished">2019-06-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>最近在准备关于莫比乌斯反演的课件，准备把例题简要整理下来，那就开始吧</p>
+<h3 id="1-bzoj-2190-SDOI2008-仪仗队"><a href="#1-bzoj-2190-SDOI2008-仪仗队" class="headerlink" title="1.bzoj 2190 [SDOI2008]仪仗队"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2190" target="_blank" rel="noopener">1.bzoj 2190 [SDOI2008]仪仗队</a></h3><p>求$2+\sum_{x=1}^{n-1}\sum_{y=1}^{n-1}[gcd(x,y)==1](n\le 40000)$</p>
+<p>最简单的做法，线性筛预处理出欧拉函数的前缀和，时间复杂度$O(n)$。</p>
+<h3 id="2-bzoj-2818-Gcd"><a href="#2-bzoj-2818-Gcd" class="headerlink" title="2.bzoj 2818 Gcd"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2818" target="_blank" rel="noopener">2.bzoj 2818 Gcd</a></h3><p>求$\sum_{p}\sum_{x=1}^{n}\sum_{y=1}^{n}[gcd(x,y)==p] (n\le 10^7)$</p>
+<p>其实就是$\sum_{p}\sum_{x=1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y=1}^{\lfloor \frac{n}{p}\rfloor}[gcd(x,y)==1]$，枚举所有质数后就是和上一道题一样做法了，双倍经验。</p>
+<h3 id="3-bzoj-2705-SDOI2012-Longge的问题"><a href="#3-bzoj-2705-SDOI2012-Longge的问题" class="headerlink" title="3.bzoj 2705 [SDOI2012]Longge的问题"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2705" target="_blank" rel="noopener">3.bzoj 2705 [SDOI2012]Longge的问题</a></h3><p>求$\sum_{i=1}^{n}gcd(i,n), n\le 2^{32}$</p>
+<p>变形一下，枚举每种gcd的值，即</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad\,\sum_{i=1}^{n}gcd(i,n) \\<br>&amp; =\sum_{d\mid n}d \sum_{x=1}^{\frac{n}{d}}[gcd(x,\frac{n}{d})==1] \\<br>&amp; =\sum_{d\mid n}d\varphi(\frac{n}{d})<br>\end{aligned}<br>$$</p>
+<p>那么根号枚举约数，单点求欧拉函数就做完了。</p>
+<p>时间复杂度？是个经典的东西$O(\sum_{i=1}^{\sqrt{n}}\sqrt{i}+\sqrt{\frac{n}{i}})=O(n^{\frac{3}{4}})$</p>
+<h3 id="4-bzoj-2440-中山市选2011-完全平方数"><a href="#4-bzoj-2440-中山市选2011-完全平方数" class="headerlink" title="4.bzoj 2440 [中山市选2011]完全平方数"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2440" target="_blank" rel="noopener">4.bzoj 2440 [中山市选2011]完全平方数</a></h3><p>求第$k(k\le 10^9)$个不含完全平方数因子的正整数</p>
+<p>二分答案，转为求前$n$个数中有多少数不含完全平方因子。容斥一下，总数减去是4(2的平方)的倍数的，减去9的倍数，16的倍数不用管，前面减过了，再减去25的倍数，加上36的倍数，因为前面多减了一次…那这样就发现了容斥系数就是莫比乌斯函数。时间复杂度$O(\sqrt{n}\log{n})$</p>
+<h3 id="5-luogu-P2257-YY的GCD-bzoj-2820"><a href="#5-luogu-P2257-YY的GCD-bzoj-2820" class="headerlink" title="5.luogu P2257 YY的GCD(bzoj 2820)"></a><a href="https://www.luogu.org/problemnew/show/P2257" target="_blank" rel="noopener">5.luogu P2257 YY的GCD(bzoj 2820)</a></h3><p>求$\sum_{p}\sum_{x=1}^{n}\sum_{y=1}^{m}[gcd(x,y)==p] (n\le 10^7)$，$T(\le 10000)$组询问</p>
+<p>bzoj 2818的加强版，把其中一个n换成了m，这样就不能用欧拉函数了，推导一下：</p>
+<p>下述的$p$表示质数</p>
+<p>$$<br>\begin{aligned}<br>&amp; \quad\, \sum_{p}\sum_{x=1}^{n}\sum_{y=1}^{m}[gcd(x,y)==p] \\<br>&amp; =\sum_{p}\sum_{x=1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y=1}^{\lfloor \frac{m}{p}\rfloor}[gcd(x,y)==1] \\<br>&amp; =\sum_{p}\sum_{x=1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y=1}^{\lfloor \frac{m}{p}\rfloor}\sum_{d\mid gcd(x,y)}\mu(d) \\<br>&amp; =\sum_{p}\sum_{x=1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y=1}^{\lfloor \frac{m}{p}\rfloor}\sum_{d\mid x \land d\mid y}\mu(d) \\<br>&amp; =\sum_{p}\sum_{d=1}^{\lfloor \frac{min(n,m)}{p}\rfloor}\mu(d)\lfloor \frac{n}{pd}\rfloor\lfloor \frac{m}{pd}\rfloor \\<br>&amp; =\sum_{k=1}^{min(n,m)}\sum_{p,p\mid k}\mu(\frac{k}{p})\lfloor \frac{n}{k}\rfloor\lfloor \frac{m}{k}\rfloor \\<br>&amp; =\sum_{k=1}^{min(n,m)}f(k)\lfloor \frac{n}{k}\rfloor\lfloor \frac{m}{k}\rfloor<br>\end{aligned}<br>$$</p>
+<p>其中第三行莫比乌斯反演，第五行交换求和，第六行令$k=pd$,转而枚举$k$，化简到最后用筛法预处理出所有$f$的值即可，这里应该可以用线性筛，不过懒得推导的话也可以枚举所有质数再枚举它的倍数这样求，那么时间复杂度就和埃氏筛一样了，之后每次求一组询问就是经典的数论分块了。时间复杂度$O(n\log{\log{n}}+T\sqrt{n})$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">10000000</span>;</span><br><span class="line"><span class="keyword">bool</span> vis[N+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> prime[N+<span class="number">5</span>],cnt;</span><br><span class="line"><span class="keyword">int</span> mu[N+<span class="number">5</span>],f[N+<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getprime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])</span><br><span class="line">        &#123;</span><br><span class="line">            prime[cnt++]=i;</span><br><span class="line">            mu[i]=<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt &amp;&amp; prime[j]&lt;=N/i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            vis[i*prime[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j]) mu[i*prime[j]]=-mu[i];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                mu[i*prime[j]]=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x=prime[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=x;j&lt;=N;j+=x)</span><br><span class="line">            f[j]+=mu[j/x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;++i)</span><br><span class="line">        f[i]+=f[i<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&gt;m) swap(n,m);</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j;i&lt;=n;i=j+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=<span class="built_in">min</span>(n/(n/i),m/(m/i));</span><br><span class="line">        ans+=<span class="number">1L</span>L*(f[j]-f[i<span class="number">-1</span>])*(n/i)*(m/i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    getprime();</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> n,m;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,calc(n,m));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-spoj-LCMSUM"><a href="#6-spoj-LCMSUM" class="headerlink" title="6.spoj LCMSUM"></a><a href="https://www.spoj.com/problems/LCMSUM/" target="_blank" rel="noopener">6.spoj LCMSUM</a></h3><p>求$\sum_{i=1}^{n}lcm(i,n), n\le 10^{6}$，$T(\le 300000)$组询问。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad\, \sum_{i=1}^{n}lcm(i,n) \\<br>&amp;=\sum_{i=1}^{n}\frac{i\times n}{gcd(i,n)}\\<br>&amp;=\frac{1}{2}\sum_{i=1}^{n-1}\frac{n^{2}}{gcd(i,n)}+n\\<br>&amp;=\frac{1}{2}\sum_{d\mid n,d\ne n}\frac{n^2}{d}\sum_{k=1}^{\lfloor \frac{n}{d}\rfloor}[gcd(k,\frac{n}{d})==1]+n \\<br>&amp;=\frac{1}{2}n\sum_{d\mid n,d\ne n}\frac{n}{d}\varphi(\frac{n}{d})+n \\<br>&amp;=\frac{1}{2}n\sum_{d\mid n,d\ne 1}d\varphi(d)+n \\<br>&amp; =\frac{1}{2}nf(n)+n<br>\end{aligned}<br>$$</p>
+<p>这样线性筛预处理完，$O(n\log{n})$的求出函数值$f$，每次回答$O(1)$即可。</p>
+<h3 id="7-bzoj-2154-Crash的数字表格"><a href="#7-bzoj-2154-Crash的数字表格" class="headerlink" title="7.bzoj 2154 Crash的数字表格"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2154" target="_blank" rel="noopener">7.bzoj 2154 Crash的数字表格</a></h3><p>求$\sum_{i=1}^{n}\sum_{j=1}^{m}lcm(i,j),n,m\le 10^7$</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad\,\sum_{i=1}^{n}\sum_{j=1}^{m}lcm(i,j) \\<br>&amp;=\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{ij}{gcd(i,j)}\\<br>&amp;=\sum_{d=1}^{min(n,m)}\sum_{x=1}^{\lfloor \frac{n}{d}\rfloor}\sum_{y=1}^{\lfloor \frac{m}{d}\rfloor}dxy[gcd(x,y)==1] \\<br>&amp;=\sum_{d=1}^{min(n,m)}d\sum_{x=1}^{\lfloor \frac{n}{d}\rfloor}\sum_{y=1}^{\lfloor \frac{m}{d}\rfloor}xy\sum_{k\mid x \land k\mid y}\mu(k) \\<br>&amp;=\sum_{d=1}^{min(n,m)}d\sum_{k=1}^{\lfloor \frac{m}{d}\rfloor}\mu(k)\sum_{x=1}^{\lfloor \frac{n}{dk}\rfloor}\sum_{y=1}^{\lfloor \frac{m}{dk}\rfloor}k^{2}xy \\<br>&amp;=\sum_{T=1}^{min(n,m)}\sum_{k\mid T}kT\mu(k)g(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)\\<br>&amp;=\sum_{T=1}^{min(n,m)}Tg(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)\sum_{k\mid T}k\mu(k)\\<br>&amp;=\sum_{T=1}^{min(n,m)}Tg(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)f(T)<br>\end{aligned}<br>$$</p>
+<p>其中$g(n,m)=\sum_{i=1}^{n}\sum_{j=1}^{m}ij=\frac{n(n+1)}{2}\frac{m(m+1)}{2}$</p>
+<p>一开始头铁，$O(n\log{n})$求的$f(T)$的值，超时无疑，然后学习了用线性筛求积性函数$f(T)=\sum_{k\mid T}k\mu(k)$的思路。</p>
+<p>线性筛过程分两种情况讨论</p>
+<p>1.$prime_j$整除$i$，那么枚举$i\times prime_j$的约数$k$时，如果关于$prime_j$的指数大于等于2的话莫比乌斯函数为零，对答案没有贡献，所以此时:<br>$$<br>f(i\times prime_j)=f(i)<br>$$</p>
+<p>2.$prime_j$不整除$i$，那么再分枚举的约数$k$是否含有$prime_j$，不含有的部分就是$f(i)$，含$prime_j$的话，整体乘上这么多，并且莫比乌斯函数要变号，是$-f(i)prime_j$。综上，此时:<br>$$<br>f(i\times prime_j)=(1-prime_j)f(i)<br>$$</p>
+<p>这样这道题就做完了，时间复杂度$O(n)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">20101009</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">10000000</span>;</span><br><span class="line"><span class="keyword">bool</span> vis[N+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> prime[<span class="number">666666</span>],cnt;</span><br><span class="line"><span class="keyword">int</span> f[N+<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getprime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])</span><br><span class="line">        &#123;</span><br><span class="line">            prime[cnt++]=i;</span><br><span class="line">            f[i]=(<span class="number">1</span>-i+mod);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt &amp;&amp; i*prime[j]&lt;=N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            vis[i*prime[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j])</span><br><span class="line">            &#123;</span><br><span class="line">                f[i*prime[j]]=<span class="number">1L</span>L*(<span class="number">1</span>-prime[j]+mod)*f[i]%mod;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                f[i*prime[j]]=f[i];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    for(int i=1;i&lt;=N;++i)</span></span><br><span class="line"><span class="comment">//    &#123;</span></span><br><span class="line"><span class="comment">//        for(int j=i;j&lt;=N;j+=i)</span></span><br><span class="line"><span class="comment">//        &#123;</span></span><br><span class="line"><span class="comment">//            f[j]+=i*mu[i];</span></span><br><span class="line"><span class="comment">//            if(f[j]&lt;0) f[j]+=mod;</span></span><br><span class="line"><span class="comment">//            else if(f[j]&gt;=mod) f[j]-=mod;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Sum</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1L</span>L*(n+<span class="number">1</span>)*n/<span class="number">2</span>%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    getprime();</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">if</span>(n&lt;m) swap(n,m);</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)&#123;</span><br><span class="line">        ans+=<span class="number">1L</span>L*i*Sum(n/i)%mod*Sum(m/i)%mod*f[i]%mod;</span><br><span class="line">        <span class="keyword">if</span>(ans&gt;=mod) ans-=mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-bzoj-3994-SDOI2015-约数个数和"><a href="#8-bzoj-3994-SDOI2015-约数个数和" class="headerlink" title="8.bzoj 3994 [SDOI2015]约数个数和"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=3994" target="_blank" rel="noopener">8.bzoj 3994 [SDOI2015]约数个数和</a></h3><p>求$\sum_{i=1}^{n}\sum_{j=1}^{m}d(ij), n,m\le 50000$，$T(\le 50000)$组询问，其中$d$是约数个数函数。</p>
+<p>这个题一开始卡在一个结论上了，首先要知道$d(ij)=\sum_{x\mid i}\sum_{y\mid j}[gcd(x,y)==1]$，这个结论不好想，但可以用分解质因数的形式结合约数个数定理推出来，那解决了第一步，后面的就简单了。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad\,\sum_{i=1}^{n}\sum_{j=1}^{m}d(ij)\\<br>&amp;=\sum_{i=1}^{n}\sum_{j=1}^{m}\sum_{x\mid i}\sum_{y\mid j}[gcd(x,y)==1]\\<br>&amp;=\sum_{i=1}^{n}\sum_{j=1}^{m}\sum_{x\mid i}\sum_{y\mid j}\sum_{k\mid gcd(x,y)}\mu(k)\\<br>&amp;=\sum_{i=1}^{n}\sum_{j=1}^{m}\sum_{x\mid i}\sum_{y\mid j}\sum_{k\mid x \land k\mid y}\mu(k)\\<br>&amp;=\sum_{k=1}^{min(n,m)}\mu(k)\sum_{x=1}^{\lfloor\frac{n}{k}\rfloor}\sum_{y=1}^{\lfloor\frac{m}{k}\rfloor}\lfloor\frac{n}{xk}\rfloor\lfloor\frac{m}{yk}\rfloor\\<br>&amp;=\sum_{k=1}^{min(n,m)}\mu(k)\sum_{x=1}^{\lfloor\frac{n}{k}\rfloor}\lfloor\frac{n}{xk}\rfloor f(\lfloor\frac{m}{k}\rfloor)\\<br>&amp;=\sum_{k=1}^{min(n,m)}\mu(k)f(\lfloor\frac{n}{k}\rfloor) f(\lfloor\frac{m}{k}\rfloor) \\<br>\end{aligned}<br>$$</p>
+<p>至此又可以数论分块搞定单组询问了，时间复杂度$O(T\sqrt{n})$。</p>
+<h3 id="9-bzoj-4659-lcm"><a href="#9-bzoj-4659-lcm" class="headerlink" title="9.bzoj 4659 lcm"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=4659" target="_blank" rel="noopener">9.bzoj 4659 lcm</a></h3><p>化简下题意就是求$\sum_{i=1}^{n}\sum_{j=1}^{m}lcm(i,j)[\mu^2(gcd(i,j))==1],n,m\le 4000000$，对$2^{30}$取模，$T(\le 2000)$组询问。发现就是在<a href="#t7">第七题</a>的基础上加了个多组询问，且只统计$\mu^2(gcd(i,j))==1$的。</p>
+<p>那么前面的推导都是一样的，最后化简到</p>
+<p>原式$=\sum_{T=1}^{min(n,m)}g(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)T\sum_{k\mid T}k\mu(k)\mu^2(\frac{T}{k})$</p>
+<p>头铁依然会TLE，还是先观察一下</p>
+<p>$f(T)=\sum_{k\mid T}k\mu(k)\mu^2(\frac{T}{k})$是积性函数</p>
+<p>且当$T$分解质因数后的指数中有大于2的情况的话，显然此时$f(T)=0$，并且易知$f(p)=1-p,f(p^2)=-p$，这样又可以线性筛搞一搞了，然后预处理出$if(i)$的前缀和。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">4000000</span>;</span><br><span class="line"><span class="keyword">bool</span> vis[N+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> prime[N+<span class="number">5</span>],cnt;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> f[N+<span class="number">5</span>],sum[N+<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getprime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    f[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i]) &#123;</span><br><span class="line">            prime[cnt++]=i;</span><br><span class="line">            f[i]=<span class="number">1U</span>-i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt &amp;&amp; i*prime[j]&lt;=N;j++) &#123;</span><br><span class="line">            vis[i*prime[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j]) &#123;</span><br><span class="line">                f[i*prime[j]]=f[i]*f[prime[j]];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(i==prime[j]) f[i*prime[j]]=-prime[j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i/prime[j]%prime[j]==<span class="number">0</span>) f[i*prime[j]]=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span> f[i*prime[j]]=f[i/prime[j]]*f[prime[j]*prime[j]];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    for(int i=1;i&lt;=N;++i) &#123;</span></span><br><span class="line"><span class="comment">//        for(int j=i;j&lt;=N;j+=i) &#123;</span></span><br><span class="line"><span class="comment">//            f[j]+=i*mu[i]*abs(mu[j/i]);</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;++i)</span><br><span class="line">        sum[i]=sum[i<span class="number">-1</span>]+<span class="number">1U</span>*i*f[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">Sum</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1L</span>L*(n+<span class="number">1</span>)*n/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    getprime();</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> n,m;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="keyword">if</span>(n&lt;m) swap(n,m);</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j;i&lt;=m;i=j+<span class="number">1</span>)&#123;</span><br><span class="line">            j=<span class="built_in">min</span>(n/(n/i),m/(m/i));</span><br><span class="line">            ans+=<span class="number">1U</span>*(sum[j]-sum[i<span class="number">-1</span>])*Sum(n/i)*Sum(m/i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)(ans%mod));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-bzoj-4816-Sdoi2017-数字表格"><a href="#10-bzoj-4816-Sdoi2017-数字表格" class="headerlink" title="10.bzoj 4816 [Sdoi2017]数字表格"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=4816" target="_blank" rel="noopener">10.bzoj 4816 [Sdoi2017]数字表格</a></h3><p>求$\prod_{i=1}^{n}\prod_{j=1}^{m}f(gcd(i,j)),n,m\le 10^6$，其中$f$为斐波那契数列，结果模$10^9+7$，$T(\le 1000)$组询问。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad\,\prod_{i=1}^{n}\prod_{j=1}^{m}f(gcd(i,j)) \\<br>&amp;=\prod_{d=1}^{min(n,m)}f(d)^{\sum_{i=1}^{\lfloor\frac{n}{d}\rfloor}\sum_{i=1}^{\lfloor\frac{m}{d}\rfloor}[gcd(i,j)==1]} \\<br>&amp;=\prod_{d=1}^{min(n,m)}f(d)^{\sum_{k=1}^{min(\lfloor\frac{n}{d}\rfloor,\lfloor\frac{m}{d}\rfloor)}\mu(k)\lfloor\frac{n}{dk}\rfloor\lfloor\frac{m}{dk}\rfloor}\\<br>\end{aligned}<br>$$</p>
+<p>这样指数部分是关于$\lfloor\frac{n}{d}\rfloor,\lfloor\frac{m}{d}\rfloor$的函数，可以分块，又因为外层是枚举的$d$，所以分块套分块即可！时间复杂度$O(T(n^{\frac{3}{4}}+\sqrt{n}\log{n}))$，前一部分来源分析同<a href="#t3">第三题</a>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000000</span></span><br><span class="line"><span class="keyword">bool</span> vis[N+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> prime[N+<span class="number">5</span>],cnt;</span><br><span class="line"><span class="keyword">int</span> mu[N+<span class="number">5</span>],sum[N+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> f[N+<span class="number">5</span>],pre[N+<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getprime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i]) &#123;</span><br><span class="line">            prime[cnt++]=i;</span><br><span class="line">            mu[i]=<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt &amp;&amp; prime[j]&lt;=N/i;j++) &#123;</span><br><span class="line">            vis[i*prime[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j])</span><br><span class="line">                mu[i*prime[j]]=-mu[i];</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                mu[i*prime[j]]=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;++i)</span><br><span class="line">        sum[i]=sum[i<span class="number">-1</span>]+mu[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> x,ll n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>) ans=<span class="number">1L</span>L*ans*x%mod;</span><br><span class="line">        x=<span class="number">1L</span>L*x*x%mod;</span><br><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j;i&lt;=n;i=j+<span class="number">1</span>)&#123;</span><br><span class="line">        j=<span class="built_in">min</span>(n/(n/i),m/(m/i));</span><br><span class="line">        ans+=<span class="number">1L</span>L*(sum[j]-sum[i<span class="number">-1</span>])*(n/i)*(m/i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    getprime();</span><br><span class="line"></span><br><span class="line">    pre[<span class="number">0</span>]=pre[<span class="number">1</span>]=f[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;++i)&#123;</span><br><span class="line">        f[i]=f[i<span class="number">-1</span>]+f[i<span class="number">-2</span>];</span><br><span class="line">        <span class="keyword">if</span>(f[i]&gt;=mod) f[i]-=mod;</span><br><span class="line">        pre[i]=<span class="number">1L</span>L*pre[i<span class="number">-1</span>]*f[i]%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> n,m;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="keyword">if</span>(n&gt;m) swap(n,m);</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j;i&lt;=n;i=j+<span class="number">1</span>)&#123;</span><br><span class="line">            j=<span class="built_in">min</span>(n/(n/i),m/(m/i));</span><br><span class="line">            <span class="keyword">int</span> x=<span class="number">1L</span>L*pre[j]*power(pre[i<span class="number">-1</span>],mod<span class="number">-2</span>)%mod;</span><br><span class="line">            ll y=calc(n/i,m/i,i);</span><br><span class="line">            ans=<span class="number">1L</span>L*ans*power(x,y)%mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-20T04:05:22.682Z" itemprop="dateUpdated">2020-04-20 12:05:22</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/" target="_blank" rel="external">http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="forever_you">
+            forever_you
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="tag">时间复杂度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/" rel="tag">莫比乌斯反演</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/&title=《数论初级魔法大赏》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/&title=《数论初级魔法大赏》 — Forever you~&source=记录退役生活" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数论初级魔法大赏》 — Forever you~&url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/09/16/Burnside%E5%BC%95%E7%90%86%E4%B8%8EPolya%E8%AE%A1%E6%95%B0%E5%85%AC%E5%BC%8F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Burnside引理与Polya计数公式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/29/%E6%9E%9A%E4%B8%BE%E7%AE%97%E6%B3%95%E5%86%8D%E6%94%BE%E9%80%81/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">枚举算法再放送</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHsz",
+            appKey: "2Twk1r9fmBnvsFveG9Ey5o6F",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>forever_you &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/&title=《数论初级魔法大赏》 — Forever you~&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/&title=《数论初级魔法大赏》 — Forever you~&source=记录退役生活" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数论初级魔法大赏》 — Forever you~&url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1278826631&web_id=1278826631')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

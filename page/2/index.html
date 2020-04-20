@@ -157,11 +157,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-超实用！Stern-Brocot-tree总结奉上"
+            <article id="post-小清新线段树"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-09-11 21:07:00" datetime="2018-09-11T13:07:00.000Z"  itemprop="datePublished">2018-09-11</time>
+        <time class="post-time" title="2018-11-08 21:41:00" datetime="2018-11-08T13:41:00.000Z"  itemprop="datePublished">2018-11-08</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
@@ -175,7 +175,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/">超实用！Stern-Brocot tree总结奉上</a>
+      <a class="post-title-link" href="/2018/11/08/%E5%B0%8F%E6%B8%85%E6%96%B0%E7%BA%BF%E6%AE%B5%E6%A0%91/">小清新线段树</a>
     </h3>
   
 
@@ -185,22 +185,20 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。
-Stern-Brocot tree:
+        小清新线段树的概念是由jiry_2提出的，区别于zkw(重口味)线段树命名。这里我的理解是可以归为一类结合时间复杂度分析以及懒标记应用的非传统线段树。不过既为非传统，这类题目总体来说还是做法各异，下面就结合题目做一些分析。
 
-
-Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。
-构造方法可以理解为：先在左边写上$\frac{0}{1...
+入门难度1.bzoj 3211 花神游历各国区间求和，区间开根号（下取整）
+因为只有开根号操作，所以最后不是1就是0，且一个数开根号次数$O(loglogC)$级别的，...
     
 
-        <a href="/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" class="post-more waves-effect waves-button">
+        <a href="/2018/11/08/%E5%B0%8F%E6%B8%85%E6%96%B0%E7%BA%BF%E6%AE%B5%E6%A0%91/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stern-Brocot-tree/" rel="tag">Stern-Brocot tree</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="tag">时间复杂度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>
 
     </div>
     
@@ -209,11 +207,11 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-线段树合并"
+            <article id="post-一类区间分治技巧"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-09-05 17:31:00" datetime="2018-09-05T09:31:00.000Z"  itemprop="datePublished">2018-09-05</time>
+        <time class="post-time" title="2018-10-30 16:03:00" datetime="2018-10-30T08:03:00.000Z"  itemprop="datePublished">2018-10-30</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
@@ -227,7 +225,7 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/09/05/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/">线段树合并</a>
+      <a class="post-title-link" href="/2018/10/30/%E4%B8%80%E7%B1%BB%E5%8C%BA%E9%97%B4%E5%88%86%E6%B2%BB%E6%8A%80%E5%B7%A7/">一类区间分治技巧</a>
     </h3>
   
 
@@ -237,19 +235,103 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        适用条件：动态开点的(权值)线段树。
-关于时间复杂度的结论：
-
-每次合并的代价是两棵树的公共节点数。
-若有n棵含有单个元素的树，经过n-1次merge操作，将他们合并成一棵树的代价是$O(nlogn)$或$O(nlogC)$的
-单次merge操作开销可大可小，均摊下一次就是一个log的。
-
-关于空间复杂度，普通版本是$O(nlogn)$的。
-直接给出代码，merge操作十分简洁：
-12345...
+        对于一类区间询问问题，如果可以离线并且可以快速合并区间信息那么就有一个非常实用的分治方法。首先我们对总区间分治下去，当前区间$[l , r]$中点为$mid$，那么我们将所有的询问分成三类，一类包括$mid$这个点，一类完全在左侧，一类完全在右侧，我们只要在当前这层解决第一类的所有询问，后两类分治下去即可。怎么快速的求呢？方法也非常简单，因为信息可以快速合并，那么我们以$mid$为界，往前处...
     
 
-        <a href="/2018/09/05/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/" class="post-more waves-effect waves-button">
+        <a href="/2018/10/30/%E4%B8%80%E7%B1%BB%E5%8C%BA%E9%97%B4%E5%88%86%E6%B2%BB%E6%8A%80%E5%B7%A7/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-高维前缀和"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-10-29 20:30:00" datetime="2018-10-29T12:30:00.000Z"  itemprop="datePublished">2018-10-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/10/29/%E9%AB%98%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/">高维前缀和</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        问题的引入一个$n \times m$二维矩阵$A$的前缀和$S$,一般来说定义为$S_{x,y}=\sum_{i=1}^{x}\sum_{j=1}^{y}A_{i,j}$。
+代码常见的写法就是用容斥加加减减：
+123for(int i=1;i&lt;=n;++i)    for(int j=1;j&lt;=m;++j)        S[i][j]=S[i-1][j]+S[i][j-1]-...
+    
+
+        <a href="/2018/10/29/%E9%AB%98%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-线段树优化凸壳"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-10-09 20:10:00" datetime="2018-10-09T12:10:00.000Z"  itemprop="datePublished">2018-10-09</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/10/09/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%87%B8%E5%A3%B3/">线段树优化凸壳</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Lena and Queries题目链接：http://codeforces.com/contest/678/problem/F
+三种操作，1.插入一个点$(x,y)$ 2.删除之前第$i$个操作插入的点 3.给一个$q$，询问在已有点中$qx+y$最大是多少
+如果没有删除完全可以cdq分治然后在上凸壳上三分。有删除操作的话因为贡献不独立，所以不能cdq分治。
+但是可以用上一次线段树优化建图...
+    
+
+        <a href="/2018/10/09/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%87%B8%E5%A3%B3/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
@@ -265,11 +347,11 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-2017-西安网络赛-A题-TREE"
+            <article id="post-2018-CCPC网络赛-GuGu-Convolution"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-08-31 14:45:00" datetime="2018-08-31T06:45:00.000Z"  itemprop="datePublished">2018-08-31</time>
+        <time class="post-time" title="2018-10-08 15:23:00" datetime="2018-10-08T07:23:00.000Z"  itemprop="datePublished">2018-10-08</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%A3%E8%A3%85%E9%A2%98%E8%A7%A3/">散装题解</a></li></ul>
@@ -283,7 +365,7 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/">2017 西安网络赛 A题 TREE</a>
+      <a class="post-title-link" href="/2018/10/08/2018-CCPC%E7%BD%91%E7%BB%9C%E8%B5%9B-GuGu-Convolution/">2018 CCPC网络赛 GuGu Convolution</a>
     </h3>
   
 
@@ -293,20 +375,21 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        最近想起来这么一道题，当时q神没rush出来，赛后几分钟AC掉的
-题目链接：https://nanti.jisuanke.com/t/17114
-题意是树上有$N$个点，每个点的点权是一个01矩阵，有$Q$次询问，每次问树上从x到y这条路径上的矩阵依次乘起来的结果是多少(模2意义下)。数据范围$N\le 3000,Q\le 30000$，矩阵大小$64\times 64$。
-首先这里的模2意...
+        题目链接 http://acm.hdu.edu.cn/showproblem.php?pid=6442
+定义序列${a}=(a_0,a_1,a_2,\dots)$
+它的指数型生成函数为$g_(x)=\sum_{i=0}^{\infty}\frac{a_i}{i!}x^i$
+设$c$是一个常数
+定义序列${u_c}=(c^0,c^1,c^2,\dots)$,${e_c}=(0,c^1,0,c^...
     
 
-        <a href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/" class="post-more waves-effect waves-button">
+        <a href="/2018/10/08/2018-CCPC%E7%BD%91%E7%BB%9C%E8%B5%9B-GuGu-Convolution/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LCA/" rel="tag">LCA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitset/" rel="tag">bitset</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag">生成函数</a></li></ul>
 
     </div>
     
@@ -315,11 +398,11 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-高维偏序问题"
+            <article id="post-线段树优化建图"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-08-30 19:55:00" datetime="2018-08-30T11:55:00.000Z"  itemprop="datePublished">2018-08-30</time>
+        <time class="post-time" title="2018-09-30 21:28:00" datetime="2018-09-30T13:28:00.000Z"  itemprop="datePublished">2018-09-30</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
@@ -333,7 +416,7 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/">高维偏序问题</a>
+      <a class="post-title-link" href="/2018/09/30/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE/">线段树优化建图</a>
     </h3>
   
 
@@ -343,18 +426,18 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        最近做了几道高维偏序的简单题。
-对于这类题目一般有三种通用方法，一是cdq分治，维数越多嵌套次数就越多，总体来说思路就是对时间分治，每次统计出左半区间的贡献点对右半区间的询问点的贡献，这样对于每个询问点来说，它前面的所有对它造成影响的点就都会被算到。二是用bitset优化暴力，应该只能处理计数问题，但优点是好写，适合做高维偏序。三是KDtree，emmmm，这个没怎么写过，多校训练十分艰难的...
+        有一类经典的问题，之前见过很多次了，好像某一场区域赛的热身赛里就出过：一维数轴上有$n$个炸弹，$x_i,r_i$分别表示第$i$个炸弹的位置和引爆半径，即如果引爆炸弹$i$，那么位置在$[x_i-r_i,x_i+r_i]$范围内的炸弹都会爆炸，并且引发连锁反应。然后比如询问最少引爆几个炸弹才能全部炸完。
+首先一个建图思路是如果$i$能引爆$j$，那么$i$向$j$连一条边，做tarjan求...
     
 
-        <a href="/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/" class="post-more waves-effect waves-button">
+        <a href="/2018/09/30/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%81%8F%E5%BA%8F/" rel="tag">偏序</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>
 
     </div>
     
@@ -363,11 +446,110 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-偏序集"
+            <article id="post-NOIP-2014"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-08-29 16:47:00" datetime="2018-08-29T08:47:00.000Z"  itemprop="datePublished">2018-08-29</time>
+        <time class="post-time" title="2018-09-28 13:14:00" datetime="2018-09-28T05:14:00.000Z"  itemprop="datePublished">2018-09-28</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%A3%E8%A3%85%E9%A2%98%E8%A7%A3/">散装题解</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/09/28/NOIP-2014/">NOIP 2014</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        题目链接：https://vijos.org/p/category/2014
+D1T1 生活大爆炸版 石头剪刀布没想到noip还会出纯模拟
+1234567891011121314151617181920212223#include&lt;bits/stdc++.h&gt;using namespace std;#define N 205#define rep(i,l,r) for(int i...
+    
+
+        <a href="/2018/09/28/NOIP-2014/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/noip/" rel="tag">noip</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-NOIP-2013"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-09-26 23:59:00" datetime="2018-09-26T15:59:00.000Z"  itemprop="datePublished">2018-09-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%A3%E8%A3%85%E9%A2%98%E8%A7%A3/">散装题解</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/09/26/NOIP-2013/">NOIP 2013</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        最近突然想回顾一下历年noip题目，就开个新坑吧，题解就从略了
+题目链接 https://vijos.org/p/category/2013
+D1T1 转圈游戏公式就$(x+m10^k)%n$，现在一眼的事情当时想了很久orz
+12345678910111213141516171819202122#include&lt;bits/stdc++.h&gt;using namespace std...
+    
+
+        <a href="/2018/09/26/NOIP-2013/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/noip/" rel="tag">noip</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Dominator-Tree"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-09-14 12:28:00" datetime="2018-09-14T04:28:00.000Z"  itemprop="datePublished">2018-09-14</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
@@ -381,7 +563,7 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/">偏序集</a>
+      <a class="post-title-link" href="/2018/09/14/Dominator-Tree/">Dominator Tree</a>
     </h3>
   
 
@@ -391,23 +573,20 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        偏序关系首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系
+        问题引入题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。
 
-如果对于X中所有的x，都有x R x，则R是自反的
-如果对于X中所有x和y，若x R y和y R x同时成立则x=y，则R是反对称的
-对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的
-
-通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示...
+Flow Graph：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。
+必经点（dom）：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到...
     
 
-        <a href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" class="post-more waves-effect waves-button">
+        <a href="/2018/09/14/Dominator-Tree/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%81%8F%E5%BA%8F/" rel="tag">偏序</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li></ul>
 
     </div>
     
@@ -416,14 +595,14 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-类欧几里得算法"
+            <article id="post-Knapsack-and-Queries"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-08-28 17:41:00" datetime="2018-08-28T09:41:00.000Z"  itemprop="datePublished">2018-08-28</time>
+        <time class="post-time" title="2018-09-12 10:40:00" datetime="2018-09-12T02:40:00.000Z"  itemprop="datePublished">2018-09-12</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%A3%E8%A3%85%E9%A2%98%E8%A7%A3/">散装题解</a></li></ul>
 
 
 
@@ -434,7 +613,7 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">类欧几里得算法</a>
+      <a class="post-title-link" href="/2018/09/12/Knapsack-and-Queries/">Knapsack and Queries</a>
     </h3>
   
 
@@ -444,243 +623,19 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        推导有时候需要快速计算如下式子(比如数据范围都是1e9)
-$$f(a,b,c,n)=\sum_{i=0}^{n}\lfloor\frac{ai+b}{c}\rfloor$$
-$$g(a,b,c,n)=\sum_{i=0}^{n}i\lfloor\frac{ai+b}{c}\rfloor$$
-$$h(a,b,c,n)=\sum_{i=0}^{n} {\lfloor\frac{ai+b}{c}\...
+        来自Petrozavodsk Winter-2018. AtCoder Contest里的D题
+题意是说，有$Q$次操作，分为两种，一是添加一个重量为$w$，价值为$v$的物品，保证插入的$w$单增，二是删除当前重量最小的物品。每次操作完之后，都有一个询问，询问能否从已有物品中选出一个子集，使得重量之和在模$M$之后在区间$[l,r]$内，并且价值和最大。
+数据范围，$Q\le 100000...
     
 
-        <a href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" class="post-more waves-effect waves-button">
+        <a href="/2018/09/12/Knapsack-and-Queries/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/" rel="tag">math</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-后缀自动机学习笔记"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-08-18 15:15:00" datetime="2018-08-18T07:15:00.000Z"  itemprop="datePublished">2018-08-18</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/08/18/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">后缀自动机学习笔记</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        写在前面推荐hihocoder上的讲解，可以说是十分清楚了。
-用好后缀自动机不是十分容易，但看完本文的总结应该能至少达到签到水平…
-
-正文后缀自动机（Suffix Automaton，简称SAM）。对于一个字符串S，它对应的后缀自动机是一个最小的确定有限状态自动机（DFA），接受且只接受S的后缀。
-先给出一张图和一个表格。
-对于字符串STR=”aabbabd”，它的后缀自动机是：
-
-
-
-
-
-...
-    
-
-        <a href="/2018/08/18/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="tag">后缀自动机</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-诗词两首"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-06-22 12:44:00" datetime="2018-06-22T04:44:00.000Z"  itemprop="datePublished">2018-06-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/06/22/%E8%AF%97%E8%AF%8D%E4%B8%A4%E9%A6%96/">诗词两首</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        西江月
-
-瑟瑟微风夜半，潇潇细雨黎明。雄鸡一唱与谁听？几度茫然光景。
-壮志还须努力，何时乡返功成。椟中美玉尚无名，待得他人相赠。
-
-
-
-
-
-七绝·四季
-
-漫漫冰霜眼底收，
-西风萧瑟欲何求。
-独怜明媚绝非夏，
-四季如春花满楼。
-
-
-
-第一首是词的作业，第二首是诗词格律与写作期末题，这学期另作了一首五古，质量不高，就不放出来了=、=
-关于诗词创作就到这里了（撒花）
-
-    
-
-        <a href="/2018/06/22/%E8%AF%97%E8%AF%8D%E4%B8%A4%E9%A6%96/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%97%E8%AF%8D/" rel="tag">诗词</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-多维快速傅里叶变换"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-05-21 18:39:00" datetime="2018-05-21T10:39:00.000Z"  itemprop="datePublished">2018-05-21</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/05/21/%E5%A4%9A%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">多维快速傅里叶变换</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        以下内容摘自《算法导论》思考题30-3
-我们可以将一维离散傅里叶变换推广到d维上，这时输入是一个d维的数组$A=(a_{j_1,j_2,\dots,j_d})$，维数分别为$n_1,n_2,\dots,n_d$，其中$n_1n_2\dots n_d=n$。定义d维离散傅里叶变换如下:
-$$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=...
-    
-
-        <a href="/2018/05/21/%E5%A4%9A%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fft/" rel="tag">fft</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-快速傅里叶变换学习笔记"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-05-09 14:04:00" datetime="2018-05-09T06:04:00.000Z"  itemprop="datePublished">2018-05-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/05/09/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">快速傅里叶变换学习笔记</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一、写在前面最近数字图像处理课正在学快速傅里叶变换，发现自己对此理解的还不是很到位。于是借此机会，对照着《算法导论》，对这部分内容啃一啃。
-两个$n$次多项式相加的最直接方法所需的时间是$O(n)$，但是相乘的最直接方法所需的时间为$O(n^2)$。用快速傅里叶变换（Fast Fourier Transform，FFT）可以使多项式相乘的时间复杂度降低为$O(nlogn)$。
-需要的一些前置...
-    
-
-        <a href="/2018/05/09/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fft/" rel="tag">fft</a></li></ul>
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" rel="tag">单调队列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85/" rel="tag">背包</a></li></ul>
 
     </div>
     
@@ -693,7 +648,7 @@ $$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=...
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
     </div>
 </nav>
 

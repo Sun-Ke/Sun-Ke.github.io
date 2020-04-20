@@ -28,14 +28,14 @@
 <meta property="og:site_name" content="Forever you~">
 <meta property="og:description" content="问题引入题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。  Flow Graph：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。 必经点（dom）：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到达y的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/e8e23e35ccde15bd227e/%E6%94%AF%E9%85%8D%E6%A0%911.png">
-<meta property="og:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/90d30869f1a44b9db7a7/%E6%94%AF%E9%85%8D%E6%A0%912.png">
+<meta property="og:image" content="https://lc-gluttony.s3.amazonaws.com/YnMictO7MdpA/c42cdea6de96987ed706/%E6%94%AF%E9%85%8D%E6%A0%911.png">
+<meta property="og:image" content="https://lc-gluttony.s3.amazonaws.com/YnMictO7MdpA/859757ae0cba42d97c01/%E6%94%AF%E9%85%8D%E6%A0%912.png">
 <meta property="article:published_time" content="2018-09-14T04:28:00.000Z">
-<meta property="article:modified_time" content="2020-04-19T15:34:43.052Z">
+<meta property="article:modified_time" content="2020-04-20T15:13:03.992Z">
 <meta property="article:author" content="forever_you">
 <meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://lc-8fjwg1io.cn-n1.lcfile.com/e8e23e35ccde15bd227e/%E6%94%AF%E9%85%8D%E6%A0%911.png">
+<meta name="twitter:image" content="https://lc-gluttony.s3.amazonaws.com/YnMictO7MdpA/c42cdea6de96987ed706/%E6%94%AF%E9%85%8D%E6%A0%911.png">
     
         <link rel="alternate" type="application/atom+xml" title="Forever you~" href="/atom.xml">
     
@@ -226,11 +226,14 @@
 </ul>
 <h3 id="半必经点"><a href="#半必经点" class="headerlink" title="半必经点"></a>半必经点</h3><p><strong>半必经点（semi）</strong> 在搜索树T上点$y$的祖先中，经过时间戳比$y$大的节点可以到达$y$的深度最小的祖先$x$，称为$y$的半必经点。关于半必经点有如下性质：</p>
 <ul>
-<li>半必经点也是唯一的，因此可以记$x=semi(y)$。</li>
-<li>一个点的半必经点必定是它在dfs树上的祖先，$dfn[semi[x]]&lt;dfn[x]$。</li>
-<li>半必经点不一定是x的必经点。</li>
+<li><p>半必经点也是唯一的，因此可以记$x=semi(y)$。</p>
+</li>
+<li><p>一个点的半必经点必定是它在dfs树上的祖先，$dfn[semi[x]]&lt;dfn[x]$。</p>
+</li>
+<li><p>半必经点不一定是x的必经点。</p>
+</li>
 </ul>
-<center><img src="http://lc-8FjWg1io.cn-n1.lcfile.com/e8e23e35ccde15bd227e/%E6%94%AF%E9%85%8D%E6%A0%911.png" width="40%">&nbsp&nbsp&nbsp<img src="http://lc-8FjWg1io.cn-n1.lcfile.com/90d30869f1a44b9db7a7/%E6%94%AF%E9%85%8D%E6%A0%912.png" width="35%"></center>
+<center><img src="https://lc-gluttony.s3.amazonaws.com/YnMictO7MdpA/c42cdea6de96987ed706/%E6%94%AF%E9%85%8D%E6%A0%911.png" width="40%">&nbsp&nbsp&nbsp<img src="https://lc-gluttony.s3.amazonaws.com/YnMictO7MdpA/859757ae0cba42d97c01/%E6%94%AF%E9%85%8D%E6%A0%912.png" width="35%"></center>
 
 <p><strong>如何求半必经点</strong>：对于G中一点y，考虑所有$x\in pre(y)$，设$temp=INF$。</p>
 <ul>
@@ -257,7 +260,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-04-19T15:34:43.052Z" itemprop="dateUpdated">2020-04-19 23:34:43</time>
+    Last updated: <time datetime="2020-04-20T15:13:03.992Z" itemprop="dateUpdated">2020-04-20 23:13:03</time>
 </span><br>
 
 

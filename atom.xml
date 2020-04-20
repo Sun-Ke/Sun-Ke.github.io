@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-18T14:10:25.098Z</updated>
+  <updated>2020-04-20T11:48:29.532Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>做个小视频</title>
+    <link href="http://yoursite.com/2020/04/20/%E5%81%9A%E4%B8%AA%E5%B0%8F%E8%A7%86%E9%A2%91/"/>
+    <id>http://yoursite.com/2020/04/20/%E5%81%9A%E4%B8%AA%E5%B0%8F%E8%A7%86%E9%A2%91/</id>
+    <published>2020-04-20T11:40:50.000Z</published>
+    <updated>2020-04-20T11:48:29.532Z</updated>
+    
+    <content type="html"><![CDATA[<iframe     height="720" width="1280"     src="http://lc-8FjWg1io.cn-n1.lcfile.com/c6934c2122171c06358a/Tree.mp4"     frameborder=0 allowfullscreen></iframe>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;iframe 
+    height=&quot;720&quot; width=&quot;1280&quot; 
+    src=&quot;http://lc-8FjWg1io.cn-n1.lcfile.com/c6934c2122171c06358a/Tree.mp4&quot; 
+    frameborder=0 allow
+      
+    
+    </summary>
+    
+    
+    
+      <category term="tree" scheme="http://yoursite.com/tags/tree/"/>
+    
+  </entry>
   
   <entry>
     <title>Markdown For Typora</title>

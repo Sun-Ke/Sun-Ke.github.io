@@ -21,12 +21,10 @@
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="记录退役生活">
-<meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Forever you~">
 <meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="Forever you~">
-<meta property="og:description" content="记录退役生活">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="forever_you">
 <meta name="twitter:card" content="summary">
@@ -67,7 +65,14 @@
             <li class="waves-block waves-effect">
               <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
-                主页
+                home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                about
               </a>
             </li>
         
@@ -190,7 +195,8 @@ Stern-Brocot tree:
 
 
 Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。
-构造方法可以理解为：先在左边写上$\frac{0}{1...
+构造方法可以理解为：先在左边写上$\frac{0}{1}$，右边写上$\frac{1}{0}$，代表零和正无穷，然后分子、分母分别相加，得到$\frac{1}{1}$，写在中间，之后每次把当前层复制到下一层，然后对于下一层相邻两个有理数之间还是分子分母分别相加，得到新的有理数，写在两者中间，重复这个操作就可以无限的写下去，进而得到所有的有理数。树形结构的获得见上图。
+记树中的一个节点$\frac{y}{x}$，它是由$\frac{L_m}{L_n},...
     
 
         <a href="/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" class="post-more waves-effect waves-button">
@@ -246,7 +252,7 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
 关于空间复杂度，普通版本是$O(nlogn)$的。
 直接给出代码，merge操作十分简洁：
-12345...
+12345678910111213141516void insert(int &amp;x,int y,int l,int r)&#123;    ++sum[x=++tot];    if(l==r) return;    int mid=l+r&gt;&gt;1;    if(y&lt;=mid) insert(ls[x],y,l,mid);    else insert(rs[x],y,mid+1,r...
     
 
         <a href="/2018/09/05/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/" class="post-more waves-effect waves-button">
@@ -296,7 +302,9 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         最近想起来这么一道题，当时q神没rush出来，赛后几分钟AC掉的
 题目链接：https://nanti.jisuanke.com/t/17114
 题意是树上有$N$个点，每个点的点权是一个01矩阵，有$Q$次询问，每次问树上从x到y这条路径上的矩阵依次乘起来的结果是多少(模2意义下)。数据范围$N\le 3000,Q\le 30000$，矩阵大小$64\times 64$。
-首先这里的模2意...
+首先这里的模2意义下的矩阵乘法可以用bitset优化，每行一个bitset，每列一个bitset，这样做乘法就是左行右列and起来，然后count一下1的个数，复杂度$O({64}^2)$。
+注意到这道题中维护的信息只能合并，不能做“减法”，也就是不能使用逆矩阵，因为逆矩阵不一定存在。
+一个显然的暴力思路是就是树上倍增，但很不幸，时间复杂度$O({64}^2QlogN)$达到了$1.4\times 10^9$肯定...
     
 
         <a href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/" class="post-more waves-effect waves-button">
@@ -344,7 +352,10 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 
     
         最近做了几道高维偏序的简单题。
-对于这类题目一般有三种通用方法，一是cdq分治，维数越多嵌套次数就越多，总体来说思路就是对时间分治，每次统计出左半区间的贡献点对右半区间的询问点的贡献，这样对于每个询问点来说，它前面的所有对它造成影响的点就都会被算到。二是用bitset优化暴力，应该只能处理计数问题，但优点是好写，适合做高维偏序。三是KDtree，emmmm，这个没怎么写过，多校训练十分艰难的...
+对于这类题目一般有三种通用方法，一是cdq分治，维数越多嵌套次数就越多，总体来说思路就是对时间分治，每次统计出左半区间的贡献点对右半区间的询问点的贡献，这样对于每个询问点来说，它前面的所有对它造成影响的点就都会被算到。二是用bitset优化暴力，应该只能处理计数问题，但优点是好写，适合做高维偏序。三是KDtree，emmmm，这个没怎么写过，多校训练十分艰难的写过一次，通过了90%的数据然后TLE了。
+1.LOJ#112 三维偏序计数题，对其中一维排序后，cdq分治套树状数组，时间复杂度$O(nlog^{2}n)$。
+2.COGS 2479[HZOI 2016] 偏序计数题，四维偏序，cdq分治套cdq分治套树状数组，时间复杂度$O(nlog^{3}n)$。
+怎么理解这个分治套分治呢。假设属性为a,b,c，第一次分治的时候我们将区间[l,mid]的点标...
     
 
         <a href="/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/" class="post-more waves-effect waves-button">
@@ -397,7 +408,10 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
 如果对于X中所有x和y，若x R y和y R x同时成立则x=y，则R是反对称的
 对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的
 
-通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示...
+通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$表示严格偏序（反自反，反对称，传递），比如严格包含于，小于关系等。
+可比与不可比对于X中x和y，如果x R y或者y R x，则说x和y是可比的，否则就说x和y不可比
+极小元极大元对于偏序集X中的元素a，不存在满足x&lt;a的元素x，则a是偏序集的一个极小元。对于偏序集X中的元素b，不存在满足b&lt;y的元素y，则b是偏序集的一个极大元。
+链与反链设$(X,\le)$是有限偏序集，链是X的一个子集...
     
 
         <a href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" class="post-more waves-effect waves-button">
@@ -447,7 +461,11 @@ Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正
         推导有时候需要快速计算如下式子(比如数据范围都是1e9)
 $$f(a,b,c,n)=\sum_{i=0}^{n}\lfloor\frac{ai+b}{c}\rfloor$$
 $$g(a,b,c,n)=\sum_{i=0}^{n}i\lfloor\frac{ai+b}{c}\rfloor$$
-$$h(a,b,c,n)=\sum_{i=0}^{n} {\lfloor\frac{ai+b}{c}\...
+$$h(a,b,c,n)=\sum_{i=0}^{n} {\lfloor\frac{ai+b}{c}\rfloor}^2$$
+先推导一下$f(a,b,c,n)$，分两种情况
+1.当$a\ge c$或$b \ge c$时，
+$$f(a,b,c,n)=f(a%c,b%c,c,n)+\frac{n(n+1)}{2}\lfloor\frac{a}{c}\rfloor+(n+1)\lfloor\frac{b}{c}\rfloor$$
+2.当$a&lt;c$且$b&lt;c$时，令$m=\lfloor\fra...
     
 
         <a href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" class="post-more waves-effect waves-button">
@@ -496,16 +514,6 @@ $$h(a,b,c,n)=\sum_{i=0}^{n} {\lfloor\frac{ai+b}{c}\...
     
         写在前面推荐hihocoder上的讲解，可以说是十分清楚了。
 用好后缀自动机不是十分容易，但看完本文的总结应该能至少达到签到水平…
-
-正文后缀自动机（Suffix Automaton，简称SAM）。对于一个字符串S，它对应的后缀自动机是一个最小的确定有限状态自动机（DFA），接受且只接受S的后缀。
-先给出一张图和一个表格。
-对于字符串STR=”aabbabd”，它的后缀自动机是：
-
-
-
-
-
-...
     
 
         <a href="/2018/08/18/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-more waves-effect waves-button">
@@ -621,7 +629,9 @@ $$h(a,b,c,n)=\sum_{i=0}^{n} {\lfloor\frac{ai+b}{c}\...
     
         以下内容摘自《算法导论》思考题30-3
 我们可以将一维离散傅里叶变换推广到d维上，这时输入是一个d维的数组$A=(a_{j_1,j_2,\dots,j_d})$，维数分别为$n_1,n_2,\dots,n_d$，其中$n_1n_2\dots n_d=n$。定义d维离散傅里叶变换如下:
-$$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=...
+$$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=0}^{n_2-1}\dots\sum_{j_d=0}^{n_d-1}a_{j_1,j_2,\dots,j_d}\omega _{n_1}^{j_1k_1}\omega _{n_2}^{j_2k_2}\dots\omega _{n_d}^{j_dk_d}$$
+其中$0\le k_1&lt;n_1,0\le k_2&lt;n_2,\dots,0\le k_d&lt;n_d$
+a.证明：我们可以依次在...
     
 
         <a href="/2018/05/21/%E5%A4%9A%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" class="post-more waves-effect waves-button">
@@ -670,7 +680,7 @@ $$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=...
     
         一、写在前面最近数字图像处理课正在学快速傅里叶变换，发现自己对此理解的还不是很到位。于是借此机会，对照着《算法导论》，对这部分内容啃一啃。
 两个$n$次多项式相加的最直接方法所需的时间是$O(n)$，但是相乘的最直接方法所需的时间为$O(n^2)$。用快速傅里叶变换（Fast Fourier Transform，FFT）可以使多项式相乘的时间复杂度降低为$O(nlogn)$。
-需要的一些前置...
+需要的一些前置技能：复数、多项式、线性代数。
     
 
         <a href="/2018/05/09/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-more waves-effect waves-button">
@@ -749,7 +759,7 @@ $$y_{k_1,k_2,\dots,k_d}=\sum_{j_1=0}^{n_1-1}\sum_{j_2=...
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/page/3/&title=Forever you~&source=记录退役生活" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/page/3/&title=Forever you~&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  <title>线段树优化建图 - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Forever you~</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-09-30 21:28">
+      2018年9月30日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年4月20日 凌晨
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>有一类经典的问题，之前见过很多次了，好像某一场区域赛的热身赛里就出过：一维数轴上有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>个炸弹，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>r</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">x_i,r_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>分别表示第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个炸弹的位置和引爆半径，即如果引爆炸弹<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么位置在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>i</mi></msub><mo>+</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[x_i-r_i,x_i+r_i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span>范围内的炸弹都会爆炸，并且引发连锁反应。然后比如询问最少引爆几个炸弹才能全部炸完。</p>
+<p>首先一个建图思路是如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>能引爆<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>，那么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>向<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>连一条边，做tarjan求强连通分量就可以知道很多信息了。但是这样暴力连边是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>的，需要优化。一个显然的观察是，一个点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>的引爆范围是一段区间（这句是废话），所以是和一个区间的点连边，那么我们把炸弹按位置排序后，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>编好号，建线段树，线段树每个点向左右儿子分别连边。如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>要向区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(l,r)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">)</span></span></span></span>所有点连边的话，就在线段树中将区间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(l,r)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">)</span></span></span></span>分解成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>条线段，这样就转化成了向对应的线段树中的一些点连边，总的边数就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
+<p>来看两道具体的题目：</p>
+<h3 id="bzoj-5017-snoi2017炸弹"><a class="markdownIt-Anchor" href="#bzoj-5017-snoi2017炸弹"></a> [bzoj 5017 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=5017">Snoi2017]炸弹</a></h3>
+<p>询问如果把第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个炸弹引爆，将引爆多少个炸弹。</p>
+<p>线段树优化建图，然后tarjan，答案是从<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>所在的SCC出发，能走到的SCC含有的原炸弹数之和。因为对于每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>都要询问，所以这里不能暴力，一个方法是在这个DAG的反图上拓扑序dp一下。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 2000010</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> M 11000010</span>
+<span class="hljs-keyword">const</span> ll mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;
+<span class="hljs-keyword">const</span> ll mod2=mod*mod;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span></span>
+<span class="hljs-class">&#123;</span>
+    ll x,r;
+&#125; a[N];
+ll pos[N];
+<span class="hljs-keyword">int</span> tot,rt,n;
+<span class="hljs-keyword">int</span> ls[N],rs[N];
+<span class="hljs-keyword">int</span> e,head[M],last[M],p[N];
+<span class="hljs-keyword">int</span> dfn[N],low[N],sta[N],color[N],val[N];
+<span class="hljs-keyword">int</span> in[N],q[N];
+<span class="hljs-keyword">bool</span> v[N];
+<span class="hljs-keyword">int</span> dfstime,num,siz,len;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; redge[N];
+<span class="hljs-built_in">pair</span>&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; pr[M];
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> node &amp;a,<span class="hljs-keyword">const</span> node &amp;b)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> a.x&lt;b.x;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    head[++e]=y;
+    last[e]=p[x];
+    p[x]=e;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    x=(l==r)?l:(++tot);
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;
+    build(ls[x],l,mid);
+    build(rs[x],mid+<span class="hljs-number">1</span>,r);
+    add(x,ls[x]);
+    add(x,rs[x]);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ins</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> L,<span class="hljs-keyword">int</span> R,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(L&lt;=l &amp;&amp; r&lt;=R)
+    &#123;
+        add(y,x);
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(L&lt;=mid) ins(ls[x],l,mid,L,R,y);
+    <span class="hljs-keyword">if</span>(mid&lt;R) ins(rs[x],mid+<span class="hljs-number">1</span>,r,L,R,y);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">int</span> y;
+    dfn[x]=low[x]=++dfstime;
+    sta[++siz]=x;
+    v[x]=<span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=p[x];j;j=last[j])
+        <span class="hljs-keyword">if</span>(!dfn[y=head[j]])
+        &#123;
+            tarjan(y);
+            low[x]=<span class="hljs-built_in">min</span>(low[x],low[y]);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(v[y])
+            low[x]=<span class="hljs-built_in">min</span>(low[x],dfn[y]);
+    <span class="hljs-keyword">if</span>(low[x]==dfn[x])
+    &#123;
+        ++num;
+        <span class="hljs-keyword">do</span>
+        &#123;
+            y=sta[siz--];
+            color[y]=num;
+            v[y]=<span class="hljs-literal">false</span>;
+        &#125;<span class="hljs-keyword">while</span>(y!=x);
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>,&amp;a[i].x,&amp;a[i].r);
+        pos[i]=a[i].x;
+    &#125;
+    tot=n;
+    build(rt,<span class="hljs-number">1</span>,n);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        <span class="hljs-keyword">int</span> l=lower_bound(pos+<span class="hljs-number">1</span>,pos+n+<span class="hljs-number">1</span>,a[i].x-a[i].r)-pos;
+        <span class="hljs-keyword">int</span> r=upper_bound(pos+<span class="hljs-number">1</span>,pos+n+<span class="hljs-number">1</span>,a[i].x+a[i].r)-pos<span class="hljs-number">-1</span>;
+        ins(rt,<span class="hljs-number">1</span>,n,l,r,i);
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tot;++i)
+        <span class="hljs-keyword">if</span>(!dfn[i])
+            tarjan(i);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+        val[color[i]]++;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x=<span class="hljs-number">1</span>;x&lt;=tot;++x)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=p[x];j;j=last[j])
+        &#123;
+            <span class="hljs-keyword">int</span> y=head[j];
+            <span class="hljs-keyword">if</span>(color[x]==color[y]) <span class="hljs-keyword">continue</span>;
+            pr[++len]=<span class="hljs-built_in">make_pair</span>(color[y],color[x]);
+        &#125;
+    &#125;
+    sort(pr+<span class="hljs-number">1</span>,pr+len+<span class="hljs-number">1</span>);
+    len=unique(pr+<span class="hljs-number">1</span>,pr+len+<span class="hljs-number">1</span>)-pr<span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=len;++i)
+    &#123;
+        redge[pr[i].first].push_back(pr[i].second);
+        ++in[pr[i].second];
+    &#125;
+    <span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>,r=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=num;++i)
+        <span class="hljs-keyword">if</span>(!in[i])
+            q[r++]=i;
+    <span class="hljs-keyword">while</span>(l!=r)
+    &#123;
+        <span class="hljs-keyword">int</span> x=q[l++];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;redge[x].<span class="hljs-built_in">size</span>();++i)
+        &#123;
+            <span class="hljs-keyword">int</span> y=redge[x][i];
+            val[y]+=val[x];
+            <span class="hljs-keyword">if</span>((--in[y])==<span class="hljs-number">0</span>) q[r++]=y;
+        &#125;
+    &#125;
+    ll ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        ans+=<span class="hljs-number">1L</span>L*i*val[color[i]];
+        <span class="hljs-keyword">if</span>(ans&gt;=mod2) ans-=mod2;
+    &#125;
+    ans%=mod;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
+&#125;</code></pre></div>
+<h3 id="petrozavodsk-winter-2018-carnegie-mellon-u-contest-a-mines"><a class="markdownIt-Anchor" href="#petrozavodsk-winter-2018-carnegie-mellon-u-contest-a-mines"></a> Petrozavodsk Winter-2018. Carnegie Mellon U Contest A Mines</h3>
+<p>现在每个炸弹多了一个初始的引爆费用，因为连锁发生的爆炸是免费的。有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>次修改，每次修改一个炸弹的费用，对于每次修改都要查询当前要引爆所有炸弹的最小花费。</p>
+<p>前面的操作都一样，首先一个显然的想法是只要引爆DAG中所有入度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的SCC里的费用最小的炸弹。然后有个致命的问题是，入度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的SCC可能不含有原<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>号点，所以需要做拓扑排序删掉没用的点，之后对于每次询问用set维护即可。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NN 200010</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 800010</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> M 16000010</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> x,r,c,o;
+&#125; a[NN];
+<span class="hljs-keyword">int</span> h[NN],pos[NN],ls[N],rs[N];
+<span class="hljs-keyword">int</span> n,tot,m,rt,dfstime,siz,num;
+<span class="hljs-keyword">int</span> e,head[M],last[M],p[N];
+<span class="hljs-keyword">int</span> dfn[N],low[N],sta[N],color[N];
+<span class="hljs-keyword">int</span> in[N],q[N];
+<span class="hljs-keyword">bool</span> v[N],ok[N];
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; edge[N];
+<span class="hljs-built_in">multiset</span>&lt;<span class="hljs-keyword">int</span>&gt; st[N];
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> node &amp;a,<span class="hljs-keyword">const</span> node &amp;b)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> a.x&lt;b.x;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    head[++e]=y;
+    last[e]=p[x];
+    p[x]=e;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">int</span> y;
+    dfn[x]=low[x]=++dfstime;
+    sta[++siz]=x;
+    v[x]=<span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=p[x];j;j=last[j])
+        <span class="hljs-keyword">if</span>(!dfn[y=head[j]])
+        &#123;
+            tarjan(y);
+            low[x]=<span class="hljs-built_in">min</span>(low[x],low[y]);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(v[y])
+            low[x]=<span class="hljs-built_in">min</span>(low[x],dfn[y]);
+    <span class="hljs-keyword">if</span>(low[x]==dfn[x])
+    &#123;
+        ++num;
+        <span class="hljs-keyword">do</span>
+        &#123;
+            y=sta[siz--];
+            color[y]=num;
+            v[y]=<span class="hljs-literal">false</span>;
+        &#125;<span class="hljs-keyword">while</span>(y!=x);
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    x=(l==r)?l:(++tot);
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;
+    build(ls[x],l,mid);
+    build(rs[x],mid+<span class="hljs-number">1</span>,r);
+    add(x,ls[x]);
+    add(x,rs[x]);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ins</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> L,<span class="hljs-keyword">int</span> R,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(L&lt;=l &amp;&amp; r&lt;=R)
+    &#123;
+        add(y,x);
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(L&lt;=mid) ins(ls[x],l,mid,L,R,y);
+    <span class="hljs-keyword">if</span>(mid&lt;R) ins(rs[x],mid+<span class="hljs-number">1</span>,r,L,R,y);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> SK</span>
+    freopen(<span class="hljs-string">&quot;input.txt&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>,<span class="hljs-built_in">stdin</span>);
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">// SK</span></span>
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);
+    rep(i,<span class="hljs-number">1</span>,n)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,&amp;a[i].x,&amp;a[i].r,&amp;a[i].c);
+        a[i].o=i;
+    &#125;
+    sort(a+<span class="hljs-number">1</span>,a+n+<span class="hljs-number">1</span>,cmp);
+    rep(i,<span class="hljs-number">1</span>,n) h[i]=a[i].x,pos[a[i].o]=i;
+    tot=n;
+    build(rt,<span class="hljs-number">1</span>,n);
+    rep(i,<span class="hljs-number">1</span>,n)
+    &#123;
+        <span class="hljs-keyword">int</span> l=lower_bound(h+<span class="hljs-number">1</span>,h+n+<span class="hljs-number">1</span>,a[i].x-a[i].r)-h;
+        <span class="hljs-keyword">int</span> r=upper_bound(h+<span class="hljs-number">1</span>,h+n+<span class="hljs-number">1</span>,a[i].x+a[i].r)-h<span class="hljs-number">-1</span>;
+        ins(rt,<span class="hljs-number">1</span>,n,l,r,i);
+    &#125;
+    rep(i,<span class="hljs-number">1</span>,tot)
+        <span class="hljs-keyword">if</span>(!dfn[i])
+            tarjan(i);
+    rep(i,<span class="hljs-number">1</span>,n) ok[color[i]]=<span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x=<span class="hljs-number">1</span>;x&lt;=tot;++x)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=p[x];j;j=last[j])
+        &#123;
+            <span class="hljs-keyword">int</span> y=head[j];
+            <span class="hljs-keyword">int</span> xx=color[x],yy=color[y];
+            <span class="hljs-keyword">if</span>(xx==yy) <span class="hljs-keyword">continue</span>;
+            edge[xx].push_back(yy);
+            ++in[yy];
+        &#125;
+    &#125;
+    <span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>,r=<span class="hljs-number">0</span>;
+    rep(i,<span class="hljs-number">1</span>,num)
+        <span class="hljs-keyword">if</span>(!in[i] &amp;&amp; !ok[i])
+            q[r++]=i;
+    <span class="hljs-keyword">while</span>(l!=r)
+    &#123;
+        <span class="hljs-keyword">int</span> x=q[l++];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;y:edge[x])
+        &#123;
+            --in[y];
+            <span class="hljs-keyword">if</span>(!in[y] &amp;&amp; !ok[y]) q[r++]=y;
+        &#125;
+    &#125;
+
+    rep(i,<span class="hljs-number">1</span>,n)
+        <span class="hljs-keyword">if</span>(!in[color[i]])
+            st[color[i]].insert(a[i].c);
+
+    ll ans=<span class="hljs-number">0</span>;
+    rep(i,<span class="hljs-number">1</span>,num)
+        <span class="hljs-keyword">if</span>(ok[i] &amp;&amp; !in[i] &amp;&amp; !st[i].empty())
+            ans+=*st[i].<span class="hljs-built_in">begin</span>();
+
+    <span class="hljs-keyword">while</span>(m--)
+    &#123;
+        <span class="hljs-keyword">int</span> x,y;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);
+        x=pos[x];
+        <span class="hljs-keyword">if</span>(!in[color[x]])
+        &#123;
+            ans-=*st[color[x]].<span class="hljs-built_in">begin</span>();
+            <span class="hljs-keyword">auto</span> it=st[color[x]].<span class="hljs-built_in">find</span>(a[x].c);
+            st[color[x]].erase(it);
+            a[x].c=y;
+            st[color[x]].insert(a[x].c);
+            ans+=*st[color[x]].<span class="hljs-built_in">begin</span>();
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/10/08/2018-CCPC%E7%BD%91%E7%BB%9C%E8%B5%9B-GuGu-Convolution/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2018 CCPC网络赛 GuGu Convolution</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/28/NOIP-2014/">
+                        <span class="hidden-mobile">NOIP 2014</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'false' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2018/09/30/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHs'
+    var app_key = '2Twk1r9fmBnvsFveG9Ey5o6F'
+    var server_url = 'https://8fjwg1io.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "线段树优化建图&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.11.1/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

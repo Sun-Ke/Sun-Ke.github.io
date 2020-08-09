@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  <title>Markdown For Typora - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Forever you~</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-18 22:02">
+      2020年4月18日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年4月18日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="markdown-for-typora"><a class="markdownIt-Anchor" href="#markdown-for-typora"></a> Markdown For Typora</h1>
+<h2 id="overview"><a class="markdownIt-Anchor" href="#overview"></a> Overview</h2>
+<p><strong>Markdown</strong> is created by <a target="_blank" rel="noopener" href="http://daringfireball.net/">Daring Fireball</a>; the original guideline is <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/syntax">here</a>. Its syntax, however, varies between different parsers or editors. <strong>Typora</strong> is using <a target="_blank" rel="noopener" href="https://help.github.com/articles/github-flavored-markdown/">GitHub Flavored Markdown</a>.</p>
+<p>[toc]</p>
+<h2 id="block-elements"><a class="markdownIt-Anchor" href="#block-elements"></a> Block Elements</h2>
+<h3 id="paragraph-and-line-breaks"><a class="markdownIt-Anchor" href="#paragraph-and-line-breaks"></a> Paragraph and line breaks</h3>
+<p>A paragraph is simply one or more consecutive lines of text. In markdown source code, paragraphs are separated by two or more blank lines. In Typora, you only need one blank line (press <code>Return</code> once) to create a new paragraph.</p>
+<p>Press <code>Shift</code> + <code>Return</code> to create a single line break. Most other markdown parsers will ignore single line breaks, so in order to make other markdown parsers recognize your line break, you can leave two spaces at the end of the line, or insert <code>&lt;br/&gt;</code>.</p>
+<h3 id="headers"><a class="markdownIt-Anchor" href="#headers"></a> Headers</h3>
+<p>Headers use 1-6 hash (<code>#</code>) characters at the start of the line, corresponding to header levels 1-6. For example:</p>
+<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-section"># This is an H1</span>
+
+<span class="hljs-section">## This is an H2</span>
+
+<span class="hljs-section">###### This is an H6</span></code></pre></div>
+<p>In Typora, input ‘#’s followed by title content, and press <code>Return</code> key will create a header.</p>
+<h3 id="blockquotes"><a class="markdownIt-Anchor" href="#blockquotes"></a> Blockquotes</h3>
+<p>Markdown uses email-style &gt; characters for block quoting. They are presented as:</p>
+<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-quote">&gt; This is a blockquote with two paragraphs. This is first paragraph.</span>
+&gt;
+<span class="hljs-quote">&gt; This is second pragraph. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span>
+
+
+
+<span class="hljs-quote">&gt; This is another blockquote with one paragraph. There is three empty line to seperate two blockquote.</span></code></pre></div>
+<p>In Typora, inputting ‘&gt;’ followed by your quote contents will generate a quote block. Typora will insert a proper ‘&gt;’ or line break for you. Nested block quotes (a block quote inside another block quote) by adding additional levels of ‘&gt;’.</p>
+<h3 id="lists"><a class="markdownIt-Anchor" href="#lists"></a> Lists</h3>
+<p>Input <code>* list item 1</code> will create an unordered list - the <code>*</code> symbol can be replace with <code>+</code> or <code>-</code>.</p>
+<p>Input <code>1. list item 1</code> will create an ordered list - their markdown source code is as follows:</p>
+<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-section">## un-ordered list</span>
+<span class="hljs-bullet">*</span>   Red
+<span class="hljs-bullet">*</span>   Green
+<span class="hljs-bullet">*</span>   Blue
+
+<span class="hljs-section">## ordered list</span>
+<span class="hljs-bullet">1.</span>  Red
+<span class="hljs-bullet">2.</span> 	Green
+<span class="hljs-bullet">3.</span>	Blue</code></pre></div>
+<h3 id="task-list"><a class="markdownIt-Anchor" href="#task-list"></a> Task List</h3>
+<p>Task lists are lists with items marked as either [ ] or [x] (incomplete or complete). For example:</p>
+<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> [ ] a task list item
+<span class="hljs-bullet">-</span> [ ] list syntax required
+<span class="hljs-bullet">-</span> [ ] normal <span class="hljs-strong">**formatting**</span>, @mentions, #1234 refs
+<span class="hljs-bullet">-</span> [ ] incomplete
+<span class="hljs-bullet">-</span> [x] completed</code></pre></div>
+<p>You can change the complete/incomplete state by clicking on the checkbox before the item.</p>
+<h3 id="fenced-code-blocks"><a class="markdownIt-Anchor" href="#fenced-code-blocks"></a> (Fenced) Code Blocks</h3>
+<p>Typora only supports fences in GitHub Flavored Markdown. Original code blocks in markdown are not supported.</p>
+<p>Using fences is easy: Input ``` and press <code>return</code>. Add an optional language identifier after ``` and we’ll run it through syntax highlighting:</p>
+<div class="hljs"><pre><code class="hljs markdown">Here&#x27;s an example:
+</code></pre></div>
+<p>function test() {<br />
+console.log(“notice the blank line before this function?”);<br />
+}</p>
+<div class="hljs"><pre><code class="hljs vim">
+<span class="hljs-keyword">syntax</span> highlightin<span class="hljs-variable">g:</span>
+​```<span class="hljs-keyword">ruby</span>
+require <span class="hljs-string">&#x27;redcarpet&#x27;</span>
+markdown = Redcarpet.<span class="hljs-keyword">new</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)
+puts markdown.to_html</code></pre></div>
+<div class="hljs"><pre><code class="hljs latex">
+### Math Blocks
+
+You can render *LaTeX* mathematical expressions using **MathJax**.
+
+To add a mathematical expression, input `<span class="hljs-formula">$$` and press the &#x27;Return&#x27; key. This will trigger an input field which accepts *Tex/LaTex* source. For example:</span>
+<span class="hljs-formula"></span>
+<span class="hljs-formula"></span>
+<span class="hljs-formula">$$</span>
+<span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;V&#125;</span></span>_1 <span class="hljs-tag">\<span class="hljs-name">times</span></span> <span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;V&#125;</span></span>_2 =  <span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">&#123;vmatrix&#125;</span></span>
+<span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;i&#125;</span></span> &amp; <span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;j&#125;</span></span> &amp; <span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;k&#125;</span></span> <span class="hljs-tag">\<span class="hljs-name">\</span></span>
+<span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial X&#125;</span><span class="hljs-string">&#123;\partial u&#125;</span></span> &amp;  <span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial Y&#125;</span><span class="hljs-string">&#123;\partial u&#125;</span></span> &amp; 0 <span class="hljs-tag">\<span class="hljs-name">\</span></span>
+<span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial X&#125;</span><span class="hljs-string">&#123;\partial v&#125;</span></span> &amp;  <span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial Y&#125;</span><span class="hljs-string">&#123;\partial v&#125;</span></span> &amp; 0 <span class="hljs-tag">\<span class="hljs-name">\</span></span>
+<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">&#123;vmatrix&#125;</span></span>
+<span class="hljs-formula">$$</span>
+<span class="hljs-formula"></span>
+<span class="hljs-formula"></span>
+<span class="hljs-formula">In the markdown source file, the math block is a *LaTeX* expression wrapped by a pair of ‘$$</span>’ marks:
+
+​``` markdown
+<span class="hljs-formula">$$</span>
+<span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;V&#125;</span></span>_1 <span class="hljs-tag">\<span class="hljs-name">times</span></span> <span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;V&#125;</span></span>_2 =  <span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">&#123;vmatrix&#125;</span></span></span>
+<span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;i&#125;</span></span> &amp; <span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;j&#125;</span></span> &amp; <span class="hljs-tag">\<span class="hljs-name">mathbf</span><span class="hljs-string">&#123;k&#125;</span></span> <span class="hljs-tag">\<span class="hljs-name">\</span></span></span>
+<span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial X&#125;</span><span class="hljs-string">&#123;\partial u&#125;</span></span> &amp;  <span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial Y&#125;</span><span class="hljs-string">&#123;\partial u&#125;</span></span> &amp; 0 <span class="hljs-tag">\<span class="hljs-name">\</span></span></span>
+<span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial X&#125;</span><span class="hljs-string">&#123;\partial v&#125;</span></span> &amp;  <span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial Y&#125;</span><span class="hljs-string">&#123;\partial v&#125;</span></span> &amp; 0 <span class="hljs-tag">\<span class="hljs-name">\</span></span></span>
+<span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">&#123;vmatrix&#125;</span></span></span>
+<span class="hljs-formula">$$</span></code></pre></div>
+<p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Math/">here</a>.</p>
+<h3 id="tables"><a class="markdownIt-Anchor" href="#tables"></a> Tables</h3>
+<p>Input <code>| First Header | Second Header |</code> and press the <code>return</code> key. This will create a table with two columns.</p>
+<p>After a table is created, putting focus on that table will open up a toolbar for the table where you can resize, align, or delete the table. You can also use the context menu to copy and add/delete individual columns/rows.</p>
+<p>The full syntax for tables is described below, but it is not necessary to know the full syntax in detail as the markdown source code for tables is generated automatically by Typora.</p>
+<p>In markdown source code, they look like:</p>
+<div class="hljs"><pre><code class="hljs markdown">| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |</code></pre></div>
+<p>You can also include inline Markdown such as links, bold, italics, or strikethrough in the table.</p>
+<p>Finally, by including colons (<code>:</code>) within the header row, you can define text in that column to be left-aligned, right-aligned, or center-aligned:</p>
+<div class="hljs"><pre><code class="hljs markdown">| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |</code></pre></div>
+<p>A colon on the left-most side indicates a left-aligned column; a colon on the right-most side indicates a right-aligned column; a colon on both sides indicates a center-aligned column.</p>
+<h3 id="footnotes"><a class="markdownIt-Anchor" href="#footnotes"></a> Footnotes</h3>
+<div class="hljs"><pre><code class="hljs markdown">You can create footnotes like this[^footnote].
+
+[<span class="hljs-symbol">^footnote</span>]: <span class="hljs-link">Here is the *text* of the **footnote**.</span></code></pre></div>
+<p>will produce:</p>
+<p>You can create footnotes like this<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
+<p>Hover over the ‘footnote’ superscript to see content of the footnote.</p>
+<h3 id="horizontal-rules"><a class="markdownIt-Anchor" href="#horizontal-rules"></a> Horizontal Rules</h3>
+<p>Inputting <code>***</code> or <code>---</code> on a blank line and pressing <code>return</code> will draw a horizontal line.</p>
+<hr />
+<h3 id="yaml-front-matter"><a class="markdownIt-Anchor" href="#yaml-front-matter"></a> YAML Front Matter</h3>
+<p>Typora now supports <a target="_blank" rel="noopener" href="http://jekyllrb.com/docs/frontmatter/">YAML Front Matter</a>. Input <code>---</code> at the top of the article and then press <code>Return</code> to introduce a metadata block. Alternatively, you can insert a metadata block from the top menu of Typora.</p>
+<h3 id="table-of-contents-toc"><a class="markdownIt-Anchor" href="#table-of-contents-toc"></a> Table of Contents (TOC)</h3>
+<p>Input <code>[toc]</code> and press the <code>Return</code> key. This will create a  “Table of Contents” section. The TOC extracts all headers from the document, and its contents are updated automatically as you add to the document.</p>
+<h2 id="span-elements"><a class="markdownIt-Anchor" href="#span-elements"></a> Span Elements</h2>
+<p>Span elements will be parsed and rendered right after typing. Moving the cursor in middle of those span elements will expand those elements into markdown source. Below is an explanation of the syntax for each span element.</p>
+<h3 id="links"><a class="markdownIt-Anchor" href="#links"></a> Links</h3>
+<p>Markdown supports two styles of links: inline and reference.</p>
+<p>In both styles, the link text is delimited by [square brackets].</p>
+<p>To create an inline link, use a set of regular parentheses immediately after the link text’s closing square bracket. Inside the parentheses, put the URL where you want the link to point, along with an optional title for the link, surrounded in quotes. For example:</p>
+<div class="hljs"><pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>](<span class="hljs-link">http://example.com/ &quot;Title&quot;</span>) inline link.
+
+[<span class="hljs-string">This link</span>](<span class="hljs-link">http://example.net/</span>) has no title attribute.</code></pre></div>
+<p>will produce:</p>
+<p>This is <a target="_blank" rel="noopener" href="http://example.com/" title="Title">an example</a> inline link. (<code>&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot; title=&quot;Title&quot;&gt;</code>)</p>
+<p><a target="_blank" rel="noopener" href="http://example.net/">This link</a> has no title attribute. (<code>&lt;p&gt;&lt;a href=&quot;http://example.net/&quot;&gt;This link&lt;/a&gt; has no</code>)</p>
+<h4 id="internal-links"><a class="markdownIt-Anchor" href="#internal-links"></a> Internal Links</h4>
+<p><strong>You can set the href to headers</strong>, which will create a bookmark that allow you to jump to that section after clicking. For example:</p>
+<p>Command(on Windows: Ctrl) + Click <a href="#block-elements">This link</a> will jump to header <code>Block Elements</code>. To see how to write that, please move cursor or click that link with <code>⌘</code> key pressed to expand the element into markdown source.</p>
+<h4 id="reference-links"><a class="markdownIt-Anchor" href="#reference-links"></a> Reference Links</h4>
+<p>Reference-style links use a second set of square brackets, inside which you place a label of your choosing to identify the link:</p>
+<div class="hljs"><pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>][<span class="hljs-symbol">id</span>] reference-style link.
+
+Then, anywhere in the document, you define your link label on a line by itself like this:
+
+[<span class="hljs-symbol">id</span>]: <span class="hljs-link">http://example.com/  &quot;Optional Title Here&quot;</span></code></pre></div>
+<p>In Typora, they will be rendered like so:</p>
+<p>This is <a target="_blank" rel="noopener" href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
+<p>The implicit link name shortcut allows you to omit the name of the link, in which case the link text itself is used as the name. Just use an empty set of square brackets — for example, to link the word “Google” to the <a target="_blank" rel="noopener" href="http://google.com">google.com</a> web site, you could simply write:</p>
+<div class="hljs"><pre><code class="hljs markdown">[<span class="hljs-string">Google</span>][<span class="hljs-symbol"></span>]
+And then define the link:
+
+[<span class="hljs-symbol">Google</span>]: <span class="hljs-link">http://google.com/</span></code></pre></div>
+<p>In Typora, clicking the link will expand it for editing, and command+click will open the hyperlink in your web browser.</p>
+<h3 id="urls"><a class="markdownIt-Anchor" href="#urls"></a> URLs</h3>
+<p>Typora allows you to insert URLs as links, wrapped by <code>&lt;</code>brackets<code>&gt;</code>.</p>
+<p><code>&lt;i@typora.io&gt;</code> becomes <a href="mailto:i@typora.io">i@typora.io</a>.</p>
+<p>Typora will also automatically link standard URLs. e.g: <a target="_blank" rel="noopener" href="http://www.google.com">www.google.com</a>.</p>
+<h3 id="images"><a class="markdownIt-Anchor" href="#images"></a> Images</h3>
+<p>Images have similar syntax as links, but they require an additional <code>!</code> char before the start of the link. The syntax for inserting an image looks like this:</p>
+<div class="hljs"><pre><code class="hljs markdown">![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg</span>)
+
+![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg &quot;Optional title&quot;</span>)</code></pre></div>
+<p>You are able to use drag &amp; drop to insert an image from an image file or your web browser. You can modify the markdown source code by clicking on the image. A relative path will be used if the image that is added using drag &amp; drop is in same directory or sub-directory as the document you’re currently editing.</p>
+<p>If you’re using markdown for building websites, you may specify a URL prefix for the image preview on your local computer with property <code>typora-root-url</code> in YAML Front Matters. For example, input <code>typora-root-url:/User/Abner/Website/typora.io/</code> in YAML Front Matters, and then <code>![alt](/blog/img/test.png)</code> will be treated as <code>![alt](file:///User/Abner/Website/typora.io/blog/img/test.png)</code> in Typora.</p>
+<p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Images/">here</a>.</p>
+<h3 id="emphasis"><a class="markdownIt-Anchor" href="#emphasis"></a> Emphasis</h3>
+<p>Markdown treats asterisks (<code>*</code>) and underscores (<code>_</code>) as indicators of emphasis. Text wrapped with one <code>*</code> or <code>_</code> will be wrapped with an HTML <code>&lt;em&gt;</code> tag. E.g:</p>
+<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-emphasis">*single asterisks*</span>
+
+<span class="hljs-emphasis">_single underscores_</span></code></pre></div>
+<p>output:</p>
+<p><em>single asterisks</em></p>
+<p><em>single underscores</em></p>
+<p>GFM will ignore underscores in words, which is commonly used in code and names, like this:</p>
+<blockquote>
+<p>wow_great_stuff</p>
+<p>do_this_and_do_that_and_another_thing.</p>
+</blockquote>
+<p>To produce a literal asterisk or underscore at a position where it would otherwise be used as an emphasis delimiter, you can backslash escape it:</p>
+<div class="hljs"><pre><code class="hljs markdown">\<span class="hljs-emphasis">*this text is surrounded by literal asterisks\*</span></code></pre></div>
+<p>Typora recommends using the <code>*</code> symbol.</p>
+<h3 id="strong"><a class="markdownIt-Anchor" href="#strong"></a> Strong</h3>
+<p>A double <code>*</code> or <code>_</code> will cause its enclosed contents to be wrapped with an HTML <code>&lt;strong&gt;</code> tag, e.g:</p>
+<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-strong">**double asterisks**</span>
+
+<span class="hljs-strong">__double underscores__</span></code></pre></div>
+<p>output:</p>
+<p><strong>double asterisks</strong></p>
+<p><strong>double underscores</strong></p>
+<p>Typora recommends using the <code>**</code> symbol.</p>
+<h3 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h3>
+<p>To indicate an inline span of code, wrap it with backtick quotes (`). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:</p>
+<div class="hljs"><pre><code class="hljs markdown">Use the <span class="hljs-code">`printf()`</span> function.</code></pre></div>
+<p>will produce:</p>
+<p>Use the <code>printf()</code> function.</p>
+<h3 id="strikethrough"><a class="markdownIt-Anchor" href="#strikethrough"></a> Strikethrough</h3>
+<p>GFM adds syntax to create strikethrough text, which is missing from standard Markdown.</p>
+<p><code>~~Mistaken text.~~</code> becomes <s>Mistaken text.</s></p>
+<h3 id="underlines"><a class="markdownIt-Anchor" href="#underlines"></a> Underlines</h3>
+<p>Underline is powered by raw HTML.</p>
+<p><code>&lt;u&gt;Underline&lt;/u&gt;</code> becomes <u>Underline</u>.</p>
+<h3 id="emoji"><a class="markdownIt-Anchor" href="#emoji"></a> Emoji 😄</h3>
+<p>Input emoji with syntax <code>:smile:</code>.</p>
+<p>User can trigger auto-complete suggestions for emoji by pressing <code>ESC</code> key, or trigger it automatically after enabling it on preference panel. Also, inputting UTF-8 emoji characters directly is also supported by going to <code>Edit</code> -&gt; <code>Emoji &amp; Symbols</code> in the menu bar (macOS).</p>
+<h3 id="inline-math"><a class="markdownIt-Anchor" href="#inline-math"></a> Inline Math</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>$</code> to wrap a TeX command. For example: <code>$\lim_&#123;x \to \infty&#125; \exp(-x) = 0$</code> will be rendered as LaTeX command.</p>
+<p>To trigger inline preview for inline math: input “$”, then press the <code>ESC</code> key, then input a TeX command.</p>
+<p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Math/">here</a>.</p>
+<h3 id="subscript"><a class="markdownIt-Anchor" href="#subscript"></a> Subscript</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>~</code> to wrap subscript content. For example: <code>H~2~O</code>, <code>X~long\ text~</code>/</p>
+<h3 id="superscript"><a class="markdownIt-Anchor" href="#superscript"></a> Superscript</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>^</code> to wrap superscript content. For example: <code>X^2^</code>.</p>
+<h3 id="highlight"><a class="markdownIt-Anchor" href="#highlight"></a> Highlight</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>==</code> to wrap highlight content. For example: <code>==highlight==</code>.</p>
+<h2 id="html"><a class="markdownIt-Anchor" href="#html"></a> HTML</h2>
+<p>You can use HTML to style content what pure Markdown does not support. For example, use <code>&lt;span style=&quot;color:red&quot;&gt;this text is red&lt;/span&gt;</code> to add text with red color.</p>
+<h3 id="embed-contents"><a class="markdownIt-Anchor" href="#embed-contents"></a> Embed Contents</h3>
+<p>Some websites provide iframe-based embed code which you can also paste into Typora. For example:</p>
+<div class="hljs"><pre><code class="hljs Markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&#x27;265&#x27;</span> <span class="hljs-attr">scrolling</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Fancy Animated SVG Menu&#x27;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;http://codepen.io/jeangontijo/embed/OxVywj/?height=265&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2&#x27;</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">allowtransparency</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">allowfullscreen</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#x27;width: 100%;&#x27;</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></span></code></pre></div>
+<h3 id="video"><a class="markdownIt-Anchor" href="#video"></a> Video</h3>
+<p>You can use the <code>&lt;video&gt;</code> HTML tag to embed videos. For example:</p>
+<div class="hljs"><pre><code class="hljs Markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;xxx.mp4&quot;</span> /&gt;</span></span></code></pre></div>
+<h3 id="other-html-support"><a class="markdownIt-Anchor" href="#other-html-support"></a> Other HTML Support</h3>
+<p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/HTML/">here</a>.</p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Here is the <em>text</em> of the <strong>footnote</strong>. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/markdown/">markdown</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typora/">typora</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/20/%E5%81%9A%E4%B8%AA%E5%B0%8F%E8%A7%86%E9%A2%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">做个小视频</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/18/Hello%20World/">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'false' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2020/04/18/Markdown%20For%20Typora/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHs'
+    var app_key = '2Twk1r9fmBnvsFveG9Ey5o6F'
+    var server_url = 'https://8fjwg1io.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Markdown For Typora&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.11.1/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

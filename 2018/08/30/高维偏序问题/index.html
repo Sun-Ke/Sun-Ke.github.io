@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  <title>高维偏序问题 - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Forever you~</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-08-30 19:55">
+      2018年8月30日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年4月19日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近做了几道高维偏序的简单题。</p>
+<p>对于这类题目一般有三种通用方法，一是<strong>cdq分治</strong>，维数越多嵌套次数就越多，总体来说思路就是对时间分治，每次统计出左半区间的贡献点对右半区间的询问点的贡献，这样对于每个询问点来说，它前面的所有对它造成影响的点就都会被算到。二是用<strong>bitset优化</strong>暴力，应该只能处理计数问题，但优点是好写，适合做高维偏序。三是<strong>KDtree</strong>，emmmm，这个没怎么写过，多校训练十分艰难的写过一次，通过了90%的数据然后TLE了。</p>
+<h4 id="1loj112-三维偏序"><a class="markdownIt-Anchor" href="#1loj112-三维偏序"></a> 1.<a target="_blank" rel="noopener" href="https://loj.ac/problem/112">LOJ#112 三维偏序</a></h4>
+<p>计数题，对其中一维排序后，cdq分治套树状数组，时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msup><mi>g</mi><mn>2</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog^{2}n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
+<h4 id="2cogs-2479hzoi-2016-偏序"><a class="markdownIt-Anchor" href="#2cogs-2479hzoi-2016-偏序"></a> 2.[COGS 2479<a target="_blank" rel="noopener" href="http://cogs.pro:8080/cogs/problem/problem.php?pid=2479">HZOI 2016] 偏序</a></h4>
+<p>计数题，四维偏序，cdq分治套cdq分治套树状数组，时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msup><mi>g</mi><mn>3</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog^{3}n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
+<p>怎么理解这个分治套分治呢。假设属性为a,b,c，第一次分治的时候我们将区间[l,mid]的点标记成贡献点，[mid+1,r]的点标记成询问点，然后区间[l,r]按a属性排序，消去a的影响，这样问题就变成了有n次操作，每次要么插入一个点(b,c)，要么查询之前插入的点中有多少点在(b,c)左下方，这样问题就降了一维化成了三维偏序了。</p>
+<h4 id="3cogs-2580-hzoi-2015偏序-ii"><a class="markdownIt-Anchor" href="#3cogs-2580-hzoi-2015偏序-ii"></a> 3.[COGS 2580 <a target="_blank" rel="noopener" href="http://cogs.pro:8080/cogs/problem/problem.php?pid=2580">HZOI 2015]偏序 II</a></h4>
+<p>计数题，五维偏序，在上一题的基础上外面再套一次cdq分治，时间复杂度十分感人<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msup><mi>g</mi><mn>4</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog^{4}n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> w,x,y,z;
+    <span class="hljs-keyword">bool</span> t,s;
+&#125; a[N],b[N],c[N],d[N];
+<span class="hljs-keyword">int</span> n;
+ll ans;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BIT</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> c[N];
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">for</span>(; x&lt;=n; x+=x&amp;(-x)) c[x]+=y;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(; x; x-=x&amp;(-x)) ans+=c[x];
+        <span class="hljs-keyword">return</span> ans;
+    &#125;
+&#125; <span class="hljs-built_in">bit</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cdq3</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    cdq3(l,mid);
+    cdq3(mid+<span class="hljs-number">1</span>,r);
+    <span class="hljs-keyword">int</span> i=l,j=mid+<span class="hljs-number">1</span>,k=l;
+    <span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)
+    &#123;
+        <span class="hljs-keyword">if</span>(c[i].y&lt;c[j].y)
+        &#123;
+            <span class="hljs-keyword">if</span>(!c[i].s &amp;&amp; !c[i].t) <span class="hljs-built_in">bit</span>.add(c[i].z,<span class="hljs-number">1</span>);
+            d[k++]=c[i++];
+        &#125;
+        <span class="hljs-keyword">else</span>
+        &#123;
+            <span class="hljs-keyword">if</span>(c[j].s &amp;&amp; c[j].t) ans+=<span class="hljs-built_in">bit</span>.ask(c[j].z);
+            d[k++]=c[j++];
+        &#125;
+    &#125;
+    <span class="hljs-keyword">while</span>(i&lt;=mid)
+    &#123;
+        <span class="hljs-keyword">if</span>(!c[i].s &amp;&amp; !c[i].t) <span class="hljs-built_in">bit</span>.add(c[i].z,<span class="hljs-number">1</span>);
+        d[k++]=c[i++];
+    &#125;
+    <span class="hljs-keyword">while</span>(j&lt;=r)
+    &#123;
+        <span class="hljs-keyword">if</span>(c[j].s &amp;&amp; c[j].t) ans+=<span class="hljs-built_in">bit</span>.ask(c[j].z);
+        d[k++]=c[j++];
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l; i&lt;=mid; ++i) <span class="hljs-keyword">if</span>(!c[i].s &amp;&amp; !c[i].t) <span class="hljs-built_in">bit</span>.add(c[i].z,<span class="hljs-number">-1</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l; i&lt;=r; ++i) c[i]=d[i];
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cdq2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    cdq2(l,mid);
+    cdq2(mid+<span class="hljs-number">1</span>,r);
+    <span class="hljs-keyword">int</span> i=l,j=mid+<span class="hljs-number">1</span>,k=l;
+    <span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)
+    &#123;
+        <span class="hljs-keyword">if</span>(b[i].x&lt;b[j].x) c[k]=b[i++],c[k++].s=<span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">else</span> c[k]=b[j++],c[k++].s=<span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-keyword">while</span>(i&lt;=mid) c[k]=b[i++],c[k++].s=<span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">while</span>(j&lt;=r) c[k]=b[j++],c[k++].s=<span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l; i&lt;=r; ++i) b[i]=c[i];
+    cdq3(l,r);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cdq1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    cdq1(l,mid);
+    cdq1(mid+<span class="hljs-number">1</span>,r);
+    <span class="hljs-keyword">int</span> i=l,j=mid+<span class="hljs-number">1</span>,k=l;
+    <span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)
+    &#123;
+        <span class="hljs-keyword">if</span>(a[i].w&lt;a[j].w) b[k]=a[i++],b[k++].t=<span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">else</span> b[k]=a[j++],b[k++].t=<span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-keyword">while</span>(i&lt;=mid) b[k]=a[i++],b[k++].t=<span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">while</span>(j&lt;=r) b[k]=a[j++],b[k++].t=<span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l; i&lt;=r; ++i) a[i]=b[i];
+    cdq2(l,r);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n)!=EOF)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i].w);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i].x);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i].y);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i].z);
+        ans=<span class="hljs-number">0</span>;
+        cdq1(<span class="hljs-number">1</span>,n);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
+    &#125;
+&#125;</code></pre></div>
+<h4 id="4cogs-2639-hzoi-2015-偏序"><a class="markdownIt-Anchor" href="#4cogs-2639-hzoi-2015-偏序"></a> 4.[COGS 2639. <a target="_blank" rel="noopener" href="http://cogs.pro:8080/cogs/problem/problem.php?pid=2639">HZOI 2015] 偏序++</a></h4>
+<p>计数题，七维偏序。只能bitset了，每个元素开一个bitset表示哪些点比它小，一维一维的考虑，从小到大枚举值，然后对每个元素and一下就行了。时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>k</mi><msup><mi>n</mi><mn>2</mn></msup><mi mathvariant="normal">/</mi><mn>64</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(kn^2/64)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord">6</span><span class="mord">4</span><span class="mclose">)</span></span></span></span></p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">40005</span>;
+<span class="hljs-built_in">bitset</span>&lt;N&gt; bs[N],tmp;
+<span class="hljs-keyword">int</span> n,k,ans;
+<span class="hljs-keyword">int</span> pos[N],a[N];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) bs[i]=bs[i<span class="hljs-number">-1</span>],bs[i][i<span class="hljs-number">-1</span>]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(k--)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a+i),pos[a[i]]=i;
+        tmp.reset();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) bs[pos[i]]&amp;=tmp,tmp[pos[i]]=<span class="hljs-number">1</span>;
+    &#125;
+    ll ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) ans+=bs[i].count();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
+&#125;</code></pre></div>
+<h4 id="5spoj-lis2-another-longest-increasing-subsequence-problem"><a class="markdownIt-Anchor" href="#5spoj-lis2-another-longest-increasing-subsequence-problem"></a> 5.<a target="_blank" rel="noopener" href="https://www.spoj.com/problems/LIS2/en/">SPOJ LIS2 Another Longest Increasing Subsequence Problem</a></h4>
+<p>求最优解，即最长上升子序列的长度，每个元素有两个属性。回忆一下一个属性的话，我们可以用树状数组求前缀最大值的方法优化dp的转移，再加一维就用cdq分治套一下就行了。</p>
+<p>与之前计数题不同的地方在于，计数题中贡献对询问的影响是独立的，没有先后顺序的问题，但是做这个dp的过程就必须是从前往后了，比如说序列1,2,3,4，如果用3去更新4的话，3的dp值就必须在之前就已经算出来是3。稍微改一下<strong>分治的顺序</strong>就可以了，先递归到[l,mid]，然后用左半区间更新右半区间的dp值，然后递归到右半区间。</p>
+<h4 id="62018-牛客网暑期acm多校训练营第九场longest-common-subsequence"><a class="markdownIt-Anchor" href="#62018-牛客网暑期acm多校训练营第九场longest-common-subsequence"></a> 6.<a target="_blank" rel="noopener" href="https://www.nowcoder.com/acm/contest/148/H">2018 牛客网暑期ACM多校训练营（第九场）Longest Common Subsequence</a></h4>
+<p>求四个序列的最长公共子序列，保证值范围1-n，前三个序列中每一种值出现次数不超过2次。</p>
+<p>先考虑四个序列都是排列的情况，假设对于值x来说pa[x],pb[x],pc[x],pd[x]在四个序列中的位置，那么最长公共子序列就转化成了求四维偏序的最长链。对于这个题目我们可以2的3次方枚举每个值的位置三元组，这样总点数就是8n的，还是求四维偏序的最长链。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">80005</span>;
+<span class="hljs-keyword">int</span> n;
+<span class="hljs-keyword">int</span> dp[N],vis[N];
+<span class="hljs-keyword">int</span> pos[N][<span class="hljs-number">3</span>][<span class="hljs-number">2</span>];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> x,y,z,t,o;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d:(%d,%d,%d)  %d\n&quot;</span>,o,x,y,z,dp[o]);
+    &#125;
+&#125; a[N],b[N],c[N];
+
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmpx</span><span class="hljs-params">(<span class="hljs-keyword">const</span> node &amp;a,<span class="hljs-keyword">const</span> node &amp;b)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(a.x!=b.x) <span class="hljs-keyword">return</span> a.x&lt;b.x;
+    <span class="hljs-keyword">return</span> a.y&gt;b.y;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmpy</span><span class="hljs-params">(<span class="hljs-keyword">const</span> node &amp;a,<span class="hljs-keyword">const</span> node &amp;b)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(a.y!=b.y) <span class="hljs-keyword">return</span> a.y&lt;b.y;
+    <span class="hljs-keyword">return</span> a.z&gt;b.z;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BIT</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> c[N];
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">for</span>(; x&lt;=n; x+=x&amp;(-x)) c[x]=<span class="hljs-built_in">max</span>(c[x],y);
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">for</span>(; x&lt;=n; x+=x&amp;(-x)) c[x]=<span class="hljs-number">0</span>;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(; x; x-=x&amp;(-x)) ans=<span class="hljs-built_in">max</span>(ans,c[x]);
+        <span class="hljs-keyword">return</span> ans;
+    &#125;
+&#125; <span class="hljs-built_in">bit</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cdq2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    cdq2(l,mid);
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l; i&lt;=r; ++i) c[i]=b[i];
+    sort(c+l,c+mid+<span class="hljs-number">1</span>,cmpy);
+    sort(c+mid+<span class="hljs-number">1</span>,c+r+<span class="hljs-number">1</span>,cmpy);
+    <span class="hljs-keyword">int</span> i=l,j=mid+<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(; j&lt;=r; ++j)
+    &#123;
+        <span class="hljs-keyword">for</span>(; i&lt;=mid &amp;&amp; c[i].y&lt;c[j].y; ++i)
+        <span class="hljs-keyword">if</span>(c[i].t==<span class="hljs-number">0</span>)
+            <span class="hljs-built_in">bit</span>.change(c[i].z,dp[c[i].o]);
+        <span class="hljs-keyword">if</span>(c[j].t==<span class="hljs-number">1</span>)
+            dp[c[j].o]=<span class="hljs-built_in">max</span>(dp[c[j].o],<span class="hljs-built_in">bit</span>.ask(c[j].z<span class="hljs-number">-1</span>)+<span class="hljs-number">1</span>);
+    &#125;
+    <span class="hljs-keyword">for</span>(i=l; i&lt;=mid; ++i)
+        <span class="hljs-keyword">if</span>(c[i].t==<span class="hljs-number">0</span>) <span class="hljs-built_in">bit</span>.<span class="hljs-built_in">clear</span>(c[i].z);
+
+    cdq2(mid+<span class="hljs-number">1</span>,r);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cdq1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    cdq1(l,mid);
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l; i&lt;=r; ++i) b[i]=a[i],b[i].t=(i&gt;mid);
+    sort(b+l,b+r+<span class="hljs-number">1</span>,cmpx);
+    cdq2(l,r);
+
+    cdq1(mid+<span class="hljs-number">1</span>,r);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">3</span>; ++i)
+    &#123;
+        <span class="hljs-built_in">memset</span>(vis,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(vis));
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=n; ++j)
+        &#123;
+            <span class="hljs-keyword">int</span> x;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;x);
+            <span class="hljs-keyword">if</span>(!vis[x]) pos[x][i][<span class="hljs-number">0</span>]=pos[x][i][<span class="hljs-number">1</span>]=j,vis[x]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">else</span> pos[x][i][<span class="hljs-number">1</span>]=j;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">int</span> cnt=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i)
+    &#123;
+        <span class="hljs-keyword">int</span> x;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;x);
+        <span class="hljs-keyword">if</span>(!pos[x][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]||!pos[x][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]||!pos[x][<span class="hljs-number">2</span>][<span class="hljs-number">0</span>]) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">7</span>; j&gt;=<span class="hljs-number">0</span>; --j)
+        &#123;
+            ++cnt;
+            a[cnt].o=cnt;
+            a[cnt].x=pos[x][<span class="hljs-number">0</span>][j&amp;<span class="hljs-number">1</span>];
+            a[cnt].y=pos[x][<span class="hljs-number">1</span>][j&gt;&gt;<span class="hljs-number">1</span>&amp;<span class="hljs-number">1</span>];
+            a[cnt].z=pos[x][<span class="hljs-number">2</span>][j&gt;&gt;<span class="hljs-number">2</span>&amp;<span class="hljs-number">1</span>];
+            a[cnt].t=<span class="hljs-number">0</span>;
+            <span class="hljs-comment">//a[cnt].show(cnt);</span>
+            dp[cnt]=<span class="hljs-number">1</span>;
+        &#125;
+    &#125;
+
+    cdq1(<span class="hljs-number">1</span>,cnt);
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=cnt; ++i)
+        ans=<span class="hljs-built_in">max</span>(ans,dp[i]);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">(1,1,2)</span>
+<span class="hljs-comment">(2,2,3)</span>
+<span class="hljs-comment">(3,4,4)</span>
+<span class="hljs-comment">(4,5,5)</span>
+<span class="hljs-comment">*/</span></code></pre></div>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%81%8F%E5%BA%8F/">偏序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2017 西安网络赛 A题 TREE</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/">
+                        <span class="hidden-mobile">偏序集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'false' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2018/08/30/%E9%AB%98%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHs'
+    var app_key = '2Twk1r9fmBnvsFveG9Ey5o6F'
+    var server_url = 'https://8fjwg1io.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "高维偏序问题&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.11.1/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

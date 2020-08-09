@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  <title>NOIP 2013 - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Forever you~</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-09-26 23:59">
+      2018年9月26日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年4月20日 凌晨
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近突然想回顾一下历年noip题目，就开个新坑吧，题解就从略了</p>
+<p>题目链接 <a target="_blank" rel="noopener" href="https://vijos.org/p/category/2013">https://vijos.org/p/category/2013</a></p>
+<h4 id="d1t1-转圈游戏"><a class="markdownIt-Anchor" href="#d1t1-转圈游戏"></a> D1T1 <a target="_blank" rel="noopener" href="https://vijos.org/p/1841">转圈游戏</a></h4>
+<p>公式就<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>m</mi><mn>1</mn><msup><mn>0</mn><mi>k</mi></msup><mo stretchy="false">)</mo><mi mathvariant="normal">%</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">(x+m10^k)\%n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">%</span><span class="mord mathdefault">n</span></span></span></span>，现在一眼的事情当时想了很久orz</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">power</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">int</span> mod)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(n)
+    &#123;
+        <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>) ans=<span class="hljs-number">1L</span>L*ans*x%mod;
+        x=<span class="hljs-number">1L</span>L*x*x%mod;
+        n&gt;&gt;=<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">int</span> n,m,k,x;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d&quot;</span>,&amp;n,&amp;m,&amp;k,&amp;x)!=EOF)
+    &#123;
+        <span class="hljs-keyword">int</span> ans=(x+<span class="hljs-number">1L</span>L*m*power(<span class="hljs-number">10</span>,k,n))%n;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
+    &#125;
+&#125;</code></pre></div>
+<h4 id="d1t2-火柴排队"><a class="markdownIt-Anchor" href="#d1t2-火柴排队"></a> D1T2 <a target="_blank" rel="noopener" href="https://vijos.org/p/1842">火柴排队</a></h4>
+<p>首先肯定是小对小，大对大，才能使那个式子最小，这一点可以交换一下然后做差说明。并且题目保证了高度互不相同，也就是给了两个排列，问最少交换相邻元素多少次，才能使两个排列一样，再转化一步，假设第一个排列就是1,2,3,…n，问第二个排列最少交换相邻元素几次才能变成1,2,3,…n，这就是逆序对的定义了。</p>
+<p>不知道如果不保证高度互不相同该怎么做orz</p>
+<p>当时这个题爆零了，一点也不会QAQ</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod=<span class="hljs-number">99999997</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
+
+<span class="hljs-keyword">int</span> a[N],b[N],h[N];
+<span class="hljs-keyword">int</span> c[N];
+<span class="hljs-keyword">int</span> n;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lowbit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> x&amp;(-x);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(;x&lt;=n;x+=lowbit(x))
+        ans+=c[x];
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">for</span>(;x;x-=lowbit(x))
+        c[x]+=y;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n)!=EOF)
+    &#123;
+        rep(i,<span class="hljs-number">1</span>,n) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a+i),h[i]=a[i];
+        sort(h+<span class="hljs-number">1</span>,h+n+<span class="hljs-number">1</span>);
+        rep(i,<span class="hljs-number">1</span>,n) a[i]=lower_bound(h+<span class="hljs-number">1</span>,h+n+<span class="hljs-number">1</span>,a[i])-h;
+        rep(i,<span class="hljs-number">1</span>,n) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,b+i),h[i]=b[i];
+        sort(h+<span class="hljs-number">1</span>,h+n+<span class="hljs-number">1</span>);
+        rep(i,<span class="hljs-number">1</span>,n) b[i]=lower_bound(h+<span class="hljs-number">1</span>,h+n+<span class="hljs-number">1</span>,b[i])-h;
+
+        rep(i,<span class="hljs-number">1</span>,n) h[a[i]]=i;
+        rep(i,<span class="hljs-number">1</span>,n) b[i]=h[b[i]],c[i]=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+        rep(i,<span class="hljs-number">1</span>,n)
+        &#123;
+            change(b[i],<span class="hljs-number">1</span>);
+            ans+=ask(b[i]+<span class="hljs-number">1</span>);
+            <span class="hljs-keyword">if</span>(ans&gt;=mod) ans-=mod;
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
+    &#125;
+&#125;</code></pre></div>
+<h4 id="d1t3-货车运输"><a class="markdownIt-Anchor" href="#d1t3-货车运输"></a> D1T3 <a target="_blank" rel="noopener" href="https://vijos.org/p/1843">货车运输</a></h4>
+<p>这个不难看出是最大生成树上倍增求路径边权最小值。要注意的是可能是一个森林，当时蠢的用tarjan判连通性了，强行增加码量。还好在赛前刚给别人讲过倍增，这题满分了。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> dow(i,l,r) for(int i=l;i&gt;=r;--i)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10010</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> M 50010</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">edge</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> x,y,c;
+&#125; t[M];
+<span class="hljs-keyword">int</span> n,m,q;
+<span class="hljs-keyword">int</span> fa[N];
+<span class="hljs-keyword">bool</span> root[N];
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> edge &amp;a,<span class="hljs-keyword">const</span> edge &amp;b)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> a.c&gt;b.c;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getfa</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> x==fa[x]?x:fa[x]=getfa(fa[x]);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    x=getfa(x);
+    y=getfa(y);
+    <span class="hljs-keyword">if</span>(x==y) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    fa[x]=y;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+&#125;
+<span class="hljs-keyword">namespace</span> TREE
+&#123;
+<span class="hljs-keyword">int</span> e,head[M&lt;&lt;<span class="hljs-number">1</span>],last[M&lt;&lt;<span class="hljs-number">1</span>],w[M&lt;&lt;<span class="hljs-number">1</span>],p[N];
+<span class="hljs-keyword">int</span> f[N][<span class="hljs-number">21</span>],g[N][<span class="hljs-number">21</span>];
+<span class="hljs-keyword">int</span> deep[N];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> c)</span></span>
+<span class="hljs-function"></span>&#123;
+    head[++e]=y;w[e]=c;
+    last[e]=p[x];
+    p[x]=e;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> pre,<span class="hljs-keyword">int</span> dep)</span></span>
+<span class="hljs-function"></span>&#123;
+    deep[x]=dep;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=p[x];j;j=last[j])
+    &#123;
+        <span class="hljs-keyword">int</span> y=head[j];
+        <span class="hljs-keyword">if</span>(y==pre) <span class="hljs-keyword">continue</span>;
+        f[y][<span class="hljs-number">0</span>]=x;
+        g[y][<span class="hljs-number">0</span>]=w[j];
+        rep(i,<span class="hljs-number">1</span>,<span class="hljs-number">20</span>)
+        &#123;
+            f[y][i]=f[f[y][i<span class="hljs-number">-1</span>]][i<span class="hljs-number">-1</span>];
+            g[y][i]=<span class="hljs-built_in">min</span>(g[y][i<span class="hljs-number">-1</span>],g[f[y][i<span class="hljs-number">-1</span>]][i<span class="hljs-number">-1</span>]);
+        &#125;
+        dfs(y,x,dep+<span class="hljs-number">1</span>);
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">askmax</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(deep[x]&gt;deep[y]) swap(x,y);
+    <span class="hljs-keyword">int</span> ans=INF;
+    dow(i,<span class="hljs-number">20</span>,<span class="hljs-number">0</span>)
+        <span class="hljs-keyword">if</span>(deep[f[y][i]]&gt;=deep[x])
+            ans=<span class="hljs-built_in">min</span>(ans,g[y][i]),y=f[y][i];
+    <span class="hljs-keyword">if</span>(x==y) <span class="hljs-keyword">return</span> ans;
+    dow(i,<span class="hljs-number">20</span>,<span class="hljs-number">0</span>)
+        <span class="hljs-keyword">if</span>(f[x][i]!=f[y][i])
+        &#123;
+            ans=<span class="hljs-built_in">min</span>(&#123;ans,g[x][i],g[y][i]&#125;);
+            x=f[x][i],y=f[y][i];
+        &#125;
+    ans=<span class="hljs-built_in">min</span>(&#123;ans,g[x][<span class="hljs-number">0</span>],g[y][<span class="hljs-number">0</span>]&#125;);
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+
+&#125;<span class="hljs-comment">//TREE</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);
+    rep(i,<span class="hljs-number">1</span>,m)
+    &#123;
+        <span class="hljs-keyword">int</span> x,y,c;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,&amp;x,&amp;y,&amp;c);
+        t[i]=edge&#123;x,y,c&#125;;
+    &#125;
+    sort(t+<span class="hljs-number">1</span>,t+m+<span class="hljs-number">1</span>,cmp);
+    rep(i,<span class="hljs-number">1</span>,n) fa[i]=i;
+    rep(i,<span class="hljs-number">1</span>,m)
+    &#123;
+        <span class="hljs-keyword">int</span> x=t[i].x;
+        <span class="hljs-keyword">int</span> y=t[i].y;
+        <span class="hljs-keyword">int</span> c=t[i].c;
+        <span class="hljs-keyword">if</span>(Union(x,y))
+        &#123;
+            TREE::add(x,y,c);
+            TREE::add(y,x,c);
+        &#125;
+    &#125;
+    rep(i,<span class="hljs-number">1</span>,n) root[getfa(i)]=<span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">memset</span>(TREE::g,INF,<span class="hljs-keyword">sizeof</span>(TREE::g));
+    rep(i,<span class="hljs-number">1</span>,n)
+        <span class="hljs-keyword">if</span>(root[i])
+            TREE::dfs(i,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;q);
+    <span class="hljs-keyword">while</span>(q--)
+    &#123;
+        <span class="hljs-keyword">int</span> x,y;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);
+        <span class="hljs-keyword">if</span>(getfa(x)!=getfa(y)) <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;-1&quot;</span>);
+        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,TREE::askmax(x,y));
+    &#125;
+&#125;</code></pre></div>
+<h4 id="d2t1-积木大赛"><a class="markdownIt-Anchor" href="#d2t1-积木大赛"></a> D2T1 <a target="_blank" rel="noopener" href="https://vijos.org/p/1844">积木大赛</a></h4>
+<p>可能太简单，这题没什么印象了</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
+<span class="hljs-keyword">int</span> n;
+<span class="hljs-keyword">int</span> h[N];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+    rep(i,<span class="hljs-number">1</span>,n)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,h+i);
+        ans+=<span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>,h[i]-h[i<span class="hljs-number">-1</span>]);
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
+&#125;</code></pre></div>
+<h4 id="d2t2-花匠"><a class="markdownIt-Anchor" href="#d2t2-花匠"></a> D2T2 <a target="_blank" rel="noopener" href="https://vijos.org/p/1845">花匠</a></h4>
+<p>当时从最长上升子序列的思路出发，然后推了推，写了个单调队列，具体怎么写的忘了，不过也是AC。实际上最简单的做法只需要扫一遍，求出拐点的个数，加2就是答案了。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
+<span class="hljs-keyword">int</span> n;
+<span class="hljs-keyword">int</span> a[N];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>;
+    rep(i,<span class="hljs-number">1</span>,n)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a+i);
+        <span class="hljs-keyword">if</span>(i==<span class="hljs-number">1</span>||a[i<span class="hljs-number">-1</span>]==a[i]) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span>(a[i<span class="hljs-number">-1</span>]&lt;a[i])
+        &#123;
+            <span class="hljs-keyword">if</span>(now==<span class="hljs-number">-1</span>) ++ans;
+            now=<span class="hljs-number">1</span>;
+        &#125;
+        <span class="hljs-keyword">if</span>(a[i<span class="hljs-number">-1</span>]&gt;a[i])
+        &#123;
+            <span class="hljs-keyword">if</span>(now==<span class="hljs-number">1</span>) ++ans;
+            now=<span class="hljs-number">-1</span>;
+        &#125;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans+<span class="hljs-number">2</span>);
+&#125;</code></pre></div>
+<h4 id="d2t3-华容道"><a class="markdownIt-Anchor" href="#d2t3-华容道"></a> D2T3 <a target="_blank" rel="noopener" href="https://vijos.org/p/1846">华容道</a></h4>
+<p>这题xjb搜，就得了5分…</p>
+<p>正确做法是bfs预处理，拆点，建图跑最短路。</p>
+<p>具体来说：可以观察到只有空白块位于指定块的四方向上，指定块才可以移动。本质上还有另外一种移动方式，就是指定块不动，空白块从它的上/下左/右中的一个移动到另一个。那么这样就可以bfs预处理了，状态也有了，(x,y,k)表示指定块在(x,y)，空白块在相邻的k方向上。spfa求最短路即可。</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> dx[]= &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>&#125;;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> dy[]= &#123;<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">31</span>*<span class="hljs-number">31</span>*<span class="hljs-number">4</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> M=<span class="hljs-number">4</span>*N;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span></span>
+<span class="hljs-class">&#123;</span>
+    <span class="hljs-keyword">int</span> x,y;
+&#125; q[<span class="hljs-number">32</span>*<span class="hljs-number">32</span>*<span class="hljs-number">4</span>];
+<span class="hljs-keyword">int</span> n,m,k;
+<span class="hljs-keyword">int</span> dis[<span class="hljs-number">32</span>][<span class="hljs-number">32</span>];
+<span class="hljs-keyword">int</span> can[<span class="hljs-number">32</span>][<span class="hljs-number">32</span>];
+
+<span class="hljs-keyword">int</span> e,head[M],last[M],w[M],p[N];
+<span class="hljs-keyword">bool</span> vis[N];
+<span class="hljs-keyword">int</span> dist[N];
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ok</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> x&gt;=<span class="hljs-number">0</span> &amp;&amp; x&lt;n &amp;&amp; y&gt;=<span class="hljs-number">0</span> &amp;&amp; y&lt;m &amp;&amp; can[x][y];
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sx,<span class="hljs-keyword">int</span> sy)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">memset</span>(dis,INF,<span class="hljs-keyword">sizeof</span>(dis));
+    dis[sx][sy]=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>,r=<span class="hljs-number">0</span>;
+    q[r++]=node&#123;sx,sy&#125;;
+    <span class="hljs-keyword">while</span>(l!=r)
+    &#123;
+        <span class="hljs-keyword">int</span> x=q[l].x;
+        <span class="hljs-keyword">int</span> y=q[l].y;
+        l++;
+        rep(i,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>)
+        &#123;
+            <span class="hljs-keyword">int</span> xx=x+dx[i];
+            <span class="hljs-keyword">int</span> yy=y+dy[i];
+            <span class="hljs-keyword">if</span>(ok(xx,yy) &amp;&amp; dis[xx][yy]==INF)
+            &#123;
+                dis[xx][yy]=dis[x][y]+<span class="hljs-number">1</span>;
+                q[r++]=node&#123;xx,yy&#125;;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> k)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> x*m*<span class="hljs-number">4</span>+y*<span class="hljs-number">4</span>+k;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> c)</span></span>
+<span class="hljs-function"></span>&#123;
+    head[++e]=y;
+    w[e]=c;
+    last[e]=p[x];
+    p[x]=e;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    rep(i,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>)
+    rep(j,<span class="hljs-number">0</span>,m<span class="hljs-number">-1</span>)
+    <span class="hljs-keyword">if</span>(ok(i,j))
+    &#123;
+        rep(k,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>)
+        &#123;
+            <span class="hljs-keyword">int</span> x=i+dx[k];
+            <span class="hljs-keyword">int</span> y=j+dy[k];
+            <span class="hljs-keyword">if</span>(!ok(x,y)) <span class="hljs-keyword">continue</span>;
+            can[i][j]=<span class="hljs-number">0</span>;
+            bfs(x,y);
+            can[i][j]=<span class="hljs-number">1</span>;
+            rep(h,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>) <span class="hljs-keyword">if</span>(h!=k)
+            &#123;
+                <span class="hljs-keyword">int</span> xx=i+dx[h];
+                <span class="hljs-keyword">int</span> yy=j+dy[h];
+                <span class="hljs-keyword">if</span>(ok(xx,yy) &amp;&amp; dis[xx][yy]!=INF)
+                    add(calc(i,j,k),calc(i,j,h),dis[xx][yy]);
+            &#125;
+            add(calc(i,j,k),calc(x,y,k^<span class="hljs-number">1</span>),<span class="hljs-number">1</span>);
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">spfa</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sx,<span class="hljs-keyword">int</span> sy)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; q;
+    <span class="hljs-built_in">memset</span>(vis,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(vis));
+    <span class="hljs-built_in">memset</span>(dist,INF,<span class="hljs-keyword">sizeof</span>(dist));
+    rep(i,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>)
+    <span class="hljs-keyword">if</span>(ok(sx+dx[i],sy+dy[i]) &amp;&amp; dis[sx+dx[i]][sy+dy[i]]!=INF)
+    &#123;
+        <span class="hljs-keyword">int</span> now=calc(sx,sy,i);
+        dist[now]=dis[sx+dx[i]][sy+dy[i]];
+        vis[now]=<span class="hljs-literal">true</span>;
+        q.push(now);
+    &#125;
+    <span class="hljs-keyword">while</span>(!q.empty())
+    &#123;
+        <span class="hljs-keyword">int</span> x=q.front();
+        q.pop();
+        vis[x]=<span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=p[x]; j; j=last[j])
+        &#123;
+            <span class="hljs-keyword">int</span> y=head[j];
+            <span class="hljs-keyword">if</span>(dist[y]&gt;dist[x]+w[j])
+            &#123;
+                dist[y]=dist[x]+w[j];
+                <span class="hljs-keyword">if</span>(!vis[y])
+                &#123;
+                    vis[y]=<span class="hljs-literal">true</span>;
+                    q.push(y);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">work</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> sx,<span class="hljs-keyword">int</span> sy,<span class="hljs-keyword">int</span> tx,<span class="hljs-keyword">int</span> ty)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span>(sx==tx &amp;&amp; sy==ty) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    can[sx][sy]=<span class="hljs-number">0</span>;
+    bfs(x,y);
+    can[sx][sy]=<span class="hljs-number">1</span>;
+    spfa(sx,sy);
+    <span class="hljs-keyword">int</span> ans=INF;
+    rep(i,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>) ans=<span class="hljs-built_in">min</span>(ans,dist[calc(tx,ty,i)]);
+    <span class="hljs-keyword">if</span>(ans==INF) ans=<span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;m,&amp;k);
+    rep(i,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>)
+    rep(j,<span class="hljs-number">0</span>,m<span class="hljs-number">-1</span>)
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;can[i][j]);
+    init();
+    <span class="hljs-keyword">while</span>(k--)
+    &#123;
+        <span class="hljs-keyword">int</span> x,y,sx,sy,tx,ty;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d%d%d&quot;</span>,&amp;x,&amp;y,&amp;sx,&amp;sy,&amp;tx,&amp;ty);
+        --x;--y;--sx;--sy;--tx;--ty;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,work(x,y,sx,sy,tx,ty));
+    &#125;
+&#125;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">3 4 2</span>
+<span class="hljs-comment">0 1 1 1</span>
+<span class="hljs-comment">0 1 1 0</span>
+<span class="hljs-comment">0 1 0 0</span>
+<span class="hljs-comment">3 2 1 2 2 2</span>
+<span class="hljs-comment">1 2 2 2 3 2</span>
+<span class="hljs-comment">*/</span></code></pre></div>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%A3%E8%A3%85%E9%A2%98%E8%A7%A3/">散装题解</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/noip/">noip</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/09/28/NOIP-2014/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">NOIP 2014</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/14/Dominator-Tree/">
+                        <span class="hidden-mobile">Dominator Tree</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'false' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2018/09/26/NOIP-2013/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '8FjWg1iogf2PRNRIFoLTj9lR-gzGzoHs'
+    var app_key = '2Twk1r9fmBnvsFveG9Ey5o6F'
+    var server_url = 'https://8fjwg1io.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "NOIP 2013&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.11.1/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

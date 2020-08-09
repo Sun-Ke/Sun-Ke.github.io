@@ -244,7 +244,7 @@
 <li>top数组表示每个点所在重链的顶端节点</li>
 <li>pos数组表示每个点按照重链优先dfs下的dfs序</li>
 </ul>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-keyword">int</span> deep[N],fa[N],num[N],son[N],top[N],pos[N];
+<pre><code class="hljs C++"><span class="hljs-keyword">int</span> deep[N],fa[N],num[N],son[N],top[N],pos[N];
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> pre,<span class="hljs-keyword">int</span> d)</span> </span>&#123;
     deep[x]=d;
     fa[x]=pre;
@@ -284,7 +284,7 @@
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-built_in">memset</span>(son,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(son));
     cnt=<span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
 
             </article>
             <hr>

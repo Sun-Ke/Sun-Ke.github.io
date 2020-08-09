@@ -257,7 +257,7 @@
 <p>要注意的一点就是在C<ins>中“\”需要转义，即“\d”在C</ins>中要写成“\\d”，诸如此类。</p>
 <p>下面用具体的代码介绍这三个函数</p>
 <p><strong>regex_match</strong> 判断一个正则表达式是否能匹配整个字符串</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;regex&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
@@ -289,9 +289,9 @@
 <span class="hljs-comment">string object with 3 matches</span>
 <span class="hljs-comment">range with 3 matches</span>
 <span class="hljs-comment">the matches were: [subject] [sub] [ject] </span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<span class="hljs-comment">*/</span></code></pre>
 <p><strong>regex_search</strong> 来查找第一个能匹配正则表达式的子串</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;regex&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
@@ -321,9 +321,9 @@
 <span class="hljs-comment">subject sub ject</span>
 <span class="hljs-comment">submarine sub marine</span>
 <span class="hljs-comment">subsequence sub sequence</span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<span class="hljs-comment">*/</span></code></pre>
 <p><strong>regex_replace</strong> 匹配并替换</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-comment">// regex_replace example</span>
+<pre><code class="hljs C++"><span class="hljs-comment">// regex_replace example</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;regex&gt;</span></span>
@@ -353,7 +353,7 @@
 <span class="hljs-comment">there is a sub-sequence in the string</span>
 <span class="hljs-comment">there is a sequence in the string</span>
 <span class="hljs-comment">sub and sequence</span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<span class="hljs-comment">*/</span></code></pre>
 <hr />
 <h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
 <p>基本的工具基本介绍完了，可以来切一些水题了！</p>
@@ -364,7 +364,7 @@
 <p>首先，这里的“.*”和正则表达式里介绍的概念不一样。因为“*”使用的条件是前一个字符确定。即“.*”不能匹配“ab”，但是可以匹配“aa”或“bbb”这样。</p>
 <p>这里用反向引用就好了，先将“.*”换成“(\w)\1*”即可。</p>
 <p>AC代码只有这么短</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-built_in">string</span> str1,str2;
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
@@ -380,22 +380,22 @@
         <span class="hljs-keyword">if</span>(regex_match(str1,reg)) <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;yes&quot;</span>);
         <span class="hljs-keyword">else</span> <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;no&quot;</span>);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="abbreviation"><a class="markdownIt-Anchor" href="#abbreviation"></a> Abbreviation</h4>
 <p>from <a target="_blank" rel="noopener" href="http://codeforces.com/gym/101190">2016-2017 ACM-ICPC Northeastern European Regional Contest (NEERC 16)</a></p>
 <p>题意：大概是给一段包含大小写字母和逗号句号的文本，要求缩写连续的大写字母开头的单词。当时这个模拟写的十分难受想死，结果题解上写了一句有队伍用正则表达式很快就A了这个题目。</p>
 <p>样例输入：</p>
-<div class="hljs"><pre><code class="hljs mercury">This <span class="hljs-keyword">is</span> ACM North Eastern European Regional Contest,
+<pre><code class="hljs mercury">This <span class="hljs-keyword">is</span> ACM North Eastern European Regional Contest,
 sponsored by International Business Machines.
 The. Best. Contest. Ever.
-A Great Opportunity for <span class="hljs-built_in">all</span> contestants.</code></pre></div>
+A Great Opportunity for <span class="hljs-built_in">all</span> contestants.</code></pre>
 <p>样例输出：</p>
-<div class="hljs"><pre><code class="hljs mercury">This <span class="hljs-keyword">is</span> ACM NEERC (North Eastern European Regional Contest),
+<pre><code class="hljs mercury">This <span class="hljs-keyword">is</span> ACM NEERC (North Eastern European Regional Contest),
 sponsored by IBM (International Business Machines).
 The. Best. Contest. Ever.
-A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.</code></pre></div>
+A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.</code></pre>
 <p>AC代码（赛后补的）：</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
 <span class="hljs-function"></span>&#123;
@@ -425,9 +425,9 @@ A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;ch:str) <span class="hljs-built_in">putchar</span>(ch);
         <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>赛中写的字符串模拟：</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-built_in">string</span> s;
 <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; vec;
@@ -515,7 +515,7 @@ A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.
         <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);
     &#125;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="命名规范问题"><a class="markdownIt-Anchor" href="#命名规范问题"></a> 命名规范问题</h4>
 <p>from <a target="_blank" rel="noopener" href="http://www.bnuoj.com/v3/contest_show.php?cid=9357">第十六届北京师范大学程序设计竞赛现场决赛</a></p>
 <p>题意：给一些变量名，将符合(题中描述的) 驼峰命名法规范的变<br />
@@ -523,7 +523,7 @@ A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.
 <p>好吧，这个题其实是我出的，标程用正则表达式，20行左右搞定。</p>
 <p>应该并不毒瘤吧，<s>看大家模拟的挺开心的</s>。</p>
 <p>代码：</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
 <span class="hljs-function"></span>&#123;
@@ -543,7 +543,7 @@ A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.
         <span class="hljs-keyword">if</span>(now[<span class="hljs-number">0</span>]==<span class="hljs-string">&#x27;_&#x27;</span>) now.erase(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
         <span class="hljs-built_in">cout</span>&lt;&lt;now&lt;&lt;<span class="hljs-built_in">endl</span>;
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 
             </article>
             <hr>

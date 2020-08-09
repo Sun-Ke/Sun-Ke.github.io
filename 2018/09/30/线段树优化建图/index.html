@@ -215,7 +215,7 @@
 <h3 id="bzoj-5017-snoi2017炸弹"><a class="markdownIt-Anchor" href="#bzoj-5017-snoi2017炸弹"></a> [bzoj 5017 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=5017">Snoi2017]炸弹</a></h3>
 <p>询问如果把第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个炸弹引爆，将引爆多少个炸弹。</p>
 <p>线段树优化建图，然后tarjan，答案是从<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>所在的SCC出发，能走到的SCC含有的原炸弹数之和。因为对于每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>都要询问，所以这里不能暴力，一个方法是在这个DAG的反图上拓扑序dp一下。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 2000010</span>
@@ -351,11 +351,11 @@ ll pos[N];
     &#125;
     ans%=mod;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h3 id="petrozavodsk-winter-2018-carnegie-mellon-u-contest-a-mines"><a class="markdownIt-Anchor" href="#petrozavodsk-winter-2018-carnegie-mellon-u-contest-a-mines"></a> Petrozavodsk Winter-2018. Carnegie Mellon U Contest A Mines</h3>
 <p>现在每个炸弹多了一个初始的引爆费用，因为连锁发生的爆炸是免费的。有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>次修改，每次修改一个炸弹的费用，对于每次修改都要查询当前要引爆所有炸弹的最小花费。</p>
 <p>前面的操作都一样，首先一个显然的想法是只要引爆DAG中所有入度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的SCC里的费用最小的炸弹。然后有个致命的问题是，入度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的SCC可能不含有原<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>号点，所以需要做拓扑排序删掉没用的点，之后对于每次询问用set维护即可。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NN 200010</span>
@@ -507,7 +507,7 @@ ll pos[N];
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
     &#125;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
             </article>
             <hr>
             <div>

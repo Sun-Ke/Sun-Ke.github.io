@@ -1,7 +1,7 @@
 html,
 body {
-  font-size: 18px;
-  font-family: Georgia, sans, serif;
+  font-size: 19px;
+  font-family: serif;
 }
 html,
 body,
@@ -621,7 +621,7 @@ sup > a::before,
 .markdown-body {
   font-size: 1rem;
   margin-bottom: 2rem;
-  font-family: Georgia, sans, serif;
+  font-family: serif;
   color: #2c3e50;
 }
 .markdown-body h1,

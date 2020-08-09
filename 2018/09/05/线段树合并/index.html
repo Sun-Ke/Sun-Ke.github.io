@@ -218,7 +218,7 @@
 </ul>
 <p>关于空间复杂度，普通版本是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>的。</p>
 <p>直接给出代码，merge操作十分简洁：</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
+<pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span>
 <span class="hljs-function"></span>&#123;
     ++sum[x=++tot];
     <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
@@ -233,12 +233,12 @@
     ls[x]=merge(ls[x],ls[y]);
     rs[x]=merge(rs[x],rs[y]);
     <span class="hljs-keyword">return</span> x;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
 <h4 id="1bzoj-2212-poi2011tree-rotations"><a class="markdownIt-Anchor" href="#1bzoj-2212-poi2011tree-rotations"></a> 1.[BZOJ 2212: <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2212">Poi2011]Tree Rotations</a></h4>
 <p>递归的给一颗二叉树，只有叶子有权值，对于每个非叶节点可以交换左右子树，使遍历后构成的序列逆序对最小。</p>
 <p>对于一个子树，逆序对来自三部分，一个完全在左子树，一个完全在右子树，还有就是跨越左右子树的逆序对，可以发现交换左右子树的操作只会改变跨越部分的贡献，这里可以在线段树合并过程中求出逆序对的个数。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 600010</span>
@@ -294,12 +294,12 @@ ll ans0,ans1,ans;
     solve(rt);
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="2bzoj-2733-hnoi2012永无乡"><a class="markdownIt-Anchor" href="#2bzoj-2733-hnoi2012永无乡"></a> 2.[BZOJ 2733: <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2733">HNOI2012]永无乡</a></h4>
 <p>每个元素有点权，支持合并两个集合，查询一个集合内第k小的元素。</p>
 <p>之前的做法是启发式合并+平衡树，每个元素最多插入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>次，插入一次<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，所以总的时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msup><mi>g</mi><mn>2</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog^{2}n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
 <p>用线段树合并就可以做到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>了，查询非常简单。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
 <span class="hljs-keyword">int</span> tot;
@@ -376,10 +376,10 @@ ll ans0,ans1,ans;
         <span class="hljs-keyword">else</span> Union(x,y);
     &#125;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="32018-南京网络赛-h-set"><a class="markdownIt-Anchor" href="#32018-南京网络赛-h-set"></a> 3.<a target="_blank" rel="noopener" href="https://nanti.jisuanke.com/t/30997">2018 南京网络赛 H set</a></h4>
 <p>首先这个题不是线段树，而是trie树，我们把每个数二进制从低位到高位插入trie，维护子树中插入的数的个数，合并类似线段树合并，修改操作比较巧妙，+1就相当于最低位+1，也就是最低位0变1，1变0，那么交换左右子树即可，进位的话就是进入（交换后）的左子树继续交换左右子树，递归下去。这样总的时间复杂度就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogC)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mclose">)</span></span></span></span>。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 600010</span>
 <span class="hljs-keyword">int</span> tot;
@@ -471,7 +471,7 @@ ll ans0,ans1,ans;
         &#125;
     &#125;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
             </article>
             <hr>
             <div>

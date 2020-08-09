@@ -219,26 +219,26 @@
 <p>Press <code>Shift</code> + <code>Return</code> to create a single line break. Most other markdown parsers will ignore single line breaks, so in order to make other markdown parsers recognize your line break, you can leave two spaces at the end of the line, or insert <code>&lt;br/&gt;</code>.</p>
 <h3 id="headers"><a class="markdownIt-Anchor" href="#headers"></a> Headers</h3>
 <p>Headers use 1-6 hash (<code>#</code>) characters at the start of the line, corresponding to header levels 1-6. For example:</p>
-<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-section"># This is an H1</span>
+<pre><code class="hljs markdown"><span class="hljs-section"># This is an H1</span>
 
 <span class="hljs-section">## This is an H2</span>
 
-<span class="hljs-section">###### This is an H6</span></code></pre></div>
+<span class="hljs-section">###### This is an H6</span></code></pre>
 <p>In Typora, input ‘#’s followed by title content, and press <code>Return</code> key will create a header.</p>
 <h3 id="blockquotes"><a class="markdownIt-Anchor" href="#blockquotes"></a> Blockquotes</h3>
 <p>Markdown uses email-style &gt; characters for block quoting. They are presented as:</p>
-<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-quote">&gt; This is a blockquote with two paragraphs. This is first paragraph.</span>
+<pre><code class="hljs markdown"><span class="hljs-quote">&gt; This is a blockquote with two paragraphs. This is first paragraph.</span>
 &gt;
 <span class="hljs-quote">&gt; This is second pragraph. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span>
 
 
 
-<span class="hljs-quote">&gt; This is another blockquote with one paragraph. There is three empty line to seperate two blockquote.</span></code></pre></div>
+<span class="hljs-quote">&gt; This is another blockquote with one paragraph. There is three empty line to seperate two blockquote.</span></code></pre>
 <p>In Typora, inputting ‘&gt;’ followed by your quote contents will generate a quote block. Typora will insert a proper ‘&gt;’ or line break for you. Nested block quotes (a block quote inside another block quote) by adding additional levels of ‘&gt;’.</p>
 <h3 id="lists"><a class="markdownIt-Anchor" href="#lists"></a> Lists</h3>
 <p>Input <code>* list item 1</code> will create an unordered list - the <code>*</code> symbol can be replace with <code>+</code> or <code>-</code>.</p>
 <p>Input <code>1. list item 1</code> will create an ordered list - their markdown source code is as follows:</p>
-<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-section">## un-ordered list</span>
+<pre><code class="hljs markdown"><span class="hljs-section">## un-ordered list</span>
 <span class="hljs-bullet">*</span>   Red
 <span class="hljs-bullet">*</span>   Green
 <span class="hljs-bullet">*</span>   Blue
@@ -246,30 +246,30 @@
 <span class="hljs-section">## ordered list</span>
 <span class="hljs-bullet">1.</span>  Red
 <span class="hljs-bullet">2.</span> 	Green
-<span class="hljs-bullet">3.</span>	Blue</code></pre></div>
+<span class="hljs-bullet">3.</span>	Blue</code></pre>
 <h3 id="task-list"><a class="markdownIt-Anchor" href="#task-list"></a> Task List</h3>
 <p>Task lists are lists with items marked as either [ ] or [x] (incomplete or complete). For example:</p>
-<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> [ ] a task list item
+<pre><code class="hljs markdown"><span class="hljs-bullet">-</span> [ ] a task list item
 <span class="hljs-bullet">-</span> [ ] list syntax required
 <span class="hljs-bullet">-</span> [ ] normal <span class="hljs-strong">**formatting**</span>, @mentions, #1234 refs
 <span class="hljs-bullet">-</span> [ ] incomplete
-<span class="hljs-bullet">-</span> [x] completed</code></pre></div>
+<span class="hljs-bullet">-</span> [x] completed</code></pre>
 <p>You can change the complete/incomplete state by clicking on the checkbox before the item.</p>
 <h3 id="fenced-code-blocks"><a class="markdownIt-Anchor" href="#fenced-code-blocks"></a> (Fenced) Code Blocks</h3>
 <p>Typora only supports fences in GitHub Flavored Markdown. Original code blocks in markdown are not supported.</p>
 <p>Using fences is easy: Input ``` and press <code>return</code>. Add an optional language identifier after ``` and we’ll run it through syntax highlighting:</p>
-<div class="hljs"><pre><code class="hljs markdown">Here&#x27;s an example:
-</code></pre></div>
+<pre><code class="hljs markdown">Here&#x27;s an example:
+</code></pre>
 <p>function test() {<br />
 console.log(“notice the blank line before this function?”);<br />
 }</p>
-<div class="hljs"><pre><code class="hljs vim">
+<pre><code class="hljs vim">
 <span class="hljs-keyword">syntax</span> highlightin<span class="hljs-variable">g:</span>
 ​```<span class="hljs-keyword">ruby</span>
 require <span class="hljs-string">&#x27;redcarpet&#x27;</span>
 markdown = Redcarpet.<span class="hljs-keyword">new</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)
-puts markdown.to_html</code></pre></div>
-<div class="hljs"><pre><code class="hljs latex">
+puts markdown.to_html</code></pre>
+<pre><code class="hljs latex">
 ### Math Blocks
 
 You can render *LaTeX* mathematical expressions using **MathJax**.
@@ -295,29 +295,29 @@ To add a mathematical expression, input `<span class="hljs-formula">$$` and pres
 <span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial X&#125;</span><span class="hljs-string">&#123;\partial u&#125;</span></span> &amp;  <span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial Y&#125;</span><span class="hljs-string">&#123;\partial u&#125;</span></span> &amp; 0 <span class="hljs-tag">\<span class="hljs-name">\</span></span></span>
 <span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial X&#125;</span><span class="hljs-string">&#123;\partial v&#125;</span></span> &amp;  <span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;\partial Y&#125;</span><span class="hljs-string">&#123;\partial v&#125;</span></span> &amp; 0 <span class="hljs-tag">\<span class="hljs-name">\</span></span></span>
 <span class="hljs-formula"><span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">&#123;vmatrix&#125;</span></span></span>
-<span class="hljs-formula">$$</span></code></pre></div>
+<span class="hljs-formula">$$</span></code></pre>
 <p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Math/">here</a>.</p>
 <h3 id="tables"><a class="markdownIt-Anchor" href="#tables"></a> Tables</h3>
 <p>Input <code>| First Header | Second Header |</code> and press the <code>return</code> key. This will create a table with two columns.</p>
 <p>After a table is created, putting focus on that table will open up a toolbar for the table where you can resize, align, or delete the table. You can also use the context menu to copy and add/delete individual columns/rows.</p>
 <p>The full syntax for tables is described below, but it is not necessary to know the full syntax in detail as the markdown source code for tables is generated automatically by Typora.</p>
 <p>In markdown source code, they look like:</p>
-<div class="hljs"><pre><code class="hljs markdown">| First Header  | Second Header |
+<pre><code class="hljs markdown">| First Header  | Second Header |
 | ------------- | ------------- |
 | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |</code></pre></div>
+| Content Cell  | Content Cell  |</code></pre>
 <p>You can also include inline Markdown such as links, bold, italics, or strikethrough in the table.</p>
 <p>Finally, by including colons (<code>:</code>) within the header row, you can define text in that column to be left-aligned, right-aligned, or center-aligned:</p>
-<div class="hljs"><pre><code class="hljs markdown">| Left-Aligned  | Center Aligned  | Right Aligned |
+<pre><code class="hljs markdown">| Left-Aligned  | Center Aligned  | Right Aligned |
 | :------------ |:---------------:| -----:|
 | col 3 is      | some wordy text | $1600 |
 | col 2 is      | centered        |   $12 |
-| zebra stripes | are neat        |    $1 |</code></pre></div>
+| zebra stripes | are neat        |    $1 |</code></pre>
 <p>A colon on the left-most side indicates a left-aligned column; a colon on the right-most side indicates a right-aligned column; a colon on both sides indicates a center-aligned column.</p>
 <h3 id="footnotes"><a class="markdownIt-Anchor" href="#footnotes"></a> Footnotes</h3>
-<div class="hljs"><pre><code class="hljs markdown">You can create footnotes like this[^footnote].
+<pre><code class="hljs markdown">You can create footnotes like this[^footnote].
 
-[<span class="hljs-symbol">^footnote</span>]: <span class="hljs-link">Here is the *text* of the **footnote**.</span></code></pre></div>
+[<span class="hljs-symbol">^footnote</span>]: <span class="hljs-link">Here is the *text* of the **footnote**.</span></code></pre>
 <p>will produce:</p>
 <p>You can create footnotes like this<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
 <p>Hover over the ‘footnote’ superscript to see content of the footnote.</p>
@@ -334,9 +334,9 @@ To add a mathematical expression, input `<span class="hljs-formula">$$` and pres
 <p>Markdown supports two styles of links: inline and reference.</p>
 <p>In both styles, the link text is delimited by [square brackets].</p>
 <p>To create an inline link, use a set of regular parentheses immediately after the link text’s closing square bracket. Inside the parentheses, put the URL where you want the link to point, along with an optional title for the link, surrounded in quotes. For example:</p>
-<div class="hljs"><pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>](<span class="hljs-link">http://example.com/ &quot;Title&quot;</span>) inline link.
+<pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>](<span class="hljs-link">http://example.com/ &quot;Title&quot;</span>) inline link.
 
-[<span class="hljs-string">This link</span>](<span class="hljs-link">http://example.net/</span>) has no title attribute.</code></pre></div>
+[<span class="hljs-string">This link</span>](<span class="hljs-link">http://example.net/</span>) has no title attribute.</code></pre>
 <p>will produce:</p>
 <p>This is <a target="_blank" rel="noopener" href="http://example.com/" title="Title">an example</a> inline link. (<code>&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot; title=&quot;Title&quot;&gt;</code>)</p>
 <p><a target="_blank" rel="noopener" href="http://example.net/">This link</a> has no title attribute. (<code>&lt;p&gt;&lt;a href=&quot;http://example.net/&quot;&gt;This link&lt;/a&gt; has no</code>)</p>
@@ -345,18 +345,18 @@ To add a mathematical expression, input `<span class="hljs-formula">$$` and pres
 <p>Command(on Windows: Ctrl) + Click <a href="#block-elements">This link</a> will jump to header <code>Block Elements</code>. To see how to write that, please move cursor or click that link with <code>⌘</code> key pressed to expand the element into markdown source.</p>
 <h4 id="reference-links"><a class="markdownIt-Anchor" href="#reference-links"></a> Reference Links</h4>
 <p>Reference-style links use a second set of square brackets, inside which you place a label of your choosing to identify the link:</p>
-<div class="hljs"><pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>][<span class="hljs-symbol">id</span>] reference-style link.
+<pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>][<span class="hljs-symbol">id</span>] reference-style link.
 
 Then, anywhere in the document, you define your link label on a line by itself like this:
 
-[<span class="hljs-symbol">id</span>]: <span class="hljs-link">http://example.com/  &quot;Optional Title Here&quot;</span></code></pre></div>
+[<span class="hljs-symbol">id</span>]: <span class="hljs-link">http://example.com/  &quot;Optional Title Here&quot;</span></code></pre>
 <p>In Typora, they will be rendered like so:</p>
 <p>This is <a target="_blank" rel="noopener" href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
 <p>The implicit link name shortcut allows you to omit the name of the link, in which case the link text itself is used as the name. Just use an empty set of square brackets — for example, to link the word “Google” to the <a target="_blank" rel="noopener" href="http://google.com">google.com</a> web site, you could simply write:</p>
-<div class="hljs"><pre><code class="hljs markdown">[<span class="hljs-string">Google</span>][<span class="hljs-symbol"></span>]
+<pre><code class="hljs markdown">[<span class="hljs-string">Google</span>][<span class="hljs-symbol"></span>]
 And then define the link:
 
-[<span class="hljs-symbol">Google</span>]: <span class="hljs-link">http://google.com/</span></code></pre></div>
+[<span class="hljs-symbol">Google</span>]: <span class="hljs-link">http://google.com/</span></code></pre>
 <p>In Typora, clicking the link will expand it for editing, and command+click will open the hyperlink in your web browser.</p>
 <h3 id="urls"><a class="markdownIt-Anchor" href="#urls"></a> URLs</h3>
 <p>Typora allows you to insert URLs as links, wrapped by <code>&lt;</code>brackets<code>&gt;</code>.</p>
@@ -364,17 +364,17 @@ And then define the link:
 <p>Typora will also automatically link standard URLs. e.g: <a target="_blank" rel="noopener" href="http://www.google.com">www.google.com</a>.</p>
 <h3 id="images"><a class="markdownIt-Anchor" href="#images"></a> Images</h3>
 <p>Images have similar syntax as links, but they require an additional <code>!</code> char before the start of the link. The syntax for inserting an image looks like this:</p>
-<div class="hljs"><pre><code class="hljs markdown">![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg</span>)
+<pre><code class="hljs markdown">![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg</span>)
 
-![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg &quot;Optional title&quot;</span>)</code></pre></div>
+![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg &quot;Optional title&quot;</span>)</code></pre>
 <p>You are able to use drag &amp; drop to insert an image from an image file or your web browser. You can modify the markdown source code by clicking on the image. A relative path will be used if the image that is added using drag &amp; drop is in same directory or sub-directory as the document you’re currently editing.</p>
 <p>If you’re using markdown for building websites, you may specify a URL prefix for the image preview on your local computer with property <code>typora-root-url</code> in YAML Front Matters. For example, input <code>typora-root-url:/User/Abner/Website/typora.io/</code> in YAML Front Matters, and then <code>![alt](/blog/img/test.png)</code> will be treated as <code>![alt](file:///User/Abner/Website/typora.io/blog/img/test.png)</code> in Typora.</p>
 <p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Images/">here</a>.</p>
 <h3 id="emphasis"><a class="markdownIt-Anchor" href="#emphasis"></a> Emphasis</h3>
 <p>Markdown treats asterisks (<code>*</code>) and underscores (<code>_</code>) as indicators of emphasis. Text wrapped with one <code>*</code> or <code>_</code> will be wrapped with an HTML <code>&lt;em&gt;</code> tag. E.g:</p>
-<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-emphasis">*single asterisks*</span>
+<pre><code class="hljs markdown"><span class="hljs-emphasis">*single asterisks*</span>
 
-<span class="hljs-emphasis">_single underscores_</span></code></pre></div>
+<span class="hljs-emphasis">_single underscores_</span></code></pre>
 <p>output:</p>
 <p><em>single asterisks</em></p>
 <p><em>single underscores</em></p>
@@ -384,20 +384,20 @@ And then define the link:
 <p>do_this_and_do_that_and_another_thing.</p>
 </blockquote>
 <p>To produce a literal asterisk or underscore at a position where it would otherwise be used as an emphasis delimiter, you can backslash escape it:</p>
-<div class="hljs"><pre><code class="hljs markdown">\<span class="hljs-emphasis">*this text is surrounded by literal asterisks\*</span></code></pre></div>
+<pre><code class="hljs markdown">\<span class="hljs-emphasis">*this text is surrounded by literal asterisks\*</span></code></pre>
 <p>Typora recommends using the <code>*</code> symbol.</p>
 <h3 id="strong"><a class="markdownIt-Anchor" href="#strong"></a> Strong</h3>
 <p>A double <code>*</code> or <code>_</code> will cause its enclosed contents to be wrapped with an HTML <code>&lt;strong&gt;</code> tag, e.g:</p>
-<div class="hljs"><pre><code class="hljs markdown"><span class="hljs-strong">**double asterisks**</span>
+<pre><code class="hljs markdown"><span class="hljs-strong">**double asterisks**</span>
 
-<span class="hljs-strong">__double underscores__</span></code></pre></div>
+<span class="hljs-strong">__double underscores__</span></code></pre>
 <p>output:</p>
 <p><strong>double asterisks</strong></p>
 <p><strong>double underscores</strong></p>
 <p>Typora recommends using the <code>**</code> symbol.</p>
 <h3 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h3>
 <p>To indicate an inline span of code, wrap it with backtick quotes (`). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:</p>
-<div class="hljs"><pre><code class="hljs markdown">Use the <span class="hljs-code">`printf()`</span> function.</code></pre></div>
+<pre><code class="hljs markdown">Use the <span class="hljs-code">`printf()`</span> function.</code></pre>
 <p>will produce:</p>
 <p>Use the <code>printf()</code> function.</p>
 <h3 id="strikethrough"><a class="markdownIt-Anchor" href="#strikethrough"></a> Strikethrough</h3>
@@ -423,10 +423,10 @@ And then define the link:
 <p>You can use HTML to style content what pure Markdown does not support. For example, use <code>&lt;span style=&quot;color:red&quot;&gt;this text is red&lt;/span&gt;</code> to add text with red color.</p>
 <h3 id="embed-contents"><a class="markdownIt-Anchor" href="#embed-contents"></a> Embed Contents</h3>
 <p>Some websites provide iframe-based embed code which you can also paste into Typora. For example:</p>
-<div class="hljs"><pre><code class="hljs Markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&#x27;265&#x27;</span> <span class="hljs-attr">scrolling</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Fancy Animated SVG Menu&#x27;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;http://codepen.io/jeangontijo/embed/OxVywj/?height=265&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2&#x27;</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">allowtransparency</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">allowfullscreen</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#x27;width: 100%;&#x27;</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></span></code></pre></div>
+<pre><code class="hljs Markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&#x27;265&#x27;</span> <span class="hljs-attr">scrolling</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Fancy Animated SVG Menu&#x27;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;http://codepen.io/jeangontijo/embed/OxVywj/?height=265&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2&#x27;</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">allowtransparency</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">allowfullscreen</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#x27;width: 100%;&#x27;</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></span></code></pre>
 <h3 id="video"><a class="markdownIt-Anchor" href="#video"></a> Video</h3>
 <p>You can use the <code>&lt;video&gt;</code> HTML tag to embed videos. For example:</p>
-<div class="hljs"><pre><code class="hljs Markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;xxx.mp4&quot;</span> /&gt;</span></span></code></pre></div>
+<pre><code class="hljs Markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;xxx.mp4&quot;</span> /&gt;</span></span></code></pre>
 <h3 id="other-html-support"><a class="markdownIt-Anchor" href="#other-html-support"></a> Other HTML Support</h3>
 <p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/HTML/">here</a>.</p>
 <hr class="footnotes-sep" />

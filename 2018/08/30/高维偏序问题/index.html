@@ -218,7 +218,7 @@
 <p>怎么理解这个分治套分治呢。假设属性为a,b,c，第一次分治的时候我们将区间[l,mid]的点标记成贡献点，[mid+1,r]的点标记成询问点，然后区间[l,r]按a属性排序，消去a的影响，这样问题就变成了有n次操作，每次要么插入一个点(b,c)，要么查询之前插入的点中有多少点在(b,c)左下方，这样问题就降了一维化成了三维偏序了。</p>
 <h4 id="3cogs-2580-hzoi-2015偏序-ii"><a class="markdownIt-Anchor" href="#3cogs-2580-hzoi-2015偏序-ii"></a> 3.[COGS 2580 <a target="_blank" rel="noopener" href="http://cogs.pro:8080/cogs/problem/problem.php?pid=2580">HZOI 2015]偏序 II</a></h4>
 <p>计数题，五维偏序，在上一题的基础上外面再套一次cdq分治，时间复杂度十分感人<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msup><mi>g</mi><mn>4</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog^{4}n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
@@ -322,10 +322,10 @@ ll ans;
         cdq1(<span class="hljs-number">1</span>,n);
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="4cogs-2639-hzoi-2015-偏序"><a class="markdownIt-Anchor" href="#4cogs-2639-hzoi-2015-偏序"></a> 4.[COGS 2639. <a target="_blank" rel="noopener" href="http://cogs.pro:8080/cogs/problem/problem.php?pid=2639">HZOI 2015] 偏序++</a></h4>
 <p>计数题，七维偏序。只能bitset了，每个元素开一个bitset表示哪些点比它小，一维一维的考虑，从小到大枚举值，然后对每个元素and一下就行了。时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>k</mi><msup><mi>n</mi><mn>2</mn></msup><mi mathvariant="normal">/</mi><mn>64</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(kn^2/64)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord">6</span><span class="mord">4</span><span class="mclose">)</span></span></span></span></p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">40005</span>;
@@ -345,14 +345,14 @@ ll ans;
     ll ans=<span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) ans+=bs[i].count();
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="5spoj-lis2-another-longest-increasing-subsequence-problem"><a class="markdownIt-Anchor" href="#5spoj-lis2-another-longest-increasing-subsequence-problem"></a> 5.<a target="_blank" rel="noopener" href="https://www.spoj.com/problems/LIS2/en/">SPOJ LIS2 Another Longest Increasing Subsequence Problem</a></h4>
 <p>求最优解，即最长上升子序列的长度，每个元素有两个属性。回忆一下一个属性的话，我们可以用树状数组求前缀最大值的方法优化dp的转移，再加一维就用cdq分治套一下就行了。</p>
 <p>与之前计数题不同的地方在于，计数题中贡献对询问的影响是独立的，没有先后顺序的问题，但是做这个dp的过程就必须是从前往后了，比如说序列1,2,3,4，如果用3去更新4的话，3的dp值就必须在之前就已经算出来是3。稍微改一下<strong>分治的顺序</strong>就可以了，先递归到[l,mid]，然后用左半区间更新右半区间的dp值，然后递归到右半区间。</p>
 <h4 id="62018-牛客网暑期acm多校训练营第九场longest-common-subsequence"><a class="markdownIt-Anchor" href="#62018-牛客网暑期acm多校训练营第九场longest-common-subsequence"></a> 6.<a target="_blank" rel="noopener" href="https://www.nowcoder.com/acm/contest/148/H">2018 牛客网暑期ACM多校训练营（第九场）Longest Common Subsequence</a></h4>
 <p>求四个序列的最长公共子序列，保证值范围1-n，前三个序列中每一种值出现次数不超过2次。</p>
 <p>先考虑四个序列都是排列的情况，假设对于值x来说pa[x],pb[x],pc[x],pd[x]在四个序列中的位置，那么最长公共子序列就转化成了求四维偏序的最长链。对于这个题目我们可以2的3次方枚举每个值的位置三元组，这样总点数就是8n的，还是求四维偏序的最长链。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">80005</span>;
@@ -477,7 +477,7 @@ ll ans;
 <span class="hljs-comment">(2,2,3)</span>
 <span class="hljs-comment">(3,4,4)</span>
 <span class="hljs-comment">(4,5,5)</span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<span class="hljs-comment">*/</span></code></pre>
             </article>
             <hr>
             <div>

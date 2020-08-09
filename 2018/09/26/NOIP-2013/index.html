@@ -213,7 +213,7 @@
 <p>题目链接 <a target="_blank" rel="noopener" href="https://vijos.org/p/category/2013">https://vijos.org/p/category/2013</a></p>
 <h4 id="d1t1-转圈游戏"><a class="markdownIt-Anchor" href="#d1t1-转圈游戏"></a> D1T1 <a target="_blank" rel="noopener" href="https://vijos.org/p/1841">转圈游戏</a></h4>
 <p>公式就<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>m</mi><mn>1</mn><msup><mn>0</mn><mi>k</mi></msup><mo stretchy="false">)</mo><mi mathvariant="normal">%</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">(x+m10^k)\%n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">%</span><span class="mord mathdefault">n</span></span></span></span>，现在一眼的事情当时想了很久orz</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">power</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">int</span> mod)</span></span>
 <span class="hljs-function"></span>&#123;
@@ -234,12 +234,12 @@
         <span class="hljs-keyword">int</span> ans=(x+<span class="hljs-number">1L</span>L*m*power(<span class="hljs-number">10</span>,k,n))%n;
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d1t2-火柴排队"><a class="markdownIt-Anchor" href="#d1t2-火柴排队"></a> D1T2 <a target="_blank" rel="noopener" href="https://vijos.org/p/1842">火柴排队</a></h4>
 <p>首先肯定是小对小，大对大，才能使那个式子最小，这一点可以交换一下然后做差说明。并且题目保证了高度互不相同，也就是给了两个排列，问最少交换相邻元素多少次，才能使两个排列一样，再转化一步，假设第一个排列就是1,2,3,…n，问第二个排列最少交换相邻元素几次才能变成1,2,3,…n，这就是逆序对的定义了。</p>
 <p>不知道如果不保证高度互不相同该怎么做orz</p>
 <p>当时这个题爆零了，一点也不会QAQ</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod=<span class="hljs-number">99999997</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
@@ -286,10 +286,10 @@
         &#125;
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d1t3-货车运输"><a class="markdownIt-Anchor" href="#d1t3-货车运输"></a> D1T3 <a target="_blank" rel="noopener" href="https://vijos.org/p/1843">货车运输</a></h4>
 <p>这个不难看出是最大生成树上倍增求路径边权最小值。要注意的是可能是一个森林，当时蠢的用tarjan判连通性了，强行增加码量。还好在赛前刚给别人讲过倍增，这题满分了。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> dow(i,l,r) for(int i=l;i&gt;=r;--i)</span>
@@ -403,10 +403,10 @@
         <span class="hljs-keyword">if</span>(getfa(x)!=getfa(y)) <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;-1&quot;</span>);
         <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,TREE::askmax(x,y));
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d2t1-积木大赛"><a class="markdownIt-Anchor" href="#d2t1-积木大赛"></a> D2T1 <a target="_blank" rel="noopener" href="https://vijos.org/p/1844">积木大赛</a></h4>
 <p>可能太简单，这题没什么印象了</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
@@ -422,10 +422,10 @@
         ans+=<span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>,h[i]-h[i<span class="hljs-number">-1</span>]);
     &#125;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d2t2-花匠"><a class="markdownIt-Anchor" href="#d2t2-花匠"></a> D2T2 <a target="_blank" rel="noopener" href="https://vijos.org/p/1845">花匠</a></h4>
 <p>当时从最长上升子序列的思路出发，然后推了推，写了个单调队列，具体怎么写的忘了，不过也是AC。实际上最简单的做法只需要扫一遍，求出拐点的个数，加2就是答案了。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100010</span>
@@ -452,12 +452,12 @@
         &#125;
     &#125;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans+<span class="hljs-number">2</span>);
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d2t3-华容道"><a class="markdownIt-Anchor" href="#d2t3-华容道"></a> D2T3 <a target="_blank" rel="noopener" href="https://vijos.org/p/1846">华容道</a></h4>
 <p>这题xjb搜，就得了5分…</p>
 <p>正确做法是bfs预处理，拆点，建图跑最短路。</p>
 <p>具体来说：可以观察到只有空白块位于指定块的四方向上，指定块才可以移动。本质上还有另外一种移动方式，就是指定块不动，空白块从它的上/下左/右中的一个移动到另一个。那么这样就可以bfs预处理了，状态也有了，(x,y,k)表示指定块在(x,y)，空白块在相邻的k方向上。spfa求最短路即可。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;
@@ -608,7 +608,7 @@
 <span class="hljs-comment">0 1 0 0</span>
 <span class="hljs-comment">3 2 1 2 2 2</span>
 <span class="hljs-comment">1 2 2 2 3 2</span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<span class="hljs-comment">*/</span></code></pre>
             </article>
             <hr>
             <div>

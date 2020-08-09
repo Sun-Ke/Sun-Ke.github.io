@@ -212,7 +212,7 @@
               <p>题目链接：<a target="_blank" rel="noopener" href="https://vijos.org/p/category/2014">https://vijos.org/p/category/2014</a></p>
 <h4 id="d1t1-生活大爆炸版-石头剪刀布"><a class="markdownIt-Anchor" href="#d1t1-生活大爆炸版-石头剪刀布"></a> D1T1 <a target="_blank" rel="noopener" href="https://vijos.org/p/1905">生活大爆炸版 石头剪刀布</a></h4>
 <p>没想到noip还会出纯模拟</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 205</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
@@ -234,10 +234,10 @@
         &#125;
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,ans1,ans2);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d1t2-联合权值"><a class="markdownIt-Anchor" href="#d1t2-联合权值"></a> D1T2 <a target="_blank" rel="noopener" href="https://vijos.org/p/1906">联合权值</a></h4>
 <p>dfs一下就统计出来了</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod=<span class="hljs-number">10007</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 200010</span>
@@ -303,10 +303,10 @@
         dfs(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,ans1,ans2);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d1t3-飞扬的小鸟"><a class="markdownIt-Anchor" href="#d1t3-飞扬的小鸟"></a> D1T3 <a target="_blank" rel="noopener" href="https://vijos.org/p/1907">飞扬的小鸟</a></h4>
 <p>这个dp有、东西，日常不会dp</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10010</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> M 1010</span>
@@ -379,10 +379,10 @@
         <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;0&quot;</span>);
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans2);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d2t1-无线网络发射器选址"><a class="markdownIt-Anchor" href="#d2t1-无线网络发射器选址"></a> D2T1 <a target="_blank" rel="noopener" href="https://vijos.org/p/1908">无线网络发射器选址</a></h4>
 <p>记前缀和，然后枚举</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
 <span class="hljs-keyword">int</span> n,d;
@@ -414,10 +414,10 @@
             <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(now==ans2) ++ans1;
         &#125;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,ans1,ans2);
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d2t2-寻找道路"><a class="markdownIt-Anchor" href="#d2t2-寻找道路"></a> D2T2 <a target="_blank" rel="noopener" href="https://vijos.org/p/1909">寻找道路</a></h4>
 <p>先在反图上从终点bfs，求出哪些点能到终点，然后从起点正着按题意bfs就好了</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10010</span>
@@ -483,10 +483,10 @@
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;x:redge[y])
             ok[x]=<span class="hljs-literal">false</span>;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,bfs(st,ed));
-&#125;</code></pre></div>
+&#125;</code></pre>
 <h4 id="d2t3-解方程"><a class="markdownIt-Anchor" href="#d2t3-解方程"></a> D2T3 <a target="_blank" rel="noopener" href="https://vijos.org/p/1910">解方程</a></h4>
 <p>直接解肯定没办法，只能枚举答案，然后随机素数取模验证。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rep(i,l,r) for(int i=l;i&lt;=r;++i)</span>
@@ -540,7 +540,7 @@
     &#125;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
     rep(i,<span class="hljs-number">1</span>,m) <span class="hljs-keyword">if</span>(ok[i]) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,i);
-&#125;</code></pre></div>
+&#125;</code></pre>
             </article>
             <hr>
             <div>

@@ -309,7 +309,7 @@
 <hr />
 <h3 id="五-代码实现"><a class="markdownIt-Anchor" href="#五-代码实现"></a> 五、代码实现</h3>
 <p>首先是手写复数类，也可以用std::complex<T>。</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Complex</span></span>
+<pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Complex</span></span>
 <span class="hljs-class">&#123;</span>
     <span class="hljs-keyword">double</span> x,y;
     Complex(<span class="hljs-keyword">double</span> x_=<span class="hljs-number">0</span>,<span class="hljs-keyword">double</span> y_=<span class="hljs-number">0</span>)
@@ -329,9 +329,9 @@
     &#123;
         <span class="hljs-keyword">return</span> Complex(x*t.x-y*t.y,x*t.y+y*t.x);
     &#125;
-&#125;;</code></pre></div>
+&#125;;</code></pre>
 <h4 id="递归实现"><a class="markdownIt-Anchor" href="#递归实现"></a> 递归实现</h4>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fft</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> n)</span></span>
+<pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fft</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> n)</span></span>
 <span class="hljs-function"></span>&#123;
     <span class="hljs-keyword">if</span>(n==<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span>;
     <span class="hljs-keyword">static</span> Complex c[MAXN];
@@ -352,7 +352,7 @@
         c[i+m]=a0[i]-w*a1[i];
     &#125;
     copy(c,c+n,y);
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>合并过程的推导：</p>
 <p>对于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>&lt;</mo><mi>n</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">0 \le k &lt; n/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mord">/</span><span class="mord">2</span></span></span></span></p>
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mi>y</mi><mi>k</mi></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>A</mi><mo stretchy="false">(</mo><msubsup><mi>ω</mi><mi>n</mi><mi>k</mi></msubsup><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msup><mi>A</mi><mrow><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></msup><mo stretchy="false">(</mo><msubsup><mi>ω</mi><mi>n</mi><mrow><mn>2</mn><mi>k</mi></mrow></msubsup><mo stretchy="false">)</mo><mo>+</mo><msubsup><mi>ω</mi><mi>n</mi><mi>k</mi></msubsup><msup><mi>A</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></msup><mo stretchy="false">(</mo><msubsup><mi>ω</mi><mi>n</mi><mrow><mn>2</mn><mi>k</mi></mrow></msubsup><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msup><mi>A</mi><mrow><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></msup><mo stretchy="false">(</mo><msubsup><mi>ω</mi><mrow><mi>n</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><mi>k</mi></msubsup><mo stretchy="false">)</mo><mo>+</mo><msubsup><mi>ω</mi><mi>n</mi><mi>k</mi></msubsup><msup><mi>A</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></msup><mo stretchy="false">(</mo><msubsup><mi>ω</mi><mrow><mi>n</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><mi>k</mi></msubsup><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msubsup><mi>y</mi><mi>k</mi><mrow><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></msubsup><mo>+</mo><msubsup><mi>ω</mi><mi>n</mi><mi>k</mi></msubsup><msubsup><mi>y</mi><mi>k</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></msubsup></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
@@ -381,7 +381,7 @@ y _k &amp; =A(\omega _{n}^{k}) \\\\
 <ol>
 <li>直接求出对应位置反转二进制位后的数，然后交换，时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
 </ol>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> len)</span></span>
+<pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> len)</span></span>
 <span class="hljs-function"></span>&#123;
     <span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>;
     <span class="hljs-keyword">while</span>((<span class="hljs-number">1</span>&lt;&lt;k)&lt;len) ++k;
@@ -393,11 +393,11 @@ y _k &amp; =A(\omega _{n}^{k}) \\\\
                 t|=<span class="hljs-number">1</span>&lt;&lt;(k-j<span class="hljs-number">-1</span>);
         <span class="hljs-keyword">if</span>(i&lt;t) swap(y[i],y[t]);
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <ol start="2">
 <li>从高位模拟二进制加一，用经典的摊还分析可以证明复杂度是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
 </ol>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> len)</span></span>
+<pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> len)</span></span>
 <span class="hljs-function"></span>&#123;
     <span class="hljs-keyword">int</span> i,j,k;
     <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>,j=len/<span class="hljs-number">2</span>;i&lt;len<span class="hljs-number">-1</span>;i++)
@@ -411,10 +411,10 @@ y _k &amp; =A(\omega _{n}^{k}) \\\\
         &#125;
         <span class="hljs-keyword">if</span>(j&lt;k) j+=k;
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>之后我们再考虑自底向上的合并，在之前的递归版本中，有一个<strong>公用子表达式</strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>ω</mi><mi>n</mi><mi>k</mi></msubsup><msubsup><mi>y</mi><mi>k</mi><mrow><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">\omega _{n}^{k}y_k^{[1]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461079999999999em;vertical-align:-0.30130799999999996em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-2.4530000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.398692em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">1</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.30130799999999996em;"><span></span></span></span></span></span></span></span></span></span>计算了两次，我们可以只计算一次乘积，存放在临时变量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>里，然后从<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>y</mi><mi>k</mi><mrow><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">y_k^{[0]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461079999999999em;vertical-align:-0.30130799999999996em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.398692em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">0</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.30130799999999996em;"><span></span></span></span></span></span></span></span></span></span>中增加或者减去<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>，这一系列操作称为一个<strong>蝴蝶操作</strong>。</p>
 <p>代码：</p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fft</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> len,<span class="hljs-keyword">int</span> on)</span></span>
+<pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fft</span><span class="hljs-params">(Complex y[],<span class="hljs-keyword">int</span> len,<span class="hljs-keyword">int</span> on)</span></span>
 <span class="hljs-function"></span>&#123;
     change(y,len);
     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> h=<span class="hljs-number">2</span>;h&lt;=len;h&lt;&lt;=<span class="hljs-number">1</span>)
@@ -436,13 +436,13 @@ y _k &amp; =A(\omega _{n}^{k}) \\\\
     <span class="hljs-keyword">if</span>(on==<span class="hljs-number">-1</span>)
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)
             y[i].x/=len;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>on取值1或-1，on为-1代表逆变换。</p>
 <p>实际上，预处理单位根代替每次旋转精度会更好。</p>
 <hr />
 <h3 id="六-模板"><a class="markdownIt-Anchor" href="#六-模板"></a> 六、模板</h3>
 <p><a target="_blank" rel="noopener" href="https://loj.ac/problem/108">多项式乘法</a></p>
-<div class="hljs"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> LL;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> PI=<span class="hljs-built_in">acos</span>(<span class="hljs-number">-1.0</span>);
@@ -538,7 +538,7 @@ y _k &amp; =A(\omega _{n}^{k}) \\\\
     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n+m<span class="hljs-number">-1</span>;++i)
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d%c&quot;</span>,(<span class="hljs-keyword">int</span>)(x1[i].x+<span class="hljs-number">0.5</span>),<span class="hljs-string">&quot; \n&quot;</span>[i==n+m<span class="hljs-number">-2</span>]);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <hr />
 <h3 id="七-结语"><a class="markdownIt-Anchor" href="#七-结语"></a> 七、结语</h3>
 <p>啊，终于弄完快速傅里叶变换了，撒花！</p>

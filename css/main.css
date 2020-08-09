@@ -1,7 +1,7 @@
 html,
 body {
-  font-size: 16px;
-  font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  font-size: 18px;
+  font-family: Georgia, sans, serif;
 }
 html,
 body,
@@ -621,7 +621,7 @@ sup > a::before,
 .markdown-body {
   font-size: 1rem;
   margin-bottom: 2rem;
-  font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  font-family: Georgia, sans, serif;
   color: #2c3e50;
 }
 .markdown-body h1,
@@ -655,7 +655,7 @@ sup > a::before,
   overflow: visible;
 }
 .markdown-body pre code {
-  font-size: 85%;
+  font-size: 95%;
   display: block;
   overflow-x: auto;
   padding: 0.5rem 0;

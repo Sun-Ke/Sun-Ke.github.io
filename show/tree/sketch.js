@@ -7,6 +7,7 @@ let saveJPG_button, run_button;
 let canvas,drawing;
 let number_radio,style_radio;
 let mp,rev;
+let number_dx = 0, number_dy = 0;
 function setup() {
     canvas = createCanvas(1280, 720);
     drawing = createGraphics(1280, 720);
@@ -27,14 +28,14 @@ function setup() {
     style_p = createP('style');
     style_p.position(10, 110-2);
     
-    inputbox = createElement('textarea','6\n1 2\n1 3\n2 4\n2 5\n3 6');
+    inputbox = createElement('textarea','6 3\n1 2\n1 3\n2 4\n2 5\n3 6');
     inputbox.attribute('rows','6');
     inputbox.attribute('cols','15');
-    scale_slider = createSlider(50, 300, 150);
+    scale_slider = createSlider(50, 720, 360);
     scale_slider.position(60, 10);
     scale_slider.style('width', '140px');
     
-    size_slider = createSlider(10, 80, 25);
+    size_slider = createSlider(10, 80, 45);
     size_slider.position(60, 40);
     size_slider.style('width', '140px');
     
@@ -62,15 +63,30 @@ function setup() {
     run_button.mousePressed(render);
     render();
 }
+function keyPressed(){
+    if (keyCode === LEFT_ARROW){
+        number_dx -= 0.2;
+    } else if(keyCode === RIGHT_ARROW){
+        number_dx += 0.2;
+    } else if(keyCode === UP_ARROW){
+        number_dy -= 0.2;
+    } else if(keyCode === DOWN_ARROW){
+        number_dy += 0.2;
+    }
+}
+
 function render(){
-    let alls = inputbox.value().split('\n');
+    let alls = inputbox.value().trim().split('\n');
     let cp = new Map();
-    let n = parseInt(alls[0]);
-    if(n != alls.length){
+    let firstline = alls[0].trim().split(/\s+/);
+    let n = parseInt(firstline[0]);
+    if(n != alls.length || firstline.length > 2){
         alert('input error!');
         return;
     }
     let tot = 0;
+    if (firstline.length == 2)
+        cp.set(firstline[1],tot++);
     for(let i = 1; i < n; i++){
         let line = alls[i].trim().split(/\s+/);
         if(2 != line.length){
@@ -120,8 +136,8 @@ function render(){
     for(let i = 1; i < n; i++){
         let line = alls[i].trim().split(/\s+/);
         let x = cp.get(line[0]), y = cp.get(line[1]);
-        edges[x].push(y);
         edges[y].push(x);
+        edges[x].push(y);
     }
     mp = cp; //need deep copy?
     rev = new Array(n);
@@ -136,9 +152,17 @@ function saveJPG(){
 }
 function draw() {
     drawing.background(0);
+    let type = style_radio.value();
     let space = space_slider.value();
-    tree = new Tree(edges,map(space,0,100,0,2*Math.PI));
-    let pos = [...tree.pos];
+    let scale = scale_slider.value();
+    let size = size_slider.value();
+    let number_on = number_radio.value();
+    if (type == 'radial') {
+        tree = new RadialTree(edges,map(space,0,100,0,2*Math.PI));
+    } else {
+        tree = new LayeredTree(edges,map(space,0,100,0.2,3.5), map(size,10,80,0.05,2.5));
+    }
+    let pos = [...tree.getPos()];
     let n = edges.length;
     let cx = 0, cy = 0;
     for(let i = 0 ; i < n; i++){
@@ -147,22 +171,29 @@ function draw() {
     }
     cx /= n;
     cy /= n;
-    let scale = scale_slider.value();
-    let size = size_slider.value();
-    let number_on = number_radio.value();
+    let x_min = Infinity, x_max = -Infinity, y_min = Infinity, y_max = -Infinity;
+    for(let i = 0 ; i < n; i++){
+        pos[i].x -= cx;
+        pos[i].y -= cy;
+        x_min = min(x_min, pos[i].x);
+        x_max = max(x_max, pos[i].x);
+        y_min = min(y_min, pos[i].y);
+        y_max = max(y_max, pos[i].y);
+    }
+    let ylen = y_max - y_min;
     for(let i = 0 ; i < n; i++){
         drawing.stroke(255);
         drawing.strokeWeight(3);
         drawing.noFill();
-        pos[i].x = (pos[i].x - cx) * scale + width / 2;
-        pos[i].y = (pos[i].y - cy) * scale + height / 2;
+        pos[i].x = map(pos[i].x, x_min, x_max, x_min / ylen * scale, x_max / ylen * scale) + width / 2;
+        pos[i].y = map(pos[i].y, y_min, y_max, y_min / ylen * scale, y_max / ylen * scale) + height / 2 + height / 10;
         drawing.circle(pos[i].x, pos[i].y, size);
         if('on' == number_on){
             drawing.textAlign(CENTER, CENTER);
             drawing.textSize(map(size,10,80,10,50));
             drawing.noStroke();
             drawing.fill(255);
-            drawing.text(rev[i], pos[i].x - 0.5, pos[i].y + 2.5);
+            drawing.text(rev[i], pos[i].x - 0.5 + number_dx, pos[i].y + 2.5 + number_dy);
         }     
     }
     for(let i = 0 ; i < n; i++){
@@ -184,30 +215,4 @@ function draw() {
         }
     }
     image(drawing,0,0);
-    /*
-    fill(255);
-    strokeWeight(1);
-    textSize(20);
-    text('scale', 10, 25);
-  
-    fill(255);
-    strokeWeight(1);
-    textSize(20);
-    text('size', 10, 55);
-    
-    fill(255);
-    strokeWeight(1);
-    textSize(20);
-    text('number', 10, 85);
-    
-    fill(255);
-    strokeWeight(1);
-    textSize(20);
-    text('on', 110, 85);
-    
-    fill(255);
-    strokeWeight(1);
-    textSize(20);
-    text('off', 140, 85);
-    */
 }

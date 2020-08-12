@@ -10,6 +10,7 @@ let mp,rev;
 let number_dx = 0, number_dy = 0;
 function setup() {
     canvas = createCanvas(1280, 720);
+    canvas.parent('sketch');
     drawing = createGraphics(1280, 720);
     drawing.clear();
     
@@ -28,9 +29,7 @@ function setup() {
     style_p = createP('style');
     style_p.position(10, 110-2);
     
-    inputbox = createElement('textarea','6 3\n1 2\n1 3\n2 4\n2 5\n3 6');
-    inputbox.attribute('rows','6');
-    inputbox.attribute('cols','15');
+    
     scale_slider = createSlider(50, 720, 360);
     scale_slider.position(60, 10);
     scale_slider.style('width', '140px');
@@ -59,8 +58,21 @@ function setup() {
     saveJPG_button.position(10, 160);
     saveJPG_button.mousePressed(saveJPG);
     
-    run_button = createButton('render')
+  
+    let title = createElement('h1','Tree Visualization');
+    let title2 = createElement('h3','Input n and root — the number of vertices in the tree and the root number (optional). Each of the next n-1 lines contains u and v, denoting an edge connecting vertex u and vertex v. Click \'render\' to see what it looks like. You must ensure that the input data forms a tree. Have fun!');
+    
+    inputbox = createElement('textarea','6 3\n1 2\n1 3\n2 4\n2 5\n3 6');
+    inputbox.attribute('rows','7');
+    inputbox.attribute('cols','15');
+    inputbox.style('font-size','2em');
+    
+    run_button = createButton('render');
+    run_button.style('width','87.28px');
+    run_button.style('height','33.6px');
+    run_button.style('font-size','21.3333px');
     run_button.mousePressed(render);
+  
     render();
 }
 function keyPressed(){
@@ -186,7 +198,7 @@ function draw() {
         drawing.strokeWeight(3);
         drawing.noFill();
         pos[i].x = map(pos[i].x, x_min, x_max, x_min / ylen * scale, x_max / ylen * scale) + width / 2;
-        pos[i].y = map(pos[i].y, y_min, y_max, y_min / ylen * scale, y_max / ylen * scale) + height / 2 + height / 10;
+        pos[i].y = map(pos[i].y, y_min, y_max, y_min / ylen * scale, y_max / ylen * scale) + height / 2 + height / 12;
         drawing.circle(pos[i].x, pos[i].y, size);
         if('on' == number_on){
             drawing.textAlign(CENTER, CENTER);

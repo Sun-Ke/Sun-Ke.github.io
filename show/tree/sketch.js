@@ -1,24 +1,143 @@
 let edges;
-let tree; 
-let node_size = 20;
-let slider;
+let tree;
+let scale_p, size_p, number_p, style_p, space_p;
+let scale_slider, size_slider, space_slider;
+let inputbox;
+let saveJPG_button, run_button;
+let canvas,drawing;
+let number_radio,style_radio;
+let mp,rev;
 function setup() {
-    createCanvas(640, 360);
-    slider = createSlider(50, 150, 100);
-    slider.position(10, 10);
-    slider.style('width', '80px');
-    edges = [
-        [1,2],
-        [],
-        [3,4],
-        [],
-        []
-    ];
+    canvas = createCanvas(1280, 720);
+    drawing = createGraphics(1280, 720);
+    drawing.clear();
+    
+    scale_p = createP('scale');
+    scale_p.position(10, -10-2);
+    
+    size_p = createP('size');
+    size_p.position(10, 20-2);
+    
+    space_p = createP('space');
+    space_p.position(10, 50-2);
+  
+    number_p = createP('number');
+    number_p.position(10, 80-2);
+    
+    style_p = createP('style');
+    style_p.position(10, 110-2);
+    
+    inputbox = createElement('textarea','6\n1 2\n1 3\n2 4\n2 5\n3 6');
+    inputbox.attribute('rows','6');
+    inputbox.attribute('cols','15');
+    scale_slider = createSlider(50, 300, 150);
+    scale_slider.position(60, 10);
+    scale_slider.style('width', '140px');
+    
+    size_slider = createSlider(10, 80, 25);
+    size_slider.position(60, 40);
+    size_slider.style('width', '140px');
+    
+    space_slider = createSlider(0, 100, 50);
+    space_slider.position(60, 70);
+    space_slider.style('width', '140px');
+    
+    number_radio = createRadio('number')
+    number_radio.position(90,100)
+    number_radio.option('on');
+    number_radio.option('off');
+    number_radio.selected('off');
+  
+    style_radio = createRadio('style')
+    style_radio.position(53,130)
+    style_radio.option('layered');
+    style_radio.option('radial');
+    style_radio.selected('radial');
+  
+    saveJPG_button = createButton('save as jpg')
+    saveJPG_button.position(10, 160);
+    saveJPG_button.mousePressed(saveJPG);
+    
+    run_button = createButton('render')
+    run_button.mousePressed(render);
+    render();
+}
+function render(){
+    let alls = inputbox.value().split('\n');
+    let cp = new Map();
+    let n = parseInt(alls[0]);
+    if(n != alls.length){
+        alert('input error!');
+        return;
+    }
+    let tot = 0;
+    for(let i = 1; i < n; i++){
+        let line = alls[i].trim().split(/\s+/);
+        if(2 != line.length){
+            alert('input error!');
+            return;
+        }
+        if(!cp.has(line[0])){
+            cp.set(line[0],tot++);
+        }
+        if(!cp.has(line[1])){
+            cp.set(line[1],tot++);
+        } 
+    }
+    if(tot != n){
+        alert('input error!');
+        return;
+    }
+    let fa = new Array(n);
+    for(let i = 0 ; i < n; i++){
+        fa[i] = i;
+    }
+    function getfa(x){
+        if(x == fa[x]) return x;
+        fa[x] = getfa(fa[x])
+        return fa[x];
+    }
+    function merge(x,y){
+        x = getfa(x);
+        y = getfa(y);
+        if(x == y){
+            return false;
+        }
+        fa[x] = y;
+        return true;
+    }
+    for(let i = 1; i < n; i++){
+        let line = alls[i].trim().split(/\s+/);
+        if(!merge(cp.get(line[0]),cp.get(line[1]))){
+            alert('input error!');
+            return;
+        }
+    }
+    edges = new Array(n);
+    for(let i = 0; i < n; i++){
+        edges[i] = [];
+    }
+    for(let i = 1; i < n; i++){
+        let line = alls[i].trim().split(/\s+/);
+        let x = cp.get(line[0]), y = cp.get(line[1]);
+        edges[x].push(y);
+        edges[y].push(x);
+    }
+    mp = cp; //need deep copy?
+    rev = new Array(n);
+    for(let [key,value] of mp){
+        rev[value] = key;
+    }
+    return;
 }
 
+function saveJPG(){
+    saveCanvas(drawing, 'tree', 'jpg');
+}
 function draw() {
-    background(0);
-    tree = new Tree(edges,2*Math.PI);
+    drawing.background(0);
+    let space = space_slider.value();
+    tree = new Tree(edges,map(space,0,100,0,2*Math.PI));
     let pos = [...tree.pos];
     let n = edges.length;
     let cx = 0, cy = 0;
@@ -28,30 +147,67 @@ function draw() {
     }
     cx /= n;
     cy /= n;
+    let scale = scale_slider.value();
+    let size = size_slider.value();
+    let number_on = number_radio.value();
     for(let i = 0 ; i < n; i++){
-        stroke(255);
-        strokeWeight(3);
-        noFill();
-        pos[i].x = (pos[i].x - cx) * slider.value() + windowWidth / 2;
-        pos[i].y = (pos[i].y - cy) * slider.value() + windowHeight / 4;
-        circle(pos[i].x, pos[i].y, node_size);
+        drawing.stroke(255);
+        drawing.strokeWeight(3);
+        drawing.noFill();
+        pos[i].x = (pos[i].x - cx) * scale + width / 2;
+        pos[i].y = (pos[i].y - cy) * scale + height / 2;
+        drawing.circle(pos[i].x, pos[i].y, size);
+        if('on' == number_on){
+            drawing.textAlign(CENTER, CENTER);
+            drawing.textSize(map(size,10,80,10,50));
+            drawing.noStroke();
+            drawing.fill(255);
+            drawing.text(rev[i], pos[i].x - 0.5, pos[i].y + 2.5);
+        }     
     }
     for(let i = 0 ; i < n; i++){
         for(let j of edges[i]){
             let vx = pos[j].x - pos[i].x;
             let vy = pos[j].y - pos[i].y;
             let vlen = Math.sqrt(vx**2+vy**2);
-            if(vlen < 2 * node_size)
+            if(vlen < size)
                 continue;
             vx /= vlen;
             vy /= vlen;
-            stroke(255);
-            strokeWeight(3);
-            line(pos[i].x + vx * node_size,
-                 pos[i].y + vy * node_size,
-                 pos[j].x - vx * node_size,
-                 pos[j].y - vy * node_size,
+            drawing.stroke(255);
+            drawing.strokeWeight(3);
+            drawing.line(pos[i].x + vx * (size/2 + 10),
+                 pos[i].y + vy * (size/2 + 10),
+                 pos[j].x - vx * (size/2 + 10),
+                 pos[j].y - vy * (size/2 + 10),
                 )
         }
     }
+    image(drawing,0,0);
+    /*
+    fill(255);
+    strokeWeight(1);
+    textSize(20);
+    text('scale', 10, 25);
+  
+    fill(255);
+    strokeWeight(1);
+    textSize(20);
+    text('size', 10, 55);
+    
+    fill(255);
+    strokeWeight(1);
+    textSize(20);
+    text('number', 10, 85);
+    
+    fill(255);
+    strokeWeight(1);
+    textSize(20);
+    text('on', 110, 85);
+    
+    fill(255);
+    strokeWeight(1);
+    textSize(20);
+    text('off', 140, 85);
+    */
 }

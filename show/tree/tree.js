@@ -1,5 +1,5 @@
 class Tree{
-    constructor(edges, scope = 2*Math.PI, space = 1){
+    constructor(edges, scope = 2*Math.PI, space = 0.8){
         this.edges = [...edges];
         this.scope = scope;
         this.space = space;
@@ -20,24 +20,29 @@ class Tree{
             };
         }
         
-        this.dfs_pre(0);
+        this.dfs_pre(0, -1);
         this.angle[0] = this.scope;
-        this.dfs(0);
+        this.dfs(0, -1);
     }
-    dfs_pre(u){
-        if(this.edges[u].length == 0){
-            this.leaves[u] +=1;
-            return;
-        }
+    dfs_pre(u, fa){
+        let sz = 0;
         for(const v of this.edges[u]){
-            this.dep[v] = this.dep[u] + 1
-            this.dfs_pre(v)
-            this.leaves[u] += this.leaves[v]
+            if(v == fa)
+                continue;
+            this.dep[v] = this.dep[u] + 1;
+            this.dfs_pre(v, u);
+            this.leaves[u] += this.leaves[v];
+            sz++;
+        }
+        if(sz == 0){
+            this.leaves[u] +=1;
         }
     }
-    dfs(u){
+    dfs(u, fa){
         var sum = this.alpha[u];
         for(const v of this.edges[u]){
+            if(v == fa)
+                continue;
             this.angle[v] = this.leaves[v] / this.leaves[0] * this.scope;
             this.alpha[v] = sum;
             let alpha_uv = this.alpha[v] + this.angle[v] / 2;
@@ -55,7 +60,7 @@ class Tree{
             this.pos[v].x = this.pos[u].x + l * Math.cos(alpha_uv);
             this.pos[v].y = this.pos[u].y + l * Math.sin(alpha_uv); 
             sum += this.angle[v];
-            this.dfs(v);
+            this.dfs(v, u);
         }
     }
 }

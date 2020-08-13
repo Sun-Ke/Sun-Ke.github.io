@@ -65,7 +65,7 @@ function setup() {
     inputbox = createElement('textarea','6 3\n1 2\n1 3\n2 4\n2 5\n3 6');
     inputbox.attribute('rows','7');
     inputbox.attribute('cols','15');
-    inputbox.style('font-size','2em');
+    inputbox.style('font-size','1.6em');
     
     run_button = createButton('render');
     run_button.style('width','87.28px');
@@ -192,13 +192,13 @@ function draw() {
         y_min = min(y_min, pos[i].y);
         y_max = max(y_max, pos[i].y);
     }
-    let ylen = y_max - y_min;
+    let ylen = y_max - y_min + x_max - x_min;
     for(let i = 0 ; i < n; i++){
         drawing.stroke(255);
         drawing.strokeWeight(3);
         drawing.noFill();
-        pos[i].x = map(pos[i].x, x_min, x_max, x_min / ylen * scale, x_max / ylen * scale) + width / 2;
-        pos[i].y = map(pos[i].y, y_min, y_max, y_min / ylen * scale, y_max / ylen * scale) + height / 2 + height / 12;
+        pos[i].x = ((x_max-x_min > 0.001)?map(pos[i].x, x_min, x_max, x_min / ylen * scale, x_max / ylen * scale): pos[i].x) + width / 2;
+        pos[i].y = ((y_max-y_min > 0.001)?map(pos[i].y, y_min, y_max, y_min / ylen * scale, y_max / ylen * scale): pos[i].y) + height / 2 + height / 12;
         drawing.circle(pos[i].x, pos[i].y, size);
         if('on' == number_on){
             drawing.textAlign(CENTER, CENTER);

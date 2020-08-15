@@ -1,7 +1,7 @@
 let graph;
 let canvas;
 let inputbox;
-let mp, rev;
+let n, edges, rev;
 let bright_p, size_p, space_p, number_p, color_p;
 let bright_slider, size_slider, space_slider, number_radio, color_radio;
 let scale_val = 1;
@@ -23,7 +23,7 @@ function setup(){
     color_p = createP('color');
     color_p.position(10, 110-2);
   
-    bright_slider = createSlider(0, 100, 100);
+    bright_slider = createSlider(0, 100, 75);
     bright_slider.position(60, 10);
     bright_slider.style('width', '140px');
     
@@ -74,23 +74,24 @@ function render(){
     let cp = new Map();
     let firstline = alls[0].trim().split(/\s+/);
     if (2 != firstline.length) {
-        alert('input error!');
+        alert('Input error!');
         return;
     }
-    let n = parseInt(firstline[0]), m = parseInt(firstline[1]);
+    n = parseInt(firstline[0]);
+    let m = parseInt(firstline[1]);
     if(isNaN(n) || isNaN(m) || n == 0) {
-        alert('input error!');
+        alert('Input error!');
         return;
     }
     let tot = 0;
     if(m != alls.length - 1){
-        alert('input error!');
+        alert('Input error!');
         return;
     }
     for(let i = 1; i <= m; i++){
         let line = alls[i].trim().split(/\s+/);
         if(2 != line.length){
-            alert('input error!');
+            alert('Input error!');
             return;
         }
         if(!cp.has(line[0])){
@@ -101,10 +102,10 @@ function render(){
         } 
     }
     if(tot > n){
-        alert('input error!');
+        alert('Input error!');
         return;
     }
-    let edges = new Array(n);
+    edges = new Array(n);
     for(let i = 0; i < n; i++){
         edges[i] = [];
     }
@@ -116,18 +117,14 @@ function render(){
         edges[y].push(x);
         edges[x].push(y);
     }
-    mp = cp;
     rev = new Array(n);
-    for(let [key,value] of mp){
+    for(let [key,value] of cp){
         rev[value] = key;
     }
     graph = new ForceDirectedGraph({
       'n': n,
       'edges': edges,
-      'ratio': 0.5,
-      'node_size': 50,
-      'symbol': rev,
-      'delta': 0.04
+      'symbol': rev
     })
     //some values in rev can be undefined
 }
@@ -192,13 +189,20 @@ function draw(){
     for(let radio of radios) {
         radio.style('color',color_radio.value());
     }
-  
     background(255-paint);
     graph.set_bright(map(bright_slider.value(),0,100,50,255));
     graph.set_size(map(size_slider.value(),0,100,0.5,100));
-    graph.set_ratio(map(space_slider.value(),0,100,0.04,20));
+    graph.set_ratio(map(space_slider.value(),0,100,3,40));
     graph.set_number_on('on' === number_radio.value())
     graph.set_scale_val(scale_val);
     graph.move();
-    graph.show(paint);
+    let ok = graph.show(paint);
+    if (!ok) {
+        alert('Oops, two particles collided!');
+        graph = new ForceDirectedGraph({
+          'n': n,
+          'edges': edges,
+          'symbol': rev,
+        })
+    }
 }

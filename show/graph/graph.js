@@ -96,7 +96,14 @@ class ForceDirectedGraph{
     }
     show(paint){
         let pos = this.get_real_pos();
-        
+        for(let i = 0; i < this.n; i++) {
+            if(isNaN(pos[i].x) || pos[i].x === Infinity || pos[i].x === -Infinity)
+                return false;
+            if(isNaN(pos[i].y) || pos[i].y === Infinity || pos[i].y === -Infinity)
+                return false;
+            if(abs(pos[i].x) > 1.0e+20 || abs(pos[i].y) > 1.0e+20) 
+                return false;
+        }
         for(let i = 0; i < this.n; i++) {  
             stroke(paint);
             strokeWeight(3);
@@ -125,6 +132,7 @@ class ForceDirectedGraph{
                 )
             }
         }
+        return true;
     }
     
     move(){

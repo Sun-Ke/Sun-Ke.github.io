@@ -10,7 +10,3 @@ p{
   color: white;
   font-size: large;
 }
-
-input[type="radio"]:checked + label {
-  color: white;
-}

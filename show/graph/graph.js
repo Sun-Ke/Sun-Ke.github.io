@@ -94,19 +94,19 @@ class ForceDirectedGraph{
     pull(node, dx, dy) {
         this.vel[node].add(createVector(dx, dy).mult(2 / this.scale_val));
     }
-    show(){
+    show(paint){
         let pos = this.get_real_pos();
         
         for(let i = 0; i < this.n; i++) {  
-            stroke(255);
+            stroke(paint);
             strokeWeight(3);
             noFill();
             circle(pos[i].x, pos[i].y, this.size);
-            if(this.number_on && typeof(this.symbol[i]) !== "undefined"){
+            if(this.number_on && typeof(this.symbol[i]) !== "undefined") {
                 textAlign(CENTER, CENTER);
                 textSize(map(this.size,10,80,10,50));
                 noStroke();
-                fill(255);
+                fill(paint);
                 text(this.symbol[i], pos[i].x - 0.5, pos[i].y + 2.5);
             }     
         }
@@ -115,13 +115,13 @@ class ForceDirectedGraph{
                 if (i > j)
                     continue;
             let vec = p5.Vector.sub(pos[j], pos[i]).normalize();
-            stroke(255,this.bright);
-            strokeWeight(3);
+            stroke(paint,this.bright);
+            strokeWeight(map(this.bright,0,255,2,3));
             noFill();
-            line(pos[i].x + vec.x * (this.size/2 + 10),
-                 pos[i].y + vec.y * (this.size/2 + 10),
-                 pos[j].x - vec.x * (this.size/2 + 10),
-                 pos[j].y - vec.y * (this.size/2 + 10),
+            line(pos[i].x + vec.x * (this.size/2 + 8),
+                 pos[i].y + vec.y * (this.size/2 + 8),
+                 pos[j].x - vec.x * (this.size/2 + 8),
+                 pos[j].y - vec.y * (this.size/2 + 8),
                 )
             }
         }

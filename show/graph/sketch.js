@@ -2,8 +2,8 @@ let graph;
 let canvas;
 let inputbox;
 let mp, rev;
-let bright_p, size_p, space_p, number_p;
-let bright_slider, size_slider, space_slider;
+let bright_p, size_p, space_p, number_p, color_p;
+let bright_slider, size_slider, space_slider, number_radio, color_radio;
 let scale_val = 1;
 function setup(){
     canvas = createCanvas(1280, 720);
@@ -19,12 +19,15 @@ function setup(){
   
     number_p = createP('number');
     number_p.position(10, 80-2);
-      
+    
+    color_p = createP('color');
+    color_p.position(10, 110-2);
+  
     bright_slider = createSlider(0, 100, 100);
     bright_slider.position(60, 10);
     bright_slider.style('width', '140px');
     
-    size_slider = createSlider(10, 80, 45);
+    size_slider = createSlider(0, 100, 50);
     size_slider.position(60, 40);
     size_slider.style('width', '140px');
     
@@ -38,8 +41,14 @@ function setup(){
     number_radio.option('off');
     number_radio.selected('off');
     
+    color_radio = createRadio('color');
+    color_radio.position(69.5,130)
+    color_radio.option('black');
+    color_radio.option('white');
+    color_radio.selected('white');
+  
     saveJPG_button = createButton('save as jpg')
-    saveJPG_button.position(10, 130);
+    saveJPG_button.position(10, 160);
     saveJPG_button.mousePressed(saveJPG);
   
     let title = createElement('h1','Graph Visualization');
@@ -162,7 +171,7 @@ function mouseDragged(event) {
 function keyTyped() {
     if (key == 'f' || key == 'F') {
         graph.set_delta(1);
-    } 
+    }
 }
 
 function keyReleased() {
@@ -173,12 +182,23 @@ function saveJPG(){
 }
 
 function draw(){
-    background(0);
+    let paint = ('white' == color_radio.value())? 255 : 0;
+    bright_p.style('color',color_radio.value());
+    size_p.style('color',color_radio.value());
+    space_p.style('color',color_radio.value());
+    number_p.style('color',color_radio.value());
+    color_p.style('color',color_radio.value());
+    radios = selectAll('input[type="radio"] + label');
+    for(let radio of radios) {
+        radio.style('color',color_radio.value());
+    }
+  
+    background(255-paint);
     graph.set_bright(map(bright_slider.value(),0,100,50,255));
-    graph.set_size(size_slider.value());
+    graph.set_size(map(size_slider.value(),0,100,0.5,100));
     graph.set_ratio(map(space_slider.value(),0,100,0.04,20));
     graph.set_number_on('on' === number_radio.value())
     graph.set_scale_val(scale_val);
     graph.move();
-    graph.show();
+    graph.show(paint);
 }

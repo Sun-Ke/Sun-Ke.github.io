@@ -10,23 +10,28 @@ class ForceDirectedGraph{
       number_on = false,
       symbol = undefined,
       delta = 0.04,
-      scale_val = 1
+      scale_val = 1,
+      dragc = 0.008,
+      bright = 255
     }={}){
         randomSeed(seed);
         this.L = 50;          // spring rest length
         this.kr = 6250;       // repulsive force constant
         this.ratio = ratio;    // to change the scale of the layout
-        this.n = n;
+        this.n = n;                  // number of vertices 
         this.edges = [...edges];
-        this.pos = new Array(n);
-        this.force = new Array(n);
-        this.vel = new Array(n);
-        this.size = node_size;
-        this.number_on = number_on;
-        this.symbol = symbol;
-        this.delta = delta;
-        this.scale_val = scale_val;
-      
+        this.pos = new Array(n);     // positions
+        this.force = new Array(n);   // temporary
+        this.vel = new Array(n);     // speed
+        this.size = node_size;       // circle diameter
+        this.number_on = number_on;  // number on or off
+        this.symbol = symbol;        
+        this.delta = delta;          // each time step
+        this.scale_val = scale_val;  
+        this.dragc = dragc;          // drag force constant
+        this.bright = bright;        // transparency
+        this.detX = 0;
+        this.detY = 0;
         for(let i = 0; i < n; i++) {
             this.pos[i] = createVector(random(-200,200), random(-200,200));
             this.force[i] = createVector(0, 0);
@@ -48,9 +53,17 @@ class ForceDirectedGraph{
     set_scale_val(scale_val){
         this.scale_val = scale_val;
     }
+    set_bright(bright){
+        this.bright = bright;
+    }
+    add_bias(dx, dy){
+        this.detX += dx;
+        this.detY += dy;
+    }
     get_real_pos(){
         let pos = new Array(this.n);
         let center = createVector(0, 0);
+        let bias = createVector(width / 2 + this.detX, height / 2 + this.detY);
         for(let i = 0; i < this.n; i++){
             pos[i] = this.pos[i].copy();
             center.add(pos[i]);
@@ -58,13 +71,31 @@ class ForceDirectedGraph{
         center.div(this.n);
         for(let i = 0; i< this.n; i++){
             pos[i].sub(center);
-            pos[i].mult(this.scale_val)
+            pos[i].mult(this.scale_val);
+            pos[i].add(bias);
         }
         return pos;
     }
+    locate_node(x, y) {
+        let pos = this.get_real_pos();
+        let now = createVector(x, y);
+        let mindis = Infinity , res = 0;
+        for(let i = 0 ; i < this.n; i++) {
+            let dis = p5.Vector.dist(pos[i], now);
+            if(dis < mindis) {
+                mindis = dis;
+                res = i;
+            }
+        }
+        if(mindis > this.size / 2 + 5) 
+            res = -1;
+        return res;
+    }
+    pull(node, dx, dy) {
+        this.vel[node].add(createVector(dx, dy).mult(2 / this.scale_val));
+    }
     show(){
         let pos = this.get_real_pos();
-        translate(width / 2, height / 2);
         
         for(let i = 0; i < this.n; i++) {  
             stroke(255);
@@ -84,7 +115,7 @@ class ForceDirectedGraph{
                 if (i > j)
                     continue;
             let vec = p5.Vector.sub(pos[j], pos[i]).normalize();
-            stroke(255);
+            stroke(255,this.bright);
             strokeWeight(3);
             noFill();
             line(pos[i].x + vec.x * (this.size/2 + 10),
@@ -108,11 +139,14 @@ class ForceDirectedGraph{
         for(let i = 0; i < n; i++) {
             let vec = pos[i].copy();
             let dis = vec.mag();
-            if (dis > eps) {
-                vec.normalize().mult(ks * (dis - L)).mult(-0.2); //to the center
-                force[i].x = vec.x;
-                force[i].y = vec.y;
-            }
+            dis = max(dis, eps);
+            vec.normalize().mult(ks * (dis - L)).mult(-0.2); //to the center
+            force[i] = vec.copy();
+            vec = vel[i].copy();
+            let v2 = vec.magSq();
+            vec.normalize();
+            vec.mult(- this.dragc * v2);
+            force[i].add(vec);
         }
         for(let i = 0; i < n; i++) {
             for(let j = i + 1; j < n; j++) {

@@ -2,14 +2,14 @@ let graph;
 let canvas;
 let inputbox;
 let mp, rev;
-let speed_p, size_p, space_p, number_p;
-let speed_slider, size_slider, space_slider;
+let bright_p, size_p, space_p, number_p;
+let bright_slider, size_slider, space_slider;
 let scale_val = 1;
 function setup(){
     canvas = createCanvas(1280, 720);
   
-    speed_p = createP('speed');
-    speed_p.position(10, -10-2);
+    bright_p = createP('bright');
+    bright_p.position(10, -10-2);
     
     size_p = createP('size');
     size_p.position(10, 20-2);
@@ -20,9 +20,9 @@ function setup(){
     number_p = createP('number');
     number_p.position(10, 80-2);
       
-    speed_slider = createSlider(0, 100, 50);
-    speed_slider.position(60, 10);
-    speed_slider.style('width', '140px');
+    bright_slider = createSlider(0, 100, 100);
+    bright_slider.position(60, 10);
+    bright_slider.style('width', '140px');
     
     size_slider = createSlider(10, 80, 45);
     size_slider.position(60, 40);
@@ -131,15 +131,52 @@ function mouseWheel(event) {
     return false;
 }
 
+let preX,preY;
+let drag_node = -1;
+
+function mousePressed() {
+    preX = mouseX;
+    preY = mouseY;
+    if(preX<222 && preY<222) {
+        preX = -1;
+        preY = -1;
+    } else {
+        drag_node = graph.locate_node(preX, preY);
+    }
+}
+function mouseReleased() {
+    drag_node = -1;
+}
+function mouseDragged(event) {
+    if(preX>=0 && preX<=width && preY>=0 && preY<=height) {
+        if(drag_node == -1) {
+            graph.add_bias(mouseX - preX, mouseY - preY);    
+        } else {
+            graph.pull(drag_node, mouseX - preX, mouseY - preY); 
+        }
+        preX = mouseX;
+        preY = mouseY;
+    }
+}
+
+function keyTyped() {
+    if (key == 'f' || key == 'F') {
+        graph.set_delta(1);
+    } 
+}
+
+function keyReleased() {
+    graph.set_delta(0.04);
+}
 function saveJPG(){
     saveCanvas(canvas, 'graph', 'jpg');
 }
 
 function draw(){
     background(0);
-    graph.set_delta(map(speed_slider.value(),0,100,0.0002,0.2));
+    graph.set_bright(map(bright_slider.value(),0,100,50,255));
     graph.set_size(size_slider.value());
-    graph.set_ratio(map(space_slider.value(),0,100,0.04,10));
+    graph.set_ratio(map(space_slider.value(),0,100,0.04,20));
     graph.set_number_on('on' === number_radio.value())
     graph.set_scale_val(scale_val);
     graph.move();

@@ -1,5 +1,5 @@
 let inc = 0.1;
-var scl = 10;
+var scl = 15;
 let cols, rows;
 let zoff = 0;
 

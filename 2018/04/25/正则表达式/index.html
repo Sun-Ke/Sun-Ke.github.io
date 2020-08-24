@@ -204,7 +204,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年4月19日 晚上
+                  本文最后更新于：2020年8月24日 下午
                 
               </p>
             
@@ -216,24 +216,24 @@
 <hr />
 <h3 id="常用的元字符"><a class="markdownIt-Anchor" href="#常用的元字符"></a> 常用的元字符</h3>
 <ol>
-<li>“.” 匹配除“\n”之外的任何单个字符。</li>
-<li>“^” 匹配输入字符串的开始位置，不匹配任何字符，要匹配“<sup>”字符本身，需使用“\</sup>”；同样的，“$”匹配输入字符串的结束位置。</li>
-<li>“[xyz]”字符集，匹配其中包含的任一字符。</li>
-<li>“|” 两个匹配条件逻辑或。</li>
-<li>“\w” 匹配字母或数字或下划线；“\W”匹配任意不是字母、数字、下划线的字符。</li>
-<li>“\d” 匹配任意一个数字；“\D”匹配任意非数字字符。</li>
-<li>“\s” 匹配任意的空白符，包括空格、制表符、换页符等空白字符的其中任意一个，与“[ \f\n\r\t\v]”等效；“\S” 匹配任意不是空白符的字符。</li>
-<li>“\b” 匹配一个单词边界；“\B” 匹配非单词边界。</li>
-<li>“*” 0次或多次匹配前面的字符或子表达式，“+” 1次或多次匹配前面的字符或子表达式，“?” 0次或1次匹配前面的字符或子表达式。</li>
-<li>“{n}” 正好匹配n次，“{n,}” 至少匹配n次，“{n,m}” 匹配n到m次。</li>
+<li><code>.</code> 匹配除 <code>\n</code> 之外的任何单个字符。</li>
+<li><code>^</code> 匹配输入字符串的开始位置，不匹配任何字符，要匹配 <code>^</code> 字符本身，需使用 <code>\^</code> ；同样的，<code>$</code> 匹配输入字符串的结束位置。</li>
+<li><code>[xyz]</code> 字符集，匹配其中包含的任一字符。</li>
+<li><code>|</code> 两个匹配条件逻辑或。</li>
+<li><code>\w</code> 匹配字母或数字或下划线；<code>\W</code> 匹配任意不是字母、数字、下划线的字符。</li>
+<li><code>\d</code> 匹配任意一个数字；<code>\D</code> 匹配任意非数字字符。</li>
+<li><code>\s</code> 匹配任意的空白符，包括空格、制表符、换页符等空白字符的其中任意一个，与<code>[ \f\n\r\t\v]</code> 等效；<code>\S</code> 匹配任意不是空白符的字符。</li>
+<li><code>\b</code> 匹配一个单词边界；<code>\B</code> 匹配非单词边界。</li>
+<li><code>*</code> 0次或多次匹配前面的字符或子表达式；<code>+</code> 1次或多次匹配前面的字符或子表达式；<code>?</code> 0次或1次匹配前面的字符或子表达式。</li>
+<li><code>&#123;n&#125;</code> 正好匹配n次，<code>&#123;n,&#125;</code> 至少匹配n次，<code>&#123;n,m&#125;</code> 匹配n到m次。</li>
 </ol>
 <p>举一些例子：</p>
-<p>“him|her”匹配“him”和“her”，也可写作“h(im|er)”</p>
-<p>“\bthe\b”匹配“in the war”中的“the”，但不匹配“other”中的“the”</p>
+<p><code>him|her</code> 匹配 <code>him</code> 和 <code>her</code>，也可写作 <code>h(im|er)</code></p>
+<p><code>\bthe\b</code> 匹配 <code>in the war</code> 中的 <code>the</code>，但不匹配 <code>other</code> 中的 <code>the</code></p>
 <hr />
 <h3 id="分组-捕获-反向引用"><a class="markdownIt-Anchor" href="#分组-捕获-反向引用"></a> <strong>分组、捕获、反向引用</strong></h3>
-<p>“( )” 可以将“(”和“)”之间的表达式定义为组，并且将匹配这个表达式的字符保存到一个临时区域。匹配后的各组按照左括号出现的顺序（？）分别存到\$1,\$2,\$3…中。</p>
-<p>比如“2018-04-25”，我们用“(\d{4})-(\d\d)-(\d\d)”去匹配，</p>
+<p><code>( )</code> 可以将 <code>(</code> 和 <code>)</code> 之间的表达式定义为组，并且将匹配这个表达式的字符保存到一个临时区域。匹配后的各组按照左括号出现的顺序分别存到 <code>$1,$2,$3...</code> 中。</p>
+<p>比如“2018-04-25”，我们用 <code>(\d&#123;4&#125;)-(\d\d)-(\d\d)</code> 去匹配，</p>
 <p>那么</p>
 <ul>
 <li>$1 = “2018”</li>
@@ -241,10 +241,10 @@
 <li>$3 = “25”</li>
 </ul>
 <p>如果想让某个括号里的内容不被捕获到，需要用到非捕获性分组</p>
-<p>比如“h(im|er)”，就要改为“h(?:im|er)”</p>
-<p>然后一个很重要的问题来了!如果想要匹配“看了看”、“研究研究”这样的重叠结构怎么办呢？</p>
-<p>这时候需要用到反向引用，用\1,\2,\3…表示</p>
-<p>上面的例子可以用“(…?)了?\1”去匹配。</p>
+<p>比如 <code>h(im|er)</code> ，就要改为 <code>h(?:im|er)</code></p>
+<p>然后一个很重要的问题来了，如果想要匹配 “看了看”、“研究研究” 这样的重叠结构怎么办呢？</p>
+<p>这时候需要用到反向引用，用 <code>\1,\2,\3...</code> 表示</p>
+<p>上面的例子可以用 <code>(..?)了?\1</code>去匹配。</p>
 <p>语法就先总结到这里，实际还有很多，估计是用不到了。</p>
 <hr />
 <h3 id="c11-regex"><a class="markdownIt-Anchor" href="#c11-regex"></a> <strong>C++11 regex</strong></h3>
@@ -254,7 +254,7 @@
 <p><strong>smatch</strong> match_results for string objects (class )</p>
 <p>以及三个函数</p>
 <p><strong>regex_match、regex_search、regex_replace</strong></p>
-<p>要注意的一点就是在C<ins>中“\”需要转义，即“\d”在C</ins>中要写成“\\d”，诸如此类。</p>
+<p>要注意的一点就是在C++ 中 <code>\</code> 需要转义，即 <code>\d</code> 在C++中要写成<code>\\d</code>，诸如此类。</p>
 <p>下面用具体的代码介绍这三个函数</p>
 <p><strong>regex_match</strong> 判断一个正则表达式是否能匹配整个字符串</p>
 <pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
@@ -359,11 +359,11 @@
 <p>基本的工具基本介绍完了，可以来切一些水题了！</p>
 <h4 id="two-strings"><a class="markdownIt-Anchor" href="#two-strings"></a> <a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=6170">Two strings</a></h4>
 <p>from <a target="_blank" rel="noopener" href="http://acm.bnu.edu.cn/v3/problem.php#searchstr=2017+Multi-University+Training+Contest+-+Team+9">2017 Multi-University Training Contest</a></p>
-<p>给两个字符串A、B，其中A只包含大小写字母，B只包含大小写字母和两个特殊符号“.”、“*”。</p>
-<p>“.”可以匹配任意字母，“*”表示前一个字符可以出现任意次。保证“*”不会在字符串开头，不会有两个连续的“*”。问A与B能否匹配。</p>
-<p>首先，这里的“.*”和正则表达式里介绍的概念不一样。因为“*”使用的条件是前一个字符确定。即“.*”不能匹配“ab”，但是可以匹配“aa”或“bbb”这样。</p>
-<p>这里用反向引用就好了，先将“.*”换成“(\w)\1*”即可。</p>
-<p>AC代码只有这么短</p>
+<p>给两个字符串A、B，其中A只包含大小写字母，B只包含大小写字母和两个特殊符号 <code>.</code> 、<code>\</code>。</p>
+<p><code>.</code> 可以匹配任意字母，<code>*</code>表示前一个字符可以出现任意次。保证 <code>*</code> 不会在字符串开头，不会有两个连续的 <code>*</code>。问 A 与 B 能否匹配。</p>
+<p>首先，这里的 <code>.*</code> 和正则表达式里介绍的概念不一样。因为 <code>*</code> 使用的条件是前一个字符确定。即<code>.*</code> 不能匹配 <code>ab</code>，但是可以匹配 <code>aa</code> 或 <code>bbb</code> 这样。</p>
+<p>这里用反向引用就好了，先将<code>.\*</code> 换成 <code>(\w)\1*</code> 即可。</p>
+<p>AC代码只有这么短：</p>
 <pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-built_in">string</span> str1,str2;
@@ -383,7 +383,7 @@
 &#125;</code></pre>
 <h4 id="abbreviation"><a class="markdownIt-Anchor" href="#abbreviation"></a> Abbreviation</h4>
 <p>from <a target="_blank" rel="noopener" href="http://codeforces.com/gym/101190">2016-2017 ACM-ICPC Northeastern European Regional Contest (NEERC 16)</a></p>
-<p>题意：大概是给一段包含大小写字母和逗号句号的文本，要求缩写连续的大写字母开头的单词。当时这个模拟写的十分难受想死，结果题解上写了一句有队伍用正则表达式很快就A了这个题目。</p>
+<p>题意：大概是给一段包含大小写字母和逗号句号的文本，要求缩写连续的大写字母开头的单词。当时这个模拟写的十分难受，结果题解上写了一句有队伍用正则表达式很快就A了这个题目。</p>
 <p>样例输入：</p>
 <pre><code class="hljs mercury">This <span class="hljs-keyword">is</span> ACM North Eastern European Regional Contest,
 sponsored by International Business Machines.
@@ -520,7 +520,7 @@ A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.
 <p>from <a target="_blank" rel="noopener" href="http://www.bnuoj.com/v3/contest_show.php?cid=9357">第十六届北京师范大学程序设计竞赛现场决赛</a></p>
 <p>题意：给一些变量名，将符合(题中描述的) 驼峰命名法规范的变<br />
 量名转换为下划线命名法。不符合的原样输出。</p>
-<p>好吧，这个题其实是我出的，标程用正则表达式，20行左右搞定。</p>
+<p>好吧，这个题其实是我出的，标程用正则表达式，20 行左右搞定。</p>
 <p>应该并不毒瘤吧，<s>看大家模拟的挺开心的</s>。</p>
 <p>代码：</p>
 <pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
@@ -574,9 +574,9 @@ A GO (Great Opportunity) for <span class="hljs-built_in">all</span> contestants.
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2018/04/25/%E4%B8%83%E5%BE%8B%20%E4%B8%89%E6%9C%88%E5%8D%81%E4%B8%83%E6%97%A5%E8%AE%B0%E9%9B%AA/">
+                      <a href="/2018/05/03/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">七绝·三月十七日记雪</span>
+                        <span class="hidden-mobile">莫队算法总结</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

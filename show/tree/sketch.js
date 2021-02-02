@@ -30,11 +30,11 @@ function setup() {
     style_p.position(10, 110-2);
     
     
-    scale_slider = createSlider(50, 720, 360);
+    scale_slider = createSlider(50, 720, 720);
     scale_slider.position(60, 10);
     scale_slider.style('width', '140px');
     
-    size_slider = createSlider(10, 80, 45);
+    size_slider = createSlider(10, 80, 35);
     size_slider.position(60, 40);
     size_slider.style('width', '140px');
     

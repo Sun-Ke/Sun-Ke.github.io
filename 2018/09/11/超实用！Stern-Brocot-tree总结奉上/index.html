@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head><!-- hexo injector head_begin start --><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js" integrity="sha512-EKW5YvKU3hpyyOcN6jQnAxO/L8gts+YdYV6Yymtl8pk9YlYFtqJgihORuRoBXK8/cOIlappdU6Ms8KdK6yBCgA==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css"><script src = "https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js"></script> <!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。 Stern-Brocot tree:   Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。 构造方法可以理解为：先在左边写上$\frac{0}{1}$，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超实用！Stern-Brocot tree总结奉上">
+<meta property="og:url" content="https://izard.space/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/index.html">
+<meta property="og:site_name" content="Forever you~">
+<meta property="og:description" content="关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。 Stern-Brocot tree:   Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。 构造方法可以理解为：先在左边写上$\frac{0}{1}$，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://izard.space/img/sbtree.png">
+<meta property="article:published_time" content="2018-09-11T13:07:00.000Z">
+<meta property="article:modified_time" content="2020-08-24T07:40:56.000Z">
+<meta property="article:author" content="forever_you">
+<meta property="article:tag" content="Stern-Brocot tree">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://izard.space/img/sbtree.png">
+  
+  
+  
+  <title>超实用！Stern-Brocot tree总结奉上 - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"izard.space","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Forever you~</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="超实用！Stern-Brocot tree总结奉上"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2018-09-11 21:07" pubdate>
+          2018年9月11日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">超实用！Stern-Brocot tree总结奉上</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stern%E2%80%93Brocot_tree">Wikipedia</a>以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。</p>
+<p>Stern-Brocot tree:</p>
+<center><img src="/img/sbtree.png" srcset="/img/loading.gif" lazyload width="80%"></center>
+
+<p>Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。</p>
+<p>构造方法可以理解为：先在左边写上$\frac{0}{1}$，右边写上$\frac{1}{0}$，代表零和正无穷，然后分子、分母分别相加，得到$\frac{1}{1}$，写在中间，之后每次把当前层复制到下一层，然后对于下一层相邻两个有理数之间还是分子分母分别相加，得到新的有理数，写在两者中间，重复这个操作就可以无限的写下去，进而得到所有的有理数。树形结构的获得见上图。</p>
+<p>记树中的一个节点$\frac{y}{x}$，它是由$\frac{L_m}{L_n},\frac{R_m}{R_n}$这两个数产生的，那么可以发现：</p>
+<p>1.$\frac{L_m}{L_n}$是位于左上方且离它最近的祖先，$\frac{R_m}{R_n}$是位于右上方且离它最近的祖先。</p>
+<p>2.$gcd(x,y)&#x3D;1$。</p>
+<p>3.$R_mL_n-L_mR_n&#x3D;1$。</p>
+<p>4.以$\frac{y}{x}$为根的子树中的所有数都落在区间$(\frac{L_m}{L_n},\frac{R_m}{R_n})$中</p>
+<p>找一个数$\frac{b}{a}$在树中的位置可以通过在树上二分，但如果一步一步走的话，时间复杂度关于a,b是线性的，比如找$\frac{1}{10^9}$，需要从根一直往左走$10^9-1$步。但是可以证明，在树上“拐弯”的次数是 $O(log)$ 的  ，可以与辗转相除法联系起来，详见<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PE411W7Ze">这个视频</a>。这样每次直走的步数我们可以列不等式$O(1)$求出，拐弯的过程递归下去就好了。也可以用具体数学书上的结论。</p>
+<h3 id="题目列表："><a href="#题目列表：" class="headerlink" title="题目列表："></a>题目列表：</h3><h4 id="1-Alice-Bob-Oranges-and-Apples"><a href="#1-Alice-Bob-Oranges-and-Apples" class="headerlink" title="1.Alice, Bob, Oranges and Apples"></a>1.<a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/586/E">Alice, Bob, Oranges and Apples</a></h4><p>题意：懒得叙述了，总之把在Stern-Brocot tree上走的过程抽象了一下，简化的题意就是给一个分数，输出从根到该点的路径。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    ll x,y;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>,&amp;x,&amp;y)!=EOF)&#123;<br>        <span class="hljs-keyword">if</span>(__gcd(x,y)&gt;<span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Impossible&quot;</span>);<br>            <span class="hljs-keyword">continue</span>;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(x!=y)&#123;<br>            <span class="hljs-keyword">if</span>(x&lt;y) &#123;<br>                ll t=(y<span class="hljs-number">-1</span>)/x;<br>                y-=t*x;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lldB&quot;</span>,t);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                ll t=(x<span class="hljs-number">-1</span>)/y;<br>                x-=t*y;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lldA&quot;</span>,t);<br>            &#125;<br>        &#125;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2017-CCPC-哈尔滨-Cow-s-Segment"><a href="#2-2017-CCPC-哈尔滨-Cow-s-Segment" class="headerlink" title="2. 2017 CCPC 哈尔滨 Cow`s Segment"></a>2. <a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=6238">2017 CCPC 哈尔滨 Cow`s Segment</a></h4><p>题意：给两个高精度浮点数$a,b$，求最小的正整数$x$使得区间$[ax,bx)$包含整数（注，原题面有误，真实的数据是左闭右开的）。</p>
+<p>思路：设$ax\le y&lt;bx$，即$a\le \frac{y}{x}&lt;b$，就按上面说的，在Stern-Brocot tree上二分，直到找到第一个符合条件的点，同时就是x的最小值。</p>
+<p>(Java写起来太长了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">import</span> java.math.*;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span><br>&#123;<br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> BigInteger one=BigInteger.ONE;<br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> BigInteger zero=BigInteger.ZERO;<br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> BigInteger base=BigInteger.valueOf(<span class="hljs-number">10</span>);<br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> LEN=<span class="hljs-number">300</span>;<br>    <span class="hljs-keyword">static</span> BigInteger ans;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> BigInteger <span class="hljs-title function_">trans</span><span class="hljs-params">(String s)</span>&#123;<br>        <span class="hljs-type">int</span> len=s.length();<br>        <span class="hljs-type">int</span> num=LEN,flag=<span class="hljs-number">0</span>;<br>        BigInteger ans=BigInteger.valueOf(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;++i)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(s.charAt(i)==<span class="hljs-string">&#x27;.&#x27;</span>) flag=<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> <br>            &#123;<br>                num-=flag;<br>                <span class="hljs-type">int</span> now=s.charAt(i)-<span class="hljs-string">&#x27;0&#x27;</span>;<br>                ans=ans.multiply(base).add(BigInteger.valueOf(now));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=num;++i)<br>            ans=ans.multiply(base);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(BigInteger a,BigInteger b,BigInteger c,BigInteger d,</span><br><span class="hljs-params">    		BigInteger la,BigInteger lb,BigInteger ra,BigInteger rb,</span><br><span class="hljs-params">    		BigInteger x,BigInteger y)</span><br>    &#123;<br>        BigInteger le=b.multiply(x).subtract(a.multiply(y));<br>        BigInteger ri=d.multiply(x).subtract(c.multiply(y));<br>        <span class="hljs-keyword">if</span>(le.compareTo(zero)&lt;=<span class="hljs-number">0</span> &amp;&amp; ri.compareTo(zero)&gt;<span class="hljs-number">0</span>)<br>        &#123;<br>            ans=x;<br>            <span class="hljs-keyword">return</span> ;<br>        &#125;<br>        BigInteger k,tem;<br>        <span class="hljs-keyword">if</span>(le.compareTo(zero)&gt;<span class="hljs-number">0</span>)<br>        &#123;<br>            tem=a.multiply(rb).subtract(b.multiply(ra));<br>            k=le.add(tem.subtract(one)).divide(tem);<br>            dfs(a,b,c,d,<br>            x.add(k.subtract(one).multiply(ra)),y.add(k.subtract(one).multiply(rb)),<br>            ra,rb,<br>            x.add(k.multiply(ra)),y.add(k.multiply(rb)));<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            ri=ri.negate();<br>            tem=d.multiply(la).subtract(c.multiply(lb));<br>            k=ri.divide(tem).add(one);<br>            dfs(a,b,c,d,<br>            la,lb,<br>            x.add(k.subtract(one).multiply(la)),y.add(k.subtract(one).multiply(lb)),<br>            x.add(k.multiply(la)),y.add(k.multiply(lb)));<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span><br>    &#123;<br>        Scanner cin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        BigInteger pow=base.pow(LEN);<br>        BigInteger a,b;<br>        <span class="hljs-type">int</span> T=cin.nextInt();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> cas=<span class="hljs-number">1</span>;cas&lt;=T;++cas)<br>        &#123;<br>            String s=cin.next(),t=cin.next();<br>            a=trans(s);<br>            b=trans(t);<br>            dfs(pow,a,pow,b,one,zero,zero,one,one,one);<br>            System.out.println(ans);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-Petrozavodsk-Winter-2018-AtCoder-Contest-C-Construct-Point"><a href="#3-Petrozavodsk-Winter-2018-AtCoder-Contest-C-Construct-Point" class="headerlink" title="3.Petrozavodsk Winter-2018. AtCoder Contest C Construct Point"></a>3.Petrozavodsk Winter-2018. AtCoder Contest C Construct Point</h4><p>题意：二维平面上给整点三角形的三个顶点坐标，判断三角形内部（不含边界）是否存在整点，如果有输出任意一个。</p>
+<p>思路：先考虑这么一个子问题，在直线$y&#x3D;\frac{b}{a}x$和$y&#x3D;\frac{d}{c}x$之间找一个整点，范围$0&lt;x\le D$，那么还是$\frac{b}{a}x &lt; y&lt;\frac{d}{c}x$，得到$\frac{b}{a}&lt;\frac{y}{x}&lt;\frac{d}{c}$，找到最小的x和D比较即可。对于任意三角形的话，通过分割，平移，对称的变换就能规约成上述子问题啦。</p>
+<p>代码略。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="category-chain-item">算法学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Stern-Brocot-tree/">#Stern-Brocot tree</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>超实用！Stern-Brocot tree总结奉上</div>
+      <div>https://izard.space/2018/09/11/超实用！Stern-Brocot-tree总结奉上/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>forever_you</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2018年9月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/09/12/Knapsack-and-Queries/" title="Knapsack and Queries">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Knapsack and Queries</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/05/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/" title="线段树合并">
+                        <span class="hidden-mobile">线段树合并</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script>pseudocode.renderClass("pseudocode");</script><!-- hexo injector body_end end --></body>
+</html>

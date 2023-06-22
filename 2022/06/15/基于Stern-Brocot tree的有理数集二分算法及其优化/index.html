@@ -1,0 +1,859 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head><!-- hexo injector head_begin start --><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js" integrity="sha512-EKW5YvKU3hpyyOcN6jQnAxO/L8gts+YdYV6Yymtl8pk9YlYFtqJgihORuRoBXK8/cOIlappdU6Ms8KdK6yBCgA==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css"><script src = "https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js"></script> <!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="0. 写在前面本文中用 Stern-Brocot tree 做有理数二分的 idea 来自q神，后来我独立证明了其时间复杂度为 $O(\log{N})$，遂作此文，并作为算法课期末小论文提交（大概2020年的时候）。不知道竞赛圈中有没有类似的内容，或许本文是首创？在阅读之前，可以先看一下我以往创作的相关文章和视频：  超实用！Stern-Brocot tree总结奉上  【算法】什么是Stern-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Stern-Brocot tree的有理数集二分算法及其优化">
+<meta property="og:url" content="https://izard.space/2022/06/15/%E5%9F%BA%E4%BA%8EStern-Brocot%20tree%E7%9A%84%E6%9C%89%E7%90%86%E6%95%B0%E9%9B%86%E4%BA%8C%E5%88%86%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="Forever you~">
+<meta property="og:description" content="0. 写在前面本文中用 Stern-Brocot tree 做有理数二分的 idea 来自q神，后来我独立证明了其时间复杂度为 $O(\log{N})$，遂作此文，并作为算法课期末小论文提交（大概2020年的时候）。不知道竞赛圈中有没有类似的内容，或许本文是首创？在阅读之前，可以先看一下我以往创作的相关文章和视频：  超实用！Stern-Brocot tree总结奉上  【算法】什么是Stern-">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://izard.space/img/sbtree.png">
+<meta property="article:published_time" content="2022-06-14T16:07:01.000Z">
+<meta property="article:modified_time" content="2023-06-21T19:07:56.569Z">
+<meta property="article:author" content="forever_you">
+<meta property="article:tag" content="Stern-Brocot tree">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://izard.space/img/sbtree.png">
+  
+  
+  
+  <title>基于Stern-Brocot tree的有理数集二分算法及其优化 - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"izard.space","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Forever you~</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="基于Stern-Brocot tree的有理数集二分算法及其优化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-15 00:07" pubdate>
+          2022年6月15日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于Stern-Brocot tree的有理数集二分算法及其优化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="0-写在前面"><a href="#0-写在前面" class="headerlink" title="0. 写在前面"></a>0. 写在前面</h2><p>本文中用 Stern-Brocot tree 做有理数二分的 idea 来自q神，后来我独立证明了其时间复杂度为 $O(\log{N})$，遂作此文，并作为算法课期末小论文提交（大概2020年的时候）。不知道竞赛圈中有没有类似的内容，或许本文是首创？在阅读之前，可以先看一下我以往创作的相关文章和视频：</p>
+<ul>
+<li><a href="https://izard.space/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/">超实用！Stern-Brocot tree总结奉上 </a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av90612371">【算法】什么是Stern-Brocot tree？香不香，味道还可以吗？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av91204693">【算法】这个算法明明使用二分却过分暴力！继续品尝Stern–Brocot tree</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av94352322">【算法】震惊！Stern–Brocot tree竟与辗转相除有关？</a></li>
+</ul>
+<p>另外本文可能有一些意识流的地方，写得并不严谨，请见谅。</p>
+<h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>二分法是算法研究中的一个极其重要的基础算法，或者说是一种重要的指导思想。比如，在有序数组中查找某一特定元素的位置或者判定其是否出现，或者数值分析中的求某一段单调函数的零点，又或者是在问题满足某种单调性时用二分枚举去代替暴力枚举，这样就将最优性问题转换成判定性问题，进而二分出最终答案。实际上，这类可以用二分算法解决的问题通常有一个相似的模型，然而对于解类型的不同，算法框架又稍有区别。一般来说，最常见的是在整数区间或实数区间上二分。然而对于某些问题，需要考虑的是在有理数集上二分，并将答案表示成最简分数的形式。这种情况下，二分更难实现，比如已知当前区间$\left[ \frac{a}{b},\frac{c}{d}\right]$，如何求解当前区间的“中点”，从而对区间进行“二分”？借助数学工具Stern-Brocot tree可以完成这一任务。</p>
+<p>Stern-Brocot tree是由德国数学家Moritz Stern和法国钟表匠Achille Brocot分别独立发现的。Stern-Brocot tree是一种展示所有正有理数的无限完全二叉树，其中树上节点与正有理数一一对应。它巧妙地将数论与数据结构联系在一起，构造过程十分优雅，且拥有众多神奇的性质。不仅如此，其与法里序列、连分数以及欧几里得算法等内容有着广泛而密切的联系。</p>
+<p>本文第二节归纳总结了二分问题的共同点和算法的基本框架，并依据解类型的不同阐述了其中的区别。最后引出本文所讨论的问题——在有理数集中二分。</p>
+<p>本文第三节重点介绍了Stern-Brocot tree的构造、性质以及相关证明。</p>
+<p>本文第四节引入了Stern-Brocot tree中独特的数系，并将构造过程中的线性变换用矩阵乘积的形式来表示。最后从矩阵形式入手，解释了其与求最大公约数的欧几里得算法的联系。</p>
+<p>本文第五节具体描述了在Stern-Brocot tree上实现对有理数集二分的算法，并逐步给出了优化。</p>
+<h2 id="2-二分算法"><a href="#2-二分算法" class="headerlink" title="2. 二分算法"></a>2. 二分算法</h2><p>考虑某问题在区间 $\left[ L,R \right]$ 中寻找答案 $a$。假设已知该问题在区间 $\left[L,a\right)$ 上有性质$P$，在$\left(a,R\right]$上不具有性质 $P$，且验证区间上任意一个点是否具有性质 $P$ 十分容易或者时间复杂度在可接受范围内，那么答案 $a$ 就可利用二分法求解。</p>
+<p>这里说的性质 $P$ 是一种形象的说法，也可以理解为我们能通过简单的计算或是另外的算法来较快地询问二分中点与答案的大小关系。而区间能根据是否含有性质 $P$ 分成前后两段通常是由某种单调性决定的。</p>
+<h3 id="2-1-整数集上的二分"><a href="#2-1-整数集上的二分" class="headerlink" title="2.1. 整数集上的二分"></a>2.1. 整数集上的二分</h3><p>当只考虑区间中的整点时，即二分的对象为一段连续的整数时，情况最简单。假设在 $a$ 点处具有性质 $P$，则伪代码如下所示：</p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{BinarySearchForInteger} 
+\begin{algorithmic}
+\PROCEDURE{BinarySearchForInteger}{$L,R$}
+\WHILE{$L\lt R$}
+    \STATE  $mid \gets \lceil (L+R)/2 \rceil$
+    \IF{\Call{HasProperty}{$mid$}} 
+        \STATE $L \gets mid$
+    \ELSE 
+        \STATE $R \gets mid-1$
+    \ENDIF
+\ENDWHILE
+\RETURN $L$
+\ENDPROCEDURE
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+
+<p>若在 $a$ 点处不具有性质 $P$，则在取整及加减一稍有区别，情况类似。</p>
+<p>假设每次验证的时间为 $O(1)$，由于搜索的区间长度 $n$ 每次会减少一半，所以二分的时间复杂度 $O(\log{n})$。举个例子，在有序数组 $A[1\dots n]$ 中二分查找某元素 $y$ 的位置，这里假设数组元素严格单调递增，且 $y$ 一定存在。那么初始区间即 $\left[1,n\right]$，代表下标。上述所说的性质 $P$ 在这里即为“该位置的数组元素小于等于 $y$”。</p>
+<h3 id="2-2-实数集上的二分"><a href="#2-2-实数集上的二分" class="headerlink" title="2.2. 实数集上的二分"></a>2.2. 实数集上的二分</h3><p>然而对于一些数值分析或是计算几何之类的问题来说，需要的答案 $a$ 往往是浮点数类型，是一定精度内的近似解，比如要求精确到小数点后六位，或者要求绝对误差限或相对误差限不超过一个设定好的且足够小的 $\epsilon$ 值。这样循环终止条件可以根据不同的精度需求自行设定。若初始区间长度为 $n$，则时间复杂度为 $O(\log{(n&#x2F;\epsilon)})$，所需精度越高，$\epsilon$ 就需要设定的越小，时间代价就越大。</p>
+<p>由于是浮点数，代码实现时则无需考虑 $a$ 点处是否也具有性质 $P$。</p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{BinarySearchForReal} 
+\begin{algorithmic}
+\Procedure{BinarySearchForReal}{$L,R$}
+\While{$R-L>eps$}
+\State  $mid \gets (L+R)/2$
+\If{\Call{HasProperty}{$mid$}} 
+\State $L \gets mid$
+\Else 
+\State $R \gets mid$
+\EndIf
+\EndWhile
+\Return $L$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<p>例如，求解 $f(x)&#x3D;x^2-2$ 在区间 $\left[0,2\right]$ 上的零点，性质 $P$ 则为“$f(x)&lt;0$”。</p>
+<h3 id="2-3-有理数集上的二分"><a href="#2-3-有理数集上的二分" class="headerlink" title="2.3. 有理数集上的二分"></a>2.3. 有理数集上的二分</h3><p>对于有理数的情况我们也可以抽象出类似的问题。考虑在有理数集 $Q_N&#x3D; \left{ \frac{p}{q}:p,q\in \left{ 1,2,\dots,N\right} \right}$ 上确定未知数 $\frac{x}{y}$ 。已知在 $(0,\frac{x}{y}]$ 上有性质 $P$，在 $(\frac{x}{y},+\infty)$ 上不具有性质 $P$，且可以用 $O(1)$ 的时间询问任一有理数 $\frac{p}{q}$ 是否具有性质 $P$，换句话说，可以很快判断出 $\frac{p}{q}$ 是否小于等于答案 $\frac{x}{y}$。目标就是用尽量少的询问次数确定 $\frac{x}{y}$。</p>
+<p>这样定义问题的好处是规定了分子分母的上界，那么只需考虑 $O(N^2)$ 个不同的有理数。定义这样的有理数集 $Q_N$ 也相当于规定了求解的精度要求，$N$ 越大代表精度越高。可以看到，有理数集上的二分问题比之前讨论过的整数集、实数集上的二分要难。</p>
+<p>一个典型应用是在直角坐标系第一象限上二分斜率大小。将斜率表示成最简分数的形式避免了浮点数计算带来的精度损失，从而方便处理一些整点相关的问题。该问题模型也可以用来做无理数的最佳有理逼近。</p>
+<h2 id="3-Stern-Brocot-tree"><a href="#3-Stern-Brocot-tree" class="headerlink" title="3. Stern-Brocot tree"></a>3. Stern-Brocot tree</h2><p>在解决有理数集上二分问题之前，先介绍一下Stern-Brocot tree。在本节中将给出Stern-Brocot tree的构造过程以及相关性质的证明。</p>
+<h3 id="3-1-Stern-Brocot-tree的构造"><a href="#3-1-Stern-Brocot-tree的构造" class="headerlink" title="3.1. Stern-Brocot tree的构造"></a>3.1. Stern-Brocot tree的构造</h3><p>首先定义两个分数的中位分数：</p>
+<blockquote>
+<p><strong>定义 1</strong>（中位分数）. 两个分数 $\frac{a}{c}$ 和 $\frac{b}{d}$ 的中位分数为 $\frac{a+b}{c+d}$。</p>
+</blockquote>
+<p>后面会看到在有理数集上二分时，我们会使用中位分数来作为每次二分的“中点”。</p>
+<p>有了中位分数的概念就可以开始构造Stern-Brocot tree了。我们先来构造树上每层的分数序列，构造从两个分数 $\frac{0}{1},\frac{1}{0}$ 出发，作为第 $0$ 层。第一个数是 $0$，而第二个数实际上并不是严格意义上的分数，这里将其看成无穷大即可。</p>
+<p>每次将相邻两分数的中位分数插在它们的中间，一层一层无限地计算下去，那么前几层就会得到：</p>
+<p>$$\frac{0}{1},\bm{\frac{1}{1}},\frac{1}{0}$$</p>
+<p>$$\frac{0}{1},\bm{\frac{1}{2}},\frac{1}{1},\bm{\frac{2}{1}},\frac{1}{0}$$</p>
+<p>$$\frac{0}{1},\bm{\frac{1}{3}},\frac{1}{2},\bm{\frac{2}{3}},\frac{1}{1},\bm{\frac{3}{2}},\frac{2}{1},\bm{\frac{3}{1}},\frac{1}{0}$$</p>
+<p>可以看到，第一次产生 $1$ 个新值，第二次产生 $2$ 个，第三次产生4个，再接下来会新得到8个值，以此类推。不难发现，一个在某层中新产生的分数会在下一层的计算中产生左右两个新的分数，那么让$\frac{1}{1}$为根，每层中的新值分别向下一层与其相邻的左右两个点连边，并作为其的两个孩子节点，这样就构造出了如图一所示的Stern-Brocot tree（实线连接的树）。假设某分数$\frac{a+c}{b+d}$由$\frac{a}{b}$和$\frac{c}{d}$构造得到，那么可以发现，$\frac{a}{b}$在树中是$\frac{a+c}{b+d}$节点从下往上看第一个小于其值的祖先节点，即它左上方最近的祖先。类似地，$\frac{c}{d}$是$\frac{a+c}{b+d}$右上方最近的祖先。</p>
+<p>事实上，Stern-Brocot tree不仅是一个无限完全二叉树，其也满足二叉搜索树的性质：每个点的权值大于等于左子树中任意一点的权值，并且小于等于右子树任意一点的权值。当然，等于的情况在这里并不会出现。若只考虑这个无限大的树的前 $k$ 层，对其做中序遍历，并将 $\frac{0}{1}$ 和 $\frac{1}{0}$ 分别添加在序列的头尾，那么就得到了我们之前构造的第 $k$ 层序列。</p>
+<center><img src="/img/sbtree.png" srcset="/img/loading.gif" lazyload width="90%"></center>
+
+<h3 id="3-2-Stern-Brocot-tree的性质"><a href="#3-2-Stern-Brocot-tree的性质" class="headerlink" title="3.2. Stern-Brocot tree的性质"></a>3.2. Stern-Brocot tree的性质</h3><p>为了说明Stern-Brocot tree能展示所有的正有理数且树上节点与正有理数一一对应，主要需证明以下三条性质：有序性、不可约性、所有正有理数的存在性。</p>
+<h4 id="3-2-1-有序性"><a href="#3-2-1-有序性" class="headerlink" title="3.2.1. 有序性"></a>3.2.1. 有序性</h4><blockquote>
+<p><strong>定理1.</strong> 若 $\frac{a}{c}&lt;\frac{b}{d}$ 且 $a,b,c,d\ge 0$，则 $\frac{a}{c}&lt;\frac{a+b}{c+d}&lt;\frac{b}{d}$。</p>
+</blockquote>
+<p>这条性质是说两分数的中位分数的大小严格介于它们中间，经过简单的移项通分即可证明，此处略去。因为第 $0$ 层的分数是升序排列的，因此每次将相邻两分数的中位分数写在中间不会破坏每层的有序性。</p>
+<h4 id="3-2-2-不可约性"><a href="#3-2-2-不可约性" class="headerlink" title="3.2.2. 不可约性"></a>3.2.2. 不可约性</h4><blockquote>
+<p><strong>定理2.</strong> 若$\frac{a}{b}$和$\frac{c}{d}$是构造过程中任意一层的相邻分数，那么就有$bc-ad&#x3D;1$。</p>
+</blockquote>
+<p><strong>证明.</strong> 初始第 $0$ 层是正确的，$1\times 1-0\times 0 &#x3D;1$。当插入中位分数后，序列变成了<br>$$\dots,\frac{a}{b},\frac{a+c}{b+d},\frac{c}{d},\dots$$</p>
+<p>需要检验的新情形是<br>$$<br>\begin{aligned}<br>  b(a+c) - a(b+d) &amp;&#x3D; 1 \<br>  c(b+d) - d(a+c) &amp;&#x3D; 1 .<br>\end{aligned}<br>$$<br>根据 $bc-ad&#x3D;1$ 不难证明其正确性。</p>
+<p>得到该性质之后，结合裴蜀定理，即关于未知数 $x$ 和 $y$ 的线性不定方程$Ax+By&#x3D;C$ 有整数解，当且仅当 $C$ 是 $gcd(A,B)$ 的倍数，可以推出 $gcd(a,b)&#x3D;gcd(c,d)&#x3D;1$，即构造出的任意分数都是最简分数。</p>
+<h4 id="3-2-3-所有正有理数的存在性"><a href="#3-2-3-所有正有理数的存在性" class="headerlink" title="3.2.3. 所有正有理数的存在性"></a>3.2.3. 所有正有理数的存在性</h4><p>根据有序性可以得知，一个分数在树中不会出现超过一次。更进一步，可以证明：</p>
+<blockquote>
+<p><strong>定理3.</strong> 任何满足 $gcd(x,y)&#x3D;1$ 的正有理数 $\frac{x}{y}$ 都能通过有限步构造得到。</p>
+</blockquote>
+<p><strong>证明.</strong> 一开始我们有</p>
+<p>$$\frac{a}{b}&#x3D;\frac{0}{1}&lt;\frac{x}{y}&lt;\frac{1}{0}&#x3D;\frac{c}{d}$$</p>
+<p>每次比较 $\frac{x}{y}$ 和 $\frac{a+c}{b+d}$，分为三种情况，并不断进行下去：</p>
+<ul>
+<li><p>$\frac{x}{y}&#x3D;\frac{a+c}{b+d}$，则构造出了 $\frac{x}{y}$；</p>
+</li>
+<li><p>$\frac{x}{y}&lt;\frac{a+c}{b+d}$，则令 $c\gets a+c$，$d\gets b+d$；</p>
+</li>
+<li><p>$\frac{x}{y}&gt;\frac{a+c}{b+d}$，则令 $a\gets a+c$，$b\gets b+d$</p>
+</li>
+</ul>
+<p>那么就有<br>$$<br>\begin{aligned}<br>           \frac{x}{y} - \frac{a}{b} &amp;&gt;0 \<br>        \frac{c}{d} - \frac{x}{y} &amp;&gt;0<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>        bx - ay &amp;\ge 1 \<br>        cy - dx &amp;\ge 1<br>\end{aligned}\tag{1,2}<br>$$</p>
+<p>(1)乘上 $c+d$，(2)乘上 $a+b$，然后两式相加得到<br>$$<br>\begin{aligned}<br>           (c+d)(bx - ay) + (a+b)(cy - dx) \ge a+b+c+d<br>\end{aligned} \tag{3}<br>$$<br>根据定理 2 化简可得<br>$$<br>\begin{aligned}<br>x+y \ge a+b+c+d<br>\end{aligned}\tag{3}<br>$$</p>
+<p>因为每一步中 $a,b,c,d$ 里至少有一个变量会变大，所以(3)式不会一直成立。也就是说，一定能在有限步内构造出 $\frac{x}{y}$。</p>
+<p>这样所有正有理数都会在树中出现且仅出现一次。实际上，这个证明过程本质就是在Stern-Brocot tree这个二叉搜索树上去二分地定位一个正有理数的位置，后文还会涉及到类似内容。</p>
+<h2 id="4-准备工作"><a href="#4-准备工作" class="headerlink" title="4. 准备工作"></a>4. 准备工作</h2><p>上一节证明了树上节点与正有理数是一一对应的，本节将引入Stern-Brocot tree独特的数系来具体阐明这个一一对应的关系。之后用矩阵的形式描述从根节点往下移动的过程中分子分母的变化。本节最后将揭示Stern-Brocot tree与求两个数最大公约数的欧几里得算法的联系，为第 $5$ 节给出的优化提供理论基础。</p>
+<h3 id="4-1-数系的引入"><a href="#4-1-数系的引入" class="headerlink" title="4.1. 数系的引入"></a>4.1. 数系的引入</h3><p>在上一小节中，我们已经知道了所有正有理数都会在树中的某个位置恰好出现一次。考虑用 L 或 R 表示从根走到某节点的路径时每次往左孩子还是右孩子走，那么这样一个由 L 和 R 组成的有限长度的字符串就唯一确定了树上的一个位置，也就唯一表示了一个正有理数。例如 LRL，表示从根 $\frac{1}{1}$ 往左走到 $\frac{1}{2}$，然后往右走走到 $\frac{2}{3}$，再往左到 $\frac{3}{5}$，所以 LRL 表示分数 $\frac{3}{5}$。特殊的，根节点 $\frac{1}{1}$ 对应一个空字符串，用字符 $I$ 表示。</p>
+<blockquote>
+<p><strong>定义2.</strong> 若 $S$ 是由 L 和 R 组成的字符串，$\frac{x}{y}$ 为Stern-Brocot tree上与 $S$ 对应的分数，则定义<br>$$<br>\begin{aligned}<br>       f(S) &#x3D; \frac{x}{y}<br>\end{aligned}<br>$$</p>
+</blockquote>
+<blockquote>
+<p><strong>定理4.</strong> 若 $f(S)&#x3D;\frac{x}{y}$，则字符串 $S$ 的长度不会超过 $x+y-2$。</p>
+</blockquote>
+<p>根据定理 3 证明中的(3)式即可证明。特殊地，当 $\frac{x}{y}$ 为 $\frac{1}{n}$ 或 $\frac{n}{1}$ 的形式时，$S$ 长度为 $n-1$，此时达到最长。这个性质说明直接按照定理 3 证明中的二分方法去定位 $\frac{x}{y}$ 的话，时间复杂度是线性的，需要发掘Stern-Brocot tree更多更加本质的特点，从而达到优化。</p>
+<h3 id="4-2-矩阵表示"><a href="#4-2-矩阵表示" class="headerlink" title="4.2 矩阵表示"></a>4.2 矩阵表示</h3><p>在 3.2.3 小节证明的二分过程中，我们维护了四个变量 $a,b,c,d$ 并做了一些线性的变换，本节中用 $2\times 2$ 矩阵来描述同样的过程。</p>
+<blockquote>
+<p><strong>定义3.</strong> 假设某分数 $\frac{a+c}{b+d}$ 由 $\frac{a}{b}$ 和 $\frac{c}{d}$ 构造得到，其中 $\frac{a}{b}$ 是它左上方最近的祖先，$\frac{c}{d}$ 是它右上方最近的祖先，且 $f(S)&#x3D;\frac{a+c}{b+d}$，定义矩阵：<br>$$<br>\begin{aligned}<br>       M(S)&#x3D;<br>       \begin{pmatrix}<br>       b &amp; d \<br>    a &amp; c<br>    \end{pmatrix}<br>\end{aligned}<br>$$</p>
+</blockquote>
+<p>注意，这里将祖先分数的分子放在了分母的下方，好处是根节点可以表示成一个单位矩阵，即<br>$$<br>\begin{aligned}<br>       M(I)&#x3D;<br>       \begin{pmatrix}<br>       1 &amp; 0 \<br>    0 &amp; 1<br>    \end{pmatrix}<br>\end{aligned}<br>$$<br>根的左右孩子 $\frac{1}{2}$ 和 $\frac{2}{1}$ 分别表示为<br>$$<br>\begin{aligned}<br>       M(L)&#x3D;<br>       \begin{pmatrix}<br>       1 &amp; 1 \<br>    0 &amp; 1<br>    \end{pmatrix},,<br>    M(R)&#x3D;<br>    \begin{pmatrix}<br>    1 &amp; 0 \<br>    1 &amp; 1<br>    \end{pmatrix}<br>\end{aligned}<br>$$<br>考虑证明 3.2.2 二分的后两种情况，即走到 $\frac{a+c}{b+d}$ 的左右孩子<br>$$<br>\begin{aligned}<br>       M(SL)&#x3D;<br>       \begin{pmatrix}<br>       b &amp; b+d \<br>    a &amp; a+c<br>    \end{pmatrix},,<br>    M(SR)&#x3D;<br>    \begin{pmatrix}<br>    b+d &amp; d \<br>    a+c &amp; c<br>    \end{pmatrix}<br>\end{aligned}<br>$$<br>不难发现<br>$$<br>\begin{aligned}<br>       M(SL) &amp; &#x3D;<br>       \begin{pmatrix}<br>       b &amp; b+d \<br>    a &amp; a+c<br>    \end{pmatrix}&#x3D;<br>    \begin{pmatrix}<br>       	b &amp; d \<br>        a &amp; c<br>    \end{pmatrix}<br>    \begin{pmatrix}<br>       	1 &amp; 1 \<br>        0 &amp; 1<br>    \end{pmatrix}<br>     \<br>    M(SR) &amp; &#x3D;<br>    \begin{pmatrix}<br>    b+d &amp; d \<br>    a+c &amp; c<br>    \end{pmatrix} &#x3D;<br>    \begin{pmatrix}<br>    b &amp; d \<br>    a &amp; c<br>    \end{pmatrix}<br>    \begin{pmatrix}<br>        1 &amp; 0 \<br>        1 &amp; 1<br>    \end{pmatrix}<br>\end{aligned}<br>$$<br>一般地，下述定理成立</p>
+<blockquote>
+<p><strong>定理5.</strong> 设 $S,T$ 是两个由 L 和 R 组成的字符串，则<br>$$<br>\begin{aligned}<br>       M(ST)&#x3D;M(S)M(T)<br>\end{aligned}<br>$$</p>
+</blockquote>
+<p>因此我们可以将 LR 字符串代表的路径写成一系列 $M(L)$ 和 $M(R)$ 矩阵连乘的结果。</p>
+<h3 id="4-3-欧几里德算法"><a href="#4-3-欧几里德算法" class="headerlink" title="4.3. 欧几里德算法"></a>4.3. 欧几里德算法</h3><p>考虑简化上述二分方法，若已知分数 $\frac{x}{y}$，对应的矩阵表示为$\begin{pmatrix} b &amp; d \ a &amp; c \end{pmatrix}$，那么有 $x&#x3D;a+c$ 和 $y&#x3D;b+d$。假设 $x&gt;y$，那么对应在树上的路径第一步必为 R，设剩余路径为 $S$，则有 $f(RS)&#x3D;\frac{x}{y}$。</p>
+<p>即<br>$$<br>\begin{aligned}<br>\begin{pmatrix} 1 &amp; 0 \ 1 &amp; 1 \end{pmatrix} M(S)&#x3D;\begin{pmatrix} b &amp; d \ a &amp; c \end{pmatrix}<br>\end{aligned}<br>$$<br>解得<br>$$<br>\begin{aligned}<br>M(S)&#x3D;\begin{pmatrix} 1 &amp; 0 \ -1 &amp; 1 \end{pmatrix}\begin{pmatrix} b &amp; d \ a &amp; c \end{pmatrix}&#x3D;\begin{pmatrix} b &amp; d \ a-b &amp; c-d \end{pmatrix}<br>\end{aligned}<br>$$<br>因此<br>$$<br>\begin{aligned}<br>f(S)&#x3D;\frac{(a+c)-(b+d)}{b+d}&#x3D;\frac{x-y}{y}<br>\end{aligned}<br>$$<br>同理，若 $x&lt;y$，设 $f(LS)&#x3D;\frac{x}{y}$，则有 $f(S)&#x3D;\frac{x}{y-x}$。这样假设我们已知 $\frac{x}{y}$，想求出它在树上的位置，即对应的字符串序列，那么每次可以分两种情况：当 $x&gt;y$时，输出一个 R，并令 $x$ 减去 $y$；当 $x&lt;y$ 时，输出一个 L，并令 $y$ 减去 $x$。反复执行上述流程，直到 $x&#x3D;y&#x3D;1$ 结束，此时输出的字符串就是答案。实际上，这个过程就是对 $x$ 和 $y$ 做辗转相减，因为 $x$ 和 $y$ 互质，所以最终一定有 $x&#x3D;y&#x3D;1$。</p>
+<p>这样，我们自然可以将其优化成辗转相除法。如下所示，代码$LOCATE(x,y)$作用即输出 $\frac{x}{y}$ 的路径表示，只是这次对于同一段连续的 L 或连续的 R，只输出一个字符和其连续出现的次数。</p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Locate}
+\begin{algorithmic}
+\Procedure{Locate}{$x,y$}
+\While{$x\ne y$}
+\If{$x\le y$} 
+\State $step \gets \lfloor (y-1)/x \rfloor $
+\State $y \gets y-step\times x$
+\State \PRINT $\text{'L'},step$
+\Else 
+\State $step \gets \lfloor (x-1)/y \rfloor $
+\State $x \gets x-step\times y$
+\State \PRINT $\text{'R'},step$
+\EndIf
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+
+<p>其中，第 4 行和第 8 行中的减一是为了避免最后一次while循环将 $x$ 或 $y$ 减小至0，所以除了最后一次除法外，在树上定位 $\frac{x}{y}$ 的过程与求 $x$ 和 $y$ 最大公约数的欧几里德算法步骤完全相同。根据拉梅定理，$x$ 和 $y$ 辗转相除的步数不超过 $min(x,y)$ 十进制位数的 $5$ 倍。由此可以得出该算法的时间复杂度为 $O(\log{(x+y)})$。</p>
+<h2 id="5-Stern-Brocot-tree上的二分算法及其优化"><a href="#5-Stern-Brocot-tree上的二分算法及其优化" class="headerlink" title="5. Stern-Brocot tree上的二分算法及其优化"></a>5. Stern-Brocot tree上的二分算法及其优化</h2><p>有了之前的准备工作，在这一节中将解决 2.3 小节中提出的有理数集上的二分问题。需要注意的是，该问题与 4.3 小节中的定位问题是不同的。主要区别在于有理数集上的二分问题中 $\frac{x}{y}$ 是未知的，需要通过二分地询问从而逐步确定，而 4.3 小节所讨论的是已知一有理数 $\frac{x}{y}$ 去找它在树中的位置。</p>
+<p>一个直接的方法是将所有可能的 $O(N^2)$ 个有理数列出来，排序后利用整数区间上二分的模型，虽然二分的复杂度是 $O(\log{N})$，但是预处理的过程就已经需要 $O(N^2)$ 的时间和空间了。[2]提出了一种 $O(\log{N})$ 的算法，先用指数搜索的技巧确定答案的整数部分，然后用一种本质为连分数展开的递归方法确定小数部分。本文提出的方法时间复杂度同样为 $O(\log{N})$，并且也使用了指数搜索，不同的是本文提出的方法是非递归的，且没有分别计算整数与小数部分，而是在一个大的二分查找框架中确定答案，思路是寻求Stern-Brocot tree与欧几里德算法的联系。</p>
+<h3 id="5-1-朴素的二分方法"><a href="#5-1-朴素的二分方法" class="headerlink" title="5.1. 朴素的二分方法"></a>5.1. 朴素的二分方法</h3><p>考虑每次在树上从根出发一步一步地走，询问当前分数 $\frac{p}{q}$ 是否小于等于答案。若是，则更新答案为当前分数，并走到右孩子上；若否，则直接走到左孩子上。当 $p&gt;N$ 或 $q&gt;N$ 时，算法停止，此时答案记录的分数即为我们想要的结果。根据定理4可知，这种方法的时间复杂度是 $O(N)$。</p>
+<h3 id="5-2-二分优化"><a href="#5-2-二分优化" class="headerlink" title="5.2. 二分优化"></a>5.2. 二分优化</h3><p>根据 4.3 节可得出以下结论：</p>
+<blockquote>
+<p><strong>定理 6.</strong> 设 $f(S)&#x3D;\frac{x}{y}$，若字符串中连续相同的字符为一段，则字符串 $S$ 的段数是 $O(\log{(x+y)})$ 的。换句话说，从根节点到 $\frac{x}{y}$ 的路径拐弯的次数是 $O(\log{(x+y)})$ 的。</p>
+</blockquote>
+<p>那么考虑将朴素二分过程的一步一步走改成一段一段走，对于每一段，再次二分步长从而走到下一个“拐点”上。因为每次的步长未知，所以二分的上界设为 $N$。这样，因为有 $O(\log{N})$ 段，对于每段又需要分别做一次 $O(\log{N})$ 的二分，所以该方法的时间复杂度为 $O(\log^2{N})$。</p>
+<h3 id="5-3-进一步优化"><a href="#5-3-进一步优化" class="headerlink" title="5.3. 进一步优化"></a>5.3. 进一步优化</h3><p>直觉上来说，该方法还有进一步优化的空间。思考一下树上路径的特点，如果段数少，则每一段步长就可能会很长，比如形如 $\frac{1}{n}$ 这样的分数，$LLLLL\dots$;如果段数多，则每一段步长就会很短，比如斐波那契数列相邻两项之比，$LRLRLR\dots$。因此，在之前优化中二分上限如果不是每次跑满 $O(\log{N})$，而是 $O(\log{s_i})$ 的话（假设 $s_i$ 是第 $i$ 段的长度），时间复杂度就可能降下来。</p>
+<p>这里要用到指数搜索，即先倍增后二分的技巧。一开始先倍增的跳，跳 $1$ 步，$2$步，$4$ 步，$8$ 步…直到 $2^j$ 步时判断出已经跳过了拐点，之后即可确定$2^{j-1}\le s_i &lt;2^j$，那么再在区间 $\left[2^{j-1},2^j\right)$ 上二分步长即可，显然最多只需询问 $2\log{s_i}+O(1)$ 次，第 $i$ 次倍增后二分的时间复杂度就是 $O(\log{s_i})$。伪代码如下：</p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{BinarySearchForRational} 
+\begin{algorithmic}
+\Procedure{BinarySearchForRational}{}
+\State $a,b,c,d \gets 0,1,1,0$
+\While{$a+c\le N \textbf{ and } b+d\le N$}
+    \If{\Call{HasP}{$a+c,b+d$}}
+        \State $step  \gets 1$
+        \While{$a+step\times c\le N \textbf{ and } b+step\times d\le N \textbf{ and } $\Call{HasP}{$a + step \times c, b + step \times d$}}
+            \State $step \gets step\times 2$
+        \EndWhile
+        \State $ L,R \gets \lfloor step/2\rfloor ,step - 1$
+        \While{$L\lt R$}
+            \State $mid \gets \lceil (L + R) / 2\rceil$
+            \If{\Call{HasP}{$a + mid \times c, b + mid \times d$}}
+                \State $L \gets mid$
+            \Else 
+                \State $R \gets mid-1$
+            \EndIf
+        \EndWhile
+        \State $a,b \gets a+L\times c,b+L\times d$
+        \State $ansx,ansy= a,b$
+    \Else 
+        \State $step  \gets 1$
+        \While{$step\times a+ c\le N \textbf{ and } step\times b+ d\le N \textbf{ and } \textbf{ not } $\Call{HasP}{$step \times a +  c, step \times b +  d$}}
+            \State $step \gets step\times 2$
+        \EndWhile
+        \State $ L,R \gets \lfloor step/2\rfloor +1 ,step$
+        \While{$L \lt R$}
+            \State $mid \gets \lfloor (L + R) / 2\rfloor$
+            \If{\Call{HasP}{$mid \times a +  c, mid \times b + d$}}
+                \State $R \gets mid$
+            \Else 
+                \State $L \gets mid+1$
+            \EndIf
+        \EndWhile
+        \State $c,d \gets (L-1)\times a+c,(L-1)\times  b+d$
+    \EndIf
+\EndWhile
+\Return $ansx,ansy$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+
+
+<p>后面考虑如何证明总的时间复杂度为 $O(\log{N})$。</p>
+<p>设 $r_0&#x3D;x,r_1&#x3D;y$，不妨设 $x\ge y$，	由辗转相除得到一系列式子：</p>
+<p>$$<br> \begin{aligned}<br>  &amp;r_0  &#x3D;q_1r_1+r_2,\<br>  &amp;r_1  &#x3D;q_2r_2+r_3,\<br>  &amp; \dots,\<br>  &amp;r_{k-2}&#x3D;q_{k-1}r_{k-1}+r_k,\<br>  &amp;r_{k-1}&#x3D;q_kr_k<br>  \end{aligned}<br>$$</p>
+<p>其中 $k$ 表示 $x$ 和 $y$ 做辗转相除的除法次数，也是 Stern-Brocot tree 上，根节点到 $\frac{x}{y}$ 的路径段数。根据 4.3 小节可知，$s_i&#x3D;q_i(1\le i &lt;k),s_k&#x3D;q_k-1$，即第 $i$ 段路径的长度等于辗转相除中每次得到的商，除了最后一段是 $q_k-1$。</p>
+<p>由于询问只能查询当前有理数是否小于等于答案，因此在树上二分查找的过程中遇到最终答案并记录后也不会立刻停止算法，而是会再往右走一步，之后一直向左走，直到分子或分母超过 $N$。到节点 $\frac{x}{y}$ 之后，从右侧不断往左逼近 $\frac{x}{y}$ 的步数不超过 $\frac{N}{x}$。因此，方法三的总询问次数可以分到达 $\frac{x}{y}$ 之前与之后这两段计算：</p>
+<p>$$<br>\begin{aligned}<br>  &amp;\sum_{i&#x3D;1}^{k}(2\log{s_i}+O(1)) + 2\log{\frac{N}{x}}+O(1) \<br>  \le&amp; 2\sum_{i&#x3D;1}^{k}\log{q_i}+ 2\log{N}-2\log{x} +O(\log{x})\<br>  &#x3D;&amp;2\sum_{i&#x3D;1}^{k}\log{\lfloor\frac{r_{i-1}}{r_i}\rfloor}+ 2\log{N}-2\log{x}+O(\log{x})\<br>  \le &amp; 2\sum_{i&#x3D;1}^{k}\log{\frac{r_{i-1}}{r_i}}+ 2\log{N}-2\log{x}+O(\log{x})\<br>&#x3D;&amp; 2\log{\prod_{i&#x3D;1}^{k}\frac{r_{i-1}}{r_i}}+ 2\log{N}-2\log{x} +O(\log{x})\<br>&#x3D;&amp;2\log{\frac{r_{0}}{r_n}}+ 2\log{N}-2\log{x}+O(\log{x})\<br>&#x3D;&amp;2\log{x}+ 2\log{N}-2\log{x}+O(\log{x})\<br>&#x3D;&amp;O(\log{N})<br> \end{aligned}<br>$$<br>所以最终本文实现了在 $O(\log{N})$ 时间内通过询问某个数是否小于等于答案的方式在有理数集 $Q_N&#x3D; \left{ \frac{p}{q}:p,q\in \left{ 1,2,\dots,N\right} \right}$ 上确定未知数 $\frac{x}{y}$。该方法用非递归方法实现，借助Stern-Brocot tree的结构来实现对有理数的二分，二分时每次通过指数搜索快速走到路径拐点，并结合欧几里得算法证明了该算法是对数时间的。根据信息论理论，该复杂度达到了理论下界。至此，问题解决。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Graham R L, Knuth D E, Patashnik O, et al. Concrete mathematics: a foundation for computer science[J]. Computers in Physics, 1989, 3(5): 106-107.</p>
+<p>[2] Kwek S, Mehlhorn K. Optimal search for rationals[J]. Information Processing Letters, 2003, 86(1): 23-26.</p>
+<p>[3] Bentley J L, Yao A C C. An almost optimal algorithm for unbounded searching[J]. Information processing letters, 1976, 5(SLAC-PUB-1679).</p>
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><h3 id="Probe-Droids-–-Kattis-Kattis"><a href="#Probe-Droids-–-Kattis-Kattis" class="headerlink" title="Probe Droids – Kattis, Kattis"></a><a target="_blank" rel="noopener" href="https://open.kattis.com/problems/probedroids">Probe Droids – Kattis, Kattis</a></h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>在一个 $n\times m \ (n,m\le 10^6)$ 的网格上，每个格点有一个机器人。最左下角的点没有机器人，而是一个初始面向 $x$ 轴正方向的炮塔，坐标记为 $(1, 1)$。如果一个机器人在它的视线上，则摧毁该机器人。否则，炮塔会逆时针旋转直到可以看到机器人。重复这个操作，直到所有机器人都被摧毁。现在有 $q\ (\le 100)$ 次询问，每次询问第 $k\ (1\le k\le n\times m)$ 个被摧毁的机器人的坐标。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>二分斜率后，转化为计数问题，求 $y &#x3D; \frac{b}{a}x$ 下方有多少个点（将左下角视为原点），并与 $k$ 比较，从而判断斜率$\frac{b}{a}$的大小。二分斜率的方法即用本文描述的有理数二分方法，之后的计数问题套用<a href="https://izard.space/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">类欧几里得算法</a>。总时间复杂度$O(q\log^2{n})$。</p>
+<h4 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>(<span class="hljs-params">a, b, c, n</span>):<br>    <span class="hljs-keyword">if</span> c == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> a &gt;= c <span class="hljs-keyword">or</span> b &gt;= c:<br>        <span class="hljs-keyword">return</span> (a // c) * n * (n + <span class="hljs-number">1</span>) // <span class="hljs-number">2</span> + (b // c) * (n + <span class="hljs-number">1</span>) + f(a % c, b % c, c, n)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> (a * n + b) // c * n - f(c, c - b - <span class="hljs-number">1</span>, a, (a * n + b) // c - <span class="hljs-number">1</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">calc</span>(<span class="hljs-params">y, x</span>):<br>    <span class="hljs-keyword">global</span> n, m<br>    <span class="hljs-built_in">len</span> = <span class="hljs-built_in">min</span>(n, x * (m - <span class="hljs-number">1</span>) // y + <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span> m * <span class="hljs-built_in">len</span> - f(y, x - y - <span class="hljs-number">1</span>, x, <span class="hljs-built_in">len</span>) + (x - y - <span class="hljs-number">1</span>) // x - <span class="hljs-number">1</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">algo</span>(<span class="hljs-params">a, b, c, d</span>):<br>    <span class="hljs-keyword">global</span> k, N<br>    ansx, ansy = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> a + c &lt;= N <span class="hljs-keyword">and</span> b + d &lt;= N:<br>        <span class="hljs-keyword">if</span> calc(a + c, b + d) &lt; k:<br>            step = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> step * a + c &lt;= N <span class="hljs-keyword">and</span> step * b + d &lt;= N <span class="hljs-keyword">and</span> calc(step * a + c, step * b + d) &lt; k:<br>                step *= <span class="hljs-number">2</span><br>            l = (step // <span class="hljs-number">2</span>) + <span class="hljs-number">1</span><br>            r = step<br>            <span class="hljs-keyword">while</span> l &lt; r:<br>                mid = (l + r) // <span class="hljs-number">2</span><br>                <span class="hljs-keyword">if</span> calc(mid * a + c, mid * b + d) &lt; k:<br>                    l = mid + <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    r = mid<br>            c = (l - <span class="hljs-number">1</span>) * a + c<br>            d = (l - <span class="hljs-number">1</span>) * b + d<br>        <span class="hljs-keyword">else</span>:<br>            step = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> a + step * c &lt;= N <span class="hljs-keyword">and</span> b + step * d &lt;= N <span class="hljs-keyword">and</span> calc(a + step * c, b + step * d) &gt;= k:<br>                step *= <span class="hljs-number">2</span><br>            l = step // <span class="hljs-number">2</span><br>            r = step - <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> l &lt; r:<br>                mid = (l + r + <span class="hljs-number">1</span>) // <span class="hljs-number">2</span><br>                <span class="hljs-keyword">if</span> calc(a + mid * c, b + mid * d) &lt; k:<br>                    r = mid - <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    l = mid<br>            a = a + l * c<br>            b = b + l * d<br>            ansx, ansy = b, a<br>    <span class="hljs-keyword">return</span> ansx, ansy<br><br><br>n, m, q = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>().strip().split())<br>N = <span class="hljs-built_in">max</span>(n, m)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(q):<br>    k = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>().strip())<br>    <span class="hljs-keyword">if</span> k &lt; m:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>, k + <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">continue</span><br>    <span class="hljs-keyword">if</span> k &gt; (m - <span class="hljs-number">1</span>) * n:<br>        <span class="hljs-built_in">print</span>(k - (m - <span class="hljs-number">1</span>) * n + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">continue</span><br>    x, y = algo(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<br>    cnt = calc(y, x) - k<br>    up = <span class="hljs-built_in">min</span>((n - <span class="hljs-number">1</span>) // x, (m - <span class="hljs-number">1</span>) // y)<br>    <span class="hljs-built_in">print</span>((up - cnt) * x + <span class="hljs-number">1</span>, (up - cnt) * y + <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="category-chain-item">算法学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Stern-Brocot-tree/">#Stern-Brocot tree</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>基于Stern-Brocot tree的有理数集二分算法及其优化</div>
+      <div>https://izard.space/2022/06/15/基于Stern-Brocot tree的有理数集二分算法及其优化/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>forever_you</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/21/NOIP-2015/" title="NOIP-2015">
+                        <span class="hidden-mobile">NOIP-2015</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script>pseudocode.renderClass("pseudocode");</script><!-- hexo injector body_end end --></body>
+</html>

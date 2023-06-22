@@ -367,13 +367,6 @@
   </url>
   
   <url>
-    <loc>https://izard.space/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2023-06-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://izard.space/tags/polya%E8%AE%A1%E6%95%B0/</loc>
     <lastmod>2023-06-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -382,6 +375,13 @@
   
   <url>
     <loc>https://izard.space/tags/%E5%9B%BE%E8%AE%BA/</loc>
+    <lastmod>2023-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://izard.space/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2023-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -500,13 +500,6 @@
   </url>
   
   <url>
-    <loc>https://izard.space/tags/%E9%87%91%E5%BA%B8/</loc>
-    <lastmod>2023-06-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://izard.space/tags/%E6%95%B0%E8%AE%BA/</loc>
     <lastmod>2023-06-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -515,6 +508,13 @@
   
   <url>
     <loc>https://izard.space/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/</loc>
+    <lastmod>2023-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://izard.space/tags/%E9%87%91%E5%BA%B8/</loc>
     <lastmod>2023-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

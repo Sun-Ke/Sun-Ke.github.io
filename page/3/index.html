@@ -72,7 +72,7 @@
 
   
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
-</head>
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
 
 
 <body>
@@ -233,7 +233,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/09/26/NOIP-2013/" target="_self">
         <div>
-          最近突然想回顾一下历年noip题目，就开个新坑吧，题解就从略了 题目链接 https://vijos.org/p/category/2013 D1T1 转圈游戏公式就$(x+m10^k)%n$，现在一眼的事情当时想了很久orz 12345678910111213141516171819202122#include&lt;bits/stdc++.h&gt;using namespace std;in
+          最近突然想回顾一下历年noip题目，就开个新坑吧，题解就从略了 题目链接 https://vijos.org/p/category/2013 D1T1 转圈游戏 公式就(x+m10k)%n(x+m10^k)\%n(x+m10k)%n，现在一眼的事情当时想了很久orz 12345678910111213141516171819202122#include&lt;bits/stdc++.h&gt;us
         </div>
       </a>
 
@@ -294,7 +294,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/09/14/Dominator-Tree/" target="_self">
         <div>
-          问题引入题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。  Flow Graph：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。 必经点（dom）：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到达y的
+          问题引入 题目要求解决的模型： 给定有向图G（可能有环）和图中的一个点r，对于G中的任意一个点x，求从r到x的路径上（可能有很多条）必须经过的点集。  Flow Graph：若有向图G中存在一点r，从r出发可到达G中所有的点，则称G是Flow Graph，记为(G,r)。 必经点（dom）：若在(G,r)中从r到y的路径一定经过点x，则称x是从r到达y的必经点，记为x dom y。 从r出发到达y
         </div>
       </a>
 
@@ -355,7 +355,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/09/12/Knapsack-and-Queries/" target="_self">
         <div>
-          来自Petrozavodsk Winter-2018. AtCoder Contest里的D题 题意是说，有$Q$次操作，分为两种，一是添加一个重量为$w$，价值为$v$的物品，保证插入的$w$单增，二是删除当前重量最小的物品。每次操作完之后，都有一个询问，询问能否从已有物品中选出一个子集，使得重量之和在模$M$之后在区间$[l,r]$内，并且价值和最大。 数据范围，$Q\le 100000,2\
+          来自Petrozavodsk Winter-2018. AtCoder Contest里的D题 题意是说，有QQQ次操作，分为两种，一是添加一个重量为www，价值为vvv的物品，保证插入的www单增，二是删除当前重量最小的物品。每次操作完之后，都有一个询问，询问能否从已有物品中选出一个子集，使得重量之和在模MMM之后在区间[l,r][l,r][l,r]内，并且价值和最大。 数据范围，Q≤10000
         </div>
       </a>
 
@@ -418,7 +418,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/09/11/%E8%B6%85%E5%AE%9E%E7%94%A8%EF%BC%81Stern-Brocot-tree%E6%80%BB%E7%BB%93%E5%A5%89%E4%B8%8A/" target="_self">
         <div>
-          关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。 Stern-Brocot tree:   Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。 构造方法可以理解为：先在左边写上$\frac{0}{1}$，
+          关于Stern-Brocot tree网上的资料较少（后记：实际上并不少，只是竞赛中讨论的不多），能够找到的资源有Wikipedia以及《具体数学》上的介绍，这里大概总结一下这个树形结构的性质。 Stern-Brocot tree:  Stern-Brocot tree构成了一个无限的二叉排序树，可以将所有的正有理数从小到大列举出来。 构造方法可以理解为：先在左边写上01\frac{0}{1}10
         </div>
       </a>
 
@@ -479,7 +479,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/09/05/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/" target="_self">
         <div>
-          适用条件：动态开点的(权值)线段树。 关于时间复杂度的结论：  每次合并的代价是两棵树的公共节点数。 若有n棵含有单个元素的树，经过n-1次merge操作，将他们合并成一棵树的代价是$O(nlogn)$或$O(nlogC)$的 单次merge操作开销可大可小，均摊下一次就是一个log的。  关于空间复杂度，普通版本是$O(nlogn)$的。 直接给出代码，merge操作十分简洁： 12345678
+          适用条件：动态开点的(权值)线段树。 关于时间复杂度的结论：  每次合并的代价是两棵树的公共节点数。 若有n棵含有单个元素的树，经过n-1次merge操作，将他们合并成一棵树的代价是O(nlogn)O(nlogn)O(nlogn)或O(nlogC)O(nlogC)O(nlogC)的 单次merge操作开销可大可小，均摊下一次就是一个log的。  关于空间复杂度，普通版本是O(nlogn)O(nlo
         </div>
       </a>
 
@@ -540,7 +540,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/08/31/2017-%E8%A5%BF%E5%AE%89%E7%BD%91%E7%BB%9C%E8%B5%9B-A%E9%A2%98-TREE/" target="_self">
         <div>
-          最近想起来这么一道题，当时q神没rush出来，赛后几分钟AC掉的 题目链接：https://nanti.jisuanke.com/t/17114 题意是树上有$N$个点，每个点的点权是一个01矩阵，有$Q$次询问，每次问树上从x到y这条路径上的矩阵依次乘起来的结果是多少(模2意义下)。数据范围$N\le 3000,Q\le 30000$，矩阵大小$64\times 64$。 首先这里的模2意义下的
+          最近想起来这么一道题，当时q神没rush出来，赛后几分钟AC掉的 题目链接：https://nanti.jisuanke.com/t/17114 题意是树上有NNN个点，每个点的点权是一个01矩阵，有QQQ次询问，每次问树上从x到y这条路径上的矩阵依次乘起来的结果是多少(模2意义下)。数据范围N≤3000,Q≤30000N\le 3000,Q\le 30000N≤3000,Q≤30000，矩阵大小
         </div>
       </a>
 
@@ -664,7 +664,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/08/29/%E5%81%8F%E5%BA%8F%E9%9B%86/" target="_self">
         <div>
-          偏序关系首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系  如果对于X中所有的x，都有x R x，则R是自反的 如果对于X中所有x和y，若x R y和y R x同时成立则x&#x3D;y，则R是反对称的 对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的  通常用$\le$取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。$&lt;$
+          偏序关系 首先回顾一下偏序，集合X上的偏序是一个自反、反对称且传递的关系  如果对于X中所有的x，都有x R x，则R是自反的 如果对于X中所有x和y，若x R y和y R x同时成立则x=y，则R是反对称的 对于X中所有的x，y和z，只要x R y且y R z，就有x R z，则R是传递的  通常用≤\le≤取代R来表示偏序关系，常见的偏序关系有集合的包含，小于等于，整除等。&lt;&lt;&l
         </div>
       </a>
 
@@ -725,7 +725,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/08/28/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" target="_self">
         <div>
-          推导有时候需要快速计算如下式子(比如数据范围都是 $10^9$ ) $$f(a,b,c,n)&#x3D;\sum_{i&#x3D;0}^{n}\lfloor\frac{ai+b}{c}\rfloor$$ $$g(a,b,c,n)&#x3D;\sum_{i&#x3D;0}^{n}i\lfloor\frac{ai+b}{c}\rfloor$$ $$h(a,b,c,n)&#x3D;\sum_{i&#x3
+          推导 有时候需要快速计算如下式子(比如数据范围都是 10910^9109 ) f(a,b,c,n)=∑i=0n⌊ai+bc⌋f(a,b,c,n)=\sum_{i=0}^{n}\lfloor\frac{ai+b}{c}\rfloor f(a,b,c,n)=i=0∑n​⌊cai+b​⌋ g(a,b,c,n)=∑i=0ni⌊ai+bc⌋g(a,b,c,n)=\sum_{i=0}^{n}i\lfloor\
         </div>
       </a>
 
@@ -786,7 +786,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2018/08/18/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
         <div>
-          写在前面推荐hihocoder上的讲解，可以说是十分清楚了。 用好后缀自动机不是十分容易，但看完本文的总结应该能至少达到签到水平…
+          写在前面 推荐hihocoder上的讲解，可以说是十分清楚了。 用好后缀自动机不是十分容易，但看完本文的总结应该能至少达到签到水平…
         </div>
       </a>
 

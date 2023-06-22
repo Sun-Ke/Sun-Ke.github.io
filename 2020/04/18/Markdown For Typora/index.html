@@ -16,12 +16,12 @@
   <meta name="author" content="forever_you">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Markdown For TyporaOverviewMarkdown is created by Daring Fireball; the original guideline is here. Its syntax, however, varies between different parsers or editors. Typora is using GitHub Flavored Mar">
+    <meta name="description" content="Markdown For Typora Overview Markdown is created by Daring Fireball; the original guideline is here. Its syntax, however, varies between different parsers or editors. Typora is using GitHub Flavored M">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown For Typora">
 <meta property="og:url" content="https://izard.space/2020/04/18/Markdown%20For%20Typora/index.html">
 <meta property="og:site_name" content="Forever you~">
-<meta property="og:description" content="Markdown For TyporaOverviewMarkdown is created by Daring Fireball; the original guideline is here. Its syntax, however, varies between different parsers or editors. Typora is using GitHub Flavored Mar">
+<meta property="og:description" content="Markdown For Typora Overview Markdown is created by Daring Fireball; the original guideline is here. Its syntax, however, varies between different parsers or editors. Typora is using GitHub Flavored M">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-18T14:02:47.000Z">
 <meta property="article:modified_time" content="2020-04-18T14:10:26.000Z">
@@ -84,7 +84,7 @@
 
   
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
-</head>
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
 
 
 <body>
@@ -267,88 +267,97 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Markdown-For-Typora"><a href="#Markdown-For-Typora" class="headerlink" title="Markdown For Typora"></a>Markdown For Typora</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><strong>Markdown</strong> is created by <a target="_blank" rel="noopener" href="http://daringfireball.net/">Daring Fireball</a>; the original guideline is <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/syntax">here</a>. Its syntax, however, varies between different parsers or editors. <strong>Typora</strong> is using <a target="_blank" rel="noopener" href="https://help.github.com/articles/github-flavored-markdown/">GitHub Flavored Markdown</a>.</p>
+                <h1>Markdown For Typora</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Markdown</strong> is created by <a target="_blank" rel="noopener" href="http://daringfireball.net/">Daring Fireball</a>; the original guideline is <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/syntax">here</a>. Its syntax, however, varies between different parsers or editors. <strong>Typora</strong> is using <a target="_blank" rel="noopener" href="https://help.github.com/articles/github-flavored-markdown/">GitHub Flavored Markdown</a>.</p>
 <p>[toc]</p>
-<h2 id="Block-Elements"><a href="#Block-Elements" class="headerlink" title="Block Elements"></a>Block Elements</h2><h3 id="Paragraph-and-line-breaks"><a href="#Paragraph-and-line-breaks" class="headerlink" title="Paragraph and line breaks"></a>Paragraph and line breaks</h3><p>A paragraph is simply one or more consecutive lines of text. In markdown source code, paragraphs are separated by two or more blank lines. In Typora, you only need one blank line (press <code>Return</code> once) to create a new paragraph.</p>
+<h2 id="block-elements">Block Elements</h2>
+<h3 id="paragraph-and-line-breaks">Paragraph and line breaks</h3>
+<p>A paragraph is simply one or more consecutive lines of text. In markdown source code, paragraphs are separated by two or more blank lines. In Typora, you only need one blank line (press <code>Return</code> once) to create a new paragraph.</p>
 <p>Press <code>Shift</code> + <code>Return</code> to create a single line break. Most other markdown parsers will ignore single line breaks, so in order to make other markdown parsers recognize your line break, you can leave two spaces at the end of the line, or insert <code>&lt;br/&gt;</code>.</p>
-<h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>Headers use 1-6 hash (<code>#</code>) characters at the start of the line, corresponding to header levels 1-6. For example:</p>
+<h3 id="headers">Headers</h3>
+<p>Headers use 1-6 hash (<code>#</code>) characters at the start of the line, corresponding to header levels 1-6. For example:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># This is an H1</span><br><br><span class="hljs-section">## This is an H2</span><br><br><span class="hljs-section">###### This is an H6</span><br></code></pre></td></tr></table></figure>
-
 <p>In Typora, input ‘#’s followed by title content, and press <code>Return</code> key will create a header.</p>
-<h3 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h3><p>Markdown uses email-style &gt; characters for block quoting. They are presented as:</p>
+<h3 id="blockquotes">Blockquotes</h3>
+<p>Markdown uses email-style &gt; characters for block quoting. They are presented as:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-quote">&gt; This is a blockquote with two paragraphs. This is first paragraph.</span><br><span class="hljs-quote">&gt;</span><br><span class="hljs-quote">&gt; This is second pragraph. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span><br><br><br><br><span class="hljs-quote">&gt; This is another blockquote with one paragraph. There is three empty line to seperate two blockquote.</span><br></code></pre></td></tr></table></figure>
-
 <p>In Typora, inputting ‘&gt;’ followed by your quote contents will generate a quote block. Typora will insert a proper ‘&gt;’ or line break for you. Nested block quotes (a block quote inside another block quote) by adding additional levels of ‘&gt;’.</p>
-<h3 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h3><p>Input <code>* list item 1</code> will create an unordered list - the <code>*</code> symbol can be replace with <code>+</code> or <code>-</code>.</p>
+<h3 id="lists">Lists</h3>
+<p>Input <code>* list item 1</code> will create an unordered list - the <code>*</code> symbol can be replace with <code>+</code> or <code>-</code>.</p>
 <p>Input <code>1. list item 1</code> will create an ordered list - their markdown source code is as follows:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section">## un-ordered list</span><br><span class="hljs-bullet">*</span>   Red<br><span class="hljs-bullet">*</span>   Green<br><span class="hljs-bullet">*</span>   Blue<br><br><span class="hljs-section">## ordered list</span><br><span class="hljs-bullet">1.</span>  Red<br><span class="hljs-bullet">2.</span> 	Green<br><span class="hljs-bullet">3.</span>	Blue<br></code></pre></td></tr></table></figure>
-
-<h3 id="Task-List"><a href="#Task-List" class="headerlink" title="Task List"></a>Task List</h3><p>Task lists are lists with items marked as either [ ] or [x] (incomplete or complete). For example:</p>
+<h3 id="task-list">Task List</h3>
+<p>Task lists are lists with items marked as either [ ] or [x] (incomplete or complete). For example:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> [ ] a task list item<br><span class="hljs-bullet">-</span> [ ] list syntax required<br><span class="hljs-bullet">-</span> [ ] normal <span class="hljs-strong">**formatting**</span>, @mentions, #1234 refs<br><span class="hljs-bullet">-</span> [ ] incomplete<br><span class="hljs-bullet">-</span> [x] completed<br></code></pre></td></tr></table></figure>
-
-<p>You can change the complete&#x2F;incomplete state by clicking on the checkbox before the item.</p>
-<h3 id="Fenced-Code-Blocks"><a href="#Fenced-Code-Blocks" class="headerlink" title="(Fenced) Code Blocks"></a>(Fenced) Code Blocks</h3><p>Typora only supports fences in GitHub Flavored Markdown. Original code blocks in markdown are not supported.</p>
+<p>You can change the complete/incomplete state by clicking on the checkbox before the item.</p>
+<h3 id="fenced-code-blocks">(Fenced) Code Blocks</h3>
+<p>Typora only supports fences in GitHub Flavored Markdown. Original code blocks in markdown are not supported.</p>
 <p>Using fences is easy: Input ``` and press <code>return</code>. Add an optional language identifier after ``` and we’ll run it through syntax highlighting:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown">Here&#x27;s an example:<br><br></code></pre></td></tr></table></figure>
-<p>function test() {<br>  console.log(“notice the blank line before this function?”);<br>}</p>
+<p>function test() {<br>
+console.log(“notice the blank line before this function?”);<br>
+}</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim"><br><span class="hljs-keyword">syntax</span> highlighting:<br>​```<span class="hljs-keyword">ruby</span><br>require <span class="hljs-string">&#x27;redcarpet&#x27;</span><br>markdown = Redcarpet.<span class="hljs-keyword">new</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)<br>puts markdown.to_html<br></code></pre></td></tr></table></figure>
 <figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"></span><br><span class="language-xml">### Math Blocks</span><br><span class="language-xml"></span><br><span class="language-xml">You can render *LaTeX* mathematical expressions using **MathJax**.</span><br><span class="language-xml"></span><br><span class="language-xml">To add a mathematical expression, input `$$` and press the &#x27;Return&#x27; key. This will trigger an input field which accepts *Tex/LaTex* source. For example:</span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">$$</span><br><span class="language-xml">\mathbf</span><span class="hljs-template-variable">&#123;V&#125;</span><span class="language-xml">_1 \times \mathbf</span><span class="hljs-template-variable">&#123;V&#125;</span><span class="language-xml">_2 =  \begin</span><span class="hljs-template-variable">&#123;vmatrix&#125;</span><span class="language-xml"></span><br><span class="language-xml">\mathbf</span><span class="hljs-template-variable">&#123;i&#125;</span><span class="language-xml"> &amp; \mathbf</span><span class="hljs-template-variable">&#123;j&#125;</span><span class="language-xml"> &amp; \mathbf</span><span class="hljs-template-variable">&#123;k&#125;</span><span class="language-xml"> \\</span><br><span class="language-xml">\frac</span><span class="hljs-template-variable">&#123;\partial X&#125;</span><span class="hljs-template-variable">&#123;\partial u&#125;</span><span class="language-xml"> &amp;  \frac</span><span class="hljs-template-variable">&#123;\partial Y&#125;</span><span class="hljs-template-variable">&#123;\partial u&#125;</span><span class="language-xml"> &amp; 0 \\</span><br><span class="language-xml">\frac</span><span class="hljs-template-variable">&#123;\partial X&#125;</span><span class="hljs-template-variable">&#123;\partial v&#125;</span><span class="language-xml"> &amp;  \frac</span><span class="hljs-template-variable">&#123;\partial Y&#125;</span><span class="hljs-template-variable">&#123;\partial v&#125;</span><span class="language-xml"> &amp; 0 \\</span><br><span class="language-xml">\end</span><span class="hljs-template-variable">&#123;vmatrix&#125;</span><span class="language-xml"></span><br><span class="language-xml">$$</span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">In the markdown source file, the math block is a *LaTeX* expression wrapped by a pair of ‘$$’ marks:</span><br><span class="language-xml"></span><br><span class="language-xml">​``` markdown</span><br><span class="language-xml">$$</span><br><span class="language-xml">\mathbf</span><span class="hljs-template-variable">&#123;V&#125;</span><span class="language-xml">_1 \times \mathbf</span><span class="hljs-template-variable">&#123;V&#125;</span><span class="language-xml">_2 =  \begin</span><span class="hljs-template-variable">&#123;vmatrix&#125;</span><span class="language-xml"></span><br><span class="language-xml">\mathbf</span><span class="hljs-template-variable">&#123;i&#125;</span><span class="language-xml"> &amp; \mathbf</span><span class="hljs-template-variable">&#123;j&#125;</span><span class="language-xml"> &amp; \mathbf</span><span class="hljs-template-variable">&#123;k&#125;</span><span class="language-xml"> \\</span><br><span class="language-xml">\frac</span><span class="hljs-template-variable">&#123;\partial X&#125;</span><span class="hljs-template-variable">&#123;\partial u&#125;</span><span class="language-xml"> &amp;  \frac</span><span class="hljs-template-variable">&#123;\partial Y&#125;</span><span class="hljs-template-variable">&#123;\partial u&#125;</span><span class="language-xml"> &amp; 0 \\</span><br><span class="language-xml">\frac</span><span class="hljs-template-variable">&#123;\partial X&#125;</span><span class="hljs-template-variable">&#123;\partial v&#125;</span><span class="language-xml"> &amp;  \frac</span><span class="hljs-template-variable">&#123;\partial Y&#125;</span><span class="hljs-template-variable">&#123;\partial v&#125;</span><span class="language-xml"> &amp; 0 \\</span><br><span class="language-xml">\end</span><span class="hljs-template-variable">&#123;vmatrix&#125;</span><span class="language-xml"></span><br><span class="language-xml">$$</span><br></code></pre></td></tr></table></figure>
-
 <p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Math/">here</a>.</p>
-<h3 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h3><p>Input <code>| First Header  | Second Header |</code> and press the <code>return</code> key. This will create a table with two columns.</p>
-<p>After a table is created, putting focus on that table will open up a toolbar for the table where you can resize, align, or delete the table. You can also use the context menu to copy and add&#x2F;delete individual columns&#x2F;rows.</p>
+<h3 id="tables">Tables</h3>
+<p>Input <code>| First Header  | Second Header |</code> and press the <code>return</code> key. This will create a table with two columns.</p>
+<p>After a table is created, putting focus on that table will open up a toolbar for the table where you can resize, align, or delete the table. You can also use the context menu to copy and add/delete individual columns/rows.</p>
 <p>The full syntax for tables is described below, but it is not necessary to know the full syntax in detail as the markdown source code for tables is generated automatically by Typora.</p>
 <p>In markdown source code, they look like:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">| First Header  | Second Header |<br>| ------------- | ------------- |<br>| Content Cell  | Content Cell  |<br>| Content Cell  | Content Cell  |<br></code></pre></td></tr></table></figure>
-
 <p>You can also include inline Markdown such as links, bold, italics, or strikethrough in the table.</p>
 <p>Finally, by including colons (<code>:</code>) within the header row, you can define text in that column to be left-aligned, right-aligned, or center-aligned:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown">| Left-Aligned  | Center Aligned  | Right Aligned |<br>| :------------ |:---------------:| -----:|<br>| col 3 is      | some wordy text | $1600 |<br>| col 2 is      | centered        |   $12 |<br>| zebra stripes | are neat        |    $1 |<br></code></pre></td></tr></table></figure>
-
 <p>A colon on the left-most side indicates a left-aligned column; a colon on the right-most side indicates a right-aligned column; a colon on both sides indicates a center-aligned column.</p>
-<h3 id="Footnotes"><a href="#Footnotes" class="headerlink" title="Footnotes"></a>Footnotes</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown">You can create footnotes like this[^footnote].<br><br>[<span class="hljs-symbol">^footnote</span>]: <span class="hljs-link">Here is the *text* of the **footnote**.</span><br></code></pre></td></tr></table></figure>
-
+<h3 id="footnotes">Footnotes</h3>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown">You can create footnotes like this[^footnote].<br><br>[<span class="hljs-symbol">^footnote</span>]: <span class="hljs-link">Here is the *text* of the **footnote**.</span><br></code></pre></td></tr></table></figure>
 <p>will produce:</p>
 <p>You can create footnotes like this[^footnote].</p>
 <p>[^footnote]: Here is the <em>text</em> of the <strong>footnote</strong>.</p>
 <p>Hover over the ‘footnote’ superscript to see content of the footnote.</p>
-<h3 id="Horizontal-Rules"><a href="#Horizontal-Rules" class="headerlink" title="Horizontal Rules"></a>Horizontal Rules</h3><p>Inputting <code>***</code> or <code>---</code> on a blank line and pressing <code>return</code> will draw a horizontal line.</p>
+<h3 id="horizontal-rules">Horizontal Rules</h3>
+<p>Inputting <code>***</code> or <code>---</code> on a blank line and pressing <code>return</code> will draw a horizontal line.</p>
 <hr>
-<h3 id="YAML-Front-Matter"><a href="#YAML-Front-Matter" class="headerlink" title="YAML Front Matter"></a>YAML Front Matter</h3><p>Typora now supports <a target="_blank" rel="noopener" href="http://jekyllrb.com/docs/frontmatter/">YAML Front Matter</a>. Input <code>---</code> at the top of the article and then press <code>Return</code> to introduce a metadata block. Alternatively, you can insert a metadata block from the top menu of Typora.</p>
-<h3 id="Table-of-Contents-TOC"><a href="#Table-of-Contents-TOC" class="headerlink" title="Table of Contents (TOC)"></a>Table of Contents (TOC)</h3><p>Input <code>[toc]</code> and press the <code>Return</code> key. This will create a  “Table of Contents” section. The TOC extracts all headers from the document, and its contents are updated automatically as you add to the document.</p>
-<h2 id="Span-Elements"><a href="#Span-Elements" class="headerlink" title="Span Elements"></a>Span Elements</h2><p>Span elements will be parsed and rendered right after typing. Moving the cursor in middle of those span elements will expand those elements into markdown source. Below is an explanation of the syntax for each span element.</p>
-<h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p>Markdown supports two styles of links: inline and reference.</p>
+<h3 id="yaml-front-matter">YAML Front Matter</h3>
+<p>Typora now supports <a target="_blank" rel="noopener" href="http://jekyllrb.com/docs/frontmatter/">YAML Front Matter</a>. Input <code>---</code> at the top of the article and then press <code>Return</code> to introduce a metadata block. Alternatively, you can insert a metadata block from the top menu of Typora.</p>
+<h3 id="table-of-contents-toc">Table of Contents (TOC)</h3>
+<p>Input <code>[toc]</code> and press the <code>Return</code> key. This will create a  “Table of Contents” section. The TOC extracts all headers from the document, and its contents are updated automatically as you add to the document.</p>
+<h2 id="span-elements">Span Elements</h2>
+<p>Span elements will be parsed and rendered right after typing. Moving the cursor in middle of those span elements will expand those elements into markdown source. Below is an explanation of the syntax for each span element.</p>
+<h3 id="links">Links</h3>
+<p>Markdown supports two styles of links: inline and reference.</p>
 <p>In both styles, the link text is delimited by [square brackets].</p>
 <p>To create an inline link, use a set of regular parentheses immediately after the link text’s closing square bracket. Inside the parentheses, put the URL where you want the link to point, along with an optional title for the link, surrounded in quotes. For example:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>](<span class="hljs-link">http://example.com/ &quot;Title&quot;</span>) inline link.<br><br>[<span class="hljs-string">This link</span>](<span class="hljs-link">http://example.net/</span>) has no title attribute.<br></code></pre></td></tr></table></figure>
-
 <p>will produce:</p>
 <p>This is <a target="_blank" rel="noopener" href="http://example.com/" title="Title">an example</a> inline link. (<code>&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot; title=&quot;Title&quot;&gt;</code>)</p>
 <p><a target="_blank" rel="noopener" href="http://example.net/">This link</a> has no title attribute. (<code>&lt;p&gt;&lt;a href=&quot;http://example.net/&quot;&gt;This link&lt;/a&gt; has no</code>)</p>
-<h4 id="Internal-Links"><a href="#Internal-Links" class="headerlink" title="Internal Links"></a>Internal Links</h4><p><strong>You can set the href to headers</strong>, which will create a bookmark that allow you to jump to that section after clicking. For example:</p>
+<h4 id="internal-links">Internal Links</h4>
+<p><strong>You can set the href to headers</strong>, which will create a bookmark that allow you to jump to that section after clicking. For example:</p>
 <p>Command(on Windows: Ctrl) + Click <a href="#block-elements">This link</a> will jump to header <code>Block Elements</code>. To see how to write that, please move cursor or click that link with <code>⌘</code> key pressed to expand the element into markdown source.</p>
-<h4 id="Reference-Links"><a href="#Reference-Links" class="headerlink" title="Reference Links"></a>Reference Links</h4><p>Reference-style links use a second set of square brackets, inside which you place a label of your choosing to identify the link:</p>
+<h4 id="reference-links">Reference Links</h4>
+<p>Reference-style links use a second set of square brackets, inside which you place a label of your choosing to identify the link:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown">This is [<span class="hljs-string">an example</span>][<span class="hljs-symbol">id</span>] reference-style link.<br><br>Then, anywhere in the document, you define your link label on a line by itself like this:<br><br>[<span class="hljs-symbol">id</span>]: <span class="hljs-link">http://example.com/  &quot;Optional Title Here&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p>In Typora, they will be rendered like so:</p>
-<p>This is [an example][id] reference-style link.</p>
-<p>[id]: <a target="_blank" rel="noopener" href="http://example.com/">http://example.com/</a>	“Optional Title Here”</p>
-<p>The implicit link name shortcut allows you to omit the name of the link, in which case the link text itself is used as the name. Just use an empty set of square brackets — for example, to link the word “Google” to the google.com web site, you could simply write:</p>
+<p>This is <a target="_blank" rel="noopener" href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
+<p>The implicit link name shortcut allows you to omit the name of the link, in which case the link text itself is used as the name. Just use an empty set of square brackets — for example, to link the word “Google” to the <a target="_blank" rel="noopener" href="http://google.com">google.com</a> web site, you could simply write:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[<span class="hljs-string">Google</span>][<span class="hljs-symbol"></span>]<br>And then define the link:<br><br>[<span class="hljs-symbol">Google</span>]: <span class="hljs-link">http://google.com/</span><br></code></pre></td></tr></table></figure>
-
 <p>In Typora, clicking the link will expand it for editing, and command+click will open the hyperlink in your web browser.</p>
-<h3 id="URLs"><a href="#URLs" class="headerlink" title="URLs"></a>URLs</h3><p>Typora allows you to insert URLs as links, wrapped by <code>&lt;</code>brackets<code>&gt;</code>.</p>
-<p><code>&lt;i@typora.io&gt;</code> becomes <a href="mailto:&#105;&#64;&#116;&#x79;&#112;&#111;&#x72;&#x61;&#x2e;&#x69;&#x6f;">&#105;&#64;&#116;&#x79;&#112;&#111;&#x72;&#x61;&#x2e;&#x69;&#x6f;</a>.</p>
-<p>Typora will also automatically link standard URLs. e.g: <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a>.</p>
-<h3 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h3><p>Images have similar syntax as links, but they require an additional <code>!</code> char before the start of the link. The syntax for inserting an image looks like this:</p>
+<h3 id="urls">URLs</h3>
+<p>Typora allows you to insert URLs as links, wrapped by <code>&lt;</code>brackets<code>&gt;</code>.</p>
+<p><code>&lt;i@typora.io&gt;</code> becomes <a href="mailto:i@typora.io">i@typora.io</a>.</p>
+<p>Typora will also automatically link standard URLs. e.g: <a target="_blank" rel="noopener" href="http://www.google.com">www.google.com</a>.</p>
+<h3 id="images">Images</h3>
+<p>Images have similar syntax as links, but they require an additional <code>!</code> char before the start of the link. The syntax for inserting an image looks like this:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown">![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg</span>)<br><br>![<span class="hljs-string">Alt text</span>](<span class="hljs-link">/path/to/img.jpg &quot;Optional title&quot;</span>)<br></code></pre></td></tr></table></figure>
-
 <p>You are able to use drag &amp; drop to insert an image from an image file or your web browser. You can modify the markdown source code by clicking on the image. A relative path will be used if the image that is added using drag &amp; drop is in same directory or sub-directory as the document you’re currently editing.</p>
 <p>If you’re using markdown for building websites, you may specify a URL prefix for the image preview on your local computer with property <code>typora-root-url</code> in YAML Front Matters. For example, input <code>typora-root-url:/User/Abner/Website/typora.io/</code> in YAML Front Matters, and then <code>![alt](/blog/img/test.png)</code> will be treated as <code>![alt](file:///User/Abner/Website/typora.io/blog/img/test.png)</code> in Typora.</p>
 <p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Images/">here</a>.</p>
-<h3 id="Emphasis"><a href="#Emphasis" class="headerlink" title="Emphasis"></a>Emphasis</h3><p>Markdown treats asterisks (<code>*</code>) and underscores (<code>_</code>) as indicators of emphasis. Text wrapped with one <code>*</code> or <code>_</code> will be wrapped with an HTML <code>&lt;em&gt;</code> tag. E.g:</p>
+<h3 id="emphasis">Emphasis</h3>
+<p>Markdown treats asterisks (<code>*</code>) and underscores (<code>_</code>) as indicators of emphasis. Text wrapped with one <code>*</code> or <code>_</code> will be wrapped with an HTML <code>&lt;em&gt;</code> tag. E.g:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-emphasis">*single asterisks*</span><br><br><span class="hljs-emphasis">_single underscores_</span><br></code></pre></td></tr></table></figure>
-
 <p>output:</p>
 <p><em>single asterisks</em></p>
 <p><em>single underscores</em></p>
@@ -359,40 +368,48 @@
 </blockquote>
 <p>To produce a literal asterisk or underscore at a position where it would otherwise be used as an emphasis delimiter, you can backslash escape it:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">\<span class="hljs-emphasis">*this text is surrounded by literal asterisks\*</span><br></code></pre></td></tr></table></figure>
-
 <p>Typora recommends using the <code>*</code> symbol.</p>
-<h3 id="Strong"><a href="#Strong" class="headerlink" title="Strong"></a>Strong</h3><p>A double <code>*</code> or <code>_</code> will cause its enclosed contents to be wrapped with an HTML <code>&lt;strong&gt;</code> tag, e.g:</p>
+<h3 id="strong">Strong</h3>
+<p>A double <code>*</code> or <code>_</code> will cause its enclosed contents to be wrapped with an HTML <code>&lt;strong&gt;</code> tag, e.g:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-strong">**double asterisks**</span><br><br><span class="hljs-strong">__double underscores__</span><br></code></pre></td></tr></table></figure>
-
 <p>output:</p>
 <p><strong>double asterisks</strong></p>
 <p><strong>double underscores</strong></p>
 <p>Typora recommends using the <code>**</code> symbol.</p>
-<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p>To indicate an inline span of code, wrap it with backtick quotes (&#96;). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:</p>
+<h3 id="code">Code</h3>
+<p>To indicate an inline span of code, wrap it with backtick quotes (`). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">Use the <span class="hljs-code">`printf()`</span> function.<br></code></pre></td></tr></table></figure>
-
 <p>will produce:</p>
 <p>Use the <code>printf()</code> function.</p>
-<h3 id="Strikethrough"><a href="#Strikethrough" class="headerlink" title="Strikethrough"></a>Strikethrough</h3><p>GFM adds syntax to create strikethrough text, which is missing from standard Markdown.</p>
-<p><code>~~Mistaken text.~~</code> becomes <del>Mistaken text.</del></p>
-<h3 id="Underlines"><a href="#Underlines" class="headerlink" title="Underlines"></a>Underlines</h3><p>Underline is powered by raw HTML.</p>
+<h3 id="strikethrough">Strikethrough</h3>
+<p>GFM adds syntax to create strikethrough text, which is missing from standard Markdown.</p>
+<p><code>~~Mistaken text.~~</code> becomes <s>Mistaken text.</s></p>
+<h3 id="underlines">Underlines</h3>
+<p>Underline is powered by raw HTML.</p>
 <p><code>&lt;u&gt;Underline&lt;/u&gt;</code> becomes <u>Underline</u>.</p>
-<h3 id="Emoji-smile"><a href="#Emoji-smile" class="headerlink" title="Emoji :smile:"></a>Emoji :smile:</h3><p>Input emoji with syntax <code>:smile:</code>.</p>
+<h3 id="emoji-smile">Emoji :smile:</h3>
+<p>Input emoji with syntax <code>:smile:</code>.</p>
 <p>User can trigger auto-complete suggestions for emoji by pressing <code>ESC</code> key, or trigger it automatically after enabling it on preference panel. Also, inputting UTF-8 emoji characters directly is also supported by going to <code>Edit</code> -&gt; <code>Emoji &amp; Symbols</code> in the menu bar (macOS).</p>
-<h3 id="Inline-Math"><a href="#Inline-Math" class="headerlink" title="Inline Math"></a>Inline Math</h3><p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>$</code> to wrap a TeX command. For example: <code>$\lim_&#123;x \to \infty&#125; \exp(-x) = 0$</code> will be rendered as LaTeX command.</p>
+<h3 id="inline-math">Inline Math</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>$</code> to wrap a TeX command. For example: <code>$\lim_&#123;x \to \infty&#125; \exp(-x) = 0$</code> will be rendered as LaTeX command.</p>
 <p>To trigger inline preview for inline math: input “$”, then press the <code>ESC</code> key, then input a TeX command.</p>
 <p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/Math/">here</a>.</p>
-<h3 id="Subscript"><a href="#Subscript" class="headerlink" title="Subscript"></a>Subscript</h3><p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>~</code> to wrap subscript content. For example: <code>H~2~O</code>, <code>X~long\ text~</code>&#x2F;</p>
-<h3 id="Superscript"><a href="#Superscript" class="headerlink" title="Superscript"></a>Superscript</h3><p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>^</code> to wrap superscript content. For example: <code>X^2^</code>.</p>
-<h3 id="Highlight"><a href="#Highlight" class="headerlink" title="Highlight"></a>Highlight</h3><p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>==</code> to wrap highlight content. For example: <code>==highlight==</code>.</p>
-<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>You can use HTML to style content what pure Markdown does not support. For example, use <code>&lt;span style=&quot;color:red&quot;&gt;this text is red&lt;/span&gt;</code> to add text with red color.</p>
-<h3 id="Embed-Contents"><a href="#Embed-Contents" class="headerlink" title="Embed Contents"></a>Embed Contents</h3><p>Some websites provide iframe-based embed code which you can also paste into Typora. For example:</p>
+<h3 id="subscript">Subscript</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>~</code> to wrap subscript content. For example: <code>H~2~O</code>, <code>X~long\ text~</code>/</p>
+<h3 id="superscript">Superscript</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>^</code> to wrap superscript content. For example: <code>X^2^</code>.</p>
+<h3 id="highlight">Highlight</h3>
+<p>To use this feature, please enable it first in the <code>Preference</code> Panel -&gt; <code>Markdown</code> Tab. Then, use <code>==</code> to wrap highlight content. For example: <code>==highlight==</code>.</p>
+<h2 id="html">HTML</h2>
+<p>You can use HTML to style content what pure Markdown does not support. For example, use <code>&lt;span style=&quot;color:red&quot;&gt;this text is red&lt;/span&gt;</code> to add text with red color.</p>
+<h3 id="embed-contents">Embed Contents</h3>
+<p>Some websites provide iframe-based embed code which you can also paste into Typora. For example:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&#x27;265&#x27;</span> <span class="hljs-attr">scrolling</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Fancy Animated SVG Menu&#x27;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;http://codepen.io/jeangontijo/embed/OxVywj/?height=265&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2&#x27;</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">&#x27;no&#x27;</span> <span class="hljs-attr">allowtransparency</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">allowfullscreen</span>=<span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#x27;width: 100%;&#x27;</span>&gt;</span></span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
-
-<h3 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h3><p>You can use the <code>&lt;video&gt;</code> HTML tag to embed videos. For example:</p>
+<h3 id="video">Video</h3>
+<p>You can use the <code>&lt;video&gt;</code> HTML tag to embed videos. For example:</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;xxx.mp4&quot;</span> /&gt;</span></span><br></code></pre></td></tr></table></figure>
-
-<h3 id="Other-HTML-Support"><a href="#Other-HTML-Support" class="headerlink" title="Other HTML Support"></a>Other HTML Support</h3><p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/HTML/">here</a>.</p>
+<h3 id="other-html-support">Other HTML Support</h3>
+<p>You can find more details <a target="_blank" rel="noopener" href="https://support.typora.io/HTML/">here</a>.</p>
 
                 
               </div>

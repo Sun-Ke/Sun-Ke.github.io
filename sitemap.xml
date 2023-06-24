@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://izard.space/2023/06/24/%E5%9B%B4%E6%A3%8B%E5%85%A5%E9%97%A8%E2%80%94%E2%80%94%E6%AD%BB%E6%B4%BB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E7%8A%B6/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://izard.space/2023/06/24/%E8%AE%B0%E5%BD%95%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%AF%B9%E5%BC%88/</loc>
     
     <lastmod>2023-06-24</lastmod>
@@ -596,6 +605,13 @@
   
   <url>
     <loc>https://izard.space/tags/%E8%AF%97%E8%AF%8D/</loc>
+    <lastmod>2023-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://izard.space/tags/%E5%9B%B4%E6%A3%8B%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

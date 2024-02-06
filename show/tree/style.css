@@ -1,0 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+p{
+  color: white;
+  font-size: large;
+}
+
+input[type="radio"]:checked + label {
+  color: white;
+}

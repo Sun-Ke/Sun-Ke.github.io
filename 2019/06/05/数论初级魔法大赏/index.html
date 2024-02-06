@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css"><script src = "https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js" integrity="sha512-EKW5YvKU3hpyyOcN6jQnAxO/L8gts+YdYV6Yymtl8pk9YlYFtqJgihORuRoBXK8/cOIlappdU6Ms8KdK6yBCgA==" crossorigin="anonymous" referrerpolicy="no-referrer"> </script><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="forever_you">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="最近在准备关于莫比乌斯反演的课件，准备把例题简要整理下来，那就开始吧 [1.bzoj 2190 SDOI2008]仪仗队求$2+\sum_{x&#x3D;1}^{n-1}\sum_{y&#x3D;1}^{n-1}[gcd(x,y)&#x3D;&#x3D;1](n\le 40000)$ 最简单的做法，线性筛预处理出欧拉函数的前缀和，时间复杂度$O(n)$。 2.bzoj 2818 Gcd求$\sum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论初级魔法大赏">
+<meta property="og:url" content="https://izard.space/2019/06/05/%E6%95%B0%E8%AE%BA%E5%88%9D%E7%BA%A7%E9%AD%94%E6%B3%95%E5%A4%A7%E8%B5%8F/index.html">
+<meta property="og:site_name" content="Forever you~">
+<meta property="og:description" content="最近在准备关于莫比乌斯反演的课件，准备把例题简要整理下来，那就开始吧 [1.bzoj 2190 SDOI2008]仪仗队求$2+\sum_{x&#x3D;1}^{n-1}\sum_{y&#x3D;1}^{n-1}[gcd(x,y)&#x3D;&#x3D;1](n\le 40000)$ 最简单的做法，线性筛预处理出欧拉函数的前缀和，时间复杂度$O(n)$。 2.bzoj 2818 Gcd求$\sum">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-06-05T12:44:00.000Z">
+<meta property="article:modified_time" content="2020-08-24T07:58:14.000Z">
+<meta property="article:author" content="forever_you">
+<meta property="article:tag" content="时间复杂度">
+<meta property="article:tag" content="数论">
+<meta property="article:tag" content="莫比乌斯反演">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>数论初级魔法大赏 - Forever you~</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"izard.space","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start --><script type="text/javascript" src="/wgo/wgo.min.js"></script><script type="text/javascript" src="/wgo/wgo.player.min.js"></script><link rel="stylesheet" type="text/css" href="/wgo/wgo.player.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Forever you~" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Forever you~</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数论初级魔法大赏"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-06-05 20:44" pubdate>
+          2019年6月5日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数论初级魔法大赏</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近在准备关于莫比乌斯反演的课件，准备把例题简要整理下来，那就开始吧</p>
+<h3 id="1-bzoj-2190-SDOI2008-仪仗队"><a href="#1-bzoj-2190-SDOI2008-仪仗队" class="headerlink" title="[1.bzoj 2190 SDOI2008]仪仗队"></a>[1.bzoj 2190 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2190">SDOI2008]仪仗队</a></h3><p>求$2+\sum_{x&#x3D;1}^{n-1}\sum_{y&#x3D;1}^{n-1}[gcd(x,y)&#x3D;&#x3D;1](n\le 40000)$</p>
+<p>最简单的做法，线性筛预处理出欧拉函数的前缀和，时间复杂度$O(n)$。</p>
+<h3 id="2-bzoj-2818-Gcd"><a href="#2-bzoj-2818-Gcd" class="headerlink" title="2.bzoj 2818 Gcd"></a><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2818">2.bzoj 2818 Gcd</a></h3><p>求$\sum_{p}\sum_{x&#x3D;1}^{n}\sum_{y&#x3D;1}^{n}[gcd(x,y)&#x3D;&#x3D;p] (n\le 10^7)$</p>
+<p>其实就是$\sum_{p}\sum_{x&#x3D;1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{n}{p}\rfloor}[gcd(x,y)&#x3D;&#x3D;1]$，枚举所有质数后就是和上一道题一样做法了，双倍经验。</p>
+<h3 id="3-bzoj-2705-SDOI2012-Longge的问题"><a href="#3-bzoj-2705-SDOI2012-Longge的问题" class="headerlink" title="[3.bzoj 2705 SDOI2012]Longge的问题"></a>[3.bzoj 2705 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2705">SDOI2012]Longge的问题</a></h3><p>求$\sum_{i&#x3D;1}^{n}gcd(i,n), n\le 2^{32}$</p>
+<p>变形一下，枚举每种gcd的值，即</p>
+<p>$$<br>\begin{aligned}<br>&amp;\sum_{i&#x3D;1}^{n}gcd(i,n) \<br>&#x3D;&amp; \sum_{d\mid n}d \sum_{x&#x3D;1}^{\frac{n}{d}}[gcd(x,\frac{n}{d})&#x3D;&#x3D;1] \<br>&#x3D;&amp; \sum_{d\mid n}d\varphi(\frac{n}{d})<br>\end{aligned}<br>$$</p>
+<p>那么根号枚举约数，单点求欧拉函数就做完了。</p>
+<p>时间复杂度？是个经典的东西$O(\sum_{i&#x3D;1}^{\sqrt{n}}\sqrt{i}+\sqrt{\frac{n}{i}})&#x3D;O(n^{\frac{3}{4}})$</p>
+<h3 id="4-bzoj-2440-中山市选2011-完全平方数"><a href="#4-bzoj-2440-中山市选2011-完全平方数" class="headerlink" title="[4.bzoj 2440 中山市选2011]完全平方数"></a>[4.bzoj 2440 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2440">中山市选2011]完全平方数</a></h3><p>求第$k(k\le 10^9)$个不含完全平方数因子的正整数</p>
+<p>二分答案，转为求前$n$个数中有多少数不含完全平方因子。容斥一下，总数减去是4(2的平方)的倍数的，减去9的倍数，16的倍数不用管，前面减过了，再减去25的倍数，加上36的倍数，因为前面多减了一次…那这样就发现了容斥系数就是莫比乌斯函数。时间复杂度$O(\sqrt{n}\log{n})$</p>
+<h3 id="5-luogu-P2257-YY的GCD-bzoj-2820"><a href="#5-luogu-P2257-YY的GCD-bzoj-2820" class="headerlink" title="5.luogu P2257 YY的GCD(bzoj 2820)"></a><a target="_blank" rel="noopener" href="https://www.luogu.org/problemnew/show/P2257">5.luogu P2257 YY的GCD(bzoj 2820)</a></h3><p>求$\sum_{p}\sum_{x&#x3D;1}^{n}\sum_{y&#x3D;1}^{m}[gcd(x,y)&#x3D;&#x3D;p] (n\le 10^7)$，$T(\le 10000)$组询问</p>
+<p>bzoj 2818的加强版，把其中一个n换成了m，这样就不能用欧拉函数了，推导一下：</p>
+<p>下述的$p$表示质数</p>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_{p}\sum_{x&#x3D;1}^{n}\sum_{y&#x3D;1}^{m}[gcd(x,y)&#x3D;&#x3D;p] \<br>&#x3D;&amp; \sum_{p}\sum_{x&#x3D;1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{m}{p}\rfloor}[gcd(x,y)&#x3D;&#x3D;1] \<br>&#x3D;&amp; \sum_{p}\sum_{x&#x3D;1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{m}{p}\rfloor}\sum_{d\mid gcd(x,y)}\mu(d) \<br>&#x3D;&amp; \sum_{p}\sum_{x&#x3D;1}^{\lfloor \frac{n}{p}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{m}{p}\rfloor}\sum_{d\mid x \land d\mid y}\mu(d) \<br>&#x3D;&amp; \sum_{p}\sum_{d&#x3D;1}^{\lfloor \frac{min(n,m)}{p}\rfloor}\mu(d)\lfloor \frac{n}{pd}\rfloor\lfloor \frac{m}{pd}\rfloor \<br>&#x3D;&amp; \sum_{k&#x3D;1}^{min(n,m)}\sum_{p,p\mid k}\mu(\frac{k}{p})\lfloor \frac{n}{k}\rfloor\lfloor \frac{m}{k}\rfloor \<br>&#x3D;&amp; \sum_{k&#x3D;1}^{min(n,m)}f(k)\lfloor \frac{n}{k}\rfloor\lfloor \frac{m}{k}\rfloor<br>\end{aligned}<br>$$</p>
+<p>其中第三行莫比乌斯反演，第五行交换求和，第六行令$k&#x3D;pd$,转而枚举$k$，化简到最后用筛法预处理出所有$f$的值即可，这里应该可以用线性筛，不过懒得推导的话也可以枚举所有质数再枚举它的倍数这样求，那么时间复杂度就和埃氏筛一样了，之后每次求一组询问就是经典的数论分块了。时间复杂度$O(n\log{\log{n}}+T\sqrt{n})$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">10000000</span>;<br><span class="hljs-type">bool</span> vis[N+<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> prime[N+<span class="hljs-number">5</span>],cnt;<br><span class="hljs-type">int</span> mu[N+<span class="hljs-number">5</span>],f[N+<span class="hljs-number">5</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getprime</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    mu[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=N;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(!vis[i])<br>        &#123;<br>            prime[cnt++]=i;<br>            mu[i]=<span class="hljs-number">-1</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;cnt &amp;&amp; prime[j]&lt;=N/i;j++)<br>        &#123;<br>            vis[i*prime[j]]=<span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span>(i%prime[j]) mu[i*prime[j]]=-mu[i];<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                mu[i*prime[j]]=<span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;cnt;++i)<br>    &#123;<br>        <span class="hljs-type">int</span> x=prime[i];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=x;j&lt;=N;j+=x)<br>            f[j]+=mu[j/x];<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=N;++i)<br>        f[i]+=f[i<span class="hljs-number">-1</span>];<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-type">int</span> n,<span class="hljs-type">int</span> m)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n&gt;m) <span class="hljs-built_in">swap</span>(n,m);<br>    ll ans=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>,j;i&lt;=n;i=j+<span class="hljs-number">1</span>)<br>    &#123;<br>        j=<span class="hljs-built_in">min</span>(n/(n/i),m/(m/i));<br>        ans+=<span class="hljs-number">1LL</span>*(f[j]-f[i<span class="hljs-number">-1</span>])*(n/i)*(m/i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">getprime</span>();<br>    <span class="hljs-type">int</span> T;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;T);<br>    <span class="hljs-keyword">while</span>(T--)<br>    &#123;<br>        <span class="hljs-type">int</span> n,m;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">calc</span>(n,m));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-spoj-LCMSUM"><a href="#6-spoj-LCMSUM" class="headerlink" title="6.spoj LCMSUM"></a><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/LCMSUM/">6.spoj LCMSUM</a></h3><p>求$\sum_{i&#x3D;1}^{n}lcm(i,n), n\le 10^{6}$，$T(\le 300000)$组询问。</p>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_{i&#x3D;1}^{n}lcm(i,n) \<br>&#x3D;&amp;\sum_{i&#x3D;1}^{n}\frac{i\times n}{gcd(i,n)}\<br>&#x3D;&amp;\frac{1}{2}\sum_{i&#x3D;1}^{n-1}\frac{n^{2}}{gcd(i,n)}+n\<br>&#x3D;&amp;\frac{1}{2}\sum_{d\mid n,d\ne n}\frac{n^2}{d}\sum_{k&#x3D;1}^{\lfloor \frac{n}{d}\rfloor}[gcd(k,\frac{n}{d})&#x3D;&#x3D;1]+n \<br>&#x3D;&amp;\frac{1}{2}n\sum_{d\mid n,d\ne n}\frac{n}{d}\varphi(\frac{n}{d})+n \<br>&#x3D;&amp;\frac{1}{2}n\sum_{d\mid n,d\ne 1}d\varphi(d)+n \<br>&#x3D;&amp;\frac{1}{2}nf(n)+n<br>\end{aligned}<br>$$</p>
+<p>这样线性筛预处理完，$O(n\log{n})$的求出函数值$f$，每次回答$O(1)$即可。</p>
+<h3 id="7-bzoj-2154-Crash的数字表格"><a href="#7-bzoj-2154-Crash的数字表格" class="headerlink" title="7.bzoj 2154 Crash的数字表格"></a><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2154">7.bzoj 2154 Crash的数字表格</a></h3><p>求$\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}lcm(i,j),n,m\le 10^7$</p>
+<p>$$<br>\begin{aligned}<br>&amp;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}lcm(i,j) \<br>&#x3D;&amp;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}\frac{ij}{gcd(i,j)}\<br>&#x3D;&amp;\sum_{d&#x3D;1}^{min(n,m)}\sum_{x&#x3D;1}^{\lfloor \frac{n}{d}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{m}{d}\rfloor}dxy[gcd(x,y)&#x3D;&#x3D;1] \<br>&#x3D;&amp;\sum_{d&#x3D;1}^{min(n,m)}d\sum_{x&#x3D;1}^{\lfloor \frac{n}{d}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{m}{d}\rfloor}xy\sum_{k\mid x \land k\mid y}\mu(k) \<br>&#x3D;&amp;\sum_{d&#x3D;1}^{min(n,m)}d\sum_{k&#x3D;1}^{\lfloor \frac{m}{d}\rfloor}\mu(k)\sum_{x&#x3D;1}^{\lfloor \frac{n}{dk}\rfloor}\sum_{y&#x3D;1}^{\lfloor \frac{m}{dk}\rfloor}k^{2}xy \<br>&#x3D;&amp;\sum_{T&#x3D;1}^{min(n,m)}\sum_{k\mid T}kT\mu(k)g(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)\<br>&#x3D;&amp;\sum_{T&#x3D;1}^{min(n,m)}Tg(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)\sum_{k\mid T}k\mu(k)\<br>&#x3D;&amp;\sum_{T&#x3D;1}^{min(n,m)}Tg(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)f(T)<br>\end{aligned}<br>$$</p>
+<p>其中$g(n,m)&#x3D;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}ij&#x3D;\frac{n(n+1)}{2}\frac{m(m+1)}{2}$</p>
+<p>一开始头铁，$O(n\log{n})$求的$f(T)$的值，超时无疑，然后学习了用线性筛求积性函数$f(T)&#x3D;\sum_{k\mid T}k\mu(k)$的思路。</p>
+<p>线性筛过程分两种情况讨论</p>
+<p>1.$prime_j$整除$i$，那么枚举$i\times prime_j$的约数$k$时，如果关于$prime_j$的指数大于等于2的话莫比乌斯函数为零，对答案没有贡献，所以此时:<br>$$<br>f(i\times prime_j)&#x3D;f(i)<br>$$</p>
+<p>2.$prime_j$不整除$i$，那么再分枚举的约数$k$是否含有$prime_j$，不含有的部分就是$f(i)$，含$prime_j$的话，整体乘上这么多，并且莫比乌斯函数要变号，是$-f(i)prime_j$。综上，此时:<br>$$<br>f(i\times prime_j)&#x3D;(1-prime_j)f(i)<br>$$</p>
+<p>这样这道题就做完了，时间复杂度$O(n)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> mod=<span class="hljs-number">20101009</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">10000000</span>;<br><span class="hljs-type">bool</span> vis[N+<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> prime[<span class="hljs-number">666666</span>],cnt;<br><span class="hljs-type">int</span> f[N+<span class="hljs-number">5</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getprime</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    f[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=N;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(!vis[i])<br>        &#123;<br>            prime[cnt++]=i;<br>            f[i]=(<span class="hljs-number">1</span>-i+mod);<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;cnt &amp;&amp; i*prime[j]&lt;=N;j++)<br>        &#123;<br>            vis[i*prime[j]]=<span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span>(i%prime[j])<br>            &#123;<br>                f[i*prime[j]]=<span class="hljs-number">1LL</span>*(<span class="hljs-number">1</span>-prime[j]+mod)*f[i]%mod;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                f[i*prime[j]]=f[i];<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br><span class="hljs-comment">//    for(int i=1;i&lt;=N;++i)</span><br><span class="hljs-comment">//    &#123;</span><br><span class="hljs-comment">//        for(int j=i;j&lt;=N;j+=i)</span><br><span class="hljs-comment">//        &#123;</span><br><span class="hljs-comment">//            f[j]+=i*mu[i];</span><br><span class="hljs-comment">//            if(f[j]&lt;0) f[j]+=mod;</span><br><span class="hljs-comment">//            else if(f[j]&gt;=mod) f[j]-=mod;</span><br><span class="hljs-comment">//        &#125;</span><br><span class="hljs-comment">//    &#125;</span><br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Sum</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1LL</span>*(n+<span class="hljs-number">1</span>)*n/<span class="hljs-number">2</span>%mod;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">getprime</span>();<br>    <span class="hljs-type">int</span> n,m;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<br>    <span class="hljs-keyword">if</span>(n&lt;m) <span class="hljs-built_in">swap</span>(n,m);<br>    ll ans=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;++i)&#123;<br>        ans+=<span class="hljs-number">1LL</span>*i*<span class="hljs-built_in">Sum</span>(n/i)%mod*<span class="hljs-built_in">Sum</span>(m/i)%mod*f[i]%mod;<br>        <span class="hljs-keyword">if</span>(ans&gt;=mod) ans-=mod;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-bzoj-3994-SDOI2015-约数个数和"><a href="#8-bzoj-3994-SDOI2015-约数个数和" class="headerlink" title="[8.bzoj 3994 SDOI2015]约数个数和"></a>[8.bzoj 3994 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=3994">SDOI2015]约数个数和</a></h3><p>求$\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}d(ij), n,m\le 50000$，$T(\le 50000)$组询问，其中$d$是约数个数函数。</p>
+<p>这个题一开始卡在一个结论上了，首先要知道$d(ij)&#x3D;\sum_{x\mid i}\sum_{y\mid j}[gcd(x,y)&#x3D;&#x3D;1]$，这个结论不好想，但可以用分解质因数的形式结合约数个数定理推出来，那解决了第一步，后面的就简单了。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}d(ij)\<br>&#x3D;&amp;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}\sum_{x\mid i}\sum_{y\mid j}[gcd(x,y)&#x3D;&#x3D;1]\<br>&#x3D;&amp;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}\sum_{x\mid i}\sum_{y\mid j}\sum_{k\mid gcd(x,y)}\mu(k)\<br>&#x3D;&amp;\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}\sum_{x\mid i}\sum_{y\mid j}\sum_{k\mid x \land k\mid y}\mu(k)\<br>&#x3D;&amp;\sum_{k&#x3D;1}^{min(n,m)}\mu(k)\sum_{x&#x3D;1}^{\lfloor\frac{n}{k}\rfloor}\sum_{y&#x3D;1}^{\lfloor\frac{m}{k}\rfloor}\lfloor\frac{n}{xk}\rfloor\lfloor\frac{m}{yk}\rfloor\<br>&#x3D;&amp;\sum_{k&#x3D;1}^{min(n,m)}\mu(k)\sum_{x&#x3D;1}^{\lfloor\frac{n}{k}\rfloor}\lfloor\frac{n}{xk}\rfloor f(\lfloor\frac{m}{k}\rfloor)\<br>&#x3D;&amp;\sum_{k&#x3D;1}^{min(n,m)}\mu(k)f(\lfloor\frac{n}{k}\rfloor) f(\lfloor\frac{m}{k}\rfloor) \<br>\end{aligned}<br>$$</p>
+<p>至此又可以数论分块搞定单组询问了，时间复杂度$O(T\sqrt{n})$。</p>
+<h3 id="9-bzoj-4659-lcm"><a href="#9-bzoj-4659-lcm" class="headerlink" title="9.bzoj 4659 lcm"></a><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=4659">9.bzoj 4659 lcm</a></h3><p>化简下题意就是求$\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;1}^{m}lcm(i,j)[\mu^2(gcd(i,j))&#x3D;&#x3D;1],n,m\le 4000000$，对$2^{30}$取模，$T(\le 2000)$组询问。发现就是在<a href="#t7">第七题</a>的基础上加了个多组询问，且只统计$\mu^2(gcd(i,j))&#x3D;&#x3D;1$的。</p>
+<p>那么前面的推导都是一样的，最后化简到</p>
+<p>原式$&#x3D;\sum_{T&#x3D;1}^{min(n,m)}g(\lfloor \frac{n}{T}\rfloor,\lfloor \frac{m}{T}\rfloor)T\sum_{k\mid T}k\mu(k)\mu^2(\frac{T}{k})$</p>
+<p>头铁依然会TLE，还是先观察一下</p>
+<p>$f(T)&#x3D;\sum_{k\mid T}k\mu(k)\mu^2(\frac{T}{k})$是积性函数</p>
+<p>且当$T$分解质因数后的指数中有大于2的情况的话，显然此时$f(T)&#x3D;0$，并且易知$f(p)&#x3D;1-p,f(p^2)&#x3D;-p$，这样又可以线性筛搞一搞了，然后预处理出$if(i)$的前缀和。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> mod=<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">30</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">4000000</span>;<br><span class="hljs-type">bool</span> vis[N+<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> prime[N+<span class="hljs-number">5</span>],cnt;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> f[N+<span class="hljs-number">5</span>],sum[N+<span class="hljs-number">5</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getprime</span><span class="hljs-params">()</span> </span>&#123;<br>    f[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=N;i++) &#123;<br>        <span class="hljs-keyword">if</span>(!vis[i]) &#123;<br>            prime[cnt++]=i;<br>            f[i]=<span class="hljs-number">1U</span>-i;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;cnt &amp;&amp; i*prime[j]&lt;=N;j++) &#123;<br>            vis[i*prime[j]]=<span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span>(i%prime[j]) &#123;<br>                f[i*prime[j]]=f[i]*f[prime[j]];<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span>(i==prime[j]) f[i*prime[j]]=-prime[j];<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i/prime[j]%prime[j]==<span class="hljs-number">0</span>) f[i*prime[j]]=<span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">else</span> f[i*prime[j]]=f[i/prime[j]]*f[prime[j]*prime[j]];<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br><span class="hljs-comment">//    for(int i=1;i&lt;=N;++i) &#123;</span><br><span class="hljs-comment">//        for(int j=i;j&lt;=N;j+=i) &#123;</span><br><span class="hljs-comment">//            f[j]+=i*mu[i]*abs(mu[j/i]);</span><br><span class="hljs-comment">//        &#125;</span><br><span class="hljs-comment">//    &#125;</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=N;++i)<br>        sum[i]=sum[i<span class="hljs-number">-1</span>]+<span class="hljs-number">1U</span>*i*f[i];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> <span class="hljs-title">Sum</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1LL</span>*(n+<span class="hljs-number">1</span>)*n/<span class="hljs-number">2</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">getprime</span>();<br>    <span class="hljs-type">int</span> T;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;T);<br>    <span class="hljs-keyword">while</span>(T--)&#123;<br>        <span class="hljs-type">int</span> n,m;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<br>        <span class="hljs-keyword">if</span>(n&lt;m) <span class="hljs-built_in">swap</span>(n,m);<br>        <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> ans=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>,j;i&lt;=m;i=j+<span class="hljs-number">1</span>)&#123;<br>            j=<span class="hljs-built_in">min</span>(n/(n/i),m/(m/i));<br>            ans+=<span class="hljs-number">1U</span>*(sum[j]-sum[i<span class="hljs-number">-1</span>])*<span class="hljs-built_in">Sum</span>(n/i)*<span class="hljs-built_in">Sum</span>(m/i);<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,(<span class="hljs-type">int</span>)(ans%mod));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="10-bzoj-4816-Sdoi2017-数字表格"><a href="#10-bzoj-4816-Sdoi2017-数字表格" class="headerlink" title="[10.bzoj 4816 Sdoi2017]数字表格"></a>[10.bzoj 4816 <a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=4816">Sdoi2017]数字表格</a></h3><p>求$\prod_{i&#x3D;1}^{n}\prod_{j&#x3D;1}^{m}f(gcd(i,j)),n,m\le 10^6$，其中$f$为斐波那契数列，结果模$10^9+7$，$T(\le 1000)$组询问。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\prod_{i&#x3D;1}^{n}\prod_{j&#x3D;1}^{m}f(gcd(i,j)) \<br>&#x3D;&amp;\prod_{d&#x3D;1}^{min(n,m)}f(d)^{\sum_{i&#x3D;1}^{\lfloor\frac{n}{d}\rfloor}\sum_{i&#x3D;1}^{\lfloor\frac{m}{d}\rfloor}[gcd(i,j)&#x3D;&#x3D;1]} \<br>&#x3D;&amp;\prod_{d&#x3D;1}^{min(n,m)}f(d)^{\sum_{k&#x3D;1}^{min(\lfloor\frac{n}{d}\rfloor,\lfloor\frac{m}{d}\rfloor)}\mu(k)\lfloor\frac{n}{dk}\rfloor\lfloor\frac{m}{dk}\rfloor}\<br>\end{aligned}<br>$$</p>
+<p>这样指数部分是关于$\lfloor\frac{n}{d}\rfloor,\lfloor\frac{m}{d}\rfloor$的函数，可以分块，又因为外层是枚举的$d$，所以分块套分块即可！时间复杂度$O(T(n^{\frac{3}{4}}+\sqrt{n}\log{n}))$，前一部分来源分析同<a href="#t3">第三题</a>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 1000000</span><br><span class="hljs-type">bool</span> vis[N+<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> prime[N+<span class="hljs-number">5</span>],cnt;<br><span class="hljs-type">int</span> mu[N+<span class="hljs-number">5</span>],sum[N+<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> f[N+<span class="hljs-number">5</span>],pre[N+<span class="hljs-number">5</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getprime</span><span class="hljs-params">()</span> </span>&#123;<br>    mu[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=N;i++) &#123;<br>        <span class="hljs-keyword">if</span>(!vis[i]) &#123;<br>            prime[cnt++]=i;<br>            mu[i]=<span class="hljs-number">-1</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;cnt &amp;&amp; prime[j]&lt;=N/i;j++) &#123;<br>            vis[i*prime[j]]=<span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span>(i%prime[j])<br>                mu[i*prime[j]]=-mu[i];<br>            <span class="hljs-keyword">else</span> &#123;<br>                mu[i*prime[j]]=<span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=N;++i)<br>        sum[i]=sum[i<span class="hljs-number">-1</span>]+mu[i];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">power</span><span class="hljs-params">(<span class="hljs-type">int</span> x,ll n)</span></span>&#123;<br>    <span class="hljs-type">int</span> ans=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(n)&#123;<br>        <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>) ans=<span class="hljs-number">1LL</span>*ans*x%mod;<br>        x=<span class="hljs-number">1LL</span>*x*x%mod;<br>        n&gt;&gt;=<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-type">int</span> n,<span class="hljs-type">int</span> m,<span class="hljs-type">int</span> d)</span></span>&#123;<br>    ll ans=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>,j;i&lt;=n;i=j+<span class="hljs-number">1</span>)&#123;<br>        j=<span class="hljs-built_in">min</span>(n/(n/i),m/(m/i));<br>        ans+=<span class="hljs-number">1LL</span>*(sum[j]-sum[i<span class="hljs-number">-1</span>])*(n/i)*(m/i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">getprime</span>();<br><br>    pre[<span class="hljs-number">0</span>]=pre[<span class="hljs-number">1</span>]=f[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=N;++i)&#123;<br>        f[i]=f[i<span class="hljs-number">-1</span>]+f[i<span class="hljs-number">-2</span>];<br>        <span class="hljs-keyword">if</span>(f[i]&gt;=mod) f[i]-=mod;<br>        pre[i]=<span class="hljs-number">1LL</span>*pre[i<span class="hljs-number">-1</span>]*f[i]%mod;<br>    &#125;<br>    <span class="hljs-type">int</span> T;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;T);<br>    <span class="hljs-keyword">while</span>(T--)&#123;<br>        <span class="hljs-type">int</span> n,m;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<br>        <span class="hljs-keyword">if</span>(n&gt;m) <span class="hljs-built_in">swap</span>(n,m);<br>        <span class="hljs-type">int</span> ans=<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>,j;i&lt;=n;i=j+<span class="hljs-number">1</span>)&#123;<br>            j=<span class="hljs-built_in">min</span>(n/(n/i),m/(m/i));<br>            <span class="hljs-type">int</span> x=<span class="hljs-number">1LL</span>*pre[j]*<span class="hljs-built_in">power</span>(pre[i<span class="hljs-number">-1</span>],mod<span class="hljs-number">-2</span>)%mod;<br>            ll y=<span class="hljs-built_in">calc</span>(n/i,m/i,i);<br>            ans=<span class="hljs-number">1LL</span>*ans*<span class="hljs-built_in">power</span>(x,y)%mod;<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="category-chain-item">算法学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">#时间复杂度</a>
+      
+        <a href="/tags/%E6%95%B0%E8%AE%BA/">#数论</a>
+      
+        <a href="/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/">#莫比乌斯反演</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数论初级魔法大赏</div>
+      <div>https://izard.space/2019/06/05/数论初级魔法大赏/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>forever_you</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年6月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/09/16/Burnside%E5%BC%95%E7%90%86%E4%B8%8EPolya%E8%AE%A1%E6%95%B0%E5%85%AC%E5%BC%8F/" title="Burnside引理与Polya计数公式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Burnside引理与Polya计数公式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/04/29/%E6%9E%9A%E4%B8%BE%E7%AE%97%E6%B3%95%E5%86%8D%E6%94%BE%E9%80%81/" title="枚举算法再放送">
+                        <span class="hidden-mobile">枚举算法再放送</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script>pseudocode.renderClass("pseudocode");</script><!-- hexo injector body_end end --></body>
+</html>

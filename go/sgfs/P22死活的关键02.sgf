@@ -1,0 +1,7 @@
+(;CA[utf-8]AB[cp][bq][cr]AW[bp][bo][co][do][dp][eq][gq]AP[MultiGo:4.4.4]SZ[19]AB[cq]
+MULTIGOGM[0]
+
+(;B[er]C[正确，黑棋左下是方的，做不出两眼，只能扩大眼位]
+;W[fr]C[白棋挡下，阻止黑棋继续扩大];B[es];W[dq];B[dr]C[六个空位足够做两眼])
+(;B[ar]C[错误，角上走不走都是一个眼];W[bs]C[白棋点眼];B[er];W[fr]
+;B[es];W[dq];B[dr];W[cs]C[黑棋死]))

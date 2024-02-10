@@ -1,0 +1,8 @@
+(;CA[utf-8]AB[cq][dp][co][ep][fp][gq]AW[ar][br][cr][dq][eq]C[黑棋如何杀死白棋]
+AP[MultiGo:4.4.4]SZ[19]AB[bq]MULTIGOGM[0]
+
+(;B[fr]C[错误，黑棋尖，缩小眼位得不够厉害];W[er];B[es]C[黑棋再缩小眼位]
+;W[ds];B[fs];W[bs]C[白棋活])
+(;B[er]C[正确，黑棋缩小眼位]
+(;W[dr];B[fr])
+(;W[fr];B[dr])))

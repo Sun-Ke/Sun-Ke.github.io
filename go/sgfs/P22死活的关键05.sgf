@@ -1,0 +1,8 @@
+(;CA[utf-8]AB[cp][dp][ep][fp][gp][hp][ip][iq][ir][kr][br][cr]AW[cs][dr][dq][eq]
+[fq][gq][hq][hr][hs]C[黑棋如何杀死白棋]AP[MultiGo:4.4.4]SZ[19]AB[bp]MULTIGOGM[0]
+
+(;B[ds]C[正确，黑棋扑，缩小眼位]
+(;W[es]C[白棋变刀五];B[fr]C[白棋死])
+(;W[fs];B[gr]C[点眼]))
+(;B[fr]C[瞎点];W[fs];B[es];W[gr]C[没杀干净，打劫活])
+(;B[fs]C[瞎点];W[fr];B[es];W[gs]C[白棋全活了]))

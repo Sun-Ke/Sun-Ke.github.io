@@ -1,0 +1,11 @@
+(;CA[utf-8]AB[dp][dm][fq][fr][dq][eq]AW[cq][cr][dr][er]C[黑棋如何杀死白棋]
+AP[MultiGo:4.4.4]SZ[19]AB[do]MULTIGOGM[0]
+
+(;B[cp]C[错误
+缩小眼位，但是缩小的不够多];W[bp]C[扩大眼位];B[bo]
+;W[aq]C[白棋虎，足够做成两眼])
+(;B[bp];W[cp]
+(;B[bo]C[正确，黑棋退];W[bq];B[es]C[黑棋在上面不需要补了，再另一边缩小眼位]
+;W[bs];B[ar]C[一点，白棋死了])
+(;B[co]C[错误，黑棋不能随手一挡];W[bq]C[白棋扩大眼位变成先手]
+;B[bo]TR[bs][es]C[黑棋不得不接，此时白棋下在B1或E1都活了])))

@@ -1,208 +1,182 @@
 let graph;
 let canvas;
-let inputbox;
-let n, edges, rev;
-let bright_p, size_p, space_p, number_p, color_p;
-let bright_slider, size_slider, space_slider, number_radio, color_radio;
-let scale_val = 1;
-function setup(){
-    canvas = createCanvas(1280, 720);
-  
-    bright_p = createP('bright');
-    bright_p.position(10, -10-2);
-    
-    size_p = createP('size');
-    size_p.position(10, 20-2);
-    
-    space_p = createP('space');
-    space_p.position(10, 50-2);
-  
-    number_p = createP('number');
-    number_p.position(10, 80-2);
-    
-    color_p = createP('color');
-    color_p.position(10, 110-2);
-  
-    bright_slider = createSlider(0, 100, 75);
-    bright_slider.position(60, 10);
-    bright_slider.style('width', '140px');
-    
-    size_slider = createSlider(0, 100, 50);
-    size_slider.position(60, 40);
-    size_slider.style('width', '140px');
-    
-    space_slider = createSlider(0, 100, 50);
-    space_slider.position(60, 70);
-    space_slider.style('width', '140px');
-    
-    number_radio = createRadio('number')
-    number_radio.position(90,100)
-    number_radio.option('on');
-    number_radio.option('off');
-    number_radio.selected('off');
-    
-    color_radio = createRadio('color');
-    color_radio.position(69.5,130)
-    color_radio.option('black');
-    color_radio.option('white');
-    color_radio.selected('white');
-  
-    saveJPG_button = createButton('save as jpg')
-    saveJPG_button.position(10, 160);
-    saveJPG_button.mousePressed(saveJPG);
-  
-    let title = createElement('h1','Graph Visualization');
-    let title2 = createElement('h3','Input n and m — the number of vertices and the number of edges in the graph. Each of the next m lines contains u and v, denoting an edge connecting vertex u and vertex v. Click \'render\' to see what it looks like. Have fun!');
-    
-    
-    inputbox = createElement('textarea','5 6\n1 2\n1 3\n2 4\n3 4\n1 5\n2 3');
-    inputbox.attribute('rows','7');
-    inputbox.attribute('cols','15');
-    inputbox.style('font-size','1.6em');
-  
-    run_button = createButton('render');
-    run_button.style('width','87.28px');
-    run_button.style('height','33.6px');
-    run_button.style('font-size','21.3333px');
-    run_button.mousePressed(render);
-  
-    render();
+let scale_controller;
+
+let parameters = {
+    bright: 0.75,
+    scale: 0.5,
+    size: 0.6,
+    space: 0.5,
+    number_on: true,
+    revert: true,
+    color: 0,
+    pixel_density: 1,
+    speed: 0.1,
+    style: "force",
+    text: "(1 ,2), (1, 3), (2,4), (3,4),(1,5), (2,3)",
+    save_button: save_image,
+    render: process_input,
+    random_button: random_position,
+};
+
+function setup() {
+    let gui = new dat.GUI();
+    let control_folder = gui.addFolder('control');
+    let vis_folder = gui.addFolder('vis');
+    let text_folder = gui.addFolder('input');
+    let save_folder = gui.addFolder('save');
+
+    control_folder.add(parameters, 'speed', 0, 1).name('speed');
+    control_folder.add(parameters, 'bright', 0, 1).name('bright');
+    scale_controller = control_folder.add(parameters, 'scale', 0, 1).name('scale');
+    control_folder.add(parameters, 'size', 0, 1).name('size');
+    control_folder.add(parameters, 'space', 0, 1).name('space');
+    control_folder.add(parameters, 'number_on').name('number');
+    control_folder.add(parameters, 'style', ["force"]).name('style');
+    control_folder.add(parameters, 'random_button').name('random');
+
+    vis_folder.add(parameters, 'color', 0, 1).name('color');
+    vis_folder.add(parameters, 'revert').name('revert');
+    vis_folder.add(parameters, 'pixel_density', 1, 3).name('pixel density');
+
+    text_folder.add(parameters, "text").name('graph');
+    text_folder.add(parameters, "render").name('render');
+
+    save_folder.add(parameters, 'save_button').name('save as jpg');
+
+    control_folder.open();
+    vis_folder.open();
+    text_folder.open();
+    save_folder.open();
+
+    canvas = createCanvas(windowWidth, windowHeight)
+    canvas.style('display', 'block')
+    canvas.parent('sketch');
+
+    drawing = createGraphics(windowWidth, windowHeight);
+    drawing.clear();
+
+    process_input();
 }
 
-function render(){
-    let alls = inputbox.value().trim().split('\n');
-    let cp = new Map();
-    let firstline = alls[0].trim().split(/\s+/);
-    if (2 != firstline.length) {
-        alert('Input error!');
-        return;
-    }
-    n = parseInt(firstline[0]);
-    let m = parseInt(firstline[1]);
-    if(isNaN(n) || isNaN(m) || n == 0) {
-        alert('Input error!');
-        return;
-    }
+function process_input() {
+    let alls = parameters.text;
+    let matches = alls.match(/\(.*?,.*?\)/g);
+    let m = matches.length;
+    let map = new Map();
     let tot = 0;
-    if(m != alls.length - 1){
-        alert('Input error!');
-        return;
-    }
-    for(let i = 1; i <= m; i++){
-        let line = alls[i].trim().split(/\s+/);
-        if(2 != line.length){
-            alert('Input error!');
+    let arr = [];
+    for (let ele of matches) {
+        let pair = ele.slice(1, ele.length - 1);
+        let line = pair.split(",");
+        if (2 != line.length) {
+            alert('input error!');
             return;
         }
-        if(!cp.has(line[0])){
-            cp.set(line[0],tot++);
+        let x = line[0].trim();
+        let y = line[1].trim();
+        if (!map.has(x)) {
+            map.set(x, tot++);
         }
-        if(!cp.has(line[1])){
-            cp.set(line[1],tot++);
-        } 
+        if (!map.has(y)) {
+            map.set(y, tot++);
+        }
+        arr.push([map.get(x), map.get(y)]);
     }
-    if(tot > n){
-        alert('Input error!');
-        return;
-    }
-    edges = new Array(n);
-    for(let i = 0; i < n; i++){
+    let n = tot;
+    let edges = new Array(n);
+    for (let i = 0; i < n; i++) {
         edges[i] = [];
     }
-    for(let i = 1; i <= m; i++){
-        let line = alls[i].trim().split(/\s+/);
-        let x = cp.get(line[0]), y = cp.get(line[1]);
-        if(x == y || edges[x].indexOf(y) != -1) 
+    for (let [x, y] of arr) {
+        if (x == y || edges[x].indexOf(y) != -1)
             continue;
         edges[y].push(x);
         edges[x].push(y);
     }
-    rev = new Array(n);
-    for(let [key,value] of cp){
+    let rev = new Array(n);
+    for (let [key, value] of map) {
         rev[value] = key;
     }
     graph = new ForceDirectedGraph({
-      'n': n,
-      'edges': edges,
-      'symbol': rev
-    })
-    //some values in rev can be undefined
+        'n': n,
+        'edges': edges,
+        'symbol': rev
+    });
 }
 
 function mouseWheel(event) {
     //move the square according to the vertical scroll amount
+    let scale_val = parameters.scale;
     scale_val += event.delta / 2500;
-    scale_val = max(scale_val, 0.1);
-    scale_val = min(scale_val, 3);
-    return false;
+    scale_val = max(scale_val, 0);
+    scale_val = min(scale_val, 1);
+    parameters.scale = scale_val;
+    scale_controller.updateDisplay();
 }
 
-let preX,preY;
+let preX, preY;
 let drag_node = -1;
 
 function mousePressed() {
     preX = mouseX;
     preY = mouseY;
-    if(preX<222 && preY<222) {
-        preX = -1;
-        preY = -1;
-    } else {
-        drag_node = graph.locate_node(preX, preY);
-    }
+    drag_node = graph.locate_node(preX, preY);
 }
+
 function mouseReleased() {
     drag_node = -1;
+    graph.set_drag_node(drag_node);
 }
+
 function mouseDragged(event) {
-    if(preX>=0 && preX<=width && preY>=0 && preY<=height) {
-        if(drag_node == -1) {
-            graph.add_bias(mouseX - preX, mouseY - preY);    
+    if (preX >= 0 && preX <= width && preY >= 0 && preY <= height) {
+        graph.set_drag_node(drag_node);
+        if (drag_node == -1) {
+            graph.add_bias(mouseX - preX, mouseY - preY);
         } else {
-            graph.pull(drag_node, mouseX - preX, mouseY - preY); 
+            graph.pull(mouseX, mouseY, mouseX - preX, mouseY - preY);
         }
         preX = mouseX;
         preY = mouseY;
     }
 }
 
-function keyTyped() {
-    if (key == 'f' || key == 'F') {
-        graph.set_delta(1);
-    }
+function save_image() {
+    saveCanvas(drawing, 'graph', 'jpg');
 }
 
-function keyReleased() {
-    graph.set_delta(0.04);
-}
-function saveJPG(){
-    saveCanvas(canvas, 'graph', 'jpg');
-}
-
-function draw(){
-    let paint = ('white' == color_radio.value())? 255 : 0;
-    bright_p.style('color',color_radio.value());
-    size_p.style('color',color_radio.value());
-    space_p.style('color',color_radio.value());
-    number_p.style('color',color_radio.value());
-    color_p.style('color',color_radio.value());
-    radios = selectAll('input[type="radio"] + label');
-    for(let radio of radios) {
-        radio.style('color',color_radio.value());
+function draw() {
+    drawing.pixelDensity(parameters.pixel_density);
+    let color = map(parameters.color, 0, 1, 0, 255);
+    let background_color = color;
+    let stroke_color = 255;
+    if (parameters.revert) {
+        [background_color, stroke_color] = [stroke_color, background_color];
     }
-    background(255-paint);
-    graph.set_bright(map(bright_slider.value(),0,100,50,255));
-    graph.set_size(map(size_slider.value(),0,100,0.5,100));
-    graph.set_ratio(map(space_slider.value(),0,100,3,40));
-    graph.set_number_on('on' === number_radio.value())
-    graph.set_scale_val(scale_val);
+    drawing.background(background_color);
+    graph.set_drawing(drawing);
+    graph.set_stroke_color(stroke_color);
+    graph.set_delta(parameters.speed);
+    graph.set_bright(map(parameters.bright, 0, 1, 50, 255));
+    graph.set_size(map(parameters.size, 0, 1, 0.5, 100));
+    graph.set_ratio(map(parameters.space, 0, 1, 1, 50));
+    graph.set_number_on(parameters.number_on);
+    graph.set_scale_val(map(parameters.scale, 0, 1, 0.1, 4));
     graph.move();
-    let ok = graph.show(paint);
+    let ok = graph.show();
     if (!ok) {
         alert('Oops, two particles collided!');
-        graph = new ForceDirectedGraph({
-          'n': n,
-          'edges': edges,
-          'symbol': rev,
-        })
+        graph.init_pos();
     }
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    drawing = createGraphics(windowWidth, windowHeight);
+    drawing.clear();
+}
+
+function random_position() {
+    graph.init_pos();
 }

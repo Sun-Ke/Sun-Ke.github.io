@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -6,7 +7,8 @@ html, body {
 canvas {
   display: block;
 }
-p{
+
+p {
   color: white;
   font-size: large;
 }

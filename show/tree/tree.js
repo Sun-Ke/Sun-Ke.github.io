@@ -9,6 +9,30 @@ class RadialTree {
         this.angle = new Array(this.n);
         this.alpha = new Array(this.n);
         this.pos = new Array(this.n);
+        this.calc();
+    }
+    get_pos() {
+        return [...this.pos];
+    }
+    update_edges(edges) {
+        this.edges = [...edges];
+        this.calc();
+    }
+    update_scope(scope) {
+        this.scope = scope;
+        this.calc();
+    }
+    update_space(space) {
+        this.space = space;
+        this.calc();
+    }
+    calc() {
+        this.n = this.edges.length;
+        this.leaves.length = this.n;
+        this.dep.length = this.n;
+        this.angle.length = this.n;
+        this.alpha.length = this.n;
+        this.pos.length = this.n;
         for (let i = 0; i < this.n; i++) {
             this.leaves[i] = 0;
             this.dep[i] = 0;
@@ -19,14 +43,11 @@ class RadialTree {
                 y: 0,
             };
         }
-
         this.dfs_pre(0, -1);
         this.angle[0] = this.scope;
         this.dfs(0, -1);
     }
-    getPos() {
-        return this.pos;
-    }
+    // calc: dep, leaves
     dfs_pre(u, fa) {
         let sz = 0;
         for (const v of this.edges[u]) {
@@ -41,8 +62,9 @@ class RadialTree {
             this.leaves[u] += 1;
         }
     }
+    // calc: angle, alpha, pos
     dfs(u, fa) {
-        var sum = this.alpha[u];
+        let sum = this.alpha[u];
         for (const v of this.edges[u]) {
             if (v == fa)
                 continue;
@@ -87,6 +109,35 @@ class LayeredTree {
         this.rightSibling = new Array(this.n);
         this.leftNeighbor = new Array(this.n);
         this.tmp = new Array(this.n);
+        this.calc();
+    }
+    get_pos() {
+        return [...this.pos];
+    }
+    update_edges(edges) {
+        this.edges = [...edges];
+        this.calc();
+    }
+    update_space(sibling_separation) {
+        this.sibling_separation = sibling_separation;
+        this.calc();
+    }
+    update_size(node_size) {
+        this.node_size = node_size;
+        this.calc();
+    }
+    calc() {
+        this.n = this.edges.length;
+        this.dep.length = this.n;
+        this.size.length = this.n;
+        this.parent.length = this.n;
+        this.pos.length = this.n;
+        this.prelim.length = this.n;
+        this.modifier.length = this.n;
+        this.leftSibling.length = this.n;
+        this.rightSibling.length = this.n;
+        this.leftNeighbor.length = this.n;
+        this.tmp.length = this.n;
         for (let i = 0; i < this.n; i++) {
             this.dep[i] = 0;
             this.size[i] = 0;
@@ -101,16 +152,12 @@ class LayeredTree {
                 x: 0,
                 y: 0,
             };
-
         }
         this.dfs(0, -1, 0);
         this.firstWalk(0, 0);
         this.xTopAdjustment = this.pos[0].x - this.prelim[0];
         this.yTopAdjustment = this.pos[0].y;
         this.secondWalk(0, 0, 0);
-    }
-    getPos() {
-        return this.pos;
     }
     dfs(x, fa, level) {
         this.size[x] += 1;

@@ -1,26 +1,45 @@
 let graph;
 let canvas;
 let scale_controller;
+let gui;
+let isMouseOverGUI = false;
+let isMouseOverTextarea = false;
+let border = 5;
+
+let input_box_width = 270;
+let input_box_height = 500;
+let inputBox;
+// let typingTimer; // 定时器
+// let doneTypingInterval = 5000; // 停止输入后的等待时间 (毫秒)
+
+
+const input_example = `5 6
+1 2
+1 3
+2 4
+3 4
+1 5
+2 3
+`
 
 let parameters = {
     bright: 0.75,
-    scale: 0.5,
+    scale: 0.8,
     size: 0.6,
     space: 0.5,
     number_on: true,
     revert: true,
     color: 0,
-    pixel_density: 1,
-    speed: 0.1,
+    pixel_density: 2,
+    speed: 0.4,
     style: "force",
-    text: "(1 ,2), (1, 3), (2,4), (3,4),(1,5), (2,3)",
     save_button: save_image,
     render: process_input,
     random_button: random_position,
 };
 
 function setup() {
-    let gui = new dat.GUI();
+    gui = new dat.GUI();
     let control_folder = gui.addFolder('control');
     let vis_folder = gui.addFolder('vis');
     let text_folder = gui.addFolder('input');
@@ -36,11 +55,20 @@ function setup() {
     control_folder.add(parameters, 'random_button').name('random');
 
     vis_folder.add(parameters, 'color', 0, 1).name('color');
-    vis_folder.add(parameters, 'revert').name('revert');
+    vis_folder.add(parameters, 'revert').name('revert').onFinishChange(function (value) {
+        if (!parameters.revert) {
+            inputBox.style('background-color', '#333');    // 深色背景
+            inputBox.style('border', '2px solid #555');    // 灰色边框
+            inputBox.style('color', '#fff');               // 白色字体
+        } else {
+            inputBox.style('background-color', '#f0f8ff'); // 浅蓝色背景
+            inputBox.style('border', '2px solid #4682b4'); // 蓝色边框
+            inputBox.style('color', '#333');               // 文字颜色
+        }
+    });
     vis_folder.add(parameters, 'pixel_density', 1, 3).name('pixel density');
 
-    text_folder.add(parameters, "text").name('graph');
-    text_folder.add(parameters, "render").name('render');
+    text_folder.add(parameters, "render").name('render (ctrl + s)');
 
     save_folder.add(parameters, 'save_button').name('save as jpg');
 
@@ -49,32 +77,80 @@ function setup() {
     text_folder.open();
     save_folder.open();
 
-    canvas = createCanvas(windowWidth, windowHeight)
+    canvas = createCanvas(window.innerWidth - border, window.innerHeight - border)
     canvas.style('display', 'block')
     canvas.parent('sketch');
 
-    drawing = createGraphics(windowWidth, windowHeight);
+    drawing = createGraphics(window.innerWidth - border, window.innerHeight - border);
     drawing.clear();
+
+    // 检测鼠标是否在 GUI 面板上
+    let guiContainer = document.querySelector('.dg.main.a');
+    guiContainer.addEventListener('mouseenter', () => isMouseOverGUI = true);
+    guiContainer.addEventListener('mouseleave', () => isMouseOverGUI = false);
+
+    inputBox = createElement('textarea', input_example);
+
+    input_box_height = min(drawing.height * 3 / 5, drawing.height - gui.domElement.clientHeight - 50);
+    input_box_width = gui.domElement.clientWidth - 15;
+    inputBox.size(input_box_width, input_box_height);
+    inputBox.position(drawing.width - input_box_width - 25, drawing.height - input_box_height - 25);
+
+    // 应用自定义样式
+    inputBox.style('background-color', '#f0f8ff'); // 浅蓝色背景
+    inputBox.style('border', '2px solid #4682b4'); // 蓝色边框
+    inputBox.style('padding', '10px');             // 内边距
+    inputBox.style('font-size', '24px');           // 字体大小
+    inputBox.style('font-family', 'Consolas');
+    inputBox.style('border-radius', '10px');       // 圆角边框
+    inputBox.style('color', '#333');               // 文字颜色
+    inputBox.style('line-height', '1.5');          // 行间距
+
+    // 设置样式以固定位置到右下角
+    inputBox.style('position', 'fixed');
+    inputBox.style('right', '0px');
+    inputBox.style('bottom', '0px');
+    // 添加 mouseover 和 mouseout 事件监听器
+    inputBox.mouseOver(() => {
+        isMouseOverTextarea = true;
+    });
+
+    inputBox.mouseOut(() => {
+        isMouseOverTextarea = false;
+    });
+
+    // // 设置输入框的 input 事件监听器
+    // inputBox.input(() => {
+    //     clearTimeout(typingTimer); // 清除之前的定时器
+    //     typingTimer = setTimeout(() => {
+    //         process_input();
+    //     }, doneTypingInterval);
+    // });
 
     process_input();
 }
 
-function process_input() {
-    let alls = parameters.text;
-    let matches = alls.match(/\(.*?,.*?\)/g);
-    let m = matches.length;
+function read_textarea() {  // init graph
+    let alls = inputBox.value();
+    let lines = alls.trim().split('\n');
+    let [n, m] = lines[0].split(/\s+/).map(Number);
+    if (m === undefined) {
+        m = lines.length - 1;
+    }
+    if (!Number.isInteger(n) || !Number.isInteger(m)) {
+        throw new Error("输入的点数或边数不是整数!");
+    }
+    if (m != lines.length - 1) {
+        throw new Error("输入的边数有误!");
+    }
     let map = new Map();
     let tot = 0;
     let arr = [];
-    for (let ele of matches) {
-        let pair = ele.slice(1, ele.length - 1);
-        let line = pair.split(",");
-        if (2 != line.length) {
-            alert('input error!');
-            return;
+    for (let i = 1; i < lines.length; i++) {
+        let [x, y] = lines[i].trim().split(/\s+/);
+        if (x === undefined || y === undefined) {
+            throw new Error(`第${i}行输入的边有误!`);
         }
-        let x = line[0].trim();
-        let y = line[1].trim();
         if (!map.has(x)) {
             map.set(x, tot++);
         }
@@ -83,7 +159,9 @@ function process_input() {
         }
         arr.push([map.get(x), map.get(y)]);
     }
-    let n = tot;
+    if (tot > n) {
+        throw new Error(`出现的点数超过${n}个!`);
+    }
     let edges = new Array(n);
     for (let i = 0; i < n; i++) {
         edges[i] = [];
@@ -105,8 +183,19 @@ function process_input() {
     });
 }
 
+function process_input() {
+    try {
+        read_textarea();
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
 function mouseWheel(event) {
     //move the square according to the vertical scroll amount
+    if (isMouseOverTextarea) {
+        return;
+    }
     let scale_val = parameters.scale;
     scale_val += event.delta / 2500;
     scale_val = max(scale_val, 0);
@@ -115,13 +204,21 @@ function mouseWheel(event) {
     scale_controller.updateDisplay();
 }
 
-let preX, preY;
+let preX = null, preY = null;
 let drag_node = -1;
 
 function mousePressed() {
+    if (isMouseOverGUI || isMouseOverTextarea) {
+        preX = null;
+        preY = null;
+        drag_node = -1;
+        return;
+    }
     preX = mouseX;
     preY = mouseY;
-    drag_node = graph.locate_node(preX, preY);
+    drag_node = graph.locate_node(mouseX, mouseY);
+    graph.set_drag_node(drag_node);
+    graph.set_mouse(mouseX, mouseY);
 }
 
 function mouseReleased() {
@@ -130,16 +227,15 @@ function mouseReleased() {
 }
 
 function mouseDragged(event) {
-    if (preX >= 0 && preX <= width && preY >= 0 && preY <= height) {
+    if (preX !== null && preY !== null && preX >= 0 && preX <= width && preY >= 0 && preY <= height) {
         graph.set_drag_node(drag_node);
         if (drag_node == -1) {
             graph.add_bias(mouseX - preX, mouseY - preY);
-        } else {
-            graph.pull(mouseX, mouseY, mouseX - preX, mouseY - preY);
         }
         preX = mouseX;
         preY = mouseY;
     }
+    graph.set_mouse(mouseX, mouseY);
 }
 
 function save_image() {
@@ -155,11 +251,12 @@ function draw() {
         [background_color, stroke_color] = [stroke_color, background_color];
     }
     drawing.background(background_color);
+    // drawing.textStyle(BOLD);
     graph.set_drawing(drawing);
     graph.set_stroke_color(stroke_color);
-    graph.set_delta(parameters.speed);
+    graph.set_delta(map(parameters.speed, 0, 1, 0, 0.2));
     graph.set_bright(map(parameters.bright, 0, 1, 50, 255));
-    graph.set_size(map(parameters.size, 0, 1, 0.5, 100));
+    graph.set_size(map(parameters.size, 0, 1, 15, 100));
     graph.set_ratio(map(parameters.space, 0, 1, 1, 50));
     graph.set_number_on(parameters.number_on);
     graph.set_scale_val(map(parameters.scale, 0, 1, 0.1, 4));
@@ -172,11 +269,34 @@ function draw() {
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-    drawing = createGraphics(windowWidth, windowHeight);
+    resizeCanvas(window.innerWidth - border, window.innerHeight - border);
+    drawing = createGraphics(window.innerWidth - border, window.innerHeight - border);
     drawing.clear();
+
+    input_box_height = min(drawing.height * 3 / 5, drawing.height - gui.domElement.clientHeight - 50);
+    input_box_width = gui.domElement.clientWidth - 15;
+    inputBox.size(input_box_width, input_box_height);
+    inputBox.position(drawing.width - input_box_width - 25, drawing.height - input_box_height - 25);
 }
 
 function random_position() {
     graph.init_pos();
 }
+
+
+document.addEventListener('keydown', function (event) {
+    // 检查是否按下了 Ctrl + S 或 Cmd + S
+    if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+        event.preventDefault(); // 阻止默认的保存页面行为
+
+        process_input();
+    }
+    if (event.key === 'p') {
+        if (parameters.speed <= 0) {
+            parameters.speed = 0.5;
+        } else {
+            parameters.speed = 0;
+        }
+        gui.updateDisplay();
+    }
+});

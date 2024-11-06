@@ -1,40 +1,66 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2>examples</h2>
+                <ul>
+                    <li><a href="demo.html">demo</a> </li>
+                    <li><a href="examples/auto-animate.html">auto-animate</a> </li>
+                    <li><a href="examples/backgrounds.html">backgrounds</a></li>
+                    <li><a href="examples/barebones.html">barebones</a></li>
+                    <li><a href="examples/layout-helpers.html">layout-helpers</a></li>
+                    <li><a href="examples/markdown.html">markdown</a></li>
+                </ul>
+                <ul>
+                    <li><a href="examples/math.html">math</a></li>
+                    <li><a href="examples/media.html">media</a></li>
+                    <li><a href="examples/multiple-presentations.html">multiple-presentations</a></li>
+                    <li><a href="examples/scroll.html">scroll</a></li>
+                    <li><a href="examples/transitions.html">transitions</a></li>
+                </ul>
+                <aside class="notes">
+                    <p>按s键进入演讲者模式</p>
+
+                    <p>嘘，這是你的私人筆記 📝</p>
+
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
 </html>

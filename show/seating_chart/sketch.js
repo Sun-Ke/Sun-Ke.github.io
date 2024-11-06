@@ -110,7 +110,7 @@ let dragging_seat = null;
 let dragging_offset = { x: 0, y: 0 };
 let dragging_position = { x: 0, y: 0 };
 
-const random_modes = ["default", "sorted", "gender separation", "exam"]
+const random_modes = ["default", "gender separation", "exam"]
 
 let parameters = {
     title: "",
@@ -225,11 +225,10 @@ function setup() {
     });
     control_folder.add(parameters, 'scale', 0, 1).name('scale');
     control_folder.add(parameters, 'font_size', 0, 1).name('font_size');
-
+    button_folder.add(parameters, 'click_me').name('click me');
     button_folder.add(parameters, 'upload_file').name('upload txt');
     button_folder.add(parameters, 'random').name('random shuffle');
     button_folder.add(parameters, 'save_button').name('save as jpg');
-    button_folder.add(parameters, 'click_me').name('click me');
 
     control_folder.open();
     button_folder.open();
@@ -474,22 +473,6 @@ function click_me() {
 let heap_locked = false;  // 是否需要上锁？
 function shuffle_students() {
     if (students.length === 0) return;
-    if (parameters.random_mode === "sorted") {
-        // 按照姓名字典序排
-        seat_assignments.sort(function (a, b) {
-            if (a === null && b === null) return 0;
-            if (a === null) return 1;
-            if (b === null) return -1;
-            if (students[a].name < students[b].name) {
-                return -1;
-            }
-            if (students[a].name > students[b].name) {
-                return 1;
-            }
-            return 0;
-        });
-        return;
-    }
     prepare_heap(1);
     let key = { room: parameters.classroom, front_first: parameters.front_first, random_mode: parameters.random_mode }
     let heap = perms.get(JSON.stringify(key));
@@ -506,7 +489,6 @@ function prepare_heap(times) {   // 需要准备好seat_assignments和perms
     for (let i = 0; i < 100; i++) {
         random_shuffle(seats, len);
         for (let random_mode of random_modes) {
-            if (random_mode === "sorted") continue;
             let key = { room: parameters.classroom, front_first: false, random_mode: random_mode };
             let heap = perms.get(JSON.stringify(key));
             heap.insert(make_permutation([...seats]));
@@ -519,7 +501,6 @@ function prepare_heap(times) {   // 需要准备好seat_assignments和perms
     for (let i = 0; i < 100; i++) {
         random_shuffle(seats, len);
         for (let random_mode of random_modes) {
-            if (random_mode === "sorted") continue;
             let key = { room: parameters.classroom, front_first: true, random_mode: random_mode };
             let heap = perms.get(JSON.stringify(key));
             heap.insert(make_permutation([...seats]));

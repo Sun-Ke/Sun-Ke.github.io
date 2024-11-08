@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>贪心算法</title>
+
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <!-- <link rel="stylesheet" href="../dist/theme/white.css" id="theme"> -->
+    <!-- .slide: style="text-align: left;"> -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../dist/theme/custom.css" id="theme">
+    <style type="text/css">
+        /* .reveal p {
+            text-align: left;
+        } */
+
+        .fragment.blur {
+            filter: blur(8px);
+        }
+
+        .fragment.blur.visible {
+            filter: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <!-- Slides are separated by three dashes (the default) -->
+            <section data-markdown style="text-align: left;">
+                <script type="text/template">
+                        <h2>贪心算法</h2>
+
+                        贪心是指，在对问题求解时，总是做出在当前看来是最好的选择。
+
+                        也就是说，不从整体最优上加以考虑，它所做出的是在某种意义上的局部最优解。
+                </script>
+            </section>
+
+            <section data-markdown style="text-align: left;" data-separator-vertical="^----">
+                <script type="text/template">
+                    <h2>排队打水</h2>
+                    有 $n$ 个人排队打水，第 $i$ 个人打水需要打 $t_i$分钟。请问如何安排他们打水的顺序，使得所有人等待的时间和最小。
+                    
+                    ----
+                    <h2>排队打水</h2>
+                    有 $n$ 个人排队打水，第 $i$ 个人打水需要打 $t_i$分钟。请问如何安排他们打水的顺序，使得所有人等待的时间和最小。
+
+                    答案比较显然，按接水时间从小到大的顺序，这样平均等待时间是最小的。
+
+                    ----
+
+                    <h2>排序不等式</h2>
+                    对于两个序列 
+                    
+                    $a_1 \le a_2\le \dots \le a_n$ 和 $b_1 \le b_2\le \dots \le b_n$
+                    
+                    下述不等式成立：
+
+                    $$
+                    a_1 b_1 + a_2 b_2 +\dots + a_n b_n \ge \\\\
+                    a_1 b_{\pi(1)} + a_2 b_{\pi(2)} +\dots + a_n b_{\pi(n)} \ge \\\\
+                    a_1 b_n + a_2 b_{n-1} +\dots + a_n b_1 
+                    $$
+                </script>
+
+            </section>
+
+            <section data-markdown style="text-align: left;">
+                <script type="text/template">
+                    <h2>硬币问题</h2>
+                    <p>有 1 元、5 元、10 元、50 元、100 元硬币各有若干枚，给定数量。
+                        现在要用这些硬币支付 A 元，最少需要多少枚硬币？保证至少存在一种方案。</p>
+                        <ul>
+                            <li class="fragment">根据生活经验得到本题的贪心思路：优先使用面额大的硬币</li>
+                            <li class="fragment">如果有奇怪面额的硬币，怎么办？</li>
+                        </ul>
+    
+                </script>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/math/math.js"></script>
+
+    <script>
+
+        Reveal.initialize({
+            controls: true,     // 显示演示文稿控制箭头
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,  // 显示当前幻灯片的页码
+            shuffle: false,     // 每次演示加载时随机化幻灯片的顺序
+            loop: false,        // 循环演示
+            showNotes: false,   // 如果演讲者的笔记应该对所有观众可见，则标记
+            // 过渡风格 无/淡入/滑动/凸出/凹入/缩放
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // 过渡速度 默认/快速/慢
+            transitionSpeed: 'default', // default/fast/slow
+            // 整页幻灯片背景的过渡样式 无/淡入/滑动/凸出/凹入/缩放
+            backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX]
+        });
+
+    </script>
+
+</body>
+
+</html>

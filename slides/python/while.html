@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>while循环</title>
+
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <!-- <link rel="stylesheet" href="../dist/theme/white.css" id="theme"> -->
+    <link rel="stylesheet" href="../plugin/highlight/light/xcode.min.css">
+    <link rel="stylesheet" href="../dist/theme/custom.css" id="theme">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section>
+                <h1>Python循环结构</h1>
+                <h3>————while循环</h3>
+                <!-- <img class="corner-image" src="assets/sdsz1.0.png" alt="Transparent PNG"> -->
+            </section>
+
+            <!-- slide 1 -->
+            <section>
+                <section id="fragments">
+                    <h1>猜数字</h1>
+                    <h2>1~20</h2>
+                    <!-- <p class="blur">16</p> -->
+                    <p class="blurred" style="font-size: 1.4em;" onclick="removeBlur(this)">答案是16</p>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2>思考</h2>
+                    <h3>猜数字游戏的流程是什么？</h3>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2>思考</h2>
+                    <h3>猜数字游戏的流程是什么？</h3>
+                    <ol>
+                        <li>老师先写下一个数字</li>
+                        <li>学生猜一个数字</li>
+                        <li>老师反馈该数字大了小了还是正好猜中了</li>
+                        <li>当还没人猜中时，重复第2、3步</li>
+                    </ol>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>while循环</h2>
+                    <div class='multiCol'>
+                        <div class='col'>
+                            <div class="mac-window" style="width: 320px;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                        <code class="hljs python" style="font-size: 33px;" data-trim>
+                                            while 循环条件:
+                                                循环体                          
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>while循环</h2>
+                    <div class='multiCol'>
+                        <div class='col'>
+                            <div class="mac-window" style="width: 320px;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                        <code class="hljs python" style="font-size: 33px;" data-trim>
+                                            while 循环条件:
+                                                循环体                          
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='col'>
+                            <img src="assets/while.png" style="width: auto; height: 70%;" />
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <section style="text-align: left;">
+                    <h2>猜数字——代码填空</h2>
+
+                    <div class="mac-window" style="width: 880px;">
+                        <div class="mac-header">
+                            <span class="button red"></span>
+                            <span class="button yellow"></span>
+                            <span class="button green"></span>
+                        </div>
+                        <div class="mac-content">
+                            <pre>
+                            <code class="hljs python" style="font-size: 17px;" data-trim >
+                                import random  # 导入随机数模块
+                                # 老师提前写下一个数字，记为number
+                                # 这里采用随机生成的方式
+                                number = random.randint(1, 20)  # 随机一个1到20的数字赋值给number
+                                guess = -1
+                                while _____:  # 当没猜中时
+                                    guess = int(input("在1-20之间猜一个数字："))
+                                    if guess == number:
+                                        print(_____)
+                                    elif _____:
+                                        print("猜的数字小了")
+                                    else:
+                                        print("猜的数字大了")
+                                
+                                print("游戏结束~")                          
+                                    </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- slide 2 -->
+            <section>
+                <section style="text-align: left;">
+                    <h2>打印两位数（回顾）</h2>
+                    <div class='multiCol'>
+                        <div class='col'>
+                            <div class="mac-window" style="width: 450px;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                        <code class="hljs python" style="font-size: 30px;" data-trim>
+                                            for i in range(10, 100):
+                                                print(i)                      
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>打印两位数（for vs. while）</h2>
+                    <div class='multiCol'>
+                        <div class='col'>
+                            <div class="mac-window" style="width: 450px;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                        <code class="hljs python" style="font-size: 30px;" data-trim>
+                                            for i in range(10, 100):
+                                                print(i)                      
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='col'>
+                            <div class="mac-window" style="width: 350px;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                        <code class="hljs python" style="font-size: 30px;" data-trim>
+                                            i = 10
+                                            while i < 100:
+                                                print(i)
+                                                i = i + 1
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- slide 3 -->
+            <section>
+                <section data-markdown style="text-align: left;" data-separator-vertical="^----">
+                    <script type="text/template">
+                        ## 细胞分裂
+    
+                        已知实验室每个细胞每天都会分裂一次，第1天初始有1个细胞，第2天变为2个细胞，第3天变为4个，问第几天细胞数会至少有 $n$ 个?
+
+                    </script>
+                </section>
+
+                <section data-markdown style="text-align: left;" data-separator-vertical="^----">
+                    <script type="text/template">
+                        ## 细胞分裂
+    
+                        已知实验室每个细胞每天都会分裂一次，第1天初始有1个细胞，第2天变为2个细胞，第3天变为4个，问第几天细胞数会至少有 $n$ 个?
+    
+                        以输入的 $n = 50$ 为例：
+                        | 天数（day）    | 1 | 2 | 3 | 4 | 5 | 6| <font color="red">7</font>|
+                        | :---:   | :---: | :---: |:---: |:---: |:---: |:---: |:---: |
+                        | **细胞数（cell）**|**1**|**2**|**4**|**8**|**16**|**32**|**64**|
+                    </script>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>细胞分裂</h2>
+                    <p style="margin: 40px 0;"></p>
+
+                    <div class="mac-window" style="width: 350px;">
+                        <div class="mac-header">
+                            <span class="button red"></span>
+                            <span class="button yellow"></span>
+                            <span class="button green"></span>
+                        </div>
+                        <div class="mac-content">
+                            <pre>
+                            <code class="hljs python code-block" style="font-size: 26px;" data-click-clear data-trim >
+                                n = int(input())
+                                day = 1
+                                cell = 1
+                                while cell < n:
+                                    day = day + 1
+                                    cell = cell * 2
+                                print(day)
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- slide 4 -->
+            <section>
+                <section data-auto-animate style="text-align: left;">
+                    <h2> 总结</h2>
+                    <ul>
+                        <li class="fragment fade-left"> while循环的语法</li>
+                        <li class="fragment fade-left"> 对比for循环与while循环</li>
+                        <li class="fragment fade-left"> 用while循环解决实际问题 </li>
+                    </ul>
+
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2> 总结</h2>
+                    <ul>
+                        <li> while循环的语法</li>
+                        <li> 对比for循环与while循环</li>
+                        <li> 用while循环解决实际问题 </li>
+                    </ul>
+                    <p>while循环在生活中的应用？</p>
+
+                </section>
+                <section data-auto-animate style="text-align: left;">
+                    <h2> 总结</h2>
+                    <ul>
+                        <li> while循环的语法</li>
+                        <li> 对比for循环与while循环</li>
+                        <li> 用while循环解决实际问题 </li>
+                    </ul>
+                    <p>while循环在生活中的应用？</p>
+
+                    <div class='multiCol'>
+                        <div class='col'>
+                            <img src="assets/while1.png" style="width: 50%; " />
+                        </div>
+
+                        <div class='col'>
+                            <img src="assets/while2.png" style="width: 50%;" />
+                        </div>
+                        <div class='col'>
+                            <img src="assets/while3.png" style="width: 50%;" />
+                        </div>
+                        <div class='col'>
+                            <img src="assets/while4.png" style="width: 50%;" />
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/math/math.js"></script>
+
+    <script src="../plugin/custom.js"></script>
+    <script>
+        document.querySelectorAll('.mcq label').forEach(label => {
+            label.addEventListener('click', function () {
+                // 如果点击的是正确选项
+                if (this.classList.contains('correct')) {
+                    this.style.backgroundColor = '#4caf50';  // 绿色
+                    this.style.color = 'white';
+                } else if (this.classList.contains('incorrect')) {
+                    this.style.backgroundColor = '#f44336';  // 红色
+                    this.style.color = 'white';
+                }
+            });
+        });
+
+        function removeBlur(element) {
+            element.classList.remove('blurred');
+            element.classList.add('blurred-removed');
+            element.removeAttribute('onclick');
+        }
+
+        /* 代码先模糊通过鼠标点击变清晰 */
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('.code-block[data-click-clear]');
+
+            // 遍历所有需要点击清晰的代码块
+            codeBlocks.forEach(codeBlock => {
+                codeBlock.addEventListener('click', () => {
+                    codeBlock.classList.add('clear'); // 添加清晰的样式
+                });
+            });
+
+            // 重置逻辑：切换离开幻灯片时恢复模糊
+            Reveal.on('slidechanged', (event) => {
+                codeBlocks.forEach(codeBlock => {
+                    codeBlock.classList.remove('clear'); // 切换时恢复模糊
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

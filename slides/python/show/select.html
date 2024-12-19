@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="common/header.js"></script>
+    <meta charset="utf-8">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let values = [];
+        let w = 30;  // 柱子的宽度
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            // 生成随机数组 values
+            w = width / 10;
+            for (let k = 0; k < 10; k++) {
+                values[k] = random(height); // noise
+            }
+
+            // for (let i = 0; i < values.length; i++) {
+            //     let min_index = i;
+            //     for (let j = i + 1; j < values.length; j++) {
+            //         if (values[j] < values[min_index]) {
+            //             min_index = j;
+            //         }
+            //     }
+            //     [values[i], values[min_index]] = [values[min_index], values[i]]
+            // }
+
+            // 设置帧率
+            frameRate(4);
+        }
+
+        // 当前求i小的元素
+        // 注意，这里用了变量i和j，其他循环里需要避免重复命名！
+        let i = 0, j = 0, min_index = 0;
+
+        function draw() {
+            background(180);
+            if (i < values.length) {
+                // 如果j没超过数组的长度，继续扫描，更新min_index
+                // 否则说明已经求出未排序部分的最小值的下标，与values[i]交换，继续下一轮扫描
+                if (j < values.length) {
+                    if (values[j] < values[min_index]) {
+                        min_index = j;
+                    }
+                    j++;
+                } else {
+                    [values[i], values[min_index]] = [values[min_index], values[i]];
+                    i++;
+                    j = i;
+                    min_index = j;
+                }
+            } else {
+                text("sorted!", 10, 40);
+                noLoop();
+            }
+
+            for (let idx = 0; idx < values.length; idx++) {
+                // 这里提供三种RGB颜色
+                // 173, 216, 230
+                // 167, 109, 202
+                // 255, 127, 80
+                // 用不同的颜色标注以下三个部分
+                // *已排好序*的柱子
+                // *未排好序*的柱子中最小的那个
+                // *未排好序*的柱子中当前扫描到的柱子
+                stroke(0);
+                fill(255);
+                if (idx == min_index) {
+                    fill(65, 105, 225);
+                } else if (idx < i) {
+                    fill(167, 109, 202);
+                } else if (idx == j) {
+                    fill(255, 127, 80);
+                }
+                // 画第idx个柱子，高度为values[idx]
+                rect(idx * w, height - values[idx], w, values[idx]);
+            }
+
+            fill(255);
+            text("i=" + i, 10, 20);
+        }
+
+        // 点击鼠标，重置按钮
+        function mousePressed() {
+            // 重新随机数组元素
+
+            // 重置i, j, min_index变量
+            i = 0, j = 0, min_index = 0;
+            for (let k = 0; k < values.length; k++) {
+                values[k] = random(height); // noise
+            }
+            // 重新开始循环draw()
+            loop();
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

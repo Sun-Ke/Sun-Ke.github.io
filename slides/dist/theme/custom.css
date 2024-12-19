@@ -1,0 +1,545 @@
+/**
+ * White compact & high contrast reveal.js theme, with headers not in capitals.
+ *
+ * By Peter Kehl. Based on white.(s)css by Hakim El Hattab, http://hakim.se
+ *
+ * - Keep the source similar to black.css - for easy comparison.
+ * - $mainFontSize controls code blocks, too (although under some ratio).
+ */
+
+/* @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web/style.css'); */
+@import url(./fonts/lxgw-wenkai-screen-web/style.min.css);
+@import url(./fonts/source-sans-pro/source-sans-pro.css);
+
+section.has-dark-background,
+section.has-dark-background h1,
+section.has-dark-background h2,
+section.has-dark-background h3,
+section.has-dark-background h4,
+section.has-dark-background h5,
+section.has-dark-background h6 {
+    color: #fff;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+:root {
+    --r-background-color: #fff;
+    --r-main-font: LXGW WenKai Screen, Helvetica, sans-serif;
+    --r-main-font-size: 38px;
+    --r-main-color: #000;
+    --r-block-margin: 20px;
+    --r-heading-margin: 0 0 20px 0;
+    --r-heading-font: LXGW WenKai Screen, Helvetica, sans-serif;
+    --r-heading-color: #000;
+    --r-heading-line-height: 1.2;
+    --r-heading-letter-spacing: normal;
+    --r-heading-text-transform: uppercase;
+    --r-heading-text-shadow: none;
+    --r-heading-font-weight: 600;
+    --r-heading1-text-shadow: none;
+    --r-heading1-size: 2.5em;
+    --r-heading2-size: 1.6em;
+    --r-heading3-size: 1.3em;
+    --r-heading4-size: 1em;
+    --r-code-font: monospace;
+    --r-link-color: #2a76dd;
+    --r-link-color-dark: #1a53a1;
+    --r-link-color-hover: #6ca0e8;
+    --r-selection-background-color: #98bdef;
+    --r-selection-color: #fff;
+    --r-overlay-element-bg-color: 0, 0, 0;
+    --r-overlay-element-fg-color: 240, 240, 240;
+}
+
+.reveal-viewport {
+    background: #fff;
+    background-color: var(--r-background-color);
+}
+
+.reveal {
+    font-family: var(--r-main-font);
+    font-size: var(--r-main-font-size);
+    font-weight: normal;
+    color: var(--r-main-color);
+}
+
+.reveal ::selection {
+    color: var(--r-selection-color);
+    background: var(--r-selection-background-color);
+    text-shadow: none;
+}
+
+.reveal ::-moz-selection {
+    color: var(--r-selection-color);
+    background: var(--r-selection-background-color);
+    text-shadow: none;
+}
+
+.reveal .slides section,
+.reveal .slides section>section {
+    line-height: 1.3;
+    font-weight: inherit;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    margin: var(--r-heading-margin);
+    color: var(--r-heading-color);
+    font-family: var(--r-heading-font);
+    font-weight: var(--r-heading-font-weight);
+    line-height: var(--r-heading-line-height);
+    letter-spacing: var(--r-heading-letter-spacing);
+    text-transform: var(--r-heading-text-transform);
+    text-shadow: var(--r-heading-text-shadow);
+    word-wrap: break-word;
+}
+
+.reveal h1 {
+    font-size: var(--r-heading1-size);
+}
+
+.reveal h2 {
+    font-size: var(--r-heading2-size);
+}
+
+.reveal h3 {
+    font-size: var(--r-heading3-size);
+}
+
+.reveal h4 {
+    font-size: var(--r-heading4-size);
+}
+
+.reveal h1 {
+    text-shadow: var(--r-heading1-text-shadow);
+}
+
+.reveal .font-small {
+    font-size: 0.4em;
+}
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+    margin: var(--r-block-margin) 0;
+    line-height: 1.3;
+}
+
+/* Remove trailing margins after titles */
+.reveal h1:last-child,
+.reveal h2:last-child,
+.reveal h3:last-child,
+.reveal h4:last-child,
+.reveal h5:last-child,
+.reveal h6:last-child {
+    margin-bottom: 0;
+}
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+    max-width: 99%;
+    max-height: 99%;
+}
+
+.reveal strong,
+.reveal b {
+    font-weight: bold;
+}
+
+.reveal em {
+    font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+    display: inline-block;
+    text-align: left;
+    margin: 0 0 0 1em;
+}
+
+.reveal ol {
+    list-style-type: decimal;
+}
+
+.reveal ul {
+    list-style-type: disc;
+}
+
+.reveal ul ul {
+    list-style-type: square;
+}
+
+.reveal ul ul ul {
+    list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+    display: block;
+    margin-left: 40px;
+}
+
+.reveal dt {
+    font-weight: bold;
+}
+
+.reveal dd {
+    margin-left: 40px;
+}
+
+.reveal blockquote {
+    display: block;
+    position: relative;
+    width: 70%;
+    margin: var(--r-block-margin) auto;
+    padding: 5px;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+    display: inline-block;
+}
+
+.reveal q {
+    font-style: italic;
+}
+
+.reveal pre {
+    display: block;
+    position: relative;
+    /* width: 90%; */
+    margin: 0;
+    /* var(--r-block-margin) auto; */
+    text-align: left;
+    font-size: 0.55em;
+    font-family: var(--r-code-font);
+    line-height: 1.2em;
+    word-wrap: break-word;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal code {
+    font-family: var(--r-code-font);
+    text-transform: none;
+    tab-size: 2;
+}
+
+.reveal pre code {
+    display: block;
+    padding: 0px;
+    /* hidden auto */
+    overflow: hidden;
+    /* max-height: 500px;
+    max-width: 600px; */
+    word-wrap: normal;
+    font-size: 16px;
+    font-family: 'Courier New', 'LXGW WenKai Screen', Courier, monospace;
+    /* 字体加粗 */
+    font-weight: bold;
+    /*  拖动时不选择文字 */
+    user-select: none;
+    /* 添加这个可以让鼠标手势看起来像是拖动 */
+    cursor: grab;
+}
+
+/* FIXME: code-wrapper 宽度问题 */
+.reveal .code-wrapper {
+    white-space: normal;
+}
+
+.reveal .code-wrapper code {
+    white-space: pre;
+}
+
+.reveal table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.reveal table th {
+    font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+    text-align: left;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-bottom: 1px solid;
+}
+
+.reveal table th[align=center],
+.reveal table td[align=center] {
+    text-align: center;
+}
+
+.reveal table th[align=right],
+.reveal table td[align=right] {
+    text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.reveal sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+.reveal sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
+.reveal small {
+    display: inline-block;
+    font-size: 0.6em;
+    line-height: 1.2em;
+    vertical-align: top;
+}
+
+.reveal small * {
+    vertical-align: top;
+}
+
+.reveal img {
+    margin: var(--r-block-margin) 0;
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+    color: var(--r-link-color);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.reveal a:hover {
+    color: var(--r-link-color-hover);
+    text-shadow: none;
+    border: none;
+}
+
+.reveal .roll span:after {
+    color: #fff;
+    background: var(--r-link-color-dark);
+}
+
+/*********************************************
+ * Frame helper
+ *********************************************/
+.reveal .r-frame {
+    border: 4px solid var(--r-main-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.reveal a .r-frame {
+    transition: all 0.15s linear;
+}
+
+.reveal a:hover .r-frame {
+    border-color: var(--r-link-color);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+    color: var(--r-link-color);
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--r-link-color);
+}
+
+/*********************************************
+ * PRINT BACKGROUND
+ *********************************************/
+@media print {
+    .backgrounds {
+        background-color: var(--r-background-color);
+    }
+}
+
+/*********************************************
+ * fragment blur 模糊效果
+ *********************************************/
+.fragment.blur {
+    filter: blur(8px);
+}
+
+.fragment.blur.visible {
+    filter: none;
+}
+
+.blurred {
+    filter: blur(15px);
+    cursor: pointer;
+    transition: filter 0.5s ease;
+}
+
+/* 鼠标覆盖减少模糊效果 */
+/* .blurred:hover {
+    filter: blur(9px);
+} */
+
+.blurred-removed {
+    filter: none;
+    cursor: default;
+    transition: filter 0.5s ease;
+}
+
+/* 代码先模糊通过鼠标点击变清晰 */
+.code-block {
+    filter: blur(10px);
+    /* 初始模糊效果 */
+    cursor: pointer;
+    /* 鼠标悬停时显示为可点击 */
+    transition: filter 0.5s ease-in-out;
+    /* 模糊清晰的过渡动画 */
+}
+
+.code-block.clear {
+    filter: none;
+    /* 清晰状态 */
+}
+
+/*********************************************
+多列布局
+<div class='multiCol'>
+    <div class='col'>
+    </div>
+    <div class='col'>
+    </div>
+</div>
+ *********************************************/
+.multiCol {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+
+    .col {
+        display: table-cell;
+        /*  top */
+        vertical-align: middle;
+        width: 50%;
+        padding: 0 0 1% 2%;
+
+        &:first-of-type {
+            padding-left: 0;
+        }
+    }
+}
+
+/*********************************************
+mac风格的代码框
+<div class="mac-window">
+    <div class="mac-header">
+        <span class="button red"></span>
+        <span class="button yellow"></span>
+        <span class="button green"></span>
+    </div>
+    <div class="mac-content">
+        <pre>
+            <code class="hljs python" data-trim >                          
+            </code>
+        </pre>
+    </div>
+</div>
+ *********************************************/
+.mac-window {
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+.mac-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+}
+
+.mac-header .button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.button.red {
+    background-color: #ff5f57;
+}
+
+.button.yellow {
+    background-color: #ffbd2e;
+}
+
+.button.green {
+    background-color: #28c840;
+}
+
+.mac-content {
+    padding: 0;
+    /* No extra padding since pre/code already includes it */
+    font-family: 'Courier New', monospace;
+    background-color: #f8f8f8;
+    overflow: auto;
+    max-height: 400px;
+}
+
+.mac-content pre {
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    /* Handle long lines */
+    word-wrap: break-word;
+}
+
+/* 引入透明背景图片 */
+.black-image {
+    background-color: black;
+    /* 使透明部分背景变为黑色 */
+    z-index: 0;
+}
+
+.corner-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+}

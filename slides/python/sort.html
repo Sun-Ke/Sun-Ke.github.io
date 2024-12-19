@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>bubble</title>
+
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <!-- <link rel="stylesheet" href="../dist/theme/white.css" id="theme"> -->
+    <link rel="stylesheet" href="../plugin/highlight/light/xcode.min.css">
+    <link rel="stylesheet" href="../dist/theme/custom.css" id="theme">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section>
+                <h1>排序算法</h1>
+                <!-- <img class="corner-image" src="assets/sdsz1.0.png" alt="Transparent PNG"> -->
+
+            </section>
+
+
+            <!-- slide 3 -->
+            <section>
+                <section>
+                    <h2>冒泡排序</h2>
+
+
+
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>冒泡排序</h2>
+                    <p style="margin: 40px 0;"></p>
+
+                    <div class="mac-window" style="width: 900px;">
+                        <div class="mac-header">
+                            <span class="button red"></span>
+                            <span class="button yellow"></span>
+                            <span class="button green"></span>
+                        </div>
+                        <div class="mac-content">
+                            <pre>
+                            <code class="hljs python" style="font-size: 18px;" data-click-clear data-trim >
+                                def bubble_sort(arr):
+                                    n = len(arr)
+                                    for i in range(n):                  # 外层循环控制遍历次数
+                                        for j in range(n - 1 - i):      # 内层循环比较相邻元素
+                                            if arr[j] > arr[j + 1]:     # 如果前一个元素比后一个大
+                                                arr[j], arr[j + 1] = arr[j + 1], arr[j]  # 交换两者的位置
+                                        print(f"第 {i + 1} 次排序结果: {arr}")  # 打印每次排序后的数组状态
+
+                                array = [5, 3, 8, 1, 6, 2]
+                                print("原始数组:", array)
+                                bubble_sort(array)
+                                print("排序后数组:", array)
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <section>
+                <section>
+                    <h2>选择排序</h2>
+
+                    <iframe data-src="show/select.html" frameborder="0" marginwidth="0" scrolling="no" width="600"
+                        height="500" style="border:0px solid #666;" allowfullscreen>
+                    </iframe>
+
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>选择排序</h2>
+                    <p style="margin: 40px 0;"></p>
+
+                    <div class="mac-window" style="width: 900px;">
+                        <div class="mac-header">
+                            <span class="button red"></span>
+                            <span class="button yellow"></span>
+                            <span class="button green"></span>
+                        </div>
+                        <div class="mac-content">
+                            <pre>
+                <code class="hljs python" style="font-size: 18px;" data-click-clear data-trim >
+                    def selection_sort(arr):
+                        n = len(arr)
+                        for i in range(n):                      # 外层循环控制已排序部分
+                            min_index = i                       # 假设当前索引为最小值索引
+                            for j in range(i + 1, n):           # 在未排序部分寻找最小值
+                                if arr[j] < arr[min_index]:     # 找到更小的值
+                                    min_index = j               # 更新最小值索引
+                            arr[i], arr[min_index] = arr[min_index], arr[i]  # 交换当前元素和最小值
+                            print(f"第 {i + 1} 次排序结果: {arr}")  # 打印每次排序后的数组状态
+                
+                    array = [5, 3, 8, 1, 6, 2]
+                    print("原始数组:", array)
+                    selection_sort(array)
+                    print("排序后数组:", array)
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+        </div>
+    </div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/math/math.js"></script>
+
+    <script src="../plugin/custom.js"></script>
+    <script>
+        document.querySelectorAll('.mcq label').forEach(label => {
+            label.addEventListener('click', function () {
+                // 如果点击的是正确选项
+                if (this.classList.contains('correct')) {
+                    this.style.backgroundColor = '#4caf50';  // 绿色
+                    this.style.color = 'white';
+                } else if (this.classList.contains('incorrect')) {
+                    this.style.backgroundColor = '#f44336';  // 红色
+                    this.style.color = 'white';
+                }
+            });
+        });
+
+        function removeBlur(element) {
+            element.classList.remove('blurred');
+            element.classList.add('blurred-removed');
+            element.removeAttribute('onclick');
+        }
+
+        /* 代码先模糊通过鼠标点击变清晰 */
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('.code-block[data-click-clear]');
+
+            // 遍历所有需要点击清晰的代码块
+            codeBlocks.forEach(codeBlock => {
+                codeBlock.addEventListener('click', () => {
+                    codeBlock.classList.add('clear'); // 添加清晰的样式
+                });
+            });
+
+            // 重置逻辑：切换离开幻灯片时恢复模糊
+            Reveal.on('slidechanged', (event) => {
+                codeBlocks.forEach(codeBlock => {
+                    codeBlock.classList.remove('clear'); // 切换时恢复模糊
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

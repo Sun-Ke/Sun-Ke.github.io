@@ -1,0 +1,28 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{ctex} 
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{document}
+
+\begin{tikzpicture}[node distance=2.5cm]
+
+% 节点
+\node (start) [startstop] {开始};
+\node (condition) [decision, below of=start, yshift=-0.4cm] {条件\newline 成立？};
+\node (process) [process, below of=condition, yshift=-0.5cm] {执行循环体};
+\node (stop) [startstop, below of=process, yshift=-0.4cm] {结束};
+
+% 连线
+\draw [arrow] (start) -- (condition);
+\draw [arrow] (condition) -- node[anchor=east] {是} (process);
+\draw [arrow] (process) -| ++(-3,0) |- (condition.west);
+\draw [arrow] (condition.east) -- ++(1.5,0) |- node[anchor=north] {否} (stop.east);
+
+\end{tikzpicture}
+
+\end{document}

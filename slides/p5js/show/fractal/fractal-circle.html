@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        let is_draw_rect = false;
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background('#eaf3fb');
+            drawCircles(width / 2, height / 2, 150, 1);
+        }
+
+        function drawCircles(x, y, d, depth) {
+            if (d < 1) return;
+            if (is_draw_rect) {
+                display(x, y, d, depth)
+            }
+            circle(x, y, d);
+            drawCircles(x + d, y, d * 0.5, depth + 1);
+        }
+
+
+        function display(x, y, d, depth) {
+            push();
+            noFill();
+            stroke(0, 100, 200);
+            strokeWeight(map(depth, 1, 4, 4, 1));
+            let buffer = map(depth, 1, 4, 10, 1);
+            x -= d / 2 + buffer;
+            y -= d / 2 + buffer;
+            rect(x, y, d / 2 + 2 * d + 2 * buffer, d + 2 * buffer);
+            pop();
+        }
+
+        function mouseClicked() {
+            is_draw_rect ^= 1;
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

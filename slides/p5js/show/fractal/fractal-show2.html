@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        let colorful = true;
+        let xpos = [];
+        let lens = [];
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            for (let i = 0; i < 8; i++) {
+                xpos.push(random(width * 0.2, width * 0.8));
+                lens.push(random(50, height * 0.4));
+            }
+        }
+
+        function draw() {
+            background(255);
+            for (let i = 0; i < xpos.length; i++) {
+                push();
+                translate(xpos[i], height);
+                branch(lens[i], 0);
+                pop();
+            }
+        }
+
+        function branch(len, step) {
+            if (step > 5 || len < 3) {
+                return;
+            }
+            if (colorful) {
+                let t = map(step, 0, 8, 0, 1);
+                let c = lerpColor(color('#8B4511'), color('#006400'), t);
+                stroke(c);
+            }
+            let ratio = map(step, 0, 10, 0.0008, 0.008);
+            strokeWeight(map(step, 0, 6, 3, 0.5));
+            line(0, 0, 0, -len);
+            translate(0, -len);
+            push();
+            rotate(map(noise(len, frameCount * ratio), 0, 1, -1, 1));
+            branch(len * 0.7, step + 1);
+            pop();
+
+            push();
+            rotate(map(noise(len + 42, frameCount * ratio), 0, 1, -1, 1));
+            branch(len * 0.5, step + 1);
+            pop();
+
+            push();
+            rotate(map(noise(len + 1007, frameCount * ratio), 0, 1, -1, 1));
+            branch(len * 0.4, step + 1);
+            pop();
+        }
+
+        function mousePressed() {
+            for (let i = 0; i < 8; i++) {
+                xpos[i] = random(width * 0.2, width * 0.8);
+                lens[i] = random(50, height * 0.4);
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

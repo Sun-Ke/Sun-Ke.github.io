@@ -1,0 +1,27 @@
+/* 把代码复制到sketch.js中 */
+
+function setup() {
+    createCanvas(600, 400);
+}
+
+function draw() {
+    background(220);
+    // 把坐标系原点平移到画布下边界中心
+    translate(width * 0.5, height);
+    branch(100, 1);             // 画分形树，初始主干长度100
+}
+
+function branch(len, step) {    // 当前主干的长度，当前层数
+    if (___) return;            // 递归边界条件
+    line(___, ___, ___, ___);   // 画当前树的主干
+    translate(___, ___);        // 将原点平移到下一个分叉点
+
+    push();              // 记录当前坐标系状态
+    rotate(PI / 6);      // 顺时针旋转30度，画出右侧分支
+    branch(len * 0.66, step + 1); // 递归地画下一层，对长度缩放
+    pop();               // 恢复到之前的坐标系状态
+
+    push();
+    // 仿照上面的代码，在这里画出左边的分支
+    pop();
+}

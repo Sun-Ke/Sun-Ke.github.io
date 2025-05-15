@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>递归与分形</title>
+    <!-- <link rel="icon" type="image/png" href="assets/SDSZ.png"> -->
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <!-- <link rel="stylesheet" href="../dist/theme/white.css" id="theme"> -->
+    <link rel="stylesheet" href="../plugin/highlight/light/xcode.min.css">
+    <link rel="stylesheet" href="../dist/theme/custom.css" id="theme">
+
+    <style>
+        .reveal {
+            background: linear-gradient(135deg, #eaf3fb, #f7f9fc);
+            /* 渐变蓝白 */
+            color: #222;
+        }
+
+        /* 让标题页内容居中 */
+        .title-page {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            /* 半透明白色背景 */
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 学校名称样式 */
+        h2.school-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 主讲人信息 */
+        h3.speaker {
+            font-size: 20px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* 讲座标题样式 */
+        h1.lecture-title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #222;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin: 15px 0;
+        }
+
+        h2.lecture-title {
+            font-size: 50px;
+            font-weight: bold;
+            color: #222;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin: 15px 0;
+        }
+
+        /* 日期 */
+        .date {
+            font-size: 18px;
+            color: #777;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 两列等宽 */
+            grid-gap: 5px;
+            /* 图片之间的间距 */
+            max-width: 80%;
+            /* 限制网格宽度 */
+            margin: 0 auto;
+            /* 居中 */
+        }
+
+        .image-grid img {
+            width: 360px;
+            /* 图片宽度填满格子 */
+            height: 250px;
+            /* 保持图片比例 */
+            object-fit: cover;
+            /* 图片裁剪以适应容器 */
+        }
+
+        .image-grid2 {
+            display: flex;
+            justify-content: center;
+            /* 水平居中所有子元素 */
+            align-items: flex-start;
+            /* 顶端对齐 */
+            gap: 5px;
+            /* 卡片间距 */
+            max-width: 76%;
+            margin: 0 auto;
+            /* 容器水平居中 */
+        }
+
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            /* 垂直布局：图片在上，标题在下 */
+            align-items: center;
+            /* 子元素水平居中 */
+        }
+
+        .image-item img {
+            height: 260px;
+            object-fit: contain;
+        }
+
+        .caption {
+            margin-top: 8px;
+            /* 和图片之间的间距 */
+            text-align: center;
+            /* 文本居中 */
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* 确保控件容器定位在左下角 */
+        .reveal .controls {
+            position: absolute !important;
+            bottom: 20px !important;
+            left: 120px !important;
+            right: auto !important;
+        }
+
+        /* 调整进度条位置 */
+        .reveal .progress {
+            position: absolute !important;
+            bottom: 0px !important;
+            left: 0px !important;
+            right: auto !important;
+            width: 100% !important;
+        }
+
+        /* 卡片效果
+          <div class="card-grid">
+            <div class="card">要点 1</div>
+            <div class="card">要点 2</div>
+            <div class="card">要点 3</div>
+            </div>
+        */
+        .reveal .card-grid {
+            display: grid;
+            /* 定义 4 列，每列宽度 200px；2 行，每行高 50px */
+            grid-template-columns: repeat(3, 180px);
+            grid-template-rows: repeat(2, 20px);
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+            row-gap: 4em;
+            column-gap: 3.5em;
+        }
+
+        .reveal .flip-card {
+            background: transparent;
+            width: 200px;
+            height: 50px;
+            perspective: 2000px;
+            cursor: pointer;
+        }
+
+        .reveal .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .reveal .flip-card.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .reveal .flip-front,
+        .reveal .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 1.0em;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reveal .flip-back {
+            transform: rotateY(180deg);
+            background: #d0e8ff;
+        }
+
+        .emphasis {
+            font-weight: bold;
+            text-shadow: 0 0 4px rgba(255, 255, 150, 1),
+                0 0 8px rgba(255, 255, 150, 0.9),
+                0 0 12px rgba(255, 255, 150, 0.7),
+                0 0 16px rgba(255, 255, 150, 0.5),
+                0 0 20px rgba(255, 255, 150, 0.3);
+            /* 微弱阴影让文字“浮”起来 */
+            -webkit-text-stroke: 0.5px #333;
+            /* 文字描边 */
+        }
+
+        .pulse {
+            display: inline-block;
+            animation: pulse 2s 3;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- 标题 -->
+            <section>
+                <section data-background-iframe="show/fractal/fractal-bg.html">
+                    <div class="title-page">
+                        <h1 style="font-size: 60pt;" class="lecture-title">p5js创意编程</h1>
+                        <h2 style="font-size: 45pt;" class="lecture-title">递归与分形</h2>
+                        <h3 class="speaker">孙科</h3>
+                        <p class="date">2025年4月18日</p>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 分形引入 -->
+            <section>
+                <!-- data-background-video="./assets/imgs/fractal/doctor-strange.mp4" -->
+                <section>
+                    <video src="./assets/imgs/fractal/doctor-strange.mp4" style="" controls></video>
+                    <!-- <img style="width: 100%;height: auto;" src="./assets/imgs/fractal/doctor-strange.png"> -->
+                </section>
+                <section style="text-align: left;">
+                    <h2>电影中的分形</h2>
+                    <div class="image-grid">
+                        <img src="./assets/imgs/fractal/doctor-strange.png" alt="Image 1">
+                        <img src="./assets/imgs/fractal/galaxy.jpg" alt="Image 2">
+                        <img src="./assets/imgs/fractal/bighero2.png" alt="Image 3">
+                        <img src="./assets/imgs/fractal/elsa-swirls.jpg" alt="Image 4">
+                    </div>
+                </section>
+
+                <!-- <section data-auto-animate data-auto-animate-unmatched="fade">
+                    <img style="width: 600px;height: auto;" src="./assets/imgs/fractal/ego-planet.jpg">
+                    <img style="width: 600px;height: auto;" src="./assets/imgs/fractal/galaxy.jpg">
+                </section>
+                <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: center">
+                    <img style="width: auto;height: auto;" src="./assets/imgs/fractal/elsa-swirls.jpg">
+                    <blockquote style="font-size: 30px;">
+                        My soul is spiraling in frozen fractals all around.<br>
+                        <footer>— Elsa, Frozen</footer>
+                    </blockquote>
+                </section> -->
+
+                <section style="text-align: left;">
+                    <h2>自然中的分形</h2>
+                    <div class="image-grid">
+                        <img src="./assets/imgs/fractal/fractal-tree.jpg" alt="Image 1">
+                        <img src="./assets/imgs/fractal/duorou.png" alt="Image 2">
+                        <img src="./assets/imgs/fractal/canyon.jpg" alt="Image 3">
+                        <img src="./assets/imgs/fractal/lightning.jpg" alt="Image 4">
+                    </div>
+                </section>
+
+                <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: left;">
+                    <h2>分形</h2>
+                    <p><b>分形（Fractal）</b>是一类几何图形，它具有在任意小的尺度下都显示出自相似结构的特性。
+                        换句话说，无论你把分形放大多少倍，其局部的结构总与整体相似。</p>
+                    <!-- <div class="image-grid2">
+                        <img src="./assets/imgs/fractal/kehe.jpg" alt="Image 3" title="科赫雪花">
+                        <img src="./assets/imgs/fractal/triangle.png" alt="Image 4" title="谢尔宾斯基三角形">
+                    </div> -->
+                    <div class="image-grid2">
+                        <div class="image-item">
+                            <img src="./assets/imgs/fractal/kehe.jpg" alt="科赫雪花">
+                            <div class="caption">科赫雪花</div>
+                        </div>
+                        <div class="image-item">
+                            <img src="./assets/imgs/fractal/triangle.png" alt="谢尔宾斯基三角形">
+                            <div class="caption">谢尔宾斯基三角形</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: left;">
+                    <h2>分形</h2>
+                    <p><b>分形（Fractal）</b>是一类几何图形，它具有在任意小的尺度下都显示出自相似结构的特性。
+                        换句话说，无论你把分形放大多少倍，其局部的结构总与整体相似。</p>
+                    <!-- <div class="image-grid2">
+                        <img src="./assets/imgs/fractal/jung.jpg" alt="Image 1"
+                            title="Kerry Mitchell, “Jungle”, 1998">
+                        <img src="./assets/imgs/fractal/mandelbrot.jpg" alt="Image 2" title="曼德博集">
+                    </div> -->
+                    <div class="image-grid2">
+                        <div class="image-item">
+                            <img src="./assets/imgs/fractal/jung.jpg" alt="Image 1">
+                            <div class="caption">分形艺术</div>
+                        </div>
+                        <div class="image-item">
+                            <img src="./assets/imgs/fractal/mandelbrot.jpg" alt="曼德博集">
+                            <div class="caption">曼德博集</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>本节课的任务</h2>
+                    <p>画一个分形树！</p>
+                    <div style="width: 900px; height: 400px;text-align: center;">
+                        <iframe data-src="show/fractal/fractal-tree-maxd.html?hidden=true" frameborder="0"
+                            marginwidth="0" marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen data-preload>
+                        </iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 圆圈分形 -->
+            <section style="text-align: left;">
+                <section data-auto-animate data-auto-animate-unmatched="fade">
+                    <h2>从简单的分形图入手</h2>
+
+                    <div style="width: 900px; height: 400px;text-align: center;">
+                        <iframe data-src="show/fractal/fractal-circle.html" frameborder="0" marginwidth="0"
+                            marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen data-preload>
+                        </iframe>
+                    </div>
+                </section>
+
+                <section data-auto-animate data-auto-animate-unmatched="fade">
+                    <h2>从简单的分形图入手</h2>
+                    <p>第n+1层相比第n层的图形做了哪些几何变换？</p>
+                    <div style="width: 900px; height: 400px;text-align: center;">
+                        <iframe data-src="show/fractal/fractal-circle.html" frameborder="0" marginwidth="0"
+                            marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen data-preload>
+                        </iframe>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 style="text-align: left;">分形特点</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 400px; height: 450px;">
+                            <iframe data-src="show/fractal/fractal-circle2.html" frameborder="0" marginwidth="0"
+                                marginheight="0" scrolling="no"
+                                style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                                allowfullscreen data-preload>
+                            </iframe>
+                        </div>
+                        <div class='col' style="width: 600px; height:auto;">
+                            <ul>
+                                <li>
+                                    <span class="emphasis pulse">自相似性</span>：整体与局部结构相似，放大任意一部分都能看到与整体相似的形态。
+                                </li>
+                                <li>
+                                    <span class="emphasis pulse">无限细节</span>：理论上可无限重复放大，每一层都保留相似的复杂性。
+                                </li>
+                                <li>
+                                    <span class="emphasis pulse">简单生成规则</span>：通常由一两条简单规则，反复应用产生。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <section>
+                <section data-auto-animate style="text-align: left;">
+                    <h2>递归</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 300px; height: auto;">
+                            <img src="./assets/imgs/fractal/doll.jpg" alt="Image 1">
+                            <img src="./assets/imgs/fractal/screen.png" alt="Image 2">
+                        </div>
+                        <div class='col' style="width: 500px; height:auto;">
+                            <ul>
+                                <li>从前有座山，山里有个庙...</li>
+                                <li>俄罗斯套娃</li>
+                                <li>电脑录屏时录屏软件录到自己</li>
+                                <li>阶乘的递归定义
+                                    <div markdown="1" style="font-size: 32px;">
+                                        $$
+                                        n! =
+                                        \begin{cases}
+                                        1, & n = 0,\\
+                                        n \cdot (n - 1)!, & n > 0.
+                                        \end{cases}
+
+                                        $$
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2>递归</h2>
+
+                    <div class='multiCol'>
+                        <div class='col' style="width: 260px; height: auto;">
+                            <img src="./assets/imgs/fractal/doll.jpg" alt="Image 1">
+                            <img src="./assets/imgs/fractal/screen.png" alt="Image 2">
+                        </div>
+                        <div class='col' style="width: 500px; height:auto;text-align: left;">
+                            <p><b>递归（Recursion）</b>即在描述某个对象或过程时，直接或间接地引用它自身。它不仅限于编程，也广泛出现在数学、自然和生活中。
+                            </p>
+                            <ul>
+                                <li>从前有座山，山里有个庙...</li>
+                                <li>俄罗斯套娃</li>
+                                <li>电脑录屏时录屏软件录到自己</li>
+                                <li>阶乘的递归定义</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>递归函数特点</h2>
+                    <p>编程中，递归是通过自定义函数调用自身来实现的。</p>
+                    <ul>
+                        <li><span class="emphasis pulse">自我调用</span>：函数在自身内部调用自己</li>
+                        <li><span class="emphasis pulse">边界情况</span>(base case)：当满足某个条件时，不再继续递归，避免无限循环。</li>
+                        <li><span class="emphasis pulse">递归情况</span>(recursive case)：将问题拆解成更小的同类子问题，并对其调用自身</li>
+                    </ul>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>圆圈分形的递归实现</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 270px; height: 400px;">
+                            <div class="mac-window" style="width: 100%;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                    <code class="hljs javascript" style="font-size: 18px;" data-trim >
+                                        // ... setup()代码略
+                                        function draw() {
+                                            background(220);
+                                            // 画整个圆圈分形，初始把第一个圆画在中心，直径100
+                                            drawCircles(width / 2, height / 2, 100);
+                                        }
+                                        function drawCircles(x, y, d) { // 画圆圈分形
+                                            // 满足边界条件则返回上一层，结束递归
+                                            if (____) return; 
+                                            // 以(x,y)为圆心坐标画一个直径为d的圆
+                                            circle(x, y, d); 
+                                            // 在右侧递归地画一个更小的分形结构
+                                            drawCircles(x + d, y, ____);  
+                                        }
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col' style="width: 200px; height: 400px;">
+                            <iframe data-src="show/fractal/fractal-circle1.html?d=90" frameborder="0" marginwidth="0"
+                                scrolling="no" style="width: 100%; height: 100%;border:3px solid #666;" allowfullscreen
+                                data-preload>
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>圆圈分形的递归实现</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 270px; height: 400px;">
+                            <div class="mac-window" style="width: 100%;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                    <code class="hljs javascript" style="font-size: 18px;" data-trim data-line-numbers="9,13">
+                                        // ... setup()代码略
+                                        function draw() {
+                                            background(220);
+                                            // 画整个圆圈分形，初始把第一个圆画在中心，直径100
+                                            drawCircles(width / 2, height / 2, 100);
+                                        }
+                                        function drawCircles(x, y, d) { // 画圆圈分形
+                                            // 满足边界条件则返回上一层，结束递归
+                                            if (d < 1) return; 
+                                            // 以(x,y)为圆心坐标画一个直径为d的圆
+                                            circle(x, y, d); 
+                                            // 在右侧递归地画一个更小的分形结构
+                                            drawCircles(x + d, y, d * 0.5);  
+                                        }
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col' style="width: 200px; height: 400px;">
+                            <iframe data-src="show/fractal/fractal-circle1.html?d=90" frameborder="0" marginwidth="0"
+                                scrolling="no" style="width: 100%; height: 100%;border:3px solid #666;" allowfullscreen
+                                data-preload>
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>圆圈分形的递归实现</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 280px; height: 400px;">
+                            <div class="mac-window" style="width: 100%;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                    <code class="hljs javascript" style="font-size: 21px;" data-trim >
+                                        // ... setup()代码略
+                                        function draw() {
+                                            background(220);
+                                            drawCircles(width / 2, height / 2, 100);
+                                        }
+                                        function drawCircles(x, y, d) {
+                                            // 如果没有写边界条件？
+                                            circle(x, y, d); 
+                                            drawCircles(x + d, y, d * 0.5);  
+                                        }
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col' style="width: 200px; height: 400px;">
+                            <iframe data-src="show/fractal/fractal-circle-error.html?d=90" frameborder="0"
+                                marginwidth="0" scrolling="no" style="width: 100%; height: 100%;border:3px solid #666;"
+                                allowfullscreen data-preload>
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <!-- 分形树 -->
+            <section>
+                <section style="text-align: left;">
+                    <h2>分形树</h2>
+                    <p>尝试分析其中的分形结构</p>
+                    <div style="width: 900px; height: 400px;text-align: center;">
+                        <iframe data-src="show/fractal/fractal-tree-maxd.html?hidden=true" frameborder="0"
+                            marginwidth="0" marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen data-preload>
+                        </iframe>
+                    </div>
+                </section>
+
+                <section style="text-align: left;">
+                    <h2>分形树递归实现</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 450px; height: 450px;">
+                            <div class="mac-window" style="width: 100%;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                    <code class="hljs javascript" style="font-size: 13px;" data-trim >
+                                        function draw() {
+                                            background(220);
+                                            // 把坐标系原点平移到画布下边界中心
+                                            translate(width * 0.5, height);
+                                            branch(100, 1);             // 画分形树，初始主干长度100
+                                        }
+                                        function branch(len, step) {    // 当前主干的长度，当前层数
+                                            if (___) return;            // 递归边界条件
+                                            line(___, ___, ___, ___);   // 画当前树的主干
+                                            translate(___, ___);        // 将原点平移到下一个分叉点
+
+                                            push();              // 记录当前坐标系状态
+                                            rotate(PI / 6);      // 顺时针旋转30度，画出右侧分支
+                                            branch(len * 0.66, step + 1); // 递归地画下一层，对长度缩放
+                                            pop();               // 恢复到之前的坐标系状态
+                                            push();              // 仿照上面的代码，在这里画出左边的分支
+                                            ___;
+                                            ___;
+                                            pop();
+                                        }
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col' style="width: 400px; height: 420px;">
+                            <iframe data-src="show/fractal/fractal-tree-anim.html?hidden=true" frameborder="0"
+                                marginwidth="0" scrolling="no" style="width: 100%; height: 100%;border:2px solid #666;"
+                                allowfullscreen data-preload>
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2>分形树递归实现</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 470px; height: 450px;">
+                            <div class="mac-window" style="width: 100%;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                    <code class="hljs javascript" style="font-size: 13px;" data-trim data-line-numbers="8-10,17-18">
+                                        function draw() {
+                                            background(220);
+                                            // 把坐标系原点平移到画布下边界中心
+                                            translate(width * 0.5, height);
+                                            branch(100, 1);             // 画分形树，初始主干长度100
+                                        }
+                                        function branch(len, step) {    // 当前主干的长度，当前层数
+                                            if (len < 2 || step >= 10) return; // 递归边界条件
+                                            line(0, 0, 0, -len);        // 画当前树的主干
+                                            translate(0, -len);         // 将原点平移到下一个分叉点
+                                        
+                                            push();              // 记录当前坐标系状态
+                                            rotate(PI / 6);      // 顺时针旋转30度，画出右侧分支
+                                            branch(len * 0.66, step + 1); // 递归地画下一层，对长度缩放
+                                            pop();               // 恢复到之前的坐标系状态
+                                            push();
+                                            rotate(-PI / 6);      // 逆时针旋转30度，画出左侧分支
+                                            branch(len * 0.66, step + 1); // 递归地画下一层，对长度缩放
+                                            pop();
+                                        }
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col' style="width: 400px; height: 420px;">
+                            <iframe data-src="show/fractal/fractal-tree-anim.html?hidden=true" frameborder="0"
+                                marginwidth="0" scrolling="no" style="width: 100%; height: 100%;border:2px solid #666;"
+                                allowfullscreen data-preload>
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2>分形树递归实现</h2>
+                    <p>加入创意：两个以上分支？旋转角度/放缩比例随机(使用noise函数)？层数越大颜色越绿？(使用stroke改颜色)</p>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 450px; height: 450px;">
+                            <div class="mac-window" style="width: 100%;">
+                                <div class="mac-header">
+                                    <span class="button red"></span>
+                                    <span class="button yellow"></span>
+                                    <span class="button green"></span>
+                                </div>
+                                <div class="mac-content">
+                                    <pre>
+                                        <code class="hljs javascript" style="font-size: 13px;" data-trim data-line-numbers="8-10,17-18">
+                                            function draw() {
+                                                background(220);
+                                                // 把坐标系原点平移到画布下边界中心
+                                                translate(width * 0.5, height);
+                                                branch(100, 1);             // 画分形树，初始主干长度100
+                                            }
+                                            function branch(len, step) {    // 当前主干的长度，当前层数
+                                                if (len < 2 || step >= 10) return; // 递归边界条件
+                                                line(0, 0, 0, -len);        // 画当前树的主干
+                                                translate(0, -len);         // 将原点平移到下一个分叉点
+                                            
+                                                push();              // 记录当前坐标系状态
+                                                rotate(PI / 6);      // 顺时针旋转30度，画出右侧分支
+                                                branch(len * 0.66, step + 1); // 递归地画下一层，对长度缩放
+                                                pop();               // 恢复到之前的坐标系状态
+                                                push();
+                                                rotate(-PI / 6);      // 逆时针旋转30度，画出左侧分支
+                                                branch(len * 0.66, step + 1); // 递归地画下一层，对长度缩放
+                                                pop();
+                                            }
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col' style="width: 400px; height: 420px;">
+                            <iframe data-src="show/fractal/fractal-tree-anim.html?hidden=true" frameborder="0"
+                                marginwidth="0" scrolling="no" style="width: 100%; height: 100%;border:2px solid #666;"
+                                allowfullscreen data-preload>
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- <section style="text-align: left;"
+                    data-background-iframe="show/fractal/fractal-tree-infinite.html?hidden=true">
+                    <h2>分形树递归实现</h2>
+                </section> -->
+
+            </section>
+
+            <section>
+                <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: left;">
+                    <h2>创意作品展示</h2>
+                    <div class='multiCol'>
+                        <div class='col' style="width: 350px; height: 500px;">
+                            <iframe data-src="show/fractal/fractal-show1.html" frameborder="0" marginwidth="0"
+                                marginheight="0" scrolling="no"
+                                style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                                allowfullscreen data-preload>
+                            </iframe>
+                        </div>
+                        <div class='col' style="width: 300px; height: 500px;">
+                            <video src="./assets/imgs/fractal/real-tree.mp4" style="width: 100%; height: auto;" controls
+                                autoplay loop muted playsinline data-autoplay data-ignore></video>
+                        </div>
+                    </div>
+                    <!-- <div style="width: 900px; height: 500px;">
+                        <iframe data-src="show/fractal/fractal-show1.html" frameborder="0" marginwidth="0"
+                            marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen>
+                        </iframe>
+                    </div> -->
+
+                </section>
+
+                <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: left;">
+                    <h2>创意作品展示</h2>
+                    <div style="width: 900px; height: 500px;">
+                        <iframe data-src="show/fractal/fractal-show2.html" frameborder="0" marginwidth="0"
+                            marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen data-preload>
+                        </iframe>
+                    </div>
+                </section>
+
+                <!-- <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: left;">
+                    <h2>创意作品展示</h2>
+                    <div style="width: 900px; height: 500px;">
+                        <iframe data-src="show/fractal/fractal-tree-infinite.html" frameborder="0" marginwidth="0"
+                            marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </section> -->
+            </section>
+
+            <section>
+                <section data-auto-animate style="text-align: left;">
+                    <h2>总结拓展</h2>
+                    <ul style="font-size: 35px;">
+                        <li><b>分形应用</b>：建筑、医学、分形压缩算法、三维地形生成、计算海岸线长度...</li>
+                        <li><b>递归应用</b>：归并排序、快速排序、深度优先搜索算法...</li>
+                    </ul>
+                    <div class="image-grid2">
+                        <img style="height: 210px;" src="./assets/imgs/fractal/building.png" alt="Image 1">
+                        <img style="height: 210px;" src="./assets/imgs/fractal/fractal_mountain.gif" alt="Image 2">
+                        <img style="height: 210px;" src="./assets/imgs/fractal/coast.png" alt="Image 3">
+                    </div>
+                </section>
+
+                <section data-auto-animate style="text-align: left;">
+                    <h2>总结拓展</h2>
+                    <ul style="font-size: 35px;">
+
+                        <li><b>递归应用</b>：归并排序、快速排序、深度优先搜索算法...</li>
+                        <li><b>分形应用</b>：建筑、医学、分形压缩算法、三维地形生成、计算海岸线长度...</li>
+                    </ul>
+                    <div class="image-grid2">
+                        <img style="height: 300px;" src="./assets/imgs/fractal/mergesort.gif" alt="Image 1">
+                        <img style="height: 300px;" src="./assets/imgs/fractal/dfs.gif" alt="Image 2">
+                    </div>
+                </section>
+
+                <section data-auto-animate data-auto-animate-unmatched="fade" style="text-align: left;">
+                    <h2>课后任务</h2>
+                    <ul style="font-size: 35px;">
+                        <li>搜索什么是分形维数，为什么分形往往具有非整数维数。</li>
+                        <li>搜索分形结构在自然、艺术、工程等领域中的典型应用，思考其特点及意义。</li>
+                        <li>思考其他分形图，比如谢尔宾斯基三角形，如何用递归算法实现。</li>
+                    </ul>
+                    <div style="width: 1000px; height: 300px;">
+                        <iframe data-src="show/fractal/fractal-tree-infinite.html?hidden=true" frameborder="0"
+                            marginwidth="0" marginheight="0" scrolling="no"
+                            style="width: 100%; height: 100%;border:2px solid #666; margin-bottom:0px; max-width: 100%;"
+                            allowfullscreen data-preload>
+                        </iframe>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/math/math.js"></script>
+
+    <script src="../plugin/custom.js"></script>
+    <script>
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+    </script>
+</body>
+
+</html>

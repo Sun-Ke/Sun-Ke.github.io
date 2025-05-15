@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/p5js/show/common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/p5js/show/common/style.css">
+</head>
+
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background(0);
+            let gap = 20;
+            for (let x = 0; x < width + gap; x += gap) {
+                for (let y = 0; y < height + gap; y += gap) {
+                    fill(map(noise(123 + x * 0.01, 456 + y * 0.01, frameCount * 0.01), 0, 1, 0, 255),
+                        map(noise(789 + x * 0.01, 1002313 + y * 0.01, frameCount * 0.01), 0, 1, 0, 255),
+                        map(noise(2131321 + x * 0.01, 435345 + y * 0.01, frameCount * 0.01), 0, 1, 0, 255),
+                    );
+                    circle(x, y, map(noise(x * 0.01, y * 0.01, frameCount * 0.01), 0, 1, 2, 25));
+                }
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight); // 窗口改变时，调整画布大小
+        }
+
+        function mouseClicked() {
+            if (isLooping()) {
+                noLoop(); // 暂停动画
+            } else {
+                loop();   // 恢复动画
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

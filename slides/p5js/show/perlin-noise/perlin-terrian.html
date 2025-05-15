@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/p5js/show/common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/p5js/show/common/style.css">
+</head>
+
+<body>
+    <script>
+        let cols, rows;
+        let scl = 40;           // 每个网格的尺寸
+        let w = 1400;           // 地形宽度
+        let h = 1000;           // 地形高度
+        let flying = 0;         // 模拟移动的变量
+
+        let terrain = [];
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight, WEBGL);
+            w = min(1500, width);
+            h = min(800, height);
+            cols = w / scl;
+            rows = h / scl;
+
+            // 初始化 terrain 二维数组
+            for (let x = 0; x < cols; x++) {
+                terrain[x] = [];
+                for (let y = 0; y < rows; y++) {
+                    terrain[x][y] = 0;
+                }
+            }
+            frameRate(30);
+        }
+
+        function draw() {
+            // 让噪声动画向前移动，模拟飞行效果
+            flying -= 0.01;
+
+            // 使用 Perlin 噪声填充 terrain 数组
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    // map 将噪声值从 [0, 1] 映射到 [-100, 100]
+                    terrain[x][y] = map(noise(x * 0.1, y * 0.1 + flying), 0, 1, -100, 400);
+                }
+            }
+
+            background(0);
+            stroke(255);
+            noFill();
+
+            // 设置视角：旋转 X 轴，让地形呈现出俯视的3D效果
+            rotateX(PI / 3.5);
+            // 平移地形，使其中心显示
+            translate(-w / 2, -h / 2);
+
+            // 根据 terrain 数组绘制地形
+            for (let y = 0; y < rows - 1; y++) {
+                beginShape(TRIANGLE_STRIP);
+                for (let x = 0; x < cols; x++) {
+                    vertex(x * scl, y * scl, terrain[x][y]);
+                    vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
+                }
+                endShape();
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

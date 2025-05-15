@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/p5js/show/common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/p5js/show/common/style.css">
+</head>
+
+<body>
+    <script>
+        let maze; // 存储迷宫
+        let player = { x: 1, y: 1 }; // 玩家起始位置
+        let cellSize; // 单元格大小
+        let rows = 12; // 迷宫行数
+        let cols = 12; // 迷宫列数
+        let detx = 0, dety = 0;
+        function setup() {
+            createCanvas(windowWidth, windowHeight); // 设置画布大小
+            cellSize = min(width, height) / cols; // 动态计算单元格大小
+            detx = (width - cellSize * rows) / 2;
+            dety = (height - cellSize * cols) / 2;
+            // 手动定义迷宫
+            maze = [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+                [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+                [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+                [1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+                [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+                [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+                [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1],
+                [1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1],
+                [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1],
+                [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ];
+        }
+
+        function draw() {
+            background(220); // 背景颜色
+            drawMaze(); // 绘制迷宫
+        }
+
+        // 绘制迷宫
+        function drawMaze() {
+            for (let i = 0; i < maze.length; i++) {
+                for (let j = 0; j < maze[i].length; j++) {
+                    if (maze[i][j] === 1) {
+                        fill(50); // 墙的颜色
+                    } else if (maze[i][j] === 3) {
+                        fill(0, 255, 0); // 出口的颜色
+                    } else {
+                        fill(255); // 通路的颜色
+                    }
+                    rect(j * cellSize + detx, i * cellSize + dety, cellSize, cellSize); // 绘制单元格
+                }
+            }
+
+            // 绘制玩家
+            fill(0, 0, 255);
+            ellipse(player.x * cellSize + cellSize / 2 + detx,
+                player.y * cellSize + cellSize / 2 + dety, cellSize / 2);
+        }
+
+        // 玩家移动逻辑
+        function keyPressed() {
+            let newX = player.x;
+            let newY = player.y;
+
+            // 检测按键，计算新的位置
+            if (keyCode === UP_ARROW) newY--;
+            if (keyCode === DOWN_ARROW) newY++;
+            if (keyCode === LEFT_ARROW) newX--;
+            if (keyCode === RIGHT_ARROW) newX++;
+
+            // 检测是否撞墙
+            if (maze[newY][newX] !== 1) {
+                player.x = newX;
+                player.y = newY;
+            }
+
+            // 检测是否到达出口
+            if (maze[newY][newX] === 3) {
+                noLoop(); // 停止绘制
+                textSize(32);
+                fill(0, 255, 0);
+                textAlign(CENTER, CENTER);
+                text("You Win!", width / 2, height / 2);
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

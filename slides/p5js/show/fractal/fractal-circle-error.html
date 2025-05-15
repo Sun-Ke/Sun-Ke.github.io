@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background('#eaf3fb');
+            let params = new URLSearchParams(window.location.search);
+            let d = parseFloat(params.get("d")) || 100;
+            drawCircles(width / 2, height / 2, d, 1);
+        }
+
+        function drawCircles(x, y, d, depth) {
+            circle(x, y, d);
+            drawCircles(x + d, y, d * 0.5, depth + 1);
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

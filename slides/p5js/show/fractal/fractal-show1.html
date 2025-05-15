@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        let gui;
+        let parameters = {
+            angle: 0.5,
+            length: 200,
+        };
+        let colorful = false;
+        let weight_display = false;
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            // gui = new dat.GUI();
+            // let control_folder = gui.addFolder('control');
+            // control_folder.add(parameters, 'angle', 0, PI).name('angle');
+            // parameters.length = height * 0.4;
+            // control_folder.add(parameters, 'length', 50, height / 2).name('length');
+            // control_folder.open();
+            draw();
+            noLoop();
+        }
+
+        function draw() {
+            background(255);
+            translate(width * 0.5, height);
+            stroke(0);
+            branch(parameters.length, 0);
+        }
+
+        function drawBranchSegment(len, weight1, weight2) {
+            if (weight2 < 1) {
+                line(0, 0, 0, -len);
+                return;
+            }
+            let halfW1 = weight1 / 2;
+            let halfW2 = weight2 / 2;
+
+            beginShape();
+            vertex(-halfW1, 0);       // 起点左
+            vertex(halfW1, 0);        // 起点右
+            vertex(halfW2, -len);     // 终点右
+            vertex(-halfW2, -len);    // 终点左
+            endShape(CLOSE);
+        }
+
+        function branch(len, step) {
+            if (len < 3) {
+                return;
+            }
+            if (colorful) {
+                let t = map(step, 0, 8, 0, 1);
+                let c = lerpColor(color('#8B4511'), color('#006400'), t);
+                stroke(c);
+                fill(c);
+            }
+            let ratio = map(step, 0, 10, 0.0008, 0.008);
+            if (weight_display) {
+                strokeWeight(map(step, 0, 6, 3, 0.4));
+                let weight1 = map(pow(0.4, step), 1, 0, 15, 0.3);
+                let weight2 = map(pow(0.4, step + 1), 1, 0, 15, 0.3);
+                drawBranchSegment(len, weight1, weight2);
+            } else {
+                strokeWeight(map(step, 0, 6, 3, 0.8));
+                line(0, 0, 0, -len);
+            }
+            translate(0, -len);
+            push();
+            rotate(map(noise(len, frameCount * ratio), 0, 1, -1, 1));
+            branch(len * 0.618, step + 1);
+            pop();
+
+            push();
+            rotate(map(noise(len + 42, frameCount * ratio), 0, 1, -1, 1));
+            branch(len * 0.45, step + 1);
+            pop();
+
+            push();
+            rotate(map(noise(len + 1007, frameCount * ratio), 0, 1, -1, 1));
+            branch(len * 0.3, step + 1);
+            pop();
+        }
+
+        function mousePressed() {
+            if (!isLooping()) {
+                loop();   // 恢复动画
+            } else if (!colorful) {
+                colorful = true;
+            } else {
+                weight_display = true;
+            }
+        }
+        function doubleClicked() {
+
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

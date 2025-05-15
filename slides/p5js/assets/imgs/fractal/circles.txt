@@ -1,0 +1,19 @@
+/* 把代码复制到sketch.js中 */
+
+function setup() {
+    createCanvas(600, 400);
+}
+
+function draw() {
+    background(220);
+    // 画整个圆圈分形，初始把第一个圆画在中心，直径100
+    drawCircles(width / 2, height / 2, 100);
+}
+function drawCircles(x, y, d) { // 画圆圈分形
+    // 满足边界条件则返回上一层，结束递归
+    if (____) return;
+    // 以(x,y)为圆心坐标画一个直径为d的圆
+    circle(x, y, d);
+    // 在右侧递归地画一个更小的分形结构
+    drawCircles(x + d, y, ____);
+}

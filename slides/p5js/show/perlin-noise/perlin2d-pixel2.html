@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/p5js/show/common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/p5js/show/common/style.css">
+</head>
+
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            pixelDensity(1); // 确保每个像素对应一个屏幕像素
+            frameRate(1);
+            noiseSeed(0);
+        }
+
+        function draw() {
+            loadPixels(); // 加载像素数组
+            for (let x = 0; x < width; x += 1) {
+                for (let y = 0; y < height; y += 1) {
+                    let noiseVal = noise(x * 0.02, y * 0.02) * 255; // 噪声值映射到0-255之间
+                    if (noiseVal < 128) {
+                        noiseVal = 0;
+                    } else {
+                        noiseVal = 255;
+                    }
+                    // 获取像素数组中的位置
+                    let pix = (x + y * width) * 4;
+
+                    // 设置灰度值
+                    pixels[pix + 0] = noiseVal; // Red channel
+                    pixels[pix + 1] = noiseVal; // Green channel
+                    pixels[pix + 2] = noiseVal; // Blue channel
+                    pixels[pix + 3] = 255;      // Alpha channel
+                }
+            }
+            updatePixels(); // 更新像素数组
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight); // 窗口改变时，调整画布大小
+        }
+
+        function mouseClicked() {
+            if (isLooping()) {
+                noLoop(); // 暂停动画
+            } else {
+                loop();   // 恢复动画
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

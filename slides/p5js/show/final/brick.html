@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/p5js/show/common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/p5js/show/common/style.css">
+</head>
+
+<body>
+    <script>
+        let ball, paddle;
+        let bricks = [];
+        let ballSpeedX = 3, ballSpeedY = 3;
+        let rows = 5, cols = 10;
+        let brickWidth, brickHeight;
+        let score = 0;
+
+        function setup() {
+            createCanvas(600, 400);
+
+            // 小球初始化
+            ball = {
+                x: width / 2,
+                y: height / 2,
+                radius: 10,
+            };
+
+            // 挡板初始化
+            paddle = {
+                x: width / 2 - 50,
+                y: height - 20,
+                width: 100,
+                height: 10,
+                speed: 7,
+            };
+
+            // 初始化砖块
+            brickWidth = width / cols;
+            brickHeight = 20;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    bricks.push({
+                        x: j * brickWidth,
+                        y: i * brickHeight,
+                        width: brickWidth - 2,
+                        height: brickHeight - 2,
+                        isHit: false,
+                    });
+                }
+            }
+        }
+
+        function draw() {
+            background(30);
+
+            // 绘制分数
+            fill(255);
+            textSize(16);
+            text(`Score: ${score}`, 10, 20);
+
+            // 小球移动
+            ball.x += ballSpeedX;
+            ball.y += ballSpeedY;
+
+            // 绘制小球
+            fill(255, 100, 100);
+            circle(ball.x, ball.y, ball.radius * 2);
+
+            // 边界检测
+            if (ball.x - ball.radius < 0 || ball.x + ball.radius > width) {
+                ballSpeedX *= -1;
+            }
+            if (ball.y - ball.radius < 0) {
+                ballSpeedY *= -1;
+            }
+
+            // 游戏失败
+            if (ball.y - ball.radius > height) {
+                noLoop();
+                textSize(32);
+                fill(255, 0, 0);
+                textAlign(CENTER, CENTER);
+                text('Game Over', width / 2, height / 2);
+            }
+
+            // 挡板移动
+            if (keyIsDown(LEFT_ARROW)) {
+                paddle.x -= paddle.speed;
+            }
+            if (keyIsDown(RIGHT_ARROW)) {
+                paddle.x += paddle.speed;
+            }
+
+            // 防止挡板超出边界
+            paddle.x = constrain(paddle.x, 0, width - paddle.width);
+
+            // 绘制挡板
+            fill(100, 200, 255);
+            rect(paddle.x, paddle.y, paddle.width, paddle.height);
+
+            // 小球与挡板碰撞
+            if (
+                ball.y + ball.radius > paddle.y &&
+                ball.x > paddle.x &&
+                ball.x < paddle.x + paddle.width
+            ) {
+                ballSpeedY *= -1;
+                ball.y = paddle.y - ball.radius; // 防止嵌入
+            }
+
+            // 绘制砖块
+            for (let brick of bricks) {
+                if (!brick.isHit) {
+                    fill(200, 150, 100);
+                    rect(brick.x, brick.y, brick.width, brick.height);
+
+                    // 小球与砖块碰撞检测
+                    if (
+                        ball.x + ball.radius > brick.x &&
+                        ball.x - ball.radius < brick.x + brick.width &&
+                        ball.y + ball.radius > brick.y &&
+                        ball.y - ball.radius < brick.y + brick.height
+                    ) {
+                        brick.isHit = true;
+                        ballSpeedY *= -1;
+                        score += 10; // 增加分数
+                    }
+                }
+            }
+
+            // 检查是否所有砖块都被击中
+            let allHit = bricks.every(brick => brick.isHit);
+            if (allHit) {
+                noLoop();
+                textSize(32);
+                fill(0, 255, 0);
+                textAlign(CENTER, CENTER);
+                text('You Win!', width / 2, height / 2);
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

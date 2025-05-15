@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        let gui;
+        const ratio = 0.65;
+        let parameters = {
+            angle: 0.55,
+            max_depth: 12,
+            length: 400,
+            speed: 0.25,
+            easing: "linear",
+        };
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            gui = new dat.GUI();
+            let control_folder = gui.addFolder('control');
+            control_folder.add(parameters, 'angle', 0, PI).name('angle');
+            control_folder.add(parameters, 'max_depth', 1, 13, 1).name('max_depth');
+            parameters.length = height * 0.36;
+            control_folder.add(parameters, 'length', 50, height / 2).name('length');
+            control_folder.add(parameters, 'speed', 0, 1).name('speed');
+            control_folder.add(parameters, 'easing', Object.keys(easingFunctions)).name('easing');
+            control_folder.open();
+
+            let params = new URLSearchParams(window.location.search);
+            if (params.get("hidden") === 'true') {
+                gui.domElement.style.display = 'none';
+            }
+        }
+
+        let progress = 0;
+        let real_max_depth = 10;
+        function easeInOutQuad(x) {
+            return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+        }
+
+        function get_progress_01() {
+            let x = progress - Math.floor(progress);
+            let func = easingFunctions[parameters.easing];
+            return func(x);
+        }
+
+        function draw() {
+            background('#eaf3fb');
+            stroke(0);
+            strokeWeight(2);
+            const angle = parameters.angle;
+            let cnt = Math.floor(progress);
+            let pro = get_progress_01();
+            textSize(20);
+            // text("depth=" + cnt, 10, 20);
+            // text("pro=" + pro.toFixed(2), 10, 40);
+            let length = map(pro, 0, 1, parameters.length, parameters.length / ratio);
+            let x1 = width * 0.5;
+            let y1 = height - parameters.length * (1 - pro);
+            let alpha = angle * pro;
+            let x0 = x1 + length * sin(alpha);
+            let y0 = y1 + length * cos(alpha);
+            // print("pre", x0, y0);
+            // translate(width * 0.5, height);
+            for (let i = 0; i < min(cnt, 2); i++) {
+                let x = x1 - x0, y = y1 - y0;
+                [x, y] = [x * cos(-angle) - y * sin(-angle), x * sin(-angle) + y * cos(-angle)]; // 一定要加分号
+                // print("rotate", x, y);
+                [x, y] = [-x / ratio, -y / ratio];
+                [x0, y0, x1, y1] = [x0 + x, y0 + y, x0, y0];
+                length /= ratio;
+            }
+            // print(x0, y0);
+            translate(x0, y0);
+            rotate(-angle * (min(cnt, 2) + pro));
+            branch(length, 1);
+            progress += map(parameters.speed, 0, 1, 0, 0.01);
+            real_max_depth = parameters.max_depth + min(cnt, 2) - 2;
+            // if (progress > 1.005) {
+            //     noLoop();
+            // }
+        }
+
+        function branch(len, step) {
+            let pro = get_progress_01();
+            strokeWeight(map(
+                pro,
+                0, 1,
+                map(step, 1, 14, 3.5, 0.2),
+                map(step - 1, 1, 14, 3.5, 0.2),
+            ));
+            if (step == real_max_depth) {
+                line(0, 0, 0, -len * pro);
+                return;
+            }
+            line(0, 0, 0, -len);
+            translate(0, -len);
+            push();
+            rotate(parameters.angle);
+            branch(len * ratio, step + 1);
+            pop();
+
+            push();
+            rotate(-parameters.angle);
+            branch(len * ratio, step + 1);
+            pop();
+        }
+
+        let easingFunctions = {
+            // 匀速
+            linear: t => t,
+
+            // 二次
+            // easeInQuad: t => t * t,
+            // easeOutQuad: t => t * (2 - t),
+            // easeInOutQuad: t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+
+            // 三次
+            easeInCubic: t => t * t * t,
+            easeOutCubic: t => (--t) * t * t + 1,
+            easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+
+            // // 四次
+            // easeInQuart: t => t * t * t * t,
+            // easeOutQuart: t => 1 - (--t) * t * t * t,
+            // easeInOutQuart: t => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2,
+
+            // // 五次
+            // easeInQuint: t => t * t * t * t * t,
+            // easeOutQuint: t => 1 + (--t) * t * t * t * t,
+            // easeInOutQuint: t => t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2,
+
+            // // 正弦
+            // easeInSine: t => 1 - Math.cos((t * Math.PI) / 2),
+            // easeOutSine: t => Math.sin((t * Math.PI) / 2),
+            // easeInOutSine: t => -(Math.cos(Math.PI * t) - 1) / 2,
+
+            // // 指数
+            // easeInExpo: t => t === 0 ? 0 : Math.pow(2, 10 * t - 10),
+            // easeOutExpo: t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+            // easeInOutExpo: t => {
+            //     if (t === 0) return 0;
+            //     if (t === 1) return 1;
+            //     return t < 0.5
+            //         ? Math.pow(2, 20 * t - 10) / 2
+            //         : (2 - Math.pow(2, -20 * t + 10)) / 2;
+            // },
+
+            // // 圆形
+            // easeInCirc: t => 1 - Math.sqrt(1 - t * t),
+            // easeOutCirc: t => Math.sqrt(1 - (--t) * t),
+            // easeInOutCirc: t => t < 0.5
+            //     ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2
+            //     : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2,
+
+            // // 回弹 Back
+            // easeInBack: t => {
+            //     const c1 = 1.70158;
+            //     const c3 = c1 + 1;
+            //     return c3 * t * t * t - c1 * t * t;
+            // },
+            // easeOutBack: t => {
+            //     const c1 = 1.70158;
+            //     const c3 = c1 + 1;
+            //     return 1 + c3 * (--t) * t * t + c1 * t * t;
+            // },
+            // easeInOutBack: t => {
+            //     const c1 = 1.70158;
+            //     const c2 = c1 * 1.525;
+            //     return t < 0.5
+            //         ? (Math.pow(2 * t, 2) * ((c2 + 1) * 2 * t - c2)) / 2
+            //         : (Math.pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2;
+            // },
+
+            // // 弹性 Elastic
+            // easeInElastic: t => {
+            //     const c4 = (2 * Math.PI) / 3;
+            //     return t === 0 ? 0 : t === 1 ? 1 : -Math.pow(2, 10 * t - 10) * Math.sin((t * 10 - 10.75) * c4);
+            // },
+            // easeOutElastic: t => {
+            //     const c4 = (2 * Math.PI) / 3;
+            //     return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
+            // },
+            // easeInOutElastic: t => {
+            //     const c5 = (2 * Math.PI) / 4.5;
+            //     if (t === 0) return 0;
+            //     if (t === 1) return 1;
+            //     return t < 0.5
+            //         ? -(Math.pow(2, 20 * t - 10) * Math.sin((20 * t - 11.125) * c5)) / 2
+            //         : (Math.pow(2, -20 * t + 10) * Math.sin((20 * t - 11.125) * c5)) / 2 + 1;
+            // },
+
+            // 弹跳 Bounce
+            // easeInBounce: t => 1 - easingFunctions.easeOutBounce(1 - t),
+            easeOutBounce: t => {
+                const n1 = 7.5625;
+                const d1 = 2.75;
+                if (t < 1 / d1) return n1 * t * t;
+                else if (t < 2 / d1) return n1 * (t -= 1.5 / d1) * t + 0.75;
+                else if (t < 2.5 / d1) return n1 * (t -= 2.25 / d1) * t + 0.9375;
+                else return n1 * (t -= 2.625 / d1) * t + 0.984375;
+            },
+            // easeInOutBounce: t => t < 0.5
+            //     ? (1 - easingFunctions.easeOutBounce(1 - 2 * t)) / 2
+            //     : (1 + easingFunctions.easeOutBounce(2 * t - 1)) / 2
+        };
+
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

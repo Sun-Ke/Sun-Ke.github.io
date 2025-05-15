@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        // let gui;
+        // let parameters = {
+        //     angle: 0.5,
+        //     length: 400,
+        // };
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            // gui = new dat.GUI();
+            // let control_folder = gui.addFolder('control');
+            // control_folder.add(parameters, 'angle', 0, PI).name('angle');
+            // control_folder.add(parameters, 'length', 50, height / 2).name('length');
+            // control_folder.open();
+        }
+
+        function draw() {
+            background('#eaf3fb');
+            stroke(0);
+            strokeWeight(3);
+            translate(width * 0.5, height); // 
+            branch(height / 3);
+        }
+
+        function branch(len) {
+            if (len < 4) {
+                return;
+            }
+            line(0, 0, 0, -len);
+            translate(0, -len);
+
+            push();
+            rotate(0.5);
+            branch(len * 0.66);
+            pop();
+        }
+
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

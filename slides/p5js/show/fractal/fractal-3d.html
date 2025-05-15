@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        let angleSlider;
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight, WEBGL);
+            angleSlider = createSlider(0, PI / 2, PI / 4, 0.01);
+            angleSlider.position(20, 20);
+            angleSlider.style('width', '200px');
+        }
+
+        function draw() {
+            background(30);
+            // 获取当前分支夹角
+            let a = angleSlider.value();
+
+            // 让整体慢速自转，并且支持鼠标拖动
+            let rotX = map(mouseY, 0, height, -PI, PI);
+            let rotY = map(mouseX, 0, width, -PI, PI);
+            rotateX(-rotX); // + frameCount * 0.002
+            rotateY(rotY);
+
+            // 从“地面”往上画主干
+            translate(0, height * 0.25, 0);
+            branch(height / 3, a, 0);
+
+            // 显示当前角度
+            resetMatrix();
+            noLights();
+            fill(255);
+        }
+
+        function branch(len, a, depth) {
+            // 颜色从棕色渐变到绿色
+            let t = map(depth, 0, 5, 0, 1);
+            let c = lerpColor(color('#8B4513'), color('#228B22'), t);
+            stroke(c);
+            strokeWeight(map(len, 2, 120, 1, 5));
+
+            // 画这一段
+            line(0, 0, 0, 0, -len, 0);
+            translate(0, -len, 0);
+
+            // 递归出口
+            if (depth >= 4 || len < 2) return;
+
+            // 在 X、Y、Z 轴正负方向各生一对分支
+            let ratio = [0.8, 0.6, 0.6, 0.4, 0.4, 0.1];
+            let cnt = 0;
+            for (let axis of ['X', 'Y', 'Z']) {
+                for (let sign of [1, -1]) {
+                    push();
+                    let axisInt = axis.charCodeAt(0) - 'X'.charCodeAt(0);
+                    if (axis === 'X') rotateX(map(noise(len, axisInt, frameCount * 0.005), 0, 1, -1.2, 1.2));
+                    if (axis === 'Y') rotateY(map(noise(len, axisInt + 42, frameCount * 0.005), 0, 1, -1.2, 1.2));
+                    if (axis === 'Z') rotateZ(map(noise(len, axisInt + 1007, frameCount * 0.001), 0, 1, -1, 1));
+
+                    //   let ratio = map(noise(depth * 0.1, axisInt, sign), 0, 1, 0.2, 0.8);
+                    branch(len * ratio[cnt++], a, depth + 1);
+                    pop();
+                }
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/p5js/show/common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/p5js/show/common/style.css">
+</head>
+
+<body>
+    <script>
+        // Daniel Shiffman
+        // http://codingtra.in
+        // http://patreon.com/codingtrain
+        // Code for: https://youtu.be/BjoM9oKOAKY
+
+        class Particle {
+            constructor(x = -1, y = -1) {
+                if (x == -1 && y == -1)
+                    this.pos = createVector(random(width), random(height));
+                else
+                    this.pos = createVector(x, y);
+                this.vel = createVector(0, 0);
+                this.acc = createVector(0, 0);
+                this.maxspeed = 2;
+                this.prevPos = this.pos.copy();
+            }
+
+            update() {
+                this.vel.add(this.acc);
+                this.vel.limit(this.maxspeed);
+                this.pos.add(this.vel);
+                this.acc.mult(0);
+            }
+
+            follow(vectors) {
+                var x = floor(this.pos.x / scl);
+                var y = floor(this.pos.y / scl);
+                var index = x + y * cols;
+                var force = vectors[index];
+                this.applyForce(force);
+            }
+
+            applyForce(force) {
+                this.acc.add(force);
+            }
+
+            show() {
+                stroke(map(noise(this.pos.x / width * 10, this.pos.y / height * 10), 0, 1, 0, 255),
+                    map(noise(this.pos.x / width * 10 + 123, this.pos.y / height * 10 + 42), 0, 1, 0, 255),
+                    map(noise(this.pos.x / width * 10 + 1000, this.pos.y / height * 10 + 111111), 0, 1, 0, 255),
+                    map(noise(this.pos.x / width * 10, this.pos.y / height * 10), 0, 1, 2, 50));
+                strokeWeight(1);
+                line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+                this.updatePrev();
+            }
+
+            updatePrev() {
+                this.prevPos.x = this.pos.x;
+                this.prevPos.y = this.pos.y;
+            }
+
+            edges() {
+                let buffer = 10;
+                if (this.pos.x > width + buffer) {
+                    this.pos.x = 0;
+                    this.updatePrev();
+                }
+                if (this.pos.x < 0 - buffer) {
+                    this.pos.x = width;
+                    this.updatePrev();
+                }
+                if (this.pos.y > height + buffer) {
+                    this.pos.y = 0;
+                    this.updatePrev();
+                }
+                if (this.pos.y < 0 - buffer) {
+                    this.pos.y = height;
+                    this.updatePrev();
+                }
+            }
+
+        }
+
+        let inc = 0.1;
+        var scl = 15;
+        let cols, rows;
+        let zoff = 0;
+
+        //var fr;
+
+        let particles = [];
+
+        let flowfield;
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            cols = floor(width / scl);
+            rows = floor(height / scl);
+            //fr = createP('');
+
+            flowfield = new Array(cols * rows);
+
+            for (let i = 0; i < 500; i++) {
+                particles[i] = new Particle();
+            }
+            background(255);
+            changeFlow();
+            setInterval(changeFlow, 500);
+            setInterval(clear, 60000);
+        }
+        function clear() {
+            background(255);
+        }
+        function changeFlow() {
+            for (let y = 0, yoff = 0; y < rows; y++, yoff += inc) {
+                for (var x = 0, xoff = 0; x < cols; x++, xoff += inc) {
+                    var index = x + y * cols;
+                    var angle = noise(xoff, yoff, zoff) * TWO_PI;
+                    var v = p5.Vector.fromAngle(angle);
+                    flowfield[index] = v;
+                }
+                zoff += 0.0006;
+            }
+        }
+        function draw() {
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].follow(flowfield);
+                particles[i].update();
+                particles[i].edges();
+                particles[i].show();
+            }
+            if (mouseIsPressed && particles.length < 1000)
+                particles.push(new Particle(mouseX, mouseY));
+        }
+        function windowResized() {
+            resizeCanvas(window.innerWidth, window.innerHeight);   // ?
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>

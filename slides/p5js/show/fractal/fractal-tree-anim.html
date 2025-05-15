@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="../common/header.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+
+<body>
+    <script>
+        let easingFunctions = {
+            // 匀速
+            linear: t => t,
+
+            // 二次
+            easeInQuad: t => t * t,
+            easeOutQuad: t => t * (2 - t),
+            easeInOutQuad: t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+
+            // 三次
+            easeInCubic: t => t * t * t,
+            easeOutCubic: t => (--t) * t * t + 1,
+            easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+
+            // 四次
+            easeInQuart: t => t * t * t * t,
+            easeOutQuart: t => 1 - (--t) * t * t * t,
+            easeInOutQuart: t => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2,
+
+            // 五次
+            easeInQuint: t => t * t * t * t * t,
+            easeOutQuint: t => 1 + (--t) * t * t * t * t,
+            easeInOutQuint: t => t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2,
+
+            // 正弦
+            easeInSine: t => 1 - Math.cos((t * Math.PI) / 2),
+            easeOutSine: t => Math.sin((t * Math.PI) / 2),
+            easeInOutSine: t => -(Math.cos(Math.PI * t) - 1) / 2,
+
+            // 指数
+            easeInExpo: t => t === 0 ? 0 : Math.pow(2, 10 * t - 10),
+            easeOutExpo: t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+            easeInOutExpo: t => {
+                if (t === 0) return 0;
+                if (t === 1) return 1;
+                return t < 0.5
+                    ? Math.pow(2, 20 * t - 10) / 2
+                    : (2 - Math.pow(2, -20 * t + 10)) / 2;
+            },
+
+            // // 圆形
+            // easeInCirc: t => 1 - Math.sqrt(1 - t * t),
+            // easeOutCirc: t => Math.sqrt(1 - (--t) * t),
+            // easeInOutCirc: t => t < 0.5
+            //     ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2
+            //     : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2,
+
+            // 回弹 Back
+            easeInBack: t => {
+                const c1 = 1.70158;
+                const c3 = c1 + 1;
+                return c3 * t * t * t - c1 * t * t;
+            },
+            easeOutBack: t => {
+                const c1 = 1.70158;
+                const c3 = c1 + 1;
+                return 1 + c3 * (--t) * t * t + c1 * t * t;
+            },
+            easeInOutBack: t => {
+                const c1 = 1.70158;
+                const c2 = c1 * 1.525;
+                return t < 0.5
+                    ? (Math.pow(2 * t, 2) * ((c2 + 1) * 2 * t - c2)) / 2
+                    : (Math.pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2;
+            },
+
+            // 弹性 Elastic
+            easeInElastic: t => {
+                const c4 = (2 * Math.PI) / 3;
+                return t === 0 ? 0 : t === 1 ? 1 : -Math.pow(2, 10 * t - 10) * Math.sin((t * 10 - 10.75) * c4);
+            },
+            easeOutElastic: t => {
+                const c4 = (2 * Math.PI) / 3;
+                return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
+            },
+            easeInOutElastic: t => {
+                const c5 = (2 * Math.PI) / 4.5;
+                if (t === 0) return 0;
+                if (t === 1) return 1;
+                return t < 0.5
+                    ? -(Math.pow(2, 20 * t - 10) * Math.sin((20 * t - 11.125) * c5)) / 2
+                    : (Math.pow(2, -20 * t + 10) * Math.sin((20 * t - 11.125) * c5)) / 2 + 1;
+            },
+
+            // 弹跳 Bounce
+            easeInBounce: t => 1 - easingFunctions.easeOutBounce(1 - t),
+            easeOutBounce: t => {
+                const n1 = 7.5625;
+                const d1 = 2.75;
+                if (t < 1 / d1) return n1 * t * t;
+                else if (t < 2 / d1) return n1 * (t -= 1.5 / d1) * t + 0.75;
+                else if (t < 2.5 / d1) return n1 * (t -= 2.25 / d1) * t + 0.9375;
+                else return n1 * (t -= 2.625 / d1) * t + 0.984375;
+            },
+            easeInOutBounce: t => t < 0.5
+                ? (1 - easingFunctions.easeOutBounce(1 - 2 * t)) / 2
+                : (1 + easingFunctions.easeOutBounce(2 * t - 1)) / 2
+        };
+        let gui;
+        let parameters = {
+            angle: 0.5,
+            max_depth: 8,
+            length: 400,
+        };
+        let progress = 0;
+        let height_buffer = 100;
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            gui = new dat.GUI();
+            let control_folder = gui.addFolder('control');
+            control_folder.add(parameters, 'angle', 0, PI).name('angle');
+            control_folder.add(parameters, 'max_depth', 1, 10, 1).name('max_depth');
+            parameters.length = height * 0.26;
+            control_folder.add(parameters, 'length', 50, height / 2).name('length');
+            control_folder.open();
+            let params = new URLSearchParams(window.location.search);
+            if (params.get("hidden") === 'true') {
+                gui.domElement.style.display = 'none';
+            }
+            height_buffer = height * 0.1;
+            draw();
+        }
+
+
+
+        class BoundingBox {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.minX = Infinity;
+                this.minY = Infinity;
+                this.maxX = -Infinity;
+                this.maxY = -Infinity;
+            }
+
+            update(x, y) {
+                this.minX = min(this.minX, x);
+                this.minY = min(this.minY, y);
+                this.maxX = max(this.maxX, x);
+                this.maxY = max(this.maxY, y);
+            }
+            draw(opacity) {
+                push()
+                noFill();
+                stroke(255, 0, 0, opacity);
+                strokeWeight(3);
+                rect(this.minX, this.minY, this.maxX - this.minX, this.maxY - this.minY);
+                pop();
+            }
+        }
+        let bbox = new BoundingBox();
+        let bbox1 = new BoundingBox();
+        let bbox2 = new BoundingBox();
+        let easing = easingFunctions.easeOutBounce;
+        function draw() {
+            background('#eaf3fb');
+            stroke(0);
+            strokeWeight(2);
+            push();
+            noStroke();
+            fill(230);
+            rect(0, height - height_buffer, width, height_buffer);
+            rect(0, 0, width, height_buffer);
+            rect(0, 0, height_buffer, width);
+            rect(width - height_buffer, 0, height_buffer, width);
+            pop();
+
+            push();
+            translate(width * 0.5, height - height_buffer);
+            branch(parameters.length, 1);
+            pop();
+
+            if (frameCount == 1) {
+                noLoop();
+                return;
+            }
+
+            // —— 1. 先计算包围盒 ——  
+            bbox.reset();
+            calculateBounds(bbox, parameters.length, 1, width * 0.5, height - height_buffer, 0);
+
+
+            // 0~0.5 wait
+            // 0.5~1.5 show
+            // 1.5~2.5 translate
+            // 2.5~3 wait
+            // 3~4 rotate
+            // 4~5 rect show
+            // 5~5.5 wait
+            // 5.5~6 fallback
+            // 6 ~7 rotate
+            // 7~8 
+            push();
+            let gap = 30;
+            textSize(23);
+            strokeWeight(1);
+            translate(width * 0.03, 20)
+            if (progress > 0.5) {
+                text("1. 画当前主干", 10, 20);
+            }
+            if (progress > 1.5) {
+                text("2. 平移坐标系", 10, 20 + gap);
+            }
+            if (progress > 3) {
+                text("3. 顺时针旋转30度", 10, 20 + gap * 2);
+            }
+            if (progress > 4) {
+                text("4. 递归地画出右分支", 10, 20 + gap * 3);
+            }
+            if (progress > 5.5) {
+                text("5. 还原坐标系到旋转前", 10, 20 + gap * 4);
+            }
+            if (progress > 6) {
+                text("6. 逆时针旋转30度", 10, 20 + gap * 5);
+            }
+            if (progress > 7) {
+                text("7. 递归地画出左分支", 10, 20 + gap * 6);
+            }
+            pop();
+            if (progress < 3) {
+                push();
+                strokeWeight(4);
+                stroke(255, 0, 0);
+                translate(width * 0.5, height - height_buffer);
+                line(0, 0, 0, map(constrain(progress - 0.5, 0, 1), 0, 1, 0, -parameters.length));
+                pop();
+            }
+            if (progress < 5.5) {
+                drawP5CoordinateSystem(
+                    map(easing(constrain(progress - 1.5, 0, 1)), 0, 1, width / 2, width / 2),
+                    map(easing(constrain(progress - 1.5, 0, 1)), 0, 1, height - height_buffer, height - height_buffer - parameters.length),
+                    width * 0.45,
+                    height * 0.3,
+                    map((constrain(progress - 3, 0, 1)), 0, 1, 0, parameters.angle)
+                );
+            } else {
+                drawP5CoordinateSystem(
+                    map(easing(constrain(progress - 1.5, 0, 1)), 0, 1, width / 2, width / 2),
+                    map(easing(constrain(progress - 1.5, 0, 1)), 0, 1, height - height_buffer, height - height_buffer - parameters.length),
+                    width * 0.45,
+                    height * 0.3,
+                    map((constrain(progress - 6, 0, 1)), 0, 1, 0, -parameters.angle)
+                );
+            }
+            if (progress < 5.5) {
+                push();
+                bbox1.reset();
+                calculateBounds(bbox1, parameters.length * 2 / 3, 2, 0, 0, 0);
+                translate(width * 0.5, height - height_buffer - parameters.length);
+                rotate(parameters.angle);
+                bbox1.draw(map(easing(constrain(progress - 4, 0, 1)), 0, 1, 0, 255));
+                pop();
+            } else {
+                push();
+                bbox2.reset();
+                calculateBounds(bbox2, parameters.length * 2 / 3, 2, 0, 0, 0);
+                translate(width * 0.5, height - height_buffer - parameters.length);
+                rotate(-parameters.angle);
+                bbox2.draw(map(easing(constrain(progress - 7, 0, 1)), 0, 1, 0, 255));
+                pop();
+            }
+
+            progress += 0.009;
+            progress = progress % 10;
+        }
+
+        // 递归计算所有分支端点，更新 boundingBox
+        function calculateBounds(bbox, len, step, x, y, theta) {
+            if (step > parameters.max_depth) return;
+
+            // 计算当前分支的终点
+            let x1 = x + len * sin(theta);
+            let y1 = y - len * cos(theta);
+
+            // 更新包围盒（包括起点和终点）
+            bbox.update(x, y);
+            bbox.update(x1, y1);
+
+            // 递归左右子分支
+            calculateBounds(bbox, len * 2 / 3, step + 1, x1, y1, theta + parameters.angle);
+            calculateBounds(bbox, len * 2 / 3, step + 1, x1, y1, theta - parameters.angle);
+        }
+
+        function drawP5CoordinateSystem(x, y, xlen, ylen, angle) {
+            push();
+            translate(x, y);
+            rotate(angle);
+            stroke(0);
+            strokeWeight(4);
+            // X 轴
+            line(0, 0, xlen, 0); // 顶部横线
+            fill(0);
+            let arrowSize = 15;
+            triangle(
+                xlen, 0,
+                xlen - arrowSize, -arrowSize / 2,
+                xlen - arrowSize, arrowSize / 2
+            );
+
+            // Y 轴
+            line(0, 0, 0, ylen); // 左边竖线
+            // Y 轴箭头（三角形）
+            triangle(
+                0, ylen,
+                -arrowSize / 2, ylen - arrowSize,
+                arrowSize / 2, ylen - arrowSize
+            );
+
+            textStyle(BOLD)
+            // 原点标记
+            fill(255, 0, 0);
+            noStroke();
+            circle(0, 0, 15);
+            fill(0);
+            textSize(20);
+            text("(0, 0)", -60, -15);
+
+            fill(0);
+            text("X", xlen - 40, 25);
+            text("Y", 15, ylen - 20);
+            pop();
+        }
+
+        function branch(len, step) {
+            if (step > parameters.max_depth) {
+                return;
+            }
+            stroke(170);
+            line(0, 0, 0, -len);
+            translate(0, -len);
+            push();
+            rotate(parameters.angle);
+            branch(len * 2 / 3, step + 1);
+            pop();
+
+            push();
+            rotate(-parameters.angle);
+            branch(len * 2 / 3, step + 1);
+            pop();
+        }
+
+        function mousePressed() {
+            if (!isLooping()) {
+                loop();   // 恢复动画
+            } else if (!colorful) {
+                colorful = true;
+            } else {
+                weight_display = true;
+            }
+        }
+    </script>
+
+    <div id="sketch"></div>
+</body>
+<p style="display:none;" id="p5_loading"></p>
+
+</html>
